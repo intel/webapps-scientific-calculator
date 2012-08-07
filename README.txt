@@ -1,6 +1,6 @@
 HTML5 Calculator Application
 
-Author SamiAario <sami.aario@ixonos.com>
+Author: Carl Wong <carl.wong@intel.com>  
 
 License for the app is found in the file "LICENSE" and the license for software and assets components is as below:
 
