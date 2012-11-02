@@ -58,6 +58,10 @@ body {
 @media (orientation: landscape) and (min-height: 480px) and (min-width: 800px) {
   body { -webkit-transform: translate(-50%, -50%) scale(0.625, 0.6666);}
 }
+/* 989 x 600 */
+@media (orientation: landscape) and (min-width: 600px) and (min-height: 989px) {
+  body { -webkit-transform: translate(-50%, -50%) scale(0.77266, 0.8333); }
+}
 /* 1024 x 600 */
 @media (orientation: landscape) and (min-height: 600px) and (min-width: 1024px) {
   body { -webkit-transform: translate(-50%, -50%) scale(0.8, 0.8333);}
@@ -84,6 +88,10 @@ body {
 /* 480 x 800 */
 @media (orientation: portrait) and (min-width: 480px) and (min-height: 800px) {
   body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.6666, 0.625) translate(50%, -50%);}
+}
+/* 989 x 600 */
+@media (orientation: portrait) and (min-width: 600px) and (min-height: 989px) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.77266, 0.8333) translate(50%, -50%); }
 }
 /* 600 x 1024 */
 @media (orientation: portrait) and (min-width: 600px) and (min-height: 1024px) {
