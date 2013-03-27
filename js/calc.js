@@ -13,13 +13,9 @@ $(function() {
     "use strict";
 
     Calculator = new function() {
-        license_init("license", "background");
-        help_init("home_help", "help_");
-        //
-        // Data
-        //
-        this.parser = PEG.buildParser(document.getElementById("grammar").innerText);
 
+
+        this.parser = "";
         this.currentKey = "";
 
         /**
@@ -774,14 +770,22 @@ $(function() {
         };
     };
 
-    Calculator.createScrollbars();
+    $("button").prop("disabled",true);
     Calculator.registerOrientationChange();
-    Calculator.initButtons();
-    Calculator.setMainEntry("");
-    Calculator.setCurrentFormula("");
-    Calculator.transitionToDegrees();
-    Calculator.transitionToTrigonometricFunctions();
-    Calculator.equalPressed = false;
-    Calculator.populateMemoryPaneFromLocalStorage();
-    Calculator.populateHistoryPaneFromLocalStorage();
+
+    window.addEventListener('pageshow', function () {
+        license_init("license", "background");
+        help_init("home_help", "help_");
+        Calculator.parser = PEG.buildParser(document.getElementById("grammar").innerText);
+        Calculator.createScrollbars();
+        Calculator.initButtons();
+        Calculator.setMainEntry("");
+        Calculator.setCurrentFormula("");
+        Calculator.transitionToDegrees();
+        Calculator.transitionToTrigonometricFunctions();
+        Calculator.equalPressed = false;
+        Calculator.populateMemoryPaneFromLocalStorage();
+        Calculator.populateHistoryPaneFromLocalStorage();
+        $("button").prop("disabled",false);
+    }, false);
 });

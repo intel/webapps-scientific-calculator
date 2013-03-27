@@ -2007,3 +2007,7 @@ sub {
 #home_help:active {
     opacity: 1;
 }
+
+button[disabled] {
+    opacity: 0.5;
+}
