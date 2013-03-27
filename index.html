@@ -9,8 +9,8 @@
 -->
 <html>
     <head>
-        <meta name="viewport" content="width=device-width target-densitydpi=device-dpi initial-scale=1 maximum-scale=1 user-scalable=0" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width target-densitydpi=device-dpi initial-scale=1 maximum-scale=1 user-scalable=0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Scientific Calculator</title>
         <link rel="stylesheet" id="stylesheet" type="text/css" href="css/calc_portrait.css"/>
     </head>
@@ -18,9 +18,11 @@
         <div id="background">
             <div id="calculationpane">
                 <div id="LCD_Upper" style="display: none">
-                <div id="wrapper"><div id="scroller">
-                    <div class="scroll-pane" id="calculationhistory"></div>
-                </div></div>
+                    <div id="wrapper">
+                        <div id="scroller">
+                            <div class="scroll-pane" id="calculationhistory"></div>
+                        </div>
+                    </div>
                     <div id="historyverticalline"></div>
                     <button class="historybuttonclose" id="closehistorybutton" onclick="Calculator.closeHistory()"></button>
                 </div>
@@ -78,7 +80,7 @@
                                 <button class="buttonblackshort" id="buttonex" data-operator="e<sup>^</sup>">e<sup>x</sup></button>
                             </div>
                         </div>
-                        <div div id="centerleftpane">
+                        <div id="centerleftpane">
                             <div id="powerandroot">
                                 <button class="buttonyellow" id="buttonsquare" data-operator="<sup>2</sup>">x<sup>2</sup></button>
                                 <button class="buttonyellow" id="buttonsquareroot">&#8730;</button>
@@ -97,8 +99,8 @@
                                 <img class="buttonrighticon" src="images/ico_mem_list.png"></img>
                             </button>
                             <button class="buttonpurple" id="buttonmemorize" onclick="Calculator.onButtonMainEntryToMemoryClick()">
-                                    <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                                    <div class="buttonrighttext" id="buttonmemorizetext"></div>
+                                <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                                <div class="buttonrighttext" id="buttonmemorizetext"></div>
                             </button>
                             <button class="buttonblack" id="buttonleftparenthesis">(</button>
                             <button class="buttonblack" id="buttonrightparenthesis">)</button>
@@ -138,19 +140,19 @@
          </div>
 
          <div id=memorypage style="display: none;">
-                <div id="memorypagelcd">
-                    <div id="mpclosebutton">
-                        <button class="buttonclose" id="mplcdbuttonclose" onclick="Calculator.setMainEntry('')"></button>
-                    </div>
-                    <div id="mpmainentry"></div>
-                    <button class="historybutton" id="mpopenhistorybutton" onclick="Calculator.openHistory()"></button>
+            <div id="memorypagelcd">
+                <div id="mpclosebutton">
+                    <button class="buttonclose" id="mplcdbuttonclose" onclick="Calculator.setMainEntry('')"></button>
                 </div>
+                <div id="mpmainentry"></div>
+                <button class="historybutton" id="mpopenhistorybutton" onclick="Calculator.openHistory()"></button>
+            </div>
 
-                <div id="memorypane">
+            <div id="memorypane">
                 <div class="memoryentrypane" id="M1pane" data-entryname="M1">
                     <button class="buttonmemory" id="buttonM1" onclick="Calculator.onButtonMemoryClick('M1')">
-                            <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                            <div class="buttonrighttext" id="buttonmemorizetext">M1</div>
+                        <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                        <div class="buttonrighttext" id="buttonmemorizetext">M1</div>
                     </button>
                     <div class="memorypane" id="M1pane">
                         <div class="memory" id="M1">
@@ -166,8 +168,8 @@
                 </div>
                 <div class="memoryentrypane" id="M2pane" data-entryname="M2">
                     <button class="buttonmemory" id="buttonM2" onclick="Calculator.onButtonMemoryClick('M2')">
-                            <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                            <div class="buttonrighttext" id="buttonmemorizetext">M2</div>
+                        <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                        <div class="buttonrighttext" id="buttonmemorizetext">M2</div>
                     </button>
                     <div class="memorypane" id="M2pane">
                         <div class="memory" id="M2">
@@ -183,8 +185,8 @@
                 </div>
                 <div class="memoryentrypane" id="M3pane" data-entryname="M3">
                     <button class="buttonmemory" id="buttonM3" onclick="Calculator.onButtonMemoryClick('M3')">
-                            <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                            <div class="buttonrighttext" id="buttonmemorizetext">M3</div>
+                        <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                        <div class="buttonrighttext" id="buttonmemorizetext">M3</div>
                     </button>
                     <div class="memorypane" id="M3pane">
                         <div class="memory" id="M3">
@@ -200,8 +202,9 @@
                 </div>
                 <div class="memoryentrypane" id="M4pane" data-entryname="M4">
                     <button class="buttonmemory" id="buttonM4" onclick="Calculator.onButtonMemoryClick('M4')">
-                            <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                            <div class="buttonrighttext" id="buttonmemorizetext">M4</div></button>
+                        <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                        <div class="buttonrighttext" id="buttonmemorizetext">M4</div>
+                    </button>
                     <div class="memorypane" id="M4pane">
                         <div class="memory" id="M4">
                             <div id="M4text" class="memorytext"></div>
@@ -216,8 +219,9 @@
                 </div>
                 <div class="memoryentrypane" id="M5pane" data-entryname="M5">
                     <button class="buttonmemory" id="buttonM5" onclick="Calculator.onButtonMemoryClick('M5')">
-                            <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                            <div class="buttonrighttext" id="buttonmemorizetext">M5</div></button>
+                        <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                        <div class="buttonrighttext" id="buttonmemorizetext">M5</div>
+                    </button>
                     <div class="memorypane" id="M5pane">
                         <div class="memory" id="M5">
                             <div id="M5text" class="memorytext"></div>
@@ -232,8 +236,8 @@
                 </div>
                 <div class="memoryentrypane" id="M6pane" data-entryname="M6">
                     <button class="buttonmemory" id="buttonM6" onclick="Calculator.onButtonMemoryClick('M6')">
-                            <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                            <div class="buttonrighttext" id="buttonmemorizetext">M6</div>
+                        <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                        <div class="buttonrighttext" id="buttonmemorizetext">M6</div>
                     </button>
                     <div class="memorypane" id="M6pane">
                         <div class="memory" id="M6">
@@ -266,8 +270,8 @@
                 </div>
                 <div class="memoryentrypane" id="M8pane" data-entryname="M8">
                     <button class="buttonmemory" id="buttonM8" onclick="Calculator.onButtonMemoryClick('M8')">
-                            <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                            <div class="buttonrighttext" id="buttonmemorizetext">M8</div>
+                        <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
+                        <div class="buttonrighttext" id="buttonmemorizetext">M8</div>
                     </button>
                     <div class="memorypane" id="M8pane">
                         <div class="memory" id="M8">
@@ -281,20 +285,20 @@
                         <button class="buttonmemoryclose" id="buttonM8close" onclick="Calculator.onButtonMemoryCloseClick('M8')"></button>
                     </div>
                 </div>
-                    <button class="dialogAbuttonPurple" id="memoryclearall" onclick="Calculator.onButtonMemoryClearAll()">Clear All</button>
-                    <button class="dialogAbuttonBlack" id="memoryClose" onclick="Calculator.onButtonMemoryClose()">Close</button>
-                    </div>
-         </div>
+                <button class="dialogAbuttonPurple" id="memoryclearall" onclick="Calculator.onButtonMemoryClearAll()">Clear All</button>
+                <button class="dialogAbuttonBlack" id="memoryClose" onclick="Calculator.onButtonMemoryClose()">Close</button>
+            </div>
+        </div>
 
         <div id="clearconfirmationdialog" style="visibility: hidden;">
             <div class="dialogbackground"></div>
             <div id="clearconfirmationdialogbg">
-                    <div id="dialogheading">Clear All Memory slots</div>
-                    <div id="dialogcontent">
-                        <div id="dialogcontenttext">All memory slots will be cleared.</div>
-                        <button class="dialogBpurplebutton" id="dialogokbutton" onclick="Calculator.clearAllMemorySlots()">OK</button>
-                         <button class="dialogBblackbutton" id="dialogcancelbutton" onclick="Calculator.cancelClearAllDialog()">Cancel</button>
-                    </div>
+                <div id="dialogheading">Clear All Memory slots</div>
+                <div id="dialogcontent">
+                    <div id="dialogcontenttext">All memory slots will be cleared.</div>
+                    <button class="dialogBpurplebutton" id="dialogokbutton" onclick="Calculator.clearAllMemorySlots()">OK</button>
+                     <button class="dialogBblackbutton" id="dialogcancelbutton" onclick="Calculator.cancelClearAllDialog()">Cancel</button>
+                </div>
             </div>
         </div>
 
@@ -312,341 +316,341 @@
         </div>
         <div id="grammar-wrapper">
             <textarea class="code" id="grammar" disabled>
-            start
-              = additive
+                start
+                  = additive
 
-            additive
-              = left:(multiplicative [%]?) right:( [+-] multiplicative [%]?)*
-                {
-                    var ret = (left[1] == "%") ? left[0] / 100 : left[0];
-                    var i;
-                    var prec = 0;
+                additive
+                  = left:(multiplicative [%]?) right:( [+-] multiplicative [%]?)*
+                    {
+                        var ret = (left[1] == "%") ? left[0] / 100 : left[0];
+                        var i;
+                        var prec = 0;
 
-                    if(isNaN(ret) || !isFinite(ret) )
-                        return ret
+                        if(isNaN(ret) || !isFinite(ret) )
+                            return ret
 
-                    var tmp = ret;
-                    while (tmp % 1 != 0){
-                            tmp = tmp * 10;
-                            prec++;
-                        }
-                    for (i = 0; i < right.length; ++i) {
-                        var num = (right[i][2] == "%") ? ret * right[i][1] / 100 : right[i][1];
-
-                        tmp = num;
-                        var prec1 = 0;
-
+                        var tmp = ret;
                         while (tmp % 1 != 0){
-                            tmp = tmp * 10;
-                            prec1++;
-                        }
-                        prec = prec > prec1 ? prec: prec1;
+                                tmp = tmp * 10;
+                                prec++;
+                            }
+                        for (i = 0; i < right.length; ++i) {
+                            var num = (right[i][2] == "%") ? ret * right[i][1] / 100 : right[i][1];
 
-                        if (right[i][0] == "+") {
-                            ret = ret + num;
-                        } else if (right[i][0] == "-") {
-                            ret = ret - num;
-                        }
+                            tmp = num;
+                            var prec1 = 0;
 
+                            while (tmp % 1 != 0){
+                                tmp = tmp * 10;
+                                prec1++;
+                            }
+                            prec = prec > prec1 ? prec: prec1;
+
+                            if (right[i][0] == "+") {
+                                ret = ret + num;
+                            } else if (right[i][0] == "-") {
+                                ret = ret - num;
+                            }
+
+                        }
+                        return (prec > 0 && right.length > 0) ? parseFloat(ret.toFixed(prec)) : ret;
                     }
-                    return (prec > 0 && right.length > 0) ? parseFloat(ret.toFixed(prec)) : ret;
-                }
 
-            multiplicative
-              = left:signedexpression right:( [&#215;&#247;] signedexpression [%]? / trigonometric [%]? / hyperbolic [%]? / numberlog [%]? / squareroot [%]?)*
-                {
-                    var ret = left;
-                    var i;
-                    var prec = 0;
+                multiplicative
+                  = left:signedexpression right:( [&#215;&#247;] signedexpression [%]? / trigonometric [%]? / hyperbolic [%]? / numberlog [%]? / squareroot [%]?)*
+                    {
+                        var ret = left;
+                        var i;
+                        var prec = 0;
 
-	                     if(isNaN(ret) || !isFinite(ret))
-	                        return ret
+	                         if(isNaN(ret) || !isFinite(ret))
+	                            return ret
 
-                    var tmp = ret;
-                    while (tmp % 1 != 0){
-                            tmp = tmp * 10;
-                            prec++;
-                        }
-
-                    for (i = 0; i < right.length; ++i) {
-                        var num = (right[i][2] == "%") ? right[i][1] / 100 : right[i][1];
-
-                        tmp = num;
-                        var prec1 = 0;
+                        var tmp = ret;
                         while (tmp % 1 != 0){
-                            tmp = tmp * 10;
-                            prec1++;
+                                tmp = tmp * 10;
+                                prec++;
+                            }
+
+                        for (i = 0; i < right.length; ++i) {
+                            var num = (right[i][2] == "%") ? right[i][1] / 100 : right[i][1];
+
+                            tmp = num;
+                            var prec1 = 0;
+                            while (tmp % 1 != 0){
+                                tmp = tmp * 10;
+                                prec1++;
+                            }
+
+                            if (right[i][0] == "&#215;") {
+                                ret = ret * num;
+                                prec += prec1;
+                            } else if (right[i][0] == "&#247;") {
+                                ret = ret / num;
+                                prec -= prec1;
+                            }else{
+                                ret = ret * right[i][0];
+                            }
+                        }
+                        return (prec > 0 && right.length > 0) ? parseFloat(ret.toFixed(prec)) : ret;
+                    }
+                signedexpression
+                  = sign:[-]? expression:expression
+                    {
+                        var ret = expression;
+
+                        if (sign) {
+                            ret = -ret;
                         }
 
-                        if (right[i][0] == "&#215;") {
-                            ret = ret * num;
-                            prec += prec1;
-                        } else if (right[i][0] == "&#247;") {
-                            ret = ret / num;
-                            prec -= prec1;
-                        }else{
-                            ret = ret * right[i][0];
+                        return ret;
+                    }
+
+                expression
+                  = expandlog
+                  / powerandroot
+                  / trigonometric
+                  / hyperbolic
+                  / factorial
+                  / numberpi
+                  / inverse
+                  / primary
+
+                expandlog
+                  = log10
+                  / log2
+                  / ln
+                  / tentox
+                  / twotox
+                  / etox
+
+                numberlog
+                  = log10
+                  / log2
+                  / ln
+
+                log10
+                  = "log" operand:signedexpression
+                    {
+                        return Math.log(operand) / Math.LN10;
+                    }
+
+                log2
+                  = "log<sub>2</sub>" operand:signedexpression
+                    {
+                        return Math.log(operand) / Math.LN2;
+                    }
+
+                ln
+                  = "ln" operand:signedexpression
+                    {
+                        return Math.log(operand);
+                    }
+
+                tentox
+                  = "10<sup>x</sup>" operand:signedexpression
+                    {
+                        return Math.pow(10, operand);
+                    }
+
+                twotox
+                  = "2<sup>x</sup>" operand:signedexpression
+                    {
+                        return Math.pow(2, operand);
+                    }
+
+                etox
+                  = "e<sup>x</sup>" operand:signedexpression
+                    {
+                        return Math.pow(Math.E, operand);
+                    }
+
+                powerandroot
+                  = squareroot
+                  / nthroot
+                  / square
+                  / nthpower
+
+                squareroot
+                  = "&#8730;" radicand:signedexpression
+                    {
+                        return Math.sqrt(radicand);
+                    }
+
+                nthroot
+                  = index:primary "<sup>n</sup>&#8730;" radicand:signedexpression
+                    {
+                        var ret = Number.NaN;
+
+                        if (parseInt(index) === index && index > 0) { /* The nth root is only defined for positive integer indices. */
+                            if (index % 2 && radicand < 0) { /* For odd indices, consider the sign of the radicand. */
+                                ret = -Math.pow(-radicand, 1 / index);
+                            } else {
+                                ret = Math.pow(radicand, 1 / index);
+                            }
                         }
-                    }
-                    return (prec > 0 && right.length > 0) ? parseFloat(ret.toFixed(prec)) : ret;
-                }
-            signedexpression
-              = sign:[-]? expression:expression
-                {
-                    var ret = expression;
 
-                    if (sign) {
-                        ret = -ret;
+                        return ret;
                     }
 
-                    return ret;
-                }
+                square
+                  = operand:primary "<sup>2</sup>"
+                    {
+                        return Math.pow(operand, 2);
+                    }
 
-            expression
-              = expandlog
-              / powerandroot
-              / trigonometric
-              / hyperbolic
-              / factorial
-              / numberpi
-              / inverse
-              / primary
+                nthpower
+                  = operand:primary "<sup>^</sup>" exponent:signedexpression
+                    {
+                        return Math.pow(operand, exponent);
+                    }
 
-            expandlog
-              = log10
-              / log2
-              / ln
-              / tentox
-              / twotox
-              / etox
+                trigonometric
+                  = sin
+                  / cos
+                  / tan
+                  / arcsin
+                  / arccos
+                  / arctan
 
-            numberlog
-              = log10
-              / log2
-              / ln
+                sin
+                  = "sin" operand:signedexpression
+                    {
+                        res = Math.sin(operand / Calculator.angleDivisor);
+                        return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
+                    }
+                cos
+                  = "cos" operand:signedexpression
+                    {
+                        res = Math.cos(operand / Calculator.angleDivisor);
+                        return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
+                    }
+                tan
+                  = "tan" operand:signedexpression
+                    {
+                        res = Math.tan(operand / Calculator.angleDivisor);
+                        return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
+                    }
+                arcsin
+                  = "sin<sup>-1</sup>" operand:signedexpression
+                    {
+                        return Math.asin(operand) * Calculator.angleDivisor;
+                    }
+                arccos
+                  = "cos<sup>-1</sup>" operand:signedexpression
+                    {
+                        return Math.acos(operand) * Calculator.angleDivisor;
+                    }
+                arctan
+                  = "tan<sup>-1</sup>" operand:signedexpression
+                    {
+                        return Math.atan(operand) * Calculator.angleDivisor;
+                    }
 
-            log10
-              = "log" operand:signedexpression
-                {
-                    return Math.log(operand) / Math.LN10;
-                }
+                hyperbolic
+                  = sinh
+                  / cosh
+                  / tanh
+                  / asinh
+                  / acosh
+                  / atanh
 
-            log2
-              = "log<sub>2</sub>" operand:signedexpression
-                {
-                    return Math.log(operand) / Math.LN2;
-                }
+                sinh
+                  = "sinh" operand:signedexpression
+                    {
+                        var e = Math.E;
 
-            ln
-              = "ln" operand:signedexpression
-                {
-                    return Math.log(operand);
-                }
+                        return (Math.pow(e, operand) - Math.pow(e, -operand)) / 2;
+                    }
 
-            tentox
-              = "10<sup>x</sup>" operand:signedexpression
-                {
-                    return Math.pow(10, operand);
-                }
+                cosh
+                  = "cosh" operand:signedexpression
+                    {
+                        var e = Math.E;
 
-            twotox
-              = "2<sup>x</sup>" operand:signedexpression
-                {
-                    return Math.pow(2, operand);
-                }
+                        return (Math.pow(e, operand) + Math.pow(e, -operand)) / 2;
+                    }
 
-            etox
-              = "e<sup>x</sup>" operand:signedexpression
-                {
-                    return Math.pow(Math.E, operand);
-                }
+                tanh
+                  = "tanh" operand:signedexpression
+                    {
+                        var e = Math.E;
 
-            powerandroot
-              = squareroot
-              / nthroot
-              / square
-              / nthpower
+                        return (Math.pow(e, operand) - Math.pow(e, -operand)) / (Math.pow(e, operand) + Math.pow(e, -operand));
+                    }
 
-            squareroot
-              = "&#8730;" radicand:signedexpression
-                {
-                    return Math.sqrt(radicand);
-                }
+                asinh
+                  = "sinh<sup>-1</sup>" operand:signedexpression
+                    {
+                        return Math.log(operand + Math.sqrt(1 + Math.pow(operand, 2)));
+                    }
 
-            nthroot
-              = index:primary "<sup>n</sup>&#8730;" radicand:signedexpression
-                {
-                    var ret = Number.NaN;
+                acosh
+                  = "cosh<sup>-1</sup>" operand:signedexpression
+                    {
+                        return 2 * Math.log(Math.sqrt((operand + 1) / 2) + Math.sqrt((operand - 1) /2 ));
+                    }
 
-                    if (parseInt(index) === index && index > 0) { /* The nth root is only defined for positive integer indices. */
-                        if (index % 2 && radicand < 0) { /* For odd indices, consider the sign of the radicand. */
-                            ret = -Math.pow(-radicand, 1 / index);
+                atanh
+                  = "tanh<sup>-1</sup>" operand:signedexpression
+                    {
+                        return (Math.log(1 + operand) - Math.log(1 - operand)) / 2;
+                    }
+
+                factorial
+                  = operand:primary "!"
+                    {
+                        var ret = Number.NaN;
+
+                        if (parseInt(operand) === operand && operand >= 0) { /* Factorial is only defined for positive integers and zero. */
+                            ret = 1;
+
+                            for (var i = 2; i <= operand; i++) {
+                                ret *= i
+                            }
+                        }
+
+                        return ret;
+                    }
+                inverse
+                  = operand:primary "<sup>-1</sup>"
+                    {
+                        return 1 / operand;
+                    }
+
+                primary
+                  = pi
+                  / number
+                  / "(" additive:additive ")"
+                    {
+                        return additive;
+                    }
+
+                numberpi
+                  = operand:primary "&pi;"
+                  {
+                    return operand*Math.PI;
+                  }
+
+                pi
+                  = "&pi;"
+                    {
+                        return Math.PI;
+                    }
+
+                number
+                  = wholepart:[0-9]+fractionalpart:([.][0-9]+)?
+                    {
+                        var ret;
+
+                        if (fractionalpart) {
+                            ret = parseFloat(wholepart.join("") + "." + fractionalpart[1].join(""));
                         } else {
-                            ret = Math.pow(radicand, 1 / index);
+                            ret = parseInt(wholepart.join(""));
                         }
+
+                        return ret;
                     }
-
-                    return ret;
-                }
-
-            square
-              = operand:primary "<sup>2</sup>"
-                {
-                    return Math.pow(operand, 2);
-                }
-
-            nthpower
-              = operand:primary "<sup>^</sup>" exponent:signedexpression
-                {
-                    return Math.pow(operand, exponent);
-                }
-
-            trigonometric
-              = sin
-              / cos
-              / tan
-              / arcsin
-              / arccos
-              / arctan
-
-            sin
-              = "sin" operand:signedexpression
-                {
-                    res = Math.sin(operand / Calculator.angleDivisor);
-                    return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
-                }
-            cos
-              = "cos" operand:signedexpression
-                {
-                    res = Math.cos(operand / Calculator.angleDivisor);
-                    return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
-                }
-            tan
-              = "tan" operand:signedexpression
-                {
-                    res = Math.tan(operand / Calculator.angleDivisor);
-                    return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
-                }
-            arcsin
-              = "sin<sup>-1</sup>" operand:signedexpression
-                {
-                    return Math.asin(operand) * Calculator.angleDivisor;
-                }
-            arccos
-              = "cos<sup>-1</sup>" operand:signedexpression
-                {
-                    return Math.acos(operand) * Calculator.angleDivisor;
-                }
-            arctan
-              = "tan<sup>-1</sup>" operand:signedexpression
-                {
-                    return Math.atan(operand) * Calculator.angleDivisor;
-                }
-
-            hyperbolic
-              = sinh
-              / cosh
-              / tanh
-              / asinh
-              / acosh
-              / atanh
-
-            sinh
-              = "sinh" operand:signedexpression
-                {
-                    var e = Math.E;
-
-                    return (Math.pow(e, operand) - Math.pow(e, -operand)) / 2;
-                }
-
-            cosh
-              = "cosh" operand:signedexpression
-                {
-                    var e = Math.E;
-
-                    return (Math.pow(e, operand) + Math.pow(e, -operand)) / 2;
-                }
-
-            tanh
-              = "tanh" operand:signedexpression
-                {
-                    var e = Math.E;
-
-                    return (Math.pow(e, operand) - Math.pow(e, -operand)) / (Math.pow(e, operand) + Math.pow(e, -operand));
-                }
-
-            asinh
-              = "sinh<sup>-1</sup>" operand:signedexpression
-                {
-                    return Math.log(operand + Math.sqrt(1 + Math.pow(operand, 2)));
-                }
-
-            acosh
-              = "cosh<sup>-1</sup>" operand:signedexpression
-                {
-                    return 2 * Math.log(Math.sqrt((operand + 1) / 2) + Math.sqrt((operand - 1) /2 ));
-                }
-
-            atanh
-              = "tanh<sup>-1</sup>" operand:signedexpression
-                {
-                    return (Math.log(1 + operand) - Math.log(1 - operand)) / 2;
-                }
-
-            factorial
-              = operand:primary "!"
-                {
-                    var ret = Number.NaN;
-
-                    if (parseInt(operand) === operand && operand >= 0) { /* Factorial is only defined for positive integers and zero. */
-                        ret = 1;
-
-                        for (var i = 2; i <= operand; i++) {
-                            ret *= i
-                        }
-                    }
-
-                    return ret;
-                }
-            inverse
-              = operand:primary "<sup>-1</sup>"
-                {
-                    return 1 / operand;
-                }
-
-            primary
-              = pi
-              / number
-              / "(" additive:additive ")"
-                {
-                    return additive;
-                }
-
-            numberpi
-              = operand:primary "&pi;"
-              {
-                return operand*Math.PI;
-              }
-
-            pi
-              = "&pi;"
-                {
-                    return Math.PI;
-                }
-
-            number
-              = wholepart:[0-9]+fractionalpart:([.][0-9]+)?
-                {
-                    var ret;
-
-                    if (fractionalpart) {
-                        ret = parseFloat(wholepart.join("") + "." + fractionalpart[1].join(""));
-                    } else {
-                        ret = parseInt(wholepart.join(""));
-                    }
-
-                    return ret;
-                }
             </textarea>
         </div>
         <div id="help_dialog" class="helpdialog">
@@ -654,71 +658,77 @@
                 <div id="help_close" class="close"> x </div>
                 <div id="help_contents" class="contents">
                     <div class="column1">
-                    <ul><li>
-                    <b>General usage</b><br>
-                    Tap buttons in the order you would write them on paper 
-                    to perform a calculation, then tap = to get the result.
-                    </li><br clear="all"><li>
-                    <b>History</b><br>
-                    <img src="images/bt_history_exp_port.png" align="left"/> 
-                    Tap to see a scrollable history of recent results.<br clear="all">
-                    <img src="images/bt_history_contr_port.png" align="left"/>
-                    Tap to restore the calculator.
-                    </li><br clear="all"><li>
-                    <b>Memory insert</b><br> 
-                    <div class="buttonpurple" style="float: left;">
-                        <center>
-                        <img src="images/ico_arrow_black.png"/><bl>M1</bl>
-                        </center>
-                    </div>
-                    Tap to store the current result in the indicated memory slot.
-                    </li></ul>
-                    <br clear="all">
+                        <ul>
+                            <li>
+                                <b>General usage</b><br/>
+                                Tap buttons in the order you would write them on paper
+                                to perform a calculation, then tap = to get the result.
+                            </li><br clear="all"/><li>
+                                <b>History</b><br/>
+                                <img src="images/bt_history_exp_port.png" align="left"/>
+                                Tap to see a scrollable history of recent results.<br clear="all"/>
+                                <img src="images/bt_history_contr_port.png" align="left"/>
+                                Tap to restore the calculator.
+                            </li><br clear="all"/><li>
+                                <b>Memory insert</b><br/>
+                                <div class="buttonpurple" style="float: left;">
+                                    <center>
+                                        <img src="images/ico_arrow_black.png"/><span class="black">M1</span>
+                                    </center>
+                                </div>
+                                Tap to store the current result in the indicated memory slot.
+                            </li>
+                        </ul>
+                        <br clear="all"/>
                     </div>
                     <div class="column2">
-                    <ul><li>
-                    <b>Memory</b><br>
-                    <div class="buttonpurple" style="float: left;">
-                        <center>
-                        <wh>M</wh><img src="images/ico_mem_list.png"/>
-                        </center>
-                    </div>
-                    Tap the M button to display the current memory contents.
-                    <br clear="all">
-                    <div class="buttonpurple" style="float: left;">
-                        <center>
-                        <img src="images/ico_arrow_white.png"/><wh>M5</wh>
-                        </center>
-                    </div>
-                    Tap to insert the contents of that slot into your calculation.
-                    <br clear="all">
-                    <div class="exampleclose" style="float: left;"></div>
-                    Tap to clear the slot.
-                    <br clear="all">
-                    <div class="exampleedit" style="float: left;"></div>
-                    Tap to modify a slot’s contents. 
-                    <br clear="all">
-                    <div class="dialogAbuttonPurple" style="position: relative; float: left;">
-                        <center>
-                        <wh2>Clear All</wh2>
-                        </center>
-                    </div>
-                    Tap to erase every slot.
-                    <br clear="all">
-                    <div class="dialogAbuttonBlack" style="position: relative; float: left;">
-                        <center>
-                        <wh2>Close</wh2>
-                        </center>
-                    </div>
-                    Tap to restore the calculator.
-                    <br clear="all">
-                    </li></ul>
+                        <ul>
+                            <li>
+                                <b>Memory</b><br/>
+                                <div class="buttonpurple" style="float: left;">
+                                    <center>
+                                        <span class="white">M</span><img src="images/ico_mem_list.png"/>
+                                    </center>
+                                </div>
+                                Tap the M button to display the current memory contents.
+                                <br clear="all"/>
+                                <div class="buttonpurple" style="float: left;">
+                                    <center>
+                                        <img src="images/ico_arrow_white.png"/><span class="white">M5</span>
+                                    </center>
+                                </div>
+                                Tap to insert the contents of that slot into your calculation.
+                                <br clear="all"/>
+                                <div class="exampleclose" style="float: left;"></div>
+                                Tap to clear the slot.
+                                <br clear="all"/>
+                                <div class="exampleedit" style="float: left;"></div>
+                                Tap to modify a slot’s contents.
+                                <br clear="all"/>
+                                <div class="dialogAbuttonPurple" style="position: relative; float: left;">
+                                    <center>
+                                        <span class="white2">Clear All</span>
+                                    </center>
+                                </div>
+                                Tap to erase every slot.
+                                <br clear="all"/>
+                                <div class="dialogAbuttonBlack" style="position: relative; float: left;">
+                                    <center>
+                                        <span class="white2">Close</span>
+                                    </center>
+                                </div>
+                                Tap to restore the calculator.
+                                <br clear="all"/>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div id="licensepage" style="display: none">
-            <div id="licensetext"><div id="licensescroll"></div></div>
+            <div id="licensetext">
+                <div id="licensescroll"></div>
+            </div>
             <div id="licensebtnq" class="licensebtn">Back</div>
         </div>
     </body>

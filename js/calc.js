@@ -28,10 +28,10 @@ $(function() {
         this.setOrientation = function() {
            if ((window.orientation == 90)||(window.orientation == -90))
            {
-               document.getElementById('stylesheet').href='css/calc.css';
+               document.getElementById("stylesheet").href="css/calc.css";
            }
            else {
-               document.getElementById('stylesheet').href='css/calc_portrait.css';
+               document.getElementById("stylesheet").href="css/calc_portrait.css";
            }
         };
 
@@ -42,20 +42,20 @@ $(function() {
 
         //The below two stacks are maintained to do consistent backspace operation
         /**
-         * Stack of elements that has been pressed after '=' press && which are shown
+         * Stack of elements that has been pressed after "=" press && which are shown
          * in mainEntry area.
          *
          * This stack is used to undo user's button presses until the previous
-         * valid calculation ('=' press)
+         * valid calculation ("=" press)
          */
         this.mainEntryStack = [];
 
         /**
-         * Stack of elements that has been pressed after '=' press && which are shown
+         * Stack of elements that has been pressed after "=" press && which are shown
          * in current formula area (except already computed formula).
          *
          * This stack is used to undo user's button presses until the previous
-         * valid calculation ('=' press)
+         * valid calculation ("=" press)
          */
         this.currentFormulaStack = [];
         this.currentPage = "calculationpane";
@@ -347,11 +347,11 @@ $(function() {
         };
 
         this.setCalculationHistoryEntries = function(historyEntries) {
-            document.getElementById('calculationhistory').innerHTML = historyEntries;
+            document.getElementById("calculationhistory").innerHTML = historyEntries;
         };
 
         this.appendEntryToCalculationHistory = function(historyEntry) {
-            document.getElementById('calculationhistory').innerHTML += historyEntry;
+            document.getElementById("calculationhistory").innerHTML += historyEntry;
         };
 
         // Functions for manipulating history persistent storage data.
@@ -363,24 +363,24 @@ $(function() {
                 timestamp: new Date().getTime()
             };
 
-            localStorage.setItem('history' + Calculator.nexthistoryindex, JSON.stringify(historyEntry));
+            localStorage.setItem("history" + Calculator.nexthistoryindex, JSON.stringify(historyEntry));
             Calculator.nexthistoryindex++;
         };
 
         this.populateHistoryPaneFromLocalStorage = function() {
-            var firsthistoryindex = localStorage.getItem('firsthistoryindex');
+            var firsthistoryindex = localStorage.getItem("firsthistoryindex");
 
             if (firsthistoryindex === null) {
                 // Initialize history local storage if not used yet.
                 Calculator.nexthistoryindex = 0;
-                localStorage.setItem('firsthistoryindex', 0);
+                localStorage.setItem("firsthistoryindex", 0);
             } else {
                 // If history local storage is used, then populate the history list with stored items that are less than a week old.
                 var time = new Date().getTime();
                 var historyEntries = "";
 
                 for (var i = firsthistoryindex; true; ++i) {
-                    var historyitemstr = localStorage.getItem('history' + i);
+                    var historyitemstr = localStorage.getItem("history" + i);
 
                     if (historyitemstr === null) {
                         Calculator.nexthistoryindex = i;
@@ -390,18 +390,18 @@ $(function() {
                             var historyitem = JSON.parse(historyitemstr);
 
                             if (time - historyitem.timestamp > 604800000 /* One week in milliseconds */) {
-                                localStorage.removeItem('history' + i);
+                                localStorage.removeItem("history" + i);
                                 firsthistoryindex = i + 1;
                             } else {
                                 historyEntries += Calculator.formHistoryEntry(historyitem.formula, historyitem.result);
                             }
                         } catch (err) {
-                            localStorage.removeItem('history' + i);
+                            localStorage.removeItem("history" + i);
                         }
                     }
                 }
                 Calculator.setCalculationHistoryEntries(historyEntries);
-                localStorage.setItem('firsthistoryindex', firsthistoryindex);
+                localStorage.setItem("firsthistoryindex", firsthistoryindex);
             }
         };
 
@@ -487,8 +487,8 @@ $(function() {
 
                 if (i <= 8) {
                     // Empty memory entry found, store entry.
-                    localStorage.setItem('M' + i, value + '##');
-                    Calculator.setMemoryEntry('M' + i, value, "");
+                    localStorage.setItem("M" + i, value + "##");
+                    Calculator.setMemoryEntry("M" + i, value, "");
                     document.getElementById("button" + "M" + i).style.color = "#d9e2d0";
                 }
             }
@@ -496,7 +496,7 @@ $(function() {
 
         this.getNextEmptyMemorySlot = function(){
             for (var i = 1; i <= 8; ++i) {
-                if (localStorage.getItem('M' + i) === null) {
+                if (localStorage.getItem("M" + i) === null) {
                     break;
                 }
             }
@@ -516,10 +516,10 @@ $(function() {
             var memoryitemstr = localStorage.getItem(key);
 
             if (!(memoryitemstr === null)) {
-                var memoryitem = memoryitemstr.split('##');
+                var memoryitem = memoryitemstr.split("##");
 
                 Calculator.setMemoryEntry(key, memoryitem[0], description);
-                localStorage.setItem(key, memoryitem[0] + '##' + description);
+                localStorage.setItem(key, memoryitem[0] + "##" + description);
             }
         };
 
@@ -584,12 +584,12 @@ $(function() {
 
         this.populateMemoryPaneFromLocalStorage = function() {
             for (var i = 0; i < 9; ++i) {
-                var memoryitemstr = localStorage.getItem('M' + i);
+                var memoryitemstr = localStorage.getItem("M" + i);
 
                 if (!(memoryitemstr === null)) {
-                    var memoryitem = memoryitemstr.split('##');
+                    var memoryitem = memoryitemstr.split("##");
 
-                    Calculator.setMemoryEntry('M' + i, memoryitem[0], memoryitem[1]);
+                    Calculator.setMemoryEntry("M" + i, memoryitem[0], memoryitem[1]);
                 }
             }
         };
@@ -607,7 +607,7 @@ $(function() {
         this.clearAllMemorySlots = function(){
             document.getElementById("clearconfirmationdialog").style.visibility="hidden";
             for(var i = 1; i <= 8; i++){
-                this.onButtonMemoryCloseClick('M'+i);
+                this.onButtonMemoryCloseClick("M"+i);
             }
             Calculator.setFreeMemorySlot();
         };
@@ -661,40 +661,40 @@ $(function() {
             Calculator.buttonClickAudio.src = "./audio/GeneralButtonPress_R2.ogg";
             Calculator.equalClickAudio = new Audio();
             Calculator.equalClickAudio.src = "./audio/EqualitySign_R2.ogg";
-            $('#closehistorybutton').click(function(e){
+            $("#closehistorybutton").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.historybutton').click(function(e){
+            $(".historybutton").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.buttonclose').click(function(e){
+            $(".buttonclose").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.switchleftactive').click(function(e){
+            $(".switchleftactive").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.buttonpurple').click(function(e){
+            $(".buttonpurple").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.dialogAbuttonPurple').click(function(e){
+            $(".dialogAbuttonPurple").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.dialogAbuttonBlack').click(function(e){
+            $(".dialogAbuttonBlack").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.dialogBpurplebutton').click(function(e){
+            $(".dialogBpurplebutton").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.dialogBblackbutton').click(function(e){
+            $(".dialogBblackbutton").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.buttonmemory').click(function(e){
+            $(".buttonmemory").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.buttonmemoryedit').click(function(e){
+            $(".buttonmemoryedit").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $('.buttonmemoryclose').click(function(e){
+            $(".buttonmemoryclose").click(function(e){
                 Calculator.buttonClickAudio.play();
             });
         };
@@ -718,18 +718,18 @@ $(function() {
             }
         };
 
-        $('#mnecancel').click(function(){
+        $("#mnecancel").click(function(){
             $("#memorynoteeditor").hide();
         });
 
-        $('#mnesave').click(function(){
+        $("#mnesave").click(function(){
             $("#memorynoteeditor").hide();
             document.getElementById(Calculator.currentKey + "description").innerText =
                 document.getElementById("mnedescriptioninput").value;
             Calculator.setMemoryDescription(Calculator.currentKey, document.getElementById("mnedescriptioninput").value);
         });
 
-        $('#mnedescriptiondelete').click(function(){
+        $("#mnedescriptiondelete").click(function(){
             document.getElementById("mnedescriptioninput").value = "";
         });
 
@@ -741,9 +741,9 @@ $(function() {
          */
         this.registerOrientationChange = function(){
             //on page create
-            $(document).bind('pagecreate create', Calculator.setOrientation());
+            $(document).bind("pagecreate create", Calculator.setOrientation());
 
-            if('onorientationchange' in window)
+            if("onorientationchange" in window)
             {
                 window.onorientationchange = Calculator.setOrientation;
             }
@@ -754,7 +754,7 @@ $(function() {
                     {
                         window.orientation = 0;
                     }
-                    else 
+                    else
                     {
                         window.orientation = 90;
                     }
@@ -768,7 +768,7 @@ $(function() {
          * creates scroll bar for the history page
          */
         this.createScrollbars = function(){
-            this.historyScrollbar = new iScroll('wrapper', {scrollbarClass: 'customScrollbar',
+            this.historyScrollbar = new iScroll("wrapper", {scrollbarClass: "customScrollbar",
                 hScrollbar: true, vScrollbar: true,
                 hideScrollbar: true, checkDOMChanges: true});
         };
