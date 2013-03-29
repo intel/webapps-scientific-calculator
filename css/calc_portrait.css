@@ -1860,21 +1860,21 @@ sub {
     cursor: default;
 }
 
-.helpdialog .inner .contents bl {
+.helpdialog .inner .contents .black {
     color: #000000;
     font-family: "OpenSans-Light";
     font-size: 26pt;
     line-height: 98px;
 }
 
-.helpdialog .inner .contents wh {
+.helpdialog .inner .contents .white {
     color: #ebebe9;
     font-family: "OpenSans-Light";
     font-size: 36px;
     line-height: 98px;
 }
 
-.helpdialog .inner .contents wh2 {
+.helpdialog .inner .contents .white2 {
     color: #ebebe9;
     font-family: "OpenSans-Light";
     font-size: 36px;
