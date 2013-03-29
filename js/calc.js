@@ -15,6 +15,7 @@ $(function() {
     Calculator = new function() {
 
 
+        this.localizer = null;
         this.parser = "";
         this.currentKey = "";
 
@@ -729,9 +730,6 @@ $(function() {
             document.getElementById("mnedescriptioninput").value = "";
         });
 
-        this.localizer = new Localizer();
-        this.localizer.localizeHtmlElements();
-
         /**
          * register for the orientation event changes
          */
@@ -777,20 +775,73 @@ $(function() {
         $.ajax({
             url : "lazy.html",
             success : function(result){
+                var lazyScripts = [
+                    {
+                        script: "js/peg-0.6.2.min.js",
+                        success: function(resolve) {
+                            Calculator.parser = PEG.buildParser(document.getElementById("grammar").innerText);
+                        }
+                     },
+                    {
+                        script: "js/license.js",
+                        success: function(resolve) {
+                            license_init("license", "background");
+                        }
+                    },
+                    {
+                        script: "js/help.js",
+                        success: function(resolve) {
+                            help_init("home_help", "help_");
+                        }
+                    },
+                    {
+                        script: "js/localizer.js",
+                        success: function(resolve) {
+                            Calculator.localizer = new Localizer();
+                            Calculator.localizer.localizeHtmlElements();
+                        }
+                    },
+                    {
+                        script: "js/iscroll.js",
+                        success: function(resolve) {
+                            Calculator.createScrollbars();
+                        }
+                    }
+                ];
+                var promises = [];
+
+                // complete body
                 $("body").append(result);
-                license_init("license", "background");
-                help_init("home_help", "help_");
-                Calculator.parser = PEG.buildParser(document.getElementById("grammar").innerText);
-                Calculator.createScrollbars();
-                Calculator.initButtons();
-                Calculator.setMainEntry("");
-                Calculator.setCurrentFormula("");
-                Calculator.transitionToDegrees();
-                Calculator.transitionToTrigonometricFunctions();
-                Calculator.equalPressed = false;
-                Calculator.populateMemoryPaneFromLocalStorage();
-                Calculator.populateHistoryPaneFromLocalStorage();
-                $("button").prop("disabled",false);
+
+                function makeSuccessScript(success, resolve) {
+                    return function() {
+                        success();
+                        resolve();
+                    };
+                }
+
+                // inject js files
+                for (var index=0; index<lazyScripts.length; index++) {
+                    var jqTag = document.createElement("script");
+                    var dfd = $.Deferred();
+                    promises.push(dfd.promise());
+                    jqTag.onload=makeSuccessScript(lazyScripts[index].success, dfd.resolve);
+                    jqTag.setAttribute("src",lazyScripts[index].script);
+                    document.body.appendChild(jqTag);
+                }
+
+                // once all js files have been loaded and initialised/etc, do the rest
+                $.when.apply(null, promises).then(function() {
+                    Calculator.initButtons();
+                    Calculator.setMainEntry("");
+                    Calculator.setCurrentFormula("");
+                    Calculator.transitionToDegrees();
+                    Calculator.transitionToTrigonometricFunctions();
+                    Calculator.equalPressed = false;
+                    Calculator.populateMemoryPaneFromLocalStorage();
+                    Calculator.populateHistoryPaneFromLocalStorage();
+                    $("button").prop("disabled",false);
+                });
             }
         });
     }, false);

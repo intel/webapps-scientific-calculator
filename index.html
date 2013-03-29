@@ -139,17 +139,41 @@
             </div>
          </div>
 
+<script>
+// insert before </body> tag
+window.addEventListener('load', function () {
+  window.perf = function () {
+    var perfData = localStorage.getItem('perf-data');
+    console.log(perfData);
+  };
+
+  setTimeout(function () {
+    var perfData = localStorage.getItem('perf-data');
+    if (!perfData) {
+      perfData = [];
+    }
+    else {
+      perfData = JSON.parse(perfData);
+    }
+
+    var timestamp = (new Date()).getTime();
+    perfData.push(performance.timing);
+    localStorage.setItem('perf-data', JSON.stringify(perfData));
+    console.log(perfData);
+
+    setTimeout(function () {
+      alert('perf data saved');
+    }, 0);
+  }, 1000);
+});
+</script>
+
     </body>
 
     <!-- external library js files -->
     <script src="js/jquery-1.7.2.min.js"></script>
-    <script src="js/localizer.js"></script>
-    <script src="js/iscroll.js"></script>
-    <script src="js/peg-0.6.2.min.js"></script>
 
     <!-- internal js file -->
-    <script src="js/license.js"></script>
-    <script src="js/help.js"></script>
     <script src="js/calc.js"></script>
 </html>
 
