@@ -715,20 +715,22 @@ $(function() {
             }
         };
 
-        $("#mnecancel").click(function(){
-            $("#memorynoteeditor").hide();
-        });
+        this.registerMneClickHandlers = function(){
+            $("#mnecancel").click(function(){
+                $("#memorynoteeditor").hide();
+            });
 
-        $("#mnesave").click(function(){
-            $("#memorynoteeditor").hide();
-            document.getElementById(Calculator.currentKey + "description").innerText =
-                document.getElementById("mnedescriptioninput").value;
-            Calculator.setMemoryDescription(Calculator.currentKey, document.getElementById("mnedescriptioninput").value);
-        });
+            $("#mnesave").click(function(){
+                $("#memorynoteeditor").hide();
+                document.getElementById(Calculator.currentKey + "description").innerText =
+                    document.getElementById("mnedescriptioninput").value;
+                Calculator.setMemoryDescription(Calculator.currentKey, document.getElementById("mnedescriptioninput").value);
+            });
 
-        $("#mnedescriptiondelete").click(function(){
-            document.getElementById("mnedescriptioninput").value = "";
-        });
+            $("#mnedescriptiondelete").click(function(){
+                document.getElementById("mnedescriptioninput").value = "";
+            });
+        };
 
         /**
          * register for the orientation event changes
@@ -813,6 +815,8 @@ $(function() {
 
             // complete body
             $("body").append(result);
+
+            Calculator.registerMneClickHandlers();
 
             function makeSuccessScript(success, resolve) {
                 return function() {
