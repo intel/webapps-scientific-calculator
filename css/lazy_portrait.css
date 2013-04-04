@@ -1,7 +1,6 @@
-
 @font-face {
-   font-family: OpenSans-Semibold;
-   src: url(../fonts/OpenSans-Semibold.ttf);
+    font-family: OpenSans-Semibold;
+    src: url(../fonts/OpenSans-Semibold.ttf);
 }
 
 .memorypane {
@@ -442,7 +441,6 @@
     display: none;
 }
 
-
 @-webkit-keyframes historyAnimationOpen {
 0% {
     height: 0px;
@@ -494,7 +492,7 @@
     background-repeat: no-repeat;
     font-family: OpenSans-Light;
     font-size: 20pt;
-    color:#ffffff;
+    color:#FFFFFF;
 }
 
 #clearconfirmationdialog #dialogcontent #dialogcontenttext{
@@ -686,7 +684,6 @@
 .customScrollbarV > div {
     position:absolute;
     width:100%;
-
     background:black;
     box-sizing:border-box;
     border-radius:4px;
