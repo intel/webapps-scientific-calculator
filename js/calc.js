@@ -18,17 +18,19 @@ $(function() {
         this.localizer = null;
         this.parser = "";
         this.currentKey = "";
+        this.cssAppendix = "_portrait";
 
         /**
          * changes the orientation css file based on the current window size
          */
         this.setOrientation = function() {
-           if ((window.orientation == 90)||(window.orientation == -90))
-           {
-               document.getElementById("stylesheet").href="css/calc.css";
-           }
-           else {
-               document.getElementById("stylesheet").href="css/calc_portrait.css";
+           var lazy = document.getElementById("lazystylesheet");
+
+           this.cssAppendix = ((window.orientation == 90)||(window.orientation == -90))?"":"_portrait";
+
+           document.getElementById("stylesheet").href="css/calc"+this.cssAppendix+".css";
+           if (lazy) {
+               lazy.href="css/lazy"+this.cssAppendix+".css";
            }
         };
 
@@ -774,6 +776,8 @@ $(function() {
     Calculator.registerOrientationChange();
 
     window.addEventListener('pageshow', function () {
+        $("head").append("<link rel='stylesheet' id='lazystylesheet' type='text/css' href='css/lazy"+Calculator.cssAppendix+".css'/>");
+
         $.ajax("lazy.html").then(function(result){
             // inject rest of js files
             // and run Calculator init code that depends on them

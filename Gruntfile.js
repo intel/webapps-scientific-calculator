@@ -32,6 +32,8 @@ module.exports = function (grunt) {
         files: {
           'build/css/calc.css': ['css/calc.css'],
           'build/css/calc_portrait.css': ['css/calc_portrait.css'],
+          'build/css/lazy.css': ['css/lazy.css'],
+          'build/css/lazy_portrait.css': ['css/lazy_portrait.css'],
           'build/css/jquery.jscrollpane.css': ['css/jquery.jscrollpane.css']
         }
       }
