@@ -473,7 +473,7 @@ sub {
     height: 72px;
 }
 
-#LCD_Lower #upperpane #closebutton {
+#LCD_Lower #upperpane #upperclosebutton {
     position: relative;
     float: left; 
     width: 112px;
@@ -481,7 +481,7 @@ sub {
     left: 0px;
 }
 
-#LCD_Lower #upperpane #closebutton #buttonclosecurrentformula {
+#LCD_Lower #upperpane #upperclosebutton #buttonclosecurrentformula {
     position: relative;
     float: left; 
     left: 28px;
@@ -513,14 +513,14 @@ sub {
     height: 138px;
 }
 
-#LCD_Lower #lowerpane #closebutton {
+#LCD_Lower #lowerpane #lowerclosebutton {
     position: relative;
     float: left; 
     width: 112px;
     height: 76px;
 }
 
-#LCD_Lower #lowerpane #closebutton #buttonclosemainentry {
+#LCD_Lower #lowerpane #lowerclosebutton #buttonclosemainentry {
     position: relative;
     float: left;
     left: 28px;
