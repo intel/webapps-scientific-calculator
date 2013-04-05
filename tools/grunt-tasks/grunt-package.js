@@ -76,20 +76,24 @@ module.exports = function (grunt) {
   * then call it with pkg:TEST, where TEST is the string
   * you want to append to the output filename.
   */
-  grunt.registerTask('package', 'Zip files with custom zipfile name', function (identifier) {
-    var files = grunt.config('package.files');
-    var suffix = grunt.config('package.suffix') || 'zip';
-    var appName = grunt.config('package.appName');
-    var version = grunt.config('package.version');
-    var outDir = grunt.config('package.outDir') || '.';
-    var addGitCommitId = !!grunt.config('package.addGitCommitId');
+  grunt.registerMultiTask('package', 'Zip files with custom zipfile name', function (identifier) {
+    var appName = this.data.appName;
+    var version = this.data.version;
+    var files = this.data.files;
+    var suffix = this.data.suffix || 'zip';
+    var outDir = this.data.outDir || '.';
+    var addGitCommitId = !!this.data.addGitCommitId;
 
     // this is removed from the path of each file as it is added to the zip
-    var stripPrefix = grunt.config('package.stripPrefix') || '';
+    var stripPrefix = this.data.stripPrefix || '';
     stripPrefix = new RegExp('^' + stripPrefix);
 
     if (!appName) {
       grunt.fatal('package task requires appName argument');
+    }
+
+    if (!version) {
+      grunt.fatal('package task requires version argument (x.x.x)');
     }
 
     if (!files) {

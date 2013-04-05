@@ -8,6 +8,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     packageInfo: grunt.file.readJSON('package.json'),
+    chromeInfo: grunt.file.readJSON('manifest.json'),
 
     clean: ['build'],
 
@@ -15,13 +16,13 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          'build/js/calc.js': ['js/calc.js'],
-          'build/js/help.js': ['js/help.js'],
-          'build/js/iscroll.js': ['js/iscroll.js'],
-          'build/js/jquery-1.7.2.min.js': ['js/jquery-1.7.2.min.js'],
-          'build/js/license.js': ['js/license.js'],
-          'build/js/localizer.js': ['js/localizer.js'],
-          'build/js/peg-0.6.2.min.js': ['js/peg-0.6.2.min.js']
+          'build/app/js/calc.js': ['app/js/calc.js'],
+          'build/app/js/help.js': ['app/js/help.js'],
+          'build/app/js/iscroll.js': ['app/js/iscroll.js'],
+          'build/app/js/jquery-1.7.2.min.js': ['app/js/jquery-1.7.2.min.js'],
+          'build/app/js/license.js': ['app/js/license.js'],
+          'build/app/js/localizer.js': ['app/js/localizer.js'],
+          'build/app/js/peg-0.6.2.min.js': ['app/js/peg-0.6.2.min.js']
         }
       }
     },
@@ -30,29 +31,29 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          'build/css/calc.css': ['css/calc.css'],
-          'build/css/calc_portrait.css': ['css/calc_portrait.css'],
-          'build/css/lazy.css': ['css/lazy.css'],
-          'build/css/lazy_portrait.css': ['css/lazy_portrait.css'],
-          'build/css/jquery.jscrollpane.css': ['css/jquery.jscrollpane.css']
+          'build/app/css/calc.css': ['app/css/calc.css'],
+          'build/app/css/calc_portrait.css': ['app/css/calc_portrait.css'],
+          'build/app/css/lazy.css': ['app/css/lazy.css'],
+          'build/app/css/lazy_portrait.css': ['app/css/lazy_portrait.css'],
+          'build/app/css/jquery.jscrollpane.css': ['app/css/jquery.jscrollpane.css']
         }
       }
     },
 
-    // copy assets and the index.html file to build/;
+    // copy assets and the index.html file to build/app/;
     // NB we rewrite index.html during copy to point at the
     // minified/concated js file all.js and minified/concated CSS file
     // all.css
     copy: {
-      dist: {
+      common: {
         files: [
-          { expand: true, cwd: '.', src: ['config.xml'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['README.txt'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['icon**.png'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['images/**'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['audio/**'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['fonts/**'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['**.html'], dest: 'build/' }
+          { expand: true, cwd: '.', src: ['README.txt'], dest: 'build/app/' },
+          { expand: true, cwd: '.', src: ['app/**.html'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/audio/**'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/fonts/**'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/images/**'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/lib/**'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/_locales/**'], dest: 'build/' }
         ],
         options: {
           // this rewrites the <script> tag in the index.html file
@@ -63,16 +64,9 @@ module.exports = function (grunt) {
           // files are space-sensitive, but most HTML shouldn't be)
           processContent: function (content) {
             if (content.match(/DOCTYPE/)) {
-          //     // JS
-          //     content = content.replace(/test\.js/, '!!!all.js!!!');
-          //     content = content.replace(/<script src="[^\!]+?"><\/script>\n/g, '');
-
-              // CSS
-          //     content = content.replace(/test\.css/, '!!!all.css!!!');
-          //     content = content.replace(/<link rel="stylesheet" href="[^\!]+?">\n/g, '');
-
-              // fix JS and CSS resources
-          //     content = content.replace(/!!!/g, '');
+              // remove comments
+              content = content.replace(/.+\/\/.+?\n/g, '');
+              content = content.replace(/<!--[\s\S]+?-->/g, '');
 
               // whitespace reduction
               content = content.replace(/[ ]{2,}/g, ' ');
@@ -84,20 +78,53 @@ module.exports = function (grunt) {
 
           // if you have other resources which you don't want to have
           // treated as text, add them here
-          processContentExclude: ['images/*', 'fonts/*', 'audio/*', '*.jpg', '*.png', 'README.txt']
+          processContentExclude: [
+            'app/images/**',
+            'app/audio/**',
+            'app/_locales/**',
+            'app/fonts/**',
+            'app/lib/**',
+            '*.png',
+            'README.txt'
+          ]
         }
+      },
+      wgt: {
+        files: [
+          { expand: true, cwd: 'build/app', src: ['**'], dest: 'build/wgt/' },
+          { expand: true, cwd: '.', src: ['config.xml'], dest: 'build/wgt/' },
+          { expand: true, cwd: '.', src: ['icon_128.png'], dest: 'build/wgt/' }
+        ]
+      },
+      crx: {
+        files: [
+          { expand: true, cwd: 'build/app', src: ['**'], dest: 'build/crx/' },
+          { expand: true, cwd: '.', src: ['manifest.json'], dest: 'build/crx/' },
+          { expand: true, cwd: '.', src: ['icon_*.png'], dest: 'build/crx/' }
+        ]
       }
     },
 
-    // make wgt package in build/ directory
+    // make wgt and crx packages in build/ directory
     package: {
-      appName: '<%= packageInfo.name %>',
-      version: '<%= packageInfo.version %>',
-      files: 'build/**',
-      stripPrefix: 'build/',
-      outDir: 'build',
-      suffix: '.wgt',
-      addGitCommitId: false
+      wgt: {
+        appName: '<%= packageInfo.name %>',
+        version: '<%= packageInfo.version %>',
+        files: 'build/wgt/**',
+        stripPrefix: 'build/wgt/',
+        outDir: 'build',
+        suffix: '.wgt',
+        addGitCommitId: false
+      },
+      crx: {
+        appName: '<%= chromeInfo.name %>',
+        version: '<%= chromeInfo.version %>',
+        files: 'build/crx/**',
+        stripPrefix: 'build/crx/',
+        outDir: 'build',
+        suffix: '.crx',
+        addGitCommitId: false
+      }
     },
 
     sdb: {
@@ -142,25 +169,29 @@ module.exports = function (grunt) {
         remoteScript: '/home/developer/tizen-app.sh',
         localPort: '8888',
         openBrowser: 'google-chrome %URL%'
-      }//,
+      },
 
-      //start: {
-        //action: 'start',
-        //remoteScript: '/home/developer/tizen-app.sh'
-      //}
+      start: {
+        action: 'start',
+        remoteScript: '/home/developer/tizen-app.sh'
+      }
     }
   });
 
-  grunt.registerTask('dist', ['clean', 'cssmin:dist', 'uglify:dist', 'copy:dist']);
+  grunt.registerTask('dist', ['clean', 'cssmin:dist', 'uglify:dist', 'copy:common']);
+  grunt.registerTask('wgt', ['dist', 'copy:wgt', 'package:wgt']);
+  grunt.registerTask('crx', ['dist', 'copy:crx', 'package:crx']);
 
-  grunt.registerTask('pkg', 'Create package; call with pkg:STR to append STR to package name', function (identifier) {
-    grunt.task.run('dist');
-
-    var packageTask = (identifier ? 'package:' + identifier : 'package');
-    grunt.task.run(packageTask);
-  });
-
-  grunt.registerTask('reinstall', ['pkg', 'sdb:prepare', 'sdb:pushwgt', 'sdb:stop', 'sdb:uninstall', 'sdb:install', 'sdb:debug']);
+  grunt.registerTask('reinstall', [
+    'wgt',
+    'sdb:prepare',
+    'sdb:pushwgt',
+    'sdb:stop',
+    'sdb:uninstall',
+    'sdb:install',
+    'sdb:debug'
+  ]);
+  grunt.registerTask('install', ['wgt', 'sdb:prepare', 'sdb:pushwgt', 'sdb:install', 'sdb:debug']);
   grunt.registerTask('restart', ['sdb:stop', 'sdb:start']);
-  grunt.registerTask('default', 'dist');
+  grunt.registerTask('default', 'wgt');
 };
