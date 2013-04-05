@@ -9,12 +9,12 @@
 
 @font-face {
     font-family: OpenSans-Light;
-    src: url(../fonts/OpenSans-Light.ttf);
+    src: url(../fonts/OpenSans-Light.woff);
 }
 
 @font-face {
     font-family: OpenSans-Regular;
-    src: url(../fonts/OpenSans-Regular.ttf);
+    src: url(../fonts/OpenSans-Regular.woff);
 }
 
 body {
