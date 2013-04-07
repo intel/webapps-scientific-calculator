@@ -789,6 +789,7 @@ $(function() {
                         $.get("js/peg-code.txt",function(data) {
                             try {
                                 Calculator.parser = PEG.buildParser(data);
+                                resolve();
                             } catch(err) {
                                 console.log(err.message);
                             }
@@ -799,12 +800,14 @@ $(function() {
                     script: "js/license.js",
                     success: function(resolve) {
                         license_init("license", "background");
+                        resolve();
                     }
                 },
                 {
                     script: "js/help.js",
                     success: function(resolve) {
                         help_init("home_help", "help_");
+                        resolve();
                     }
                 },
                 {
@@ -812,12 +815,14 @@ $(function() {
                     success: function(resolve) {
                         Calculator.localizer = new Localizer();
                         Calculator.localizer.localizeHtmlElements();
+                        resolve();
                     }
                 },
                 {
                     script: "js/iscroll.js",
                     success: function(resolve) {
                         Calculator.createScrollbars();
+                        resolve();
                     }
                 }
             ];
@@ -830,8 +835,7 @@ $(function() {
 
             function makeSuccessScript(success, resolve) {
                 return function() {
-                    success();
-                    resolve();
+                    success(resolve);
                 };
             }
 

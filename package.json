@@ -22,6 +22,7 @@
     "async": "~0.2.6",
     "node-native-zip": "~1.1.0",
     "lodash": "~1.1.1",
-    "xml2js": "~0.2.6"
+    "xml2js": "~0.2.6",
+    "grunt-contrib-imagemin": "~0.1.3"
   }
 }

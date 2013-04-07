@@ -95,12 +95,12 @@
                     <div id="keyboardright">
                         <div id="centerrightpane">
                             <button class="buttonpurple" id="buttonmemorylist" onclick="Calculator.onButtonMemoryListClick()">
-                                <div class="buttonlefttext">M</div>
-                                <img class="buttonrighticon" src="images/ico_mem_list.png"></img>
+                                <span class="buttonlefttext">M</span>
+                                <img class="buttonrighticon" src="images/ico_mem_list.png"/>
                             </button>
                             <button class="buttonpurple" id="buttonmemorize" onclick="Calculator.onButtonMainEntryToMemoryClick()">
-                                <img class="buttonlefticon" src="images/ico_arrow_black.png"></img>
-                                <div class="buttonrighttext" id="buttonmemorizetext"></div>
+                                <img class="buttonlefticon" src="images/ico_arrow_black.png"/>
+                                <span class="buttonrighttext" id="buttonmemorizetext"></span>
                             </button>
                             <button class="buttonblack" id="buttonleftparenthesis">(</button>
                             <button class="buttonblack" id="buttonrightparenthesis">)</button>
@@ -137,13 +137,13 @@
                 <div id="licensebtnl"> i </div>
                 <div id="home_help" class="helplaunch"> ? </div>
             </div>
-         </div>
+        </div>
+        <!-- external library js files -->
+        <script src="js/jquery-1.7.2.min.js"></script>
+
+        <!-- internal js file -->
+        <script src="js/calc.js"></script>
     </body>
 
-    <!-- external library js files -->
-    <script src="js/jquery-1.7.2.min.js"></script>
-
-    <!-- internal js file -->
-    <script src="js/calc.js"></script>
 </html>
 
