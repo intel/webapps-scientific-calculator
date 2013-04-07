@@ -786,7 +786,13 @@ $(function() {
                 {
                     script: "js/peg-0.6.2.min.js",
                     success: function(resolve) {
-                        Calculator.parser = PEG.buildParser(document.getElementById("grammar").innerText);
+                        $.get("js/peg-code.txt",function(data) {
+                            try {
+                                Calculator.parser = PEG.buildParser(data);
+                            } catch(err) {
+                                console.log(err.message);
+                            }
+                        });
                     }
                 },
                 {
