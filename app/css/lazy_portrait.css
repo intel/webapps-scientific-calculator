@@ -859,3 +859,27 @@
     color: #ffffff;
 }
 
+#memorypage,
+#memorynoteeditor,
+#licensepage
+{
+    display: none;
+}
+
+#clearconfirmationdialog {
+    visibility: hidden;
+}
+
+div.dialogAbuttonPurple,
+div.dialogAbuttonBlack
+{
+    position: relative;
+    float: left;
+}
+
+div.buttonpurple,
+div.exampleclose,
+div.exampleedit
+{
+    float: left;
+}

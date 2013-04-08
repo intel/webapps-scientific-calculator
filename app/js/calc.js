@@ -596,7 +596,7 @@ $(function() {
         this.onButtonMemoryListClick = function() {
             $("#memorypage").show();
             this.currentPage = "memorypage";
-            document.getElementById("mpmainentry").innerHTML = Calculator.getMainEntry();;
+            document.getElementById("mpmainentry").innerHTML = Calculator.getMainEntry();
         };
 
         this.onButtonMemoryClearAll = function() {
@@ -715,6 +715,59 @@ $(function() {
             else {
                 document.getElementById("buttonmemorizetext").innerHTML = "Mx";
             }
+        };
+
+        this.registerInlineHandlers = function(){
+            $("#closehistorybutton").on("click",function(){Calculator.closeHistory();});
+            $("#buttonclosecurrentformula").on("click",function(){Calculator.setCurrentFormula('');});
+            $("#buttonclosemainentry").on("click",function(){Calculator.setMainEntry('');});
+            $("#openhistorybutton").on("click",function(){Calculator.openHistory();});
+            $("#buttondeg").on("click",function(){Calculator.transitionToDegrees();});
+            $("#buttonrad").on("click",function(){Calculator.transitionToRadians();});
+            $("#buttontrig").on("click",function(){Calculator.transitionToTrigonometricFunctions();});
+            $("#buttonhyp").on("click",function(){Calculator.transitionToHyperbolicFunctions();});
+            $("#buttonmemorylist").on("click",function(){Calculator.onButtonMemoryListClick();});
+            $("#buttonmemorize").on("click",function(){Calculator.onButtonMainEntryToMemoryClick();});
+            $("#mplcdbuttonclose").on("click",function(){Calculator.setMainEntry('');});
+            $("#mpopenhistorybutton").on("click",function(){Calculator.openHistory();});
+            $("#buttonM1").on("click",function(){Calculator.onButtonMemoryClick('M1');});
+            $("#buttonM1edit").on("click",function(){Calculator.onButtonMemoryEditClick('M1');});
+            $("#buttonM1close").on("click",function(){Calculator.onButtonMemoryCloseClick('M1');});
+            $("#buttonM2").on("click",function(){Calculator.onButtonMemoryClick('M2');});
+            $("#buttonM2edit").on("click",function(){Calculator.onButtonMemoryEditClick('M2');});
+            $("#buttonM2close").on("click",function(){Calculator.onButtonMemoryCloseClick('M2');});
+            $("#buttonM3").on("click",function(){Calculator.onButtonMemoryClick('M3');});
+            $("#buttonM3edit").on("click",function(){Calculator.onButtonMemoryEditClick('M3');});
+            $("#buttonM3close").on("click",function(){Calculator.onButtonMemoryCloseClick('M3');});
+            $("#buttonM4").on("click",function(){Calculator.onButtonMemoryClick('M4');});
+            $("#buttonM4edit").on("click",function(){Calculator.onButtonMemoryEditClick('M4');});
+            $("#buttonM4close").on("click",function(){Calculator.onButtonMemoryCloseClick('M4');});
+            $("#buttonM5").on("click",function(){Calculator.onButtonMemoryClick('M5');});
+            $("#buttonM5edit").on("click",function(){Calculator.onButtonMemoryEditClick('M5');});
+            $("#buttonM5close").on("click",function(){Calculator.onButtonMemoryCloseClick('M5');});
+            $("#buttonM6").on("click",function(){Calculator.onButtonMemoryClick('M6');});
+            $("#buttonM6edit").on("click",function(){Calculator.onButtonMemoryEditClick('M6');});
+            $("#buttonM6close").on("click",function(){Calculator.onButtonMemoryCloseClick('M6');});
+            $("#buttonM7").on("click",function(){Calculator.onButtonMemoryClick('M7');});
+            $("#buttonM7edit").on("click",function(){Calculator.onButtonMemoryEditClick('M7');});
+            $("#buttonM7close").on("click",function(){Calculator.onButtonMemoryCloseClick('M7');});
+            $("#buttonM8").on("click",function(){Calculator.onButtonMemoryClick('M8');});
+            $("#buttonM8edit").on("click",function(){Calculator.onButtonMemoryEditClick('M8');});
+            $("#buttonM8close").on("click",function(){Calculator.onButtonMemoryCloseClick('M8');});
+            $("#memoryclearall").on("click",function(){Calculator.onButtonMemoryClearAll();});
+            $("#memoryClose").on("click",function(){Calculator.onButtonMemoryClose();});
+            $("#dialogokbutton").on("click",function(){Calculator.clearAllMemorySlots();});
+            $("#dialogcancelbutton").on("click",function(){Calculator.cancelClearAllDialog();});
+
+            $("#M1descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M1');});
+            $("#M2descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M2');});
+            $("#M3descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M3');});
+            $("#M4descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M4');});
+            $("#M5descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M5');});
+            $("#M6descriptioninput").on("focusout",function(){Calculator.saveMemoryDescription('M6');});
+            $("#M7descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M7');});
+            $("#M8descriptioninput").on("focusout",function(){Calculator.saveMemoryDescription('M8');});
+
         };
 
         this.registerMneClickHandlers = function(){
@@ -859,6 +912,7 @@ $(function() {
                 Calculator.equalPressed = false;
                 Calculator.populateMemoryPaneFromLocalStorage();
                 Calculator.populateHistoryPaneFromLocalStorage();
+                Calculator.registerInlineHandlers();
                 $("button").prop("disabled",false);
             });
         });

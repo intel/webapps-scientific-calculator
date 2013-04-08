@@ -22,10 +22,8 @@ module.exports = function (grunt) {
           'build/app/js/calc.js': ['app/js/calc.js'],
           'build/app/js/help.js': ['app/js/help.js'],
           'build/app/js/iscroll.js': ['app/js/iscroll.js'],
-          'build/app/js/jquery-1.7.2.min.js': ['app/js/jquery-1.7.2.min.js'],
           'build/app/js/license.js': ['app/js/license.js'],
-          'build/app/js/localizer.js': ['app/js/localizer.js'],
-          'build/app/js/peg-0.6.2.min.js': ['app/js/peg-0.6.2.min.js']
+          'build/app/js/localizer.js': ['app/js/localizer.js']
         }
       }
     },
@@ -47,24 +45,25 @@ module.exports = function (grunt) {
     copy: {
       common: {
         files: [
-          //{ expand: true, cwd: '.', src: ['app/js/calc.js'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/js/peg-0.6.2.min.js'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/js/jquery-1.7.2.min.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/audio/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/fonts/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/js/peg-code.txt'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['README.txt'], dest: 'build/app/' }
+          { expand: true, cwd: '.', src: ['README.txt'], dest: 'build/app/' },
+          { expand: true, cwd: '.', src: ['app/_locales/**'], dest: 'build/' }
         ]
       },
       wgt: {
         files: [
           { expand: true, cwd: 'build/app/', src: ['**'], dest: 'build/wgt/' },
           { expand: true, cwd: '.', src: ['config.xml'], dest: 'build/wgt/' },
-          { expand: true, cwd: '.', src: ['scientific-calculator-icon.png'], dest: 'build/wgt/' }
+          { expand: true, cwd: '.', src: ['scientific-calculator-icon_128.png'], dest: 'build/wgt/' }
         ]
       },
       crx: {
         files: [
           { expand: true, cwd: 'build/app/', src: ['**'], dest: 'build/crx/' },
-          { expand: true, cwd: 'app/_locales', src: ['**'], dest: 'build/crx/_locales' },
           { expand: true, cwd: '.', src: ['manifest.json'], dest: 'build/crx/' },
           { expand: true, cwd: '.', src: ['scientific-calculator-icon*.png'], dest: 'build/crx/' }
         ]

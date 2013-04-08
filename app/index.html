@@ -17,29 +17,29 @@
     <body>
         <div id="background">
             <div id="calculationpane">
-                <div id="LCD_Upper" style="display: none">
+                <div id="LCD_Upper">
                     <div id="wrapper">
                         <div id="scroller">
                             <div class="scroll-pane" id="calculationhistory"></div>
                         </div>
                     </div>
                     <div id="historyverticalline"></div>
-                    <button class="historybuttonclose" id="closehistorybutton" onclick="Calculator.closeHistory()"></button>
+                    <button class="historybuttonclose" id="closehistorybutton"></button>
                 </div>
                 <div id="LCD_Lower">
                     <div id="upperpane">
                         <div id="upperclosebutton">
-                            <button class="buttonclose" id="buttonclosecurrentformula" onclick="Calculator.setCurrentFormula('')"></button>
+                            <button class="buttonclose" id="buttonclosecurrentformula"></button>
                         </div>
                         <div id="currentformula"></div>
                     </div>
                     <div id="horizontaldivider"></div>
                     <div id="lowerpane">
                         <div id="lowerclosebutton">
-                            <button class="buttonclose" id="buttonclosemainentry" onclick="Calculator.setMainEntry('')"></button>
+                            <button class="buttonclose" id="buttonclosemainentry"></button>
                         </div>
                         <div id="mainentry"></div>
-                        <button class="historybutton" id="openhistorybutton" onclick="Calculator.openHistory()"></button>
+                        <button class="historybutton" id="openhistorybutton"></button>
                     </div>
                 </div>
                 <div id="keyboard">
@@ -47,12 +47,12 @@
                         <div id="leftmostpane">
                             <div id="statetransition">
                                 <div id="degradswitch" class="switchleftactive">
-                                     <div class="buttontogglebackgroundB" id="buttondeg" onclick="Calculator.transitionToDegrees();">DEG</div>
-                                     <div class="buttontogglebackgroundA" id="buttonrad" onclick="Calculator.transitionToRadians();">RAD</div>
+                                     <div class="buttontogglebackgroundB" id="buttondeg">DEG</div>
+                                     <div class="buttontogglebackgroundA" id="buttonrad">RAD</div>
                                 </div>
                                  <div id="traghypswitch" class="switchleftactive">
-                                     <div class="buttontogglebackgroundB" id="buttontrig" onclick="Calculator.transitionToTrigonometricFunctions()">TRIG</div>
-                                     <div class="buttontogglebackgroundA" id="buttonhyp" onclick="Calculator.transitionToHyperbolicFunctions()">HYP</div>
+                                     <div class="buttontogglebackgroundB" id="buttontrig">TRIG</div>
+                                     <div class="buttontogglebackgroundA" id="buttonhyp">HYP</div>
                                 </div>
                             </div>
                             <div id="trigonometric">
@@ -94,11 +94,11 @@
                     <div id="keyboardsplitter"></div>
                     <div id="keyboardright">
                         <div id="centerrightpane">
-                            <button class="buttonpurple" id="buttonmemorylist" onclick="Calculator.onButtonMemoryListClick()">
+                            <button class="buttonpurple" id="buttonmemorylist">
                                 <span class="buttonlefttext">M</span>
                                 <img class="buttonrighticon" src="images/ico_mem_list.png"/>
                             </button>
-                            <button class="buttonpurple" id="buttonmemorize" onclick="Calculator.onButtonMainEntryToMemoryClick()">
+                            <button class="buttonpurple" id="buttonmemorize">
                                 <img class="buttonlefticon" src="images/ico_arrow_black.png"/>
                                 <span class="buttonrighttext" id="buttonmemorizetext"></span>
                             </button>

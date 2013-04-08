@@ -1089,6 +1089,11 @@ sub {
     opacity: 1;
 }
 
+#LCD_Upper
+{
+    display: none;
+}
+
 button[disabled] {
     opacity: 0.5;
 }
