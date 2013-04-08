@@ -853,6 +853,7 @@
     line-height: 45px;
     cursor: pointer;
     color: #dddddd;
+    z-index: 1; /* pull up above the columns */
 }
 
 .helpdialog .inner .close:active {
