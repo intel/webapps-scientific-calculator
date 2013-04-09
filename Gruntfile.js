@@ -45,10 +45,12 @@ module.exports = function (grunt) {
     copy: {
       common: {
         files: [
+          //{ expand: true, cwd: '.', src: ['app/js/calc.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/js/peg-0.6.2.min.js'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/js/jquery-1.7.2.min.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/js/jq.mobi.min.js'], dest: 'build/' },
+          //{ expand: true, cwd: '.', src: ['app/js/jq.mobi.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/js/q.min.js'], dest: 'build/' },
+          //{ expand: true, cwd: '.', src: ['app/js/q.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/audio/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/fonts/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/js/peg-code.txt'], dest: 'build/' },
