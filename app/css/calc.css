@@ -1,0 +1,1099 @@
+/*
+ * Copyright (c) 2012, Intel Corporation.
+ *
+ * This program is licensed under the terms and conditions of the  
+ * Apache License, version 2.0.  The full text of the Apache License is at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+
+@font-face {
+    font-family: OpenSans-Light;
+    src: url(../fonts/OpenSans-Light.woff);
+}
+
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url(../fonts/OpenSans-Regular.woff);
+}
+
+body {
+    position: absolute;
+    margin: 0px;
+    top: 0%;
+    left: 0%;
+}
+
+/* hack for landscape mode in simulator */
+@media (orientation: landscape) {
+  body {
+    margin: 0px;
+    overflow: visible;
+    -webkit-user-select: none;
+    background-color: white;
+    box-shadow: 5px 5px 20px black;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+  /* 320 x 480 */
+    -webkit-transform: translate(-50%, -50%) scale(0.375, 0.4444);
+  }
+}
+
+/* 730 x 410 */
+@media (orientation: landscape) and (min-height: 410px) and (min-width: 730px) {
+  body { -webkit-transform: translate(-50%, -50%) scale(0.57, 0.57);}
+}
+
+/* 800 x 480 */
+@media (orientation: landscape) and (min-height: 480px) and (min-width: 800px) {
+  body { -webkit-transform: translate(-50%, -50%) scale(0.625, 0.6666);}
+}
+
+/* 989 x 600 */
+@media (orientation: landscape) and (min-width: 600px) and (min-height: 989px) {
+  body { -webkit-transform: translate(-50%, -50%) scale(0.77266, 0.8333); }
+}
+
+/* 1024 x 600 */
+@media (orientation: landscape) and (min-height: 600px) and (min-width: 1024px) {
+  body { -webkit-transform: translate(-50%, -50%) scale(0.8, 0.8333);}
+}
+
+/* 1230 x 720 */
+@media (orientation: landscape) and (min-height: 720px) and (min-width: 1230px) {
+  body { -webkit-transform: translate(-50%, -50%) scale(0.9609, 1.0);}
+}
+
+/* 1280 x 720 */
+@media (orientation: landscape) and (min-height: 720px) and (min-width: 1280px) {
+  body { -webkit-transform: translate(-50%, -50%) scale(1.0, 1.0);}
+}
+
+
+/* hack for landscape mode in emulator */
+/* 320 x 480 */
+@media (orientation: portrait) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.4444, 0.375) translate(50%, -50%);}
+}
+/* 410 x 730 */
+@media (orientation: portrait) and (min-width: 410px) and (min-height: 730px) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.57, 0.57) translate(50%, -50%);}
+}
+/* 480 x 800 */
+@media (orientation: portrait) and (min-width: 480px) and (min-height: 800px) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.6666, 0.625) translate(50%, -50%);}
+}
+/* 989 x 600 */
+@media (orientation: portrait) and (min-width: 600px) and (min-height: 989px) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.77266, 0.8333) translate(50%, -50%); }
+}
+/* 600 x 1024 */
+@media (orientation: portrait) and (min-width: 600px) and (min-height: 1024px) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.8, 0.8333) translate(50%, -50%);}
+}
+/* 720 x 1230 */
+@media (orientation: portrait) and (min-width: 720px) and (min-height: 1230px) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.9609, 1.0) translate(50%, -50%);}
+}
+/* 720 x 1280 */
+@media (orientation: portrait) and (min-width: 720px) and (min-height: 1280px) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(1.0, 1.0) translate(50%, -50%);}
+}
+
+sup, sub {
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    font-size: 50%;
+    bottom: 2ex;
+}
+
+sub {
+    font-size: 50%;
+    top: 0.8ex;
+}
+
+/* Button classes */
+
+.buttonblackshort {
+    width: 104px;
+    height: 64px;
+    color: #ebebe9;
+    font-family: OpenSans-Light;
+    font-size: 36px;
+    border-style: none;
+    background-image: url(../images/bt_blackSmall_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonblackshort:active {
+    background-image: url(../images/bt_blackSmall_land_press.png);
+}
+
+.buttontogglebackgroundA, .buttontogglebackgroundB {
+    width: 80px;
+    height: 36px;
+    font-family: OpenSans-Light;
+    font-size: 24px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttontogglebackgroundA {
+    color: #727272;
+}
+
+.buttontogglebackgroundB {
+    color: #d9e2d0;
+}
+
+.switchleftactive {
+    width: 160px;
+    height: 36px;
+    background-image: url(../images/switch_land_left_act.png);
+}
+
+.switchleftactive:active, .switchrightactive:active{
+    background-image: url(../images/switch_land_press.png);
+}
+
+.buttonyellow {
+    width: 104px;
+    height: 64px;
+    color: #ebebe9;
+    font-family: OpenSans-Light;
+    font-size: 36px;
+    border-style: none;
+    background-image: url(../images/bt_yellow_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonyellow:active {
+    background-image: url(../images/bt_yellow_land_press.png);
+}
+
+.buttonred {
+    width: 104px;
+    height: 72px;
+    color: #ebebe9;
+    font-family: OpenSans-Light;
+    font-size: 46px;
+    border-style: none;
+    background-image: url(../images/bt_red_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonred:active {
+    background-image: url(../images/bt_red_land_press.png);
+}
+
+.buttonblack {
+    width: 104px;
+    height: 72px;
+    color: #ebebe9;
+    font-family: OpenSans-Light;
+    font-size: 36px;
+    border-style: none;
+    background-image: url(../images/bt_black_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonblack:active {
+    background-image: url(../images/bt_black_land_press.png);
+}
+
+.buttonwhite {
+    width: 104px;
+    height: 72px;
+    color: #000000;
+    font-family: OpenSans-Regular;
+    font-size: 46px;
+    border-style: none;
+    background-image: url(../images/bt_white_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonwhite:active {
+    background-image: url(../images/bt_white_land_press.png);
+}
+
+.buttonblue {
+    width: 104px;
+    height: 72px;
+    color: #ebebe9;
+    font-family: OpenSans-Light;
+    font-size: 56px;
+    border-style: none;
+    background-image: url(../images/bt_blue_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonblue:active {
+    background-image: url(../images/bt_blue_land_press.png);
+}
+
+.buttonpurple {
+    width: 104px;
+    height: 72px;
+    border-style: none;
+    background-image: url(../images/bt_purple_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonpurple:active {
+    background-image: url(../images/bt_purple_land_press.png);
+}
+
+.buttonblueequal {
+    width: 104px;
+    height: 156px;
+    color: #ebebe9;
+    font-family: OpenSans-Light;
+    font-size: 56pt;
+    border-style: none;
+    background-image: url(../images/bt_equals_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonblueequal:active {
+    background-image: url(../images/bt_equals_land_press.png);
+}
+
+.buttonclose {
+    width: 64px;
+    height: 64px;
+    border-style: none;
+    background-image: url(../images/bt_bin.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.buttonclose:active {
+    background-image: url(../images/bt_bin_press.png);
+}
+
+/* Backgrounds */
+
+#background
+{
+    position: relative;
+    float: left; 
+    width: 1280px;
+    height: 720px;
+    left: 0px;
+    top: 0px;
+    background-image: url(../images/bg_land.png);
+    background-repeat: no-repeat;
+}
+
+#calculationpane {
+    position: relative;
+    float: left; 
+    width: 1280px;
+    height: 720px;
+    left: 0px;
+    top: 0px;
+}
+
+#calculationpane #LCD_Upper {
+    position: absolute;
+    float: left; 
+    width: 1248px;
+    height: 690px;
+    left: 16px;
+    top: 16px;
+    background-image: url(../images/bg_history_land.png);
+    background-repeat:no-repeat;
+    z-index: 2;
+    overflow: hidden;
+    }
+
+#calculationpane #LCD_Lower {
+    position: relative;
+    float: left; 
+    width: 1248px;
+    height: 212px;
+    left: 16px;
+    top: 16px;
+    background-image: url(../images/bg_display_land.png);
+    background-repeat: no-repeat;
+}
+
+#calculationpane #keyboard {
+    position: relative;
+    float: left;
+    width: 1248px;
+    height: 450px;
+    left: 16px;
+    top: 44px;
+    background-repeat: no-repeat;
+    background-image: url(../images/bg_keyboard_land.png);
+}
+
+#calculationpane #keyboard #keyboardleft{
+    position: relative;
+    float: left;
+    width: 512px;
+    height: 450px;
+    left: 0px;
+    top: 0px;
+}
+
+#calculationpane #keyboard #keyboardsplitter{
+    position:relative;
+    width: 4px;
+    float: left;
+    height:440px;
+    top:4px;
+    left:0px;
+    background-repeat: no-repeat;
+    background-image: url(../images/line_keyboard_land.png);
+}
+
+#calculationpane #keyboard #keyboardright{
+    position: relative;
+    float: right;
+    width: 732px;
+    height: 450px;
+    top: 0px;
+    left:0px;
+}
+
+#calculationpane #keyboard #keyboardleft #leftmostpane {
+    position: relative;
+    float: left; 
+    width: 360px;
+    height: 400px;
+    left: 20px;
+    top: 36px;
+}
+
+#calculationpane #keyboard #keyboardleft #centerleftpane {
+    position: relative;
+    float: left; 
+    width: 104px;
+    height: 430px;
+    left: 40px;
+    top: 10px;
+}
+
+#calculationpane #keyboard #keyboardright #centerrightpane {
+    position: relative;
+    float: left; 
+    width: 225px;
+    height: 330px;
+    top: 20px;
+    left: 16px;
+}
+
+#calculationpane #keyboard #keyboardright #rightpane {
+    position: relative;
+    float: left;
+    width: 335px;
+    height: 420px;
+    left: 40px;
+    top: 20px;
+}
+
+#calculationpane #keyboard #keyboardright #rightmostpane {
+    position: relative;
+    float: right;
+    width: 104px;
+    height: 420px;
+    top: 20px;
+    right:16px;
+}
+
+#calculationpane #keyboard #keyboardleft #leftmostpane #statetransition {
+    position: relative;
+    width: 360px;
+    height: 36px;
+    top:0px;
+    left:0px;
+}
+
+#calculationpane #keyboard #keyboardleft #leftmostpane #statetransition #degradswitch{
+    position: relative;
+    float: left;
+    width: 160px;
+    height: 36px;
+}
+
+#calculationpane #keyboard #keyboardleft #leftmostpane #statetransition #traghypswitch{
+    position: relative;
+    float: right;
+    width: 160px;
+    height: 36px;
+    left:6px;
+}
+
+/* Upper LCD display */
+
+#LCD_Upper #calculationhistory {
+    float: left;
+    left: 3px;
+    top: 8px;
+    overflow: visible;
+}
+
+#LCD_Upper #historyverticalline  {
+    position: relative;
+    float: right;
+    width: 2px;
+    height: 680px;
+    right: 37px;
+    top:4px;
+    background-image: url(../images/line_history_vert_land.png);
+    background-repeat: no-repeat;
+}
+
+/* Lower LCD display */
+
+#LCD_Lower #upperpane {
+    position: relative;
+    float: left; 
+    width: 1248px;
+    height: 72px;
+}
+
+#LCD_Lower #upperpane #upperclosebutton {
+    position: relative;
+    float: left; 
+    width: 112px;
+    height: 72px;
+    left: 0px;
+}
+
+#LCD_Lower #upperpane #upperclosebutton #buttonclosecurrentformula {
+    position: relative;
+    float: left; 
+    left: 28px;
+}
+
+#LCD_Lower #upperpane #verticaldivider {
+    position: relative;
+    float: left; 
+    width: 1px;
+    height: 30px;
+    background-image: url(../images/LineVertical30Black.png);
+    background-repeat: no-repeat;
+}
+
+#LCD_Lower #horizontaldivider {
+    position: relative;
+    float: left; 
+    width: 1240px;
+    height: 2px;
+    left: 4px;
+    background-image: url(../images/line_display_land.png);
+    background-repeat: no-repeat;
+}
+
+#LCD_Lower #lowerpane {
+    position: relative;
+    float: left; 
+    width: 1248px;
+    height: 138px;
+}
+
+#LCD_Lower #lowerpane #lowerclosebutton {
+    position: relative;
+    float: left; 
+    width: 112px;
+    height: 76px;
+}
+
+#LCD_Lower #lowerpane #lowerclosebutton #buttonclosemainentry {
+    position: relative;
+    float: left;
+    left: 28px;
+}
+
+#LCD_Lower #lowerpane #verticaldivider {
+    position: relative;
+    float: left; 
+    width: 1px;
+    height: 60px;
+    background-image: url(../images/LineVertical60Black.png);
+    background-repeat: no-repeat;
+}
+
+#LCD_Lower #lowerpane #buttonmainentrymemoryadd {
+    position: relative;
+    left: 6px;
+    top: 20px;
+    border-style: none;
+    background-image: url(../images/Button_Arrow_Black.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+/* Buttons and their backgrounds */
+
+/* Exponential and logarithmic function buttons */
+
+#expandlog {
+    position: relative;
+    width: 360px;
+    height: 150px;
+    left: 0px;
+    top: 52px;
+}
+
+#buttonlog {
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+#buttonlog2 {
+    position: relative;
+    left: 20px;
+    top: 0px;
+}
+
+#buttonln {
+    position: relative;
+    left: 40px;
+    top: 0px;
+}
+
+#button10x {
+    position: relative;
+    left: 0px;
+    top: 20px;
+}
+
+#button2x {
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+#buttonex {
+    position: relative;
+    left: 40px;
+    top: 20px;
+}
+
+/* Trigonometric function buttons */
+
+#trigonometric {
+    position: relative;
+    width: 360px;
+    height: 150px;
+    left:0px;
+    top:32px;
+}
+
+#buttonsin {
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+#buttoncos {
+    position: relative;
+    left: 20px;
+    top: 0px;
+}
+
+#buttontan {
+    position: relative;
+    left: 40px;
+    top: 0px;
+}
+
+#buttonarcsin {
+    position: relative;
+    left: 0px;
+    top: 20px;
+}
+
+#buttonarccos {
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+#buttonarctan {
+    position: relative;
+    left: 40px;
+    top: 20px;
+}
+
+/* Hyperbolic function buttons */
+
+#hyperbolic {
+    position: relative;
+    width: 360px;
+    height: 150px;
+    left: 0px;
+    top: 32px;
+    display: none;
+}
+
+#buttonsinh {
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+#buttoncosh {
+    position: relative;
+    left: 20px;
+    top: 0px;
+}
+
+#buttontanh {
+    position: relative;
+    left: 40px;
+    top: 0px;
+}
+
+#buttonasinh {
+    position: relative;
+    left: 0px;
+    top: 20px;
+}
+
+#buttonacosh {
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+#buttonatanh {
+    position: relative;
+    left: 40px;
+    top: 20px;
+}
+
+/* State transition toggle buttons */
+
+#statetransition {
+    position: relative;
+    width: 370px;
+    height: 210px;
+    left: 10px;
+    top: 10px;
+}
+
+#buttondeg {
+    position: relative;
+    width:80px;
+    height:36px;
+    text-align: center;
+}
+
+#buttonrad {
+    position: absolute;
+    left: 80px;
+    width:80px;
+    height:36px;
+    top: 0px;
+    text-align: center;
+}
+
+#buttontrig {
+    position: relative;
+    width:80px;
+    height:36px;
+    text-align: center;
+    }
+
+#buttonhyp {
+    position: absolute;
+    left: 80px;
+    width:80px;
+    height:36px;
+    top:0px;
+    text-align: center;
+}
+
+/* Power and root function buttons */
+
+#powerandroot {
+    position: relative;
+    width: 104px;
+    height: 148px;
+    left: 0px;
+    top: 10px;
+}
+
+#buttonsquare {
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+#buttonsquareroot {
+    position: relative;
+    left: 0px;
+    top: 20px;
+}
+
+/* Nth power and nth root function buttons */
+
+#nthpowerandnthroot {
+    position: relative;
+    width: 104px;
+    height: 168px;;
+    left: 0px;
+    top: 10px;
+}
+
+#buttonnthpower {
+    position: relative;
+    left: 0px;
+    top: 20px;
+}
+
+#buttonnthroot {
+    position: relative;
+    left: 0px;
+    top: 40px;
+}
+
+/* Center right pane buttons */
+#buttonclear {
+    position: relative;
+    left: 0px;
+    top: -6px;
+}
+
+#buttonmemorylist {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    color: #ebebe9;
+    font-family: "OpenSans-Light";
+    font-size: 36px;
+}
+
+#buttondelete {
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+#buttonmemorize {
+    position: relative;
+    left: 14px;
+    top: 0px;
+    color: #000000;
+    font-family: "OpenSans-Light";
+    font-size: 36px;
+}
+
+#buttonleftparenthesis {
+    position: relative;
+    left: 0px;
+    top: 12px;
+}
+
+#buttonrightparenthesis {
+    position: relative;
+    left: 14px;
+    top: 12px;
+}
+
+#buttonfactorial {
+    position: relative;
+    left: 0px;
+    top: 24px;
+}
+
+#buttoninverse {
+    position: relative;
+    left: 14px;
+    top: 24px;
+}
+
+#buttonpi {
+    position: relative;
+    left: 0px;
+    top: 36px;
+}
+
+#buttonpercentage {
+    position: relative;
+    left: 14px;
+    top: 36px;
+}
+
+/* Right pane buttons */
+
+#button7 {
+    position: relative;
+    left: 0px;
+    top: 12px;
+}
+
+#button8 {
+    position: relative;
+    left: 8px;
+    top: 12px;
+}
+
+#button9 {
+    position: relative;
+    left: 16px;
+    top: 12px;
+}
+
+#buttondivide {
+    position: relative;
+    left: 8px;
+    top: 0px;
+}
+
+#button4 {
+    position: relative;
+    left: 0px;
+    top: 24px;
+}
+
+#button5 {
+    position: relative;
+    left: 8px;
+    top: 24px;
+}
+
+#button6 {
+    position: relative;
+    left: 16px;
+    top: 24px;
+}
+
+#buttonmultiply {
+    position: relative;
+    left: 16px;
+    top: 0px;
+}
+
+#button1 {
+    position: relative;
+    left: 0px;
+    top: 36px;
+}
+
+#button2 {
+    position: relative;
+    left: 8px;
+    top: 36px;
+}
+
+#button3 {
+    position: relative;
+    left: 16px;
+    top: 36px;
+}
+
+#buttonsubtract {
+    position: relative;
+    left: 0px;
+    top: 20px;
+}
+
+#button0 {
+    position: relative;
+    left: 0px;
+    top: 40px;
+}
+
+#button00 {
+    position: relative;
+    left: 12px;
+    top: 34px;
+}
+
+#buttondot {
+    position: relative;
+    left: 8px;
+    top: 48px;
+}
+
+#buttonadd {
+    position: relative;
+    left: 0px;
+    top: 32px;
+}
+
+/* Rightmost pane buttons */
+
+#buttonplusminus {
+    position: relative;
+    left: 16px;
+    top: 48px;
+}
+
+#buttonequal {
+    position: relative;
+    left: 0px;
+    top: 44px;
+}
+
+/* open/close history button */
+.historybutton {
+    position:absolute;
+    width: 130px;
+    height: 56px;
+    border-style: none;
+    background-image: url(../images/bt_history_exp_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.historybutton:active{
+    background-image: url(../images/bt_history_exp_land_press.png);
+}
+
+.historybuttonclose {
+    position:absolute;
+    width: 130px;
+    height: 56px;
+    border-style: none;
+    background-image: url(../images/bt_history_contr_land.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.historybuttonclose:active{
+    background-image: url(../images/bt_history_contr_land_press.png);
+}
+
+#LCD_Upper #closehistorybutton{
+    position: absolute;
+    float: left;
+    width: 130px;
+    height: 56px;
+    left: 4px;
+    top: 629px;
+    z-index: 3;
+}
+
+#LCD_Lower #lowerpane #openhistorybutton{
+    position: absolute;
+    float: left;
+    width: 130px;
+    height: 56px;
+    left: 4px;
+    top: 76px;
+}
+
+.buttonlefticon{
+    position: relative;
+    height: 26px;
+    width: 26px;
+    float:left;
+    left: 10px;
+    top:10px;
+}
+
+.buttonrighticon{
+    position: relative;
+    height: 26px;
+    width: 26px;
+    top:0px;
+    right: 20px;
+    float:right;
+    top: 10px;
+}
+
+.buttonrighttext{
+    position:relative;
+    float:right;
+    right:5px;
+}
+
+.buttonlefttext{
+    position:relative;
+    width: 50px;
+    float:left;
+    left:5px;
+    top:-2px;
+}
+
+#wrapper {
+        position:absolute;
+        top:5px; left:0px;
+        width:1232px;
+        height: 680px;
+        overflow: visible;
+}
+
+#scroller {
+        position:absolute;
+        width:100%;
+        padding:0;
+}
+
+#licensebtnl {
+    position: absolute;
+    top: 640px;
+    left: 580px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    -webkit-border-radius: 40px;
+    border: solid 3px #dddddd;
+    opacity: 0.3;
+    color: #dddddd;
+    font: 35px Arial, Helvetica, sans-serif;
+}
+
+#licensebtnl:active {
+    opacity: 1.0;
+}
+
+.helplaunch {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    -webkit-border-radius: 40px;
+    border: solid 3px #dddddd;
+    color: #dddddd;
+    opacity: 0.3;
+    font: 35px Arial, Helvetica, sans-serif;
+}
+
+#home_help {
+    top: 640px;
+    left: 700px;
+}
+
+#home_help:active {
+    opacity: 1;
+}
+
+#LCD_Upper
+{
+    display: none;
+}
+
+button[disabled] {
+    opacity: 0.5;
+}
