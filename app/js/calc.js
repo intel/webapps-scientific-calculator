@@ -831,7 +831,7 @@ $(function() {
     window.addEventListener('pageshow', function () {
         $("head").append("<link rel='stylesheet' id='lazystylesheet' type='text/css' href='css/lazy"+Calculator.cssAppendix+".css'/>");
 
-        $.ajax("lazy.html").then(function(result){
+        $.get("lazy.html", function(result){
             // inject rest of js files
             // and run Calculator init code that depends on them
 
@@ -895,15 +895,15 @@ $(function() {
             // inject js files
             for (var index=0; index<lazyScripts.length; index++) {
                 var jqTag = document.createElement("script");
-                var dfd = $.Deferred();
-                promises.push(dfd.promise());
+                var dfd = Q.defer();
+                promises.push(dfd.promise);
                 jqTag.onload=makeSuccessScript(lazyScripts[index].success, dfd.resolve);
                 jqTag.setAttribute("src",lazyScripts[index].script);
                 document.body.appendChild(jqTag);
             }
 
             // once all js files have been loaded and initialised/etc, do the rest
-            $.when.apply(null, promises).then(function() {
+            Q.all(promises).then(function() {
                 Calculator.initButtons();
                 Calculator.setMainEntry("");
                 Calculator.setCurrentFormula("");
@@ -914,6 +914,8 @@ $(function() {
                 Calculator.populateHistoryPaneFromLocalStorage();
                 Calculator.registerInlineHandlers();
                 $("button").prop("disabled",false);
+            },function() {
+                console.error("something wrong with promises");
             });
         });
     }, false);
