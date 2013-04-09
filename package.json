@@ -1,0 +1,28 @@
+{
+  "name": "Calculator",
+  "version": "0.0.1",
+  "description": "Calculator: a scientific calculator",
+  "main": "app/calc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/01org/webapps-scientific-calculator"
+  },
+  "author": "Todd Brandt <todd.e.brandt@intel.com>",
+  "license": "APL 2.0",
+  "readmeFilename": "README.txt",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.5.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "async": "~0.2.6",
+    "node-native-zip": "~1.1.0",
+    "lodash": "~1.1.1",
+    "xml2js": "~0.2.6",
+    "grunt-contrib-imagemin": "~0.1.3"
+  }
+}

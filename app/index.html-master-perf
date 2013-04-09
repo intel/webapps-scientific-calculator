@@ -721,6 +721,34 @@
             <div id="licensetext"><div id="licensescroll"></div></div>
             <div id="licensebtnq" class="licensebtn">Back</div>
         </div>
+<script>
+// insert before </body> tag
+window.addEventListener('load', function () {
+  window.perf = function () {
+    var perfData = localStorage.getItem('perf-data');
+    console.log(perfData);
+  };
+
+  setTimeout(function () {
+    var perfData = localStorage.getItem('perf-data');
+    if (!perfData) {
+      perfData = [];
+    }
+    else {
+      perfData = JSON.parse(perfData);
+    }
+
+    var timestamp = (new Date()).getTime();
+    perfData.push(performance.timing);
+    localStorage.setItem('perf-data', JSON.stringify(perfData));
+    console.log(perfData);
+
+    setTimeout(function () {
+      alert('perf data saved');
+    }, 0);
+  }, 1000);
+});
+</script>
     </body>
 
     <!-- external library js files -->
