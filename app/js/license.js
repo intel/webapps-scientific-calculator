@@ -17,10 +17,7 @@ function license_init(id, hpageid)
     var lscroll = document.getElementById(id+"scroll");
     var timer;
 
-    var request = new XMLHttpRequest();
-    request.open("GET", "README.txt", false);
-    request.onload = function(e) {
-        var text = this.responseText;
+    function handleResponse(text) {
         text = text.replace("<","&lt;");
         text = text.replace(">","&gt;");
         var lines = text.split("\n");
@@ -37,6 +34,23 @@ function license_init(id, hpageid)
             }
         }
         lscroll.innerHTML = lines.join("\n");
+    }
+
+    var request = new XMLHttpRequest();
+    request.open("GET", "README.txt", false);
+    request.onload = function(e) {
+        if (this.responseText == "") {
+            var secondAttempt = new XMLHttpRequest();
+            // if this app is being run without build tools, the README is in the parent director
+            console.log("running app without building; getting README.txt from parent");
+            secondAttempt.open("GET", "../README.txt", false);
+            secondAttempt.onload = function(e) {
+                handleResponse(this.responseText);
+            }
+            secondAttempt.send();
+        } else {
+            handleResponse(this.responseText);
+        }
     }
     request.send();
 
