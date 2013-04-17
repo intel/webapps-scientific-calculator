@@ -3,7 +3,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -20,9 +19,9 @@ module.exports = function (grunt) {
       dist: {
         files: {
           'build/app/js/calc.js': ['app/js/calc.js'],
-          'build/app/js/help.js': ['app/js/help.js'],
           'build/app/js/iscroll.js': ['app/js/iscroll.js'],
           'build/app/js/license.js': ['app/js/license.js'],
+          'build/app/js/help.js': ['app/js/help.js'],
           'build/app/js/localizer.js': ['app/js/localizer.js']
         }
       }
@@ -41,7 +40,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // copy files required for the wgt package
     copy: {
       common: {
         files: [
@@ -55,6 +53,7 @@ module.exports = function (grunt) {
           { expand: true, cwd: '.', src: ['app/fonts/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/js/peg-code.txt'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['README.txt'], dest: 'build/app/' },
+          { expand: true, cwd: '.', src: ['LICENSE'], dest: 'build/app/' },
           { expand: true, cwd: '.', src: ['app/_locales/**'], dest: 'build/' }
         ]
       },
@@ -71,6 +70,20 @@ module.exports = function (grunt) {
           { expand: true, cwd: '.', src: ['manifest.json'], dest: 'build/crx/' },
           { expand: true, cwd: '.', src: ['scientific-calculator-icon*.png'], dest: 'build/crx/' }
         ]
+      },
+      sdk: {
+        files: [
+          { expand: true, cwd: 'build/app/', src: ['**'], dest: 'build/sdk/' },
+          { expand: true, cwd: '.', src: ['app/css/calc*.css'], dest: 'build/sdk/css/' },
+          { expand: true, cwd: '.', src: ['app/css/lazy*.css'], dest: 'build/sdk/css/' },
+          { expand: true, cwd: '.', src: ['app/js/calc.js'], dest: 'build/sdk/js/' },
+          { expand: true, cwd: '.', src: ['app/js/lazy.js'], dest: 'build/sdk/js/' },
+          { expand: true, cwd: '.', src: ['app/js/help.js'], dest: 'build/sdk/js/' },
+          { expand: true, cwd: '.', src: ['app/js/license.js'], dest: 'build/sdk/js/' },
+          { expand: true, cwd: '.', src: ['app/*.html'], dest: 'build/sdk/' },
+          { expand: true, cwd: '.', src: ['config.xml'], dest: 'build/sdk/' },
+          { expand: true, cwd: '.', src: ['scientific-calculator-icon.png'], dest: 'build/sdk/' }
+        ]
       }
     },
 
@@ -82,9 +95,10 @@ module.exports = function (grunt) {
         options: {
           removeComments: true,
           collapseWhitespace: true,
-          removeCommentsFromCDATA: true,
-          removeCDATASectionsFromCDATA: true,
-          removeEmptyAttributes: true
+          removeCommentsFromCDATA: false,
+          removeCDATASectionsFromCDATA: false,
+          removeEmptyAttributes: true,
+          removeEmptyElements: false
         }
       }
     },
@@ -111,6 +125,14 @@ module.exports = function (grunt) {
         outDir: 'build',
         suffix: '.wgt',
         addGitCommitId: false
+      },
+      sdk: {
+        appName: '<%= packageInfo.name %>',
+        version: '<%= packageInfo.version %>',
+        files: 'build/sdk/**',
+        stripPrefix: 'build/sdk/',
+        outDir: 'build',
+        suffix: '.wgt',
       }
     },
 
@@ -130,6 +152,19 @@ module.exports = function (grunt) {
           filter: 'latest'
         },
         remoteDestDir: '/home/developer/'
+      },
+
+      pushdumpscript: {
+        action: 'push',
+        localFiles: 'tools/dump-localStorage.sh',
+        remoteDestDir: '/home/developer/',
+        chmod: '+x',
+        overwrite: true
+      },
+
+      dumplocalstorage: {
+        action: 'script',
+        remoteScript: '/home/developer/dump-localStorage.sh'
       },
 
       stop: {
@@ -164,6 +199,11 @@ module.exports = function (grunt) {
       }
     },
 
+    inline: {
+      script: 'build/save-perf-data.min.js',
+      htmlFile: 'build/app/index.html'
+    },
+
     simple_server: {
       port: 30303,
       dir: 'build/app/'
@@ -172,26 +212,33 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist', [
     'clean',
-    'copy:common',
     'imagemin:dist',
     'uglify:dist',
     'cssmin:dist',
-    'htmlmin:dist'
+    'htmlmin:dist',
+    'copy:common'
   ]);
 
-  grunt.registerTask('wgt', ['dist', 'copy:wgt', 'package:wgt']);
   grunt.registerTask('crx', ['dist', 'copy:crx']);
+  grunt.registerTask('wgt', ['dist', 'copy:wgt', 'package:wgt']);
+
+  grunt.registerTask('sdk', [
+    'clean',
+    'imagemin:dist',
+    'copy:common',
+    'copy:sdk',
+    'package:sdk'
+  ]);
+
+  grunt.registerTask('perf', [
+    'dist',
+    'uglify:perf',
+    'inline',
+    'copy:wgt',
+    'package:wgt'
+  ]);
 
   grunt.registerTask('install', [
-    'wgt',
-    'sdb:prepare',
-    'sdb:pushwgt',
-    'sdb:install',
-    'sdb:start'
-  ]);
-
-  grunt.registerTask('reinstall', [
-    'wgt',
     'sdb:prepare',
     'sdb:pushwgt',
     'sdb:stop',
@@ -200,9 +247,31 @@ module.exports = function (grunt) {
     'sdb:start'
   ]);
 
+  grunt.registerTask('wait', function () {
+    var done = this.async();
+    setTimeout(function () {
+      done();
+    }, 10000);
+  });
+
+  grunt.registerTask('perf-test', function () {
+    var tasks = ['sdb:pushdumpscript', 'perf', 'install', 'sdb:stop'];
+
+    for (var i = 0; i < 11; i++) {
+      tasks.push('sdb:start', 'wait', 'sdb:stop');
+    }
+
+    tasks.push('sdb:dumplocalstorage')
+
+    grunt.task.run(tasks);
+  });
+
   grunt.registerTask('restart', ['sdb:stop', 'sdb:start']);
 
   grunt.registerTask('server', ['dist', 'simple_server']);
+
+  grunt.registerTask('wgt-install', ['wgt', 'install']);
+  grunt.registerTask('sdk-install', ['sdk', 'install']);
 
   grunt.registerTask('default', 'wgt');
 };
