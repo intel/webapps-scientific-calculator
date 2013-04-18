@@ -7,8 +7,7 @@ module.exports = function (grunt) {
   /**
   * Create a zip file with a customisable filename.
   *
-  * Deps: grunt-contrib (internally, this uses grunt-contrib's compress
-  *       task)
+  * Deps: node-native-zip, async
   *
   * Format of the output filename is:
   *
@@ -37,13 +36,15 @@ module.exports = function (grunt) {
   *
   * grunt.initConfig({
   *   package: {
-  *     appName: 'app',
-  *     suffix: 'wgt',
-  *     version: '0.1.0',
-  *     addGitCommitId: true,
-  *     files: 'build/dist/**',
-  *     stripPrefix: 'build/dist',
-  *     outDir: 'build'
+  *     wgt: {
+  *       appName: 'app',
+  *       suffix: 'wgt',
+  *       version: '0.1.0',
+  *       addGitCommitId: true,
+  *       files: 'build/dist/**',
+  *       stripPrefix: 'build/dist',
+  *       outDir: 'build'
+  *     }
   *   }
   * });
   *

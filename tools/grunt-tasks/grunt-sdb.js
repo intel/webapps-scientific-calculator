@@ -140,7 +140,7 @@ module.exports = function (grunt) {
     });
   };
 
-  var getId = function (configXml, cb) {
+  var getMeta = function (configXml, cb) {
     var file = grunt.file.expand(configXml)[0];
 
     if (file) {
@@ -150,8 +150,9 @@ module.exports = function (grunt) {
             cb(err);
           }
           else {
-            var id = result.widget.$.id;
-            cb(null, id);
+            var uri = result.widget.$.id;
+            var id = result.widget['tizen:application'][0].$.id;
+            cb(null, {uri: uri, id: id});
           }
         });
       });
@@ -317,13 +318,18 @@ module.exports = function (grunt) {
    * config.sdbCmd: the sdb binary path (default='sdb')
    * done: function with signature done(err), where err is set to
    * a non-null value if an error occurs
+   * config.stopOnFailure: if true and uninstall fails, stop grunt
+   * (default: false)
    */
   var uninstall = function (config, done) {
     var configXml = config.config;
     var sdbCmd = config.sdbCmd;
     var remoteScript = config.remoteScript;
+    var stopOnFailure = (config.stopOnFailure === true ? true : false);
 
-    getId(configXml, function (err, id) {
+    getMeta(configXml, function (err, meta) {
+      var id = meta.uri;
+
       var cmd = sdbCmd + ' shell "' + remoteScript +
                 ' uninstall ' + id + '"';
 
@@ -332,14 +338,59 @@ module.exports = function (grunt) {
       exec(cmd, function (err, stdout, stderr) {
         grunt.log.write(stdout);
 
-        if (err || stdout.match('not installed|failed')) {
-          done(new Error('package with id ' + id + ' could not be uninstalled'));
+        var error = err || stdout.match('not installed|failed');
+
+        if (error) {
+          if (stopOnFailure) {
+            done(new Error('package with id ' + id + ' could not be uninstalled'));
+          }
+          else {
+            grunt.log.warn('could not uninstall package; continuing anyway');
+            done();
+          }
         }
         else {
           grunt.log.ok('package with id ' + id + ' uninstalled');
           done();
         }
       });
+    });
+  };
+
+  /**
+   * Run arbitrary script on the device
+   *
+   * config.remoteScript: full path to remote script
+   * NB the remote script is passed the following arguments:
+   *   $1 == the URI of the widget (widget.id from config.xml)
+   *   $2 == the ID of the widget (tizen:application.id from config.xml)
+   */
+  var script = function (config, done) {
+    var remoteScript = config.remoteScript;
+    var sdbCmd = config.sdbCmd;
+    var configXml = config.config;
+
+    getMeta(configXml, function (err, meta) {
+      var cmd = sdbCmd + ' shell "' + remoteScript + ' ' +
+                meta.uri + ' ' + meta.id + '"';
+      console.log(cmd);
+
+      if (err) {
+        done(err);
+      }
+      else {
+        exec(cmd, function (err, stdout, stderr) {
+          grunt.log.write(stdout);
+
+          if (err) {
+            grunt.log.error(err);
+            done(new Error('error occurred while running script ' + remoteScript));
+          }
+          else {
+            done();
+          }
+        });
+      }
     });
   };
 
@@ -394,7 +445,9 @@ module.exports = function (grunt) {
 
     var actionDone = (subcommand === 'stop' ? 'stopped' : 'launched');
 
-    getId(configXml, function (err, id) {
+    getMeta(configXml, function (err, meta) {
+      var id = meta.uri;
+
       var cmd = sdbCmd + ' shell "' + remoteScript +
                 ' ' + subcommand + ' ' + id + '"';
 
@@ -509,6 +562,9 @@ module.exports = function (grunt) {
     }
     else if (action === 'uninstall') {
       uninstall(this.data, done);
+    }
+    else if (action === 'script') {
+      script(this.data, done);
     }
     // stop, start, debug
     else {
