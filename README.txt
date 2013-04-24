@@ -1,15 +1,43 @@
 HTML5 Calculator Application
 
-Owner: Carl Wong <carl.wong@intel.com>  
+Owner: Carl Wong <carl.wong@intel.com>
 
 License for the app is found in the file "LICENSE" and the license for software and assets components is as below:
 
 CODE
 ---------------------------------------------------------------------
-jQuery JavaScript Library v1.7.2
-Copyright 2011, John Resig
-Dual licensed under the MIT or GPL Version 2 licenses.
-http://jquery.org/license
+jq.mobi
+MIT License
+@author AppMobi
+@copyright Intel
+@api private
+Licensed under the MIT
+https://raw.github.com/stereobooster/jQ.Mobi/master/license.txt
+
+Q
+Copyright 2009-2012 Kris Kowal under the terms of the MIT
+license found at http://github.com/kriskowal/q/raw/master/LICENSE
+
+With parts by Tyler Close
+Copyright 2007-2009 Tyler Close under the terms of the MIT X license found
+at http://www.opensource.org/licenses/mit-license.html
+Forked at ref_send.js version: 2009-05-11
+
+With parts by Mark Miller
+Copyright (C) 2011 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 
 PEG.js 0.6.2 Parser Generator for JavaScript
 Copyright (c) 2010-2012 David Majda
