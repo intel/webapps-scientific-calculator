@@ -10,6 +10,9 @@
     "iscroll": "latest",
     "q": "~0.9.3",
     "appframework": "01org/appframework",
-    "peg-0.7.0.min": "http://cloud.github.com/downloads/dmajda/pegjs/peg-0.7.0.min.js"
+    "peg-0.7.0.min": "http://cloud.github.com/downloads/dmajda/pegjs/peg-0.7.0.min.js",
+    "OpenSans-Light": "https://raw.github.com/w0ng/googlefontdirectory/master/fonts/OpenSans-Light.ttf",
+    "OpenSans-Regular": "https://raw.github.com/w0ng/googlefontdirectory/master/fonts/OpenSans-Regular.ttf",
+    "OpenSans-Semibold": "https://raw.github.com/w0ng/googlefontdirectory/master/fonts/OpenSans-Semibold.ttf"
   }
 }
