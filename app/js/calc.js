@@ -837,7 +837,7 @@ $(function() {
 
             var lazyScripts = [
                 {
-                    script: "js/peg-0.6.2.min.js",
+                    script: "lib/peg-0.7.0.min/index.js",
                     success: function(resolve) {
                         $.get("js/peg-code.txt",function(data) {
                             try {
@@ -872,7 +872,7 @@ $(function() {
                     }
                 },
                 {
-                    script: "js/iscroll.js",
+                    script: "lib/iscroll/src/iscroll.js",
                     success: function(resolve) {
                         Calculator.createScrollbars();
                         resolve();
