@@ -19,10 +19,10 @@ module.exports = function (grunt) {
       dist: {
         files: {
           'build/app/js/calc.js': ['app/js/calc.js'],
-          'build/app/js/iscroll.js': ['app/js/iscroll.js'],
           'build/app/js/license.js': ['app/js/license.js'],
           'build/app/js/help.js': ['app/js/help.js'],
-          'build/app/js/localizer.js': ['app/js/localizer.js']
+          'build/app/js/localizer.js': ['app/js/localizer.js'],
+          'build/app/lib/iscroll/src/iscroll.js': ['app/lib/iscroll/src/iscroll.js']
         }
       }
     },
@@ -43,14 +43,12 @@ module.exports = function (grunt) {
     copy: {
       common: {
         files: [
-          //{ expand: true, cwd: '.', src: ['app/js/calc.js'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/js/peg-0.6.2.min.js'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/js/jq.mobi.min.js'], dest: 'build/' },
-          //{ expand: true, cwd: '.', src: ['app/js/jq.mobi.js'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/js/q.min.js'], dest: 'build/' },
-          //{ expand: true, cwd: '.', src: ['app/js/q.js'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/lib/appframework/jq.mobi.min.js'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/lib/q/q.min.js'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/lib/peg-0.7.0.min/index.js'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/lib/pegjs/src/parser.pegjs'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/lib/OpenSans*/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/audio/**'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/fonts/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/js/peg-code.txt'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/README.txt'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['LICENSE'], dest: 'build/app/' },
