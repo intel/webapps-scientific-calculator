@@ -15,7 +15,7 @@ You also need bower to install the client-side dependencies:
 
   npm install -g bower
 
-You should then install the client-side dependencies into lib/:
+You should then install the client-side dependencies into app/lib/:
 
   bower install
 
