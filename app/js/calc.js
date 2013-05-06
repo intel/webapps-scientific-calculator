@@ -660,40 +660,40 @@ $(function() {
             Calculator.buttonClickAudio.src = "./audio/GeneralButtonPress_R2.ogg";
             Calculator.equalClickAudio = new Audio();
             Calculator.equalClickAudio.src = "./audio/EqualitySign_R2.ogg";
-            $("#closehistorybutton").click(function(e){
+            $("#closehistorybutton").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".historybutton").click(function(e){
+            $(".historybutton").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".buttonclose").click(function(e){
+            $(".buttonclose").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".switchleftactive").click(function(e){
+            $(".switchleftactive").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".buttonpurple").click(function(e){
+            $(".buttonpurple").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".dialogAbuttonPurple").click(function(e){
+            $(".dialogAbuttonPurple").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".dialogAbuttonBlack").click(function(e){
+            $(".dialogAbuttonBlack").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".dialogBpurplebutton").click(function(e){
+            $(".dialogBpurplebutton").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".dialogBblackbutton").click(function(e){
+            $(".dialogBblackbutton").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".buttonmemory").click(function(e){
+            $(".buttonmemory").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".buttonmemoryedit").click(function(e){
+            $(".buttonmemoryedit").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
-            $(".buttonmemoryclose").click(function(e){
+            $(".buttonmemoryclose").on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
         };
@@ -705,6 +705,7 @@ $(function() {
             $("#LCD_Upper").hide();
             $("#"+this.currentPage).show();
             this.historyScrollbar.refresh();
+            return false;
         };
 
         this.setFreeMemorySlot = function(){
@@ -853,6 +854,12 @@ $(function() {
                     script: "js/license.js",
                     success: function(resolve) {
                         license_init("license", "background");
+                        $("#licensebtnl").on("mousedown",function(){
+                          Calculator.buttonClickAudio.play();
+                        });
+                        $("#licensebtnq").on("mousedown",function() {
+                          Calculator.buttonClickAudio.play();
+                        });
                         resolve();
                     }
                 },
@@ -860,6 +867,12 @@ $(function() {
                     script: "js/help.js",
                     success: function(resolve) {
                         help_init("home_help", "help_");
+                        $("#home_help").on("mousedown",function(){
+                          Calculator.buttonClickAudio.play();
+                        });
+                        $("#help_close").on("mousedown",function(){
+                          Calculator.buttonClickAudio.play();
+                        });
                         resolve();
                     }
                 },
