@@ -144,8 +144,7 @@ $(function() {
             Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
 
             // append main entry and the operator to current formula
-            var currentFormula = $("#currentformula").html();
-            $("#currentformula").html( currentFormula + Calculator.getMainEntry() + operator );
+            $("#currentformula").append( Calculator.getMainEntry() + operator );
             Calculator.setMainEntry("");
 
             //push the recent operator to currentFormulaStack
@@ -431,9 +430,7 @@ $(function() {
         };
 
         this.appendToMainEntry = function(string) {
-            var newstring = $("#mainentry").html() + string;
-
-            Calculator.setMainEntry(newstring);
+            Calculator.setMainEntry($("#mainentry").html() + string);
         };
 
         this.getCurrentFormula = function() {
@@ -454,7 +451,6 @@ $(function() {
         this.appendToCurrentFormula = function(string) {
             var newstring = $("#currentformula").html() + string;
             Calculator.currentFormula = newstring;
-
             Calculator.setCurrentFormula(newstring);
         };
 
