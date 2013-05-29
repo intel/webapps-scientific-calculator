@@ -18,19 +18,19 @@ $(function() {
         this.localizer = null;
         this.parser = "";
         this.currentKey = "";
-        this.cssAppendix = "_portrait";
+        this.cssAppendix = "_portrait.css";
 
         /**
          * changes the orientation css file based on the current window size
          */
         this.setOrientation = function() {
-           var lazy = document.getElementById("lazystylesheet");
+           var lazy = $("#lazystylesheet");
 
-           this.cssAppendix = ((window.orientation == 90)||(window.orientation == -90))?"":"_portrait";
+           Calculator.cssAppendix = ((window.orientation == 90)||(window.orientation == -90))?".css":"_portrait.css";
 
-           document.getElementById("stylesheet").href="css/calc"+this.cssAppendix+".css";
-           if (lazy) {
-               lazy.href="css/lazy"+this.cssAppendix+".css";
+           $("#stylesheet").attr("href","css/calc"+Calculator.cssAppendix);
+           if (lazy.length>0) {
+               lazy.attr("href","css/lazy"+Calculator.cssAppendix);
            }
         };
 
@@ -70,33 +70,33 @@ $(function() {
         // Functions for transitioning between states.
         //
         this.transitionToDegrees = function() {
-            document.getElementById("degradswitch").setAttribute("class", "switchleftactive");
-            document.getElementById("buttondeg").setAttribute("class", "buttontogglebackgroundB");
-            document.getElementById("buttonrad").setAttribute("class", "buttontogglebackgroundA");
+            $("#degradswitch").attr("class","switchleftactive");
+            $("#buttondeg").attr("class","buttontogglebackgroundB");
+            $("#buttonrad").attr("class","buttontogglebackgroundA");
             Calculator.angleDivisor = 180/Math.PI;
         };
 
         this.transitionToRadians = function() {
-            document.getElementById("degradswitch").setAttribute("class", "switchrightactive");
-            document.getElementById("buttondeg").setAttribute("class", "buttontogglebackgroundA");
-            document.getElementById("buttonrad").setAttribute("class", "buttontogglebackgroundB");
+            $("#degradswitch").attr("class","switchrightactive");
+            $("#buttondeg").attr("class","buttontogglebackgroundA");
+            $("#buttonrad").attr("class","buttontogglebackgroundB");
             Calculator.angleDivisor = 1;
         };
 
         this.transitionToTrigonometricFunctions = function() {
-            document.getElementById("traghypswitch").setAttribute("class", "switchleftactive");
-            document.getElementById("buttontrig").setAttribute("class", "buttontogglebackgroundB");
-            document.getElementById("buttonhyp").setAttribute("class", "buttontogglebackgroundA");
-            document.getElementById("trigonometric").style.display = "inherit";
-            document.getElementById("hyperbolic").style.display = "none";
+            $("#traghypswitch").attr("class","switchleftactive");
+            $("#buttontrig").attr("class","buttontogglebackgroundB");
+            $("#buttonhyp").attr("class","buttontogglebackgroundA");
+            $("#trigonometric").css("display", "inherit");
+            $("#hyperbolic").css("display", "none");
         };
 
         this.transitionToHyperbolicFunctions = function() {
-            document.getElementById("traghypswitch").setAttribute("class", "switchrightactive");
-            document.getElementById("buttontrig").setAttribute("class", "buttontogglebackgroundA");
-            document.getElementById("buttonhyp").setAttribute("class", "buttontogglebackgroundB");
-            document.getElementById("trigonometric").style.display = "none";
-            document.getElementById("hyperbolic").style.display = "inherit";
+            $("#traghypswitch").attr("class","switchrightactive");
+            $("#buttontrig").attr("class","buttontogglebackgroundA");
+            $("#buttonhyp").attr("class","buttontogglebackgroundB");
+            $("#trigonometric").css("display", "none");
+            $("#hyperbolic").css("display", "inherit");
         };
 
         // Helper function for clearing main entry and current formula as needed.
@@ -126,13 +126,14 @@ $(function() {
         // Functions for handling button presses.
         //
         this.onFunctionButtonClick = function() {
+            var $this = $(this);
             Calculator.buttonClickAudio.play();
             Calculator.handleClearOnFunctionButtonClick();
 
-            var operator = this.getAttribute("data-operator");
+            var operator = $this.attr("data-operator");
 
-            if (!operator) {
-                operator = this.innerHTML;
+            if (operator===null) {
+                operator = $this.html();
             }
 
             //move mainEntryStack content to currentFormulaStack
@@ -143,8 +144,8 @@ $(function() {
             Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
 
             // append main entry and the operator to current formula
-            document.getElementById("currentformula").innerHTML += Calculator.getMainEntry();
-            document.getElementById("currentformula").innerHTML += operator;
+            var currentFormula = $("#currentformula").html();
+            $("#currentformula").html( currentFormula + Calculator.getMainEntry() + operator );
             Calculator.setMainEntry("");
 
             //push the recent operator to currentFormulaStack
@@ -159,7 +160,7 @@ $(function() {
             Calculator.buttonClickAudio.play();
             Calculator.handleClearOnNumberButtonClick();
 
-            var value = this.innerHTML;
+            var value = $(this).html();
             var mainEntry = Calculator.getMainEntry();
 
             if (mainEntry.length >= 22) {
@@ -183,7 +184,7 @@ $(function() {
                     return;
                 }
             } else if (value === "+/\u2212") {
-                 // "Plus/minus" sign.
+                // "Plus/minus" sign.
 
                 if (mainEntry === "" || mainEntry === "0") {
                     return;
@@ -209,7 +210,7 @@ $(function() {
 
         this.onClearButtonClick = function() {
             Calculator.buttonClickAudio.play();
-            var clearButtonText = document.getElementById("buttonclear").innerHTML;
+            var clearButtonText = $("#buttonclear").html();
 
             if (clearButtonText === "C") {
                 Calculator.setMainEntry("");
@@ -224,7 +225,7 @@ $(function() {
             Calculator.currentFormulaStack.splice(0,len);
 
             //update the currentformula area
-            document.getElementById("currentformula").innerHTML = Calculator.currentFormula;
+            $("#currentformula").html(Calculator.currentFormula);
         };
 
         this.onDeleteButtonClick = function() {
@@ -262,7 +263,7 @@ $(function() {
                 for(var j = 0; j < Calculator.currentFormulaStack.length; j++){
                     text += Calculator.currentFormulaStack[j];
                 }
-                document.getElementById("currentformula").innerHTML = Calculator.currentFormula + text;
+                $("#currentformula").html(Calculator.currentFormula + text);
             }
         };
 
@@ -321,7 +322,7 @@ $(function() {
         };
 
         this.setClearButtonMode = function(mode) {
-            document.getElementById("buttonclear").innerHTML = mode;
+            $("#buttonclear").html(mode);
         };
 
         // Function for adding a result history entry.
@@ -346,11 +347,12 @@ $(function() {
         };
 
         this.setCalculationHistoryEntries = function(historyEntries) {
-            document.getElementById("calculationhistory").innerHTML = historyEntries;
+            $("#calculationhistory").html(historyEntries);
         };
 
         this.appendEntryToCalculationHistory = function(historyEntry) {
-            document.getElementById("calculationhistory").innerHTML += historyEntry;
+            var calculationHistory = $("#calculationhistory");
+            calculationHistory.html(calculationHistory.html() + historyEntry);
         };
 
         // Functions for manipulating history persistent storage data.
@@ -407,50 +409,50 @@ $(function() {
         // Functions for manipulating entries.
         //
         this.getMainEntry = function() {
-            return document.getElementById("mainentry").innerHTML;
+            return $("#mainentry").html();
         };
 
         this.setMainEntry = function(string) {
-            var mainentryelement = document.getElementById("mainentry");
+            var mainentryelement = $("#mainentry");
 
-            mainentryelement.innerHTML = string;
-            document.getElementById("mpmainentry").innerHTML = string;
+            mainentryelement.html(string);
+            $("#mpmainentry").html(string);
 
             if (string === "") {
-                document.getElementById("buttonclear").innerHTML = "AC";
+                $("#buttonclear").html("AC");
             } else {
-                document.getElementById("buttonclear").innerHTML = "C";
+                $("#buttonclear").html("C");
             }
 
-            mainentryelement.className = "mainentryshort";
-            if (mainentryelement.offsetWidth < mainentryelement.scrollWidth) {
-                mainentryelement.className = "mainentrylong";
+            mainentryelement.attr("class","mainentryshort");
+            if (mainentryelement[0].offsetWidth < mainentryelement[0].scrollWidth) {
+                mainentryelement.attr("class","mainentrylong");
             }
         };
 
         this.appendToMainEntry = function(string) {
-            var newstring = document.getElementById("mainentry").innerHTML + string;
+            var newstring = $("#mainentry").html() + string;
 
             Calculator.setMainEntry(newstring);
         };
 
         this.getCurrentFormula = function() {
-            return document.getElementById("currentformula").innerHTML;
+            return $("#currentformula").html();
         };
 
         this.setCurrentFormula = function(string) {
-            var currentformulaelement = document.getElementById("currentformula");
+            var currentformulaelement = $("#currentformula");
 
-            currentformulaelement.innerHTML = string;
-            currentformulaelement.className = "currentformulashort";
-            if (currentformulaelement.offsetWidth < currentformulaelement.scrollWidth) {
-                currentformulaelement.className = "currentformulalong";
+            currentformulaelement.html(string);
+            currentformulaelement.attr("class","currentformulashort");
+            if (currentformulaelement[0].offsetWidth < currentformulaelement[0].scrollWidth) {
+                currentformulaelement.attr("class","currentformulalong");
             }
             Calculator.currentFormula = string;
         };
 
         this.appendToCurrentFormula = function(string) {
-            var newstring = document.getElementById("currentformula").innerHTML + string;
+            var newstring = $("#currentformula").html() + string;
             Calculator.currentFormula = newstring;
 
             Calculator.setCurrentFormula(newstring);
@@ -486,9 +488,10 @@ $(function() {
 
                 if (i <= 8) {
                     // Empty memory entry found, store entry.
-                    localStorage.setItem("M" + i, value + "##");
-                    Calculator.setMemoryEntry("M" + i, value, "");
-                    document.getElementById("button" + "M" + i).style.color = "#d9e2d0";
+                    var mplusi = "M" + i;
+                    localStorage.setItem(mplusi, value + "##");
+                    Calculator.setMemoryEntry(mplusi, value, "");
+                    $("#button" + mplusi).css("color","#d9e2d0");
                 }
             }
         };
@@ -503,12 +506,14 @@ $(function() {
         };
 
         this.setMemoryEntry = function(key, value, description) {
-            document.getElementById("button"+key).childNodes[1].setAttribute("src", "images/ico_arrow_white.png");
-            document.getElementById("button"+key+"edit").setAttribute("class", "buttonmemoryeditenabled");
-            document.getElementById("button"+key+"close").setAttribute("class", "buttonmemorycloseenabled");
-            document.getElementById(key + "text").innerText = value;
-            document.getElementById(key + "description").innerText = description;
-            document.getElementById("button" + key).style.color = "#d9e2d0";
+            var buttonkey = "#button"+key;
+            var hashkey = "#"+key;
+            $(buttonkey).children().eq(0).attr("src", "images/ico_arrow_white.png");
+            $(buttonkey+"edit").attr("class", "buttonmemoryeditenabled");
+            $(buttonkey+"close").attr("class", "buttonmemorycloseenabled");
+            $(hashkey+"text").html(value);
+            $(hashkey+"description").text(description);
+            $(buttonkey).css("color","#d9e2d0");
         };
 
         this.setMemoryDescription = function(key, description) {
@@ -523,45 +528,48 @@ $(function() {
         };
 
         this.onButtonMemoryEditClick = function(key) {
-            if(document.getElementById("button"+key+"edit").getAttribute("class") != "buttonmemoryeditenabled"){
+            if($("#button"+key+"edit").attr("class") != "buttonmemoryeditenabled"){
                return;
             }
 
             Calculator.currentKey = key;
             $("#memorynoteeditor").show();
-            var memoryitemstr = document.getElementById(key + "text").innerText;
-            var description = document.getElementById(key + "description").innerText;
-            document.getElementById("mnebutton").innerText = key;
-            document.getElementById("mnetext").innerText = memoryitemstr;
+            var hashkey="#"+key;
+            var memoryitemstr = $(hashkey+"text").text();
+            var description = $(hashkey+"description").text();
+            $("#mnebutton").text(key);
+            $("#mnetext").text(memoryitemstr);
 
-            var input = document.getElementById("mnedescriptioninput");
-            var text = document.getElementById("mnedescription");
+            var input = $("#mnedescriptioninput");
+            var text = $("#mnedescription");
 
-            if (input.style.display === "none" || input.style.visibility ==="" ) {
-                input.style.display = "inline";
-                text.style.display = "none";
-                input.focus();
+            if (input.css("display") === "none" || input.css("visibility") === "visible" ) {
+                input.css("display","inline");
+                text.css("display","none");
+                input.trigger("focus");
             } else {
-                input.style.display = "none";
-                text.style.display = "inline";
+                input.css("display","none");
+                text.css("display","inline");
             }
-            document.getElementById("mnedescriptioninput").value = description;
+            input.val(description);
         };
 
         this.onMemoryDescriptionInputFocusOut = function(key) {
-            var input = document.getElementById(key + "descriptioninput");
-            var description = document.getElementById(key + "description");
+            var keydescription = "#"+key+description;
+            var input = $(keydescription+"input");
+            var value = input.val();
+            var description = $(keydescription);
 
-            description.innerText = input.value;
-            Calculator.setMemoryDescription(key, input.value);
-            input.style.display = "none";
-            description.style.display = "inline";
+            description.text(value);
+            Calculator.setMemoryDescription(key,value);
+            input.css("display","none");
+            description.css("display","inline");
         };
 
         this.onButtonMemoryClick = function(key) {
             Calculator.handleClearOnNumberButtonClick();
 
-            var value = document.getElementById(key + "text").innerText;
+            var value = $("#"+key+"text").text();
 
             if (value != null) {
                 Calculator.setMainEntry(value);
@@ -571,14 +579,17 @@ $(function() {
         };
 
         this.onButtonMemoryCloseClick = function(key) {
-            document.getElementById("button"+key).childNodes[1].setAttribute("src", "images/ico_arrow_black.png");
-            document.getElementById("button"+key+"edit").setAttribute("class", "buttonmemoryedit");
-            document.getElementById("button"+key+"close").setAttribute("class", "buttonmemoryclose");
+            var hashkey = "#"+key;
+            var buttonkey = "#button"+key;
+            var keydescription = hashkey+"description";
+            $(buttonkey).children().eq(0).attr("src", "images/ico_arrow_black.png");
+            $(buttonkey+"edit").attr("class", "buttonmemoryedit");
+            $(buttonkey+"close").attr("class", "buttonmemoryclose");
             localStorage.removeItem(key);
-            document.getElementById(key + "descriptioninput").value = null;
-            document.getElementById(key + "text").innerText = null;
-            document.getElementById("button" + key).style.color = "#727272";
-            document.getElementById(key + "description").innerText = null;
+            $(hashkey+"descriptioninput").val("");
+            $(hashkey+"text").text("");
+            $(buttonkey).css("color","#727272");
+            $(hashkey+"description").text("");
         };
 
         this.populateMemoryPaneFromLocalStorage = function() {
@@ -588,68 +599,66 @@ $(function() {
                 if (!(memoryitemstr === null)) {
                     var memoryitem = memoryitemstr.split("##");
 
-                    Calculator.setMemoryEntry("M" + i, memoryitem[0], memoryitem[1]);
+                    Calculator.setMemoryEntry("M"+i, memoryitem[0], memoryitem[1]);
                 }
             }
         };
 
         this.onButtonMemoryListClick = function() {
             $("#memorypage").show();
-            this.currentPage = "memorypage";
-            document.getElementById("mpmainentry").innerHTML = Calculator.getMainEntry();
+            Calculator.currentPage = "memorypage";
+            $("#mpmainentry").html(Calculator.getMainEntry());
         };
 
         this.onButtonMemoryClearAll = function() {
-             document.getElementById("clearconfirmationdialog").style.visibility="visible";
+             $("#clearconfirmationdialog").css("visibility","visible");
         };
 
         this.clearAllMemorySlots = function(){
-            document.getElementById("clearconfirmationdialog").style.visibility="hidden";
+            $("#clearconfirmationdialog").css("visibility","hidden");
             for(var i = 1; i <= 8; i++){
-                this.onButtonMemoryCloseClick("M"+i);
+                Calculator.onButtonMemoryCloseClick("M"+i);
             }
             Calculator.setFreeMemorySlot();
         };
 
         this.cancelClearAllDialog = function(){
-            document.getElementById("clearconfirmationdialog").style.visibility="hidden";
+            $("#clearconfirmationdialog").css("visibility","hidden");
         };
 
         this.onButtonMemoryClose = function() {
             Calculator.setFreeMemorySlot();
             $("#memorypage").hide();
-            this.currentPage = "calculationpane";
+            Calculator.currentPage = "calculationpane";
         };
 
         // Function for initializing the UI buttons.
         //
         this.initButtons = function() {
-            // Initialize function buttons.
-            var functionButtonClassNames = ["buttonblackshort", "buttonyellow", "buttonblack", "buttonblue"];
-            for (var i = 0; i < functionButtonClassNames.length; ++i) {
-                var buttons = document.getElementsByClassName(functionButtonClassNames[i]);
+            $(".buttonblackshort, .buttonyellow, .buttonblack, .buttonblue").on("mousedown",Calculator.onFunctionButtonClick);
 
-                for (var j = 0; j < buttons.length; ++j) {
-                    buttons[j].onmousedown = this.onFunctionButtonClick;
-                }
-            }
-
-            // Initialize numerical buttons.
-            var buttons = document.getElementsByClassName("buttonwhite");
-            for (var j = 0; j < buttons.length; ++j) {
-                buttons[j].onmousedown = this.onNumericalButtonClick;
-            }
+            $(".buttonwhite").on("mousedown",Calculator.onNumericalButtonClick);
 
             // Initialize memorize button
-            this.setFreeMemorySlot();
+            Calculator.setFreeMemorySlot();
 
             // Initialize button special cases.
-            document.getElementById("buttonclear").onmousedown = Calculator.onClearButtonClick;
-            document.getElementById("buttondelete").onmousedown = Calculator.onDeleteButtonClick;
-            document.getElementById("buttondot").onmousedown = Calculator.onNumericalButtonClick;
-            document.getElementById("buttonplusminus").onmousedown = Calculator.onNumericalButtonClick;
-            document.getElementById("buttonequal").onmousedown = Calculator.onEqualButtonClick;
-            this.initAudio();
+            for(
+                var handlerMap = {
+                    "#buttonclear": Calculator.onClearButtonClick,
+                    "#buttondelete": Calculator.onDeleteButtonClick,
+                    "#buttondot": Calculator.onNumericalButtonClick,
+                    "#buttonplusminus": Calculator.onNumericalButtonClick,
+                    "#buttonequal": Calculator.onEqualButtonClick
+                },
+                keys=Object.keys(handlerMap),
+                i=0;
+                i<keys.length; ++i ) {
+                var thisKey = keys[i];
+                $(thisKey).off("mousedown").on("mousedown",handlerMap[thisKey]);
+            }
+
+            Calculator.initAudio();
         };
 
         /**
@@ -660,40 +669,8 @@ $(function() {
             Calculator.buttonClickAudio.src = "./audio/GeneralButtonPress_R2.ogg";
             Calculator.equalClickAudio = new Audio();
             Calculator.equalClickAudio.src = "./audio/EqualitySign_R2.ogg";
-            $("#closehistorybutton").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".historybutton").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".buttonclose").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".switchleftactive").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".buttonpurple").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".dialogAbuttonPurple").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".dialogAbuttonBlack").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".dialogBpurplebutton").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".dialogBblackbutton").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".buttonmemory").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".buttonmemoryedit").on("mousedown",function(e){
-                Calculator.buttonClickAudio.play();
-            });
-            $(".buttonmemoryclose").on("mousedown",function(e){
+            $("#closehistorybutton, .historybutton, .buttonclose, .switchleftactive, .buttonpurple, .dialogAbuttonPurple, .dialogAbuttonBlack, .dialogBpurplebutton, .dialogBblackbutton, .buttonmemory, .buttonmemoryedit, .buttonmemoryclose")
+                .on("mousedown",function(e){
                 Calculator.buttonClickAudio.play();
             });
         };
@@ -703,34 +680,38 @@ $(function() {
         };
         this.closeHistory = function() {
             $("#LCD_Upper").hide();
-            $("#"+this.currentPage).show();
-            this.historyScrollbar.refresh();
+            $("#"+Calculator.currentPage).show();
+            Calculator.historyScrollbar.refresh();
             return false;
         };
 
         this.setFreeMemorySlot = function(){
             var i = Calculator.getNextEmptyMemorySlot();
             if (i <= 8){
-                document.getElementById("buttonmemorizetext").innerHTML = "M"+ i;
+                $("#buttonmemorizetext").html("M"+ i);
             }
             else {
-                document.getElementById("buttonmemorizetext").innerHTML = "Mx";
+                $("#buttonmemorizetext").html("Mx");
             }
         };
 
         this.registerInlineHandlers = function(){
-            $("#closehistorybutton").on("click",function(){Calculator.closeHistory();});
+            $("#closehistorybutton").on("click",Calculator.closeHistory);
+            $("#openhistorybutton").on("click",Calculator.openHistory);
+            $("#buttondeg").on("click",Calculator.transitionToDegrees);
+            $("#buttonrad").on("click",Calculator.transitionToRadians);
+            $("#buttontrig").on("click",Calculator.transitionToTrigonometricFunctions);
+            $("#buttonhyp").on("click",Calculator.transitionToHyperbolicFunctions);
+            $("#buttonmemorylist").on("click",Calculator.onButtonMemoryListClick);
+            $("#buttonmemorize").on("click",Calculator.onButtonMainEntryToMemoryClick);
+            $("#memoryclearall").on("click",Calculator.onButtonMemoryClearAll);
+            $("#memoryClose").on("click",Calculator.onButtonMemoryClose);
+            $("#dialogokbutton").on("click",Calculator.clearAllMemorySlots);
+            $("#dialogcancelbutton").on("click",Calculator.cancelClearAllDialog);
+            $("#mpopenhistorybutton").on("click",Calculator.openHistory);
+
             $("#buttonclosecurrentformula").on("click",function(){Calculator.setCurrentFormula('');});
-            $("#buttonclosemainentry").on("click",function(){Calculator.setMainEntry('');});
-            $("#openhistorybutton").on("click",function(){Calculator.openHistory();});
-            $("#buttondeg").on("click",function(){Calculator.transitionToDegrees();});
-            $("#buttonrad").on("click",function(){Calculator.transitionToRadians();});
-            $("#buttontrig").on("click",function(){Calculator.transitionToTrigonometricFunctions();});
-            $("#buttonhyp").on("click",function(){Calculator.transitionToHyperbolicFunctions();});
-            $("#buttonmemorylist").on("click",function(){Calculator.onButtonMemoryListClick();});
-            $("#buttonmemorize").on("click",function(){Calculator.onButtonMainEntryToMemoryClick();});
-            $("#mplcdbuttonclose").on("click",function(){Calculator.setMainEntry('');});
-            $("#mpopenhistorybutton").on("click",function(){Calculator.openHistory();});
+            $("#buttonclosemainentry,#mplcdbuttonclose").on("click",function(){Calculator.setMainEntry('');});
             $("#buttonM1").on("click",function(){Calculator.onButtonMemoryClick('M1');});
             $("#buttonM1edit").on("click",function(){Calculator.onButtonMemoryEditClick('M1');});
             $("#buttonM1close").on("click",function(){Calculator.onButtonMemoryCloseClick('M1');});
@@ -755,10 +736,6 @@ $(function() {
             $("#buttonM8").on("click",function(){Calculator.onButtonMemoryClick('M8');});
             $("#buttonM8edit").on("click",function(){Calculator.onButtonMemoryEditClick('M8');});
             $("#buttonM8close").on("click",function(){Calculator.onButtonMemoryCloseClick('M8');});
-            $("#memoryclearall").on("click",function(){Calculator.onButtonMemoryClearAll();});
-            $("#memoryClose").on("click",function(){Calculator.onButtonMemoryClose();});
-            $("#dialogokbutton").on("click",function(){Calculator.clearAllMemorySlots();});
-            $("#dialogcancelbutton").on("click",function(){Calculator.cancelClearAllDialog();});
 
             $("#M1descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M1');});
             $("#M2descriptioninput").on("focusout",function(){Calculator.onMemoryDescriptionInputFocusOut('M2');});
@@ -778,13 +755,13 @@ $(function() {
 
             $("#mnesave").click(function(){
                 $("#memorynoteeditor").hide();
-                document.getElementById(Calculator.currentKey + "description").innerText =
-                    document.getElementById("mnedescriptioninput").value;
-                Calculator.setMemoryDescription(Calculator.currentKey, document.getElementById("mnedescriptioninput").value);
+                var mnedescriptioninputval= $("#mnedescriptioninput").val();
+                $("#"+Calculator.currentKey+"description").text(mnedescriptioninputval);
+                Calculator.setMemoryDescription(Calculator.currentKey, mnedescriptioninputval);
             });
 
             $("#mnedescriptiondelete").click(function(){
-                document.getElementById("mnedescriptioninput").value = "";
+                $("#mnedescriptioninput").val("");
             });
         };
 
@@ -820,7 +797,7 @@ $(function() {
          * creates scroll bar for the history page
          */
         this.createScrollbars = function(){
-            this.historyScrollbar = new iScroll("wrapper", {scrollbarClass: "customScrollbar",
+            Calculator.historyScrollbar = new iScroll("wrapper", {scrollbarClass: "customScrollbar",
                 hScrollbar: true, vScrollbar: true,
                 hideScrollbar: true, checkDOMChanges: true});
         };
@@ -830,7 +807,7 @@ $(function() {
     Calculator.registerOrientationChange();
 
     window.addEventListener('pageshow', function () {
-        $("head").append("<link rel='stylesheet' id='lazystylesheet' type='text/css' href='css/lazy"+Calculator.cssAppendix+".css'/>");
+        $("head").append("<link rel='stylesheet' id='lazystylesheet' type='text/css' href='css/lazy"+Calculator.cssAppendix+"'/>");
 
         $.get("lazy.html", function(result){
             // inject rest of js files
