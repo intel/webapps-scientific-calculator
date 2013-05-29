@@ -677,9 +677,11 @@ $(function() {
 
         this.openHistory = function() {
             $("#LCD_Upper").show();
+            $("#licensebtnl").hide();
         };
         this.closeHistory = function() {
             $("#LCD_Upper").hide();
+            $("#licensebtnl").show();
             $("#"+Calculator.currentPage).show();
             Calculator.historyScrollbar.refresh();
             return false;
