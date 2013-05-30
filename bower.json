@@ -7,7 +7,7 @@
     "components"
   ],
   "dependencies": {
-    "iscroll": "latest",
+    "iscroll": "~5.0.0",
     "q": "~0.9.3",
     "appframework": "01org/appframework",
     "peg-0.7.0.min": "http://cloud.github.com/downloads/dmajda/pegjs/peg-0.7.0.min.js",

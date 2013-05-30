@@ -795,7 +795,7 @@ $(function() {
          * creates scroll bar for the history page
          */
         this.createScrollbars = function(){
-            Calculator.historyScrollbar = new iScroll("wrapper", {scrollbarClass: "customScrollbar",
+            Calculator.historyScrollbar = new IScroll("#wrapper", {scrollbarClass: "customScrollbar",
                 hScrollbar: true, vScrollbar: true,
                 hideScrollbar: true, checkDOMChanges: true});
         };
@@ -860,7 +860,7 @@ $(function() {
                     }
                 },
                 {
-                    script: "lib/iscroll/src/iscroll.js",
+                    script: "lib/iscroll/dist/iscroll-min.js",
                     success: function(resolve) {
                         Calculator.createScrollbars();
                         resolve();
