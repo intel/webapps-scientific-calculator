@@ -136,6 +136,13 @@ module.exports = function (grunt) {
       }
     },
 
+    webtizen: {
+      sign: {
+        cwd: "build/wgt",
+        args: "signing --nocheck -p test:/home/davidmaxwaterman/tizen-sdk/tools/ide/sample/profiles.xml"
+      }
+    },
+
     sdb: {
       prepare: {
         action: 'push',
@@ -220,7 +227,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('crx', ['dist', 'copy:crx']);
-  grunt.registerTask('wgt', ['dist', 'copy:wgt', 'package:wgt']);
+  grunt.registerTask('wgt', ['dist', 'copy:wgt', 'webtizen:sign', 'package:wgt']);
 
   grunt.registerTask('sdk', [
     'clean',
