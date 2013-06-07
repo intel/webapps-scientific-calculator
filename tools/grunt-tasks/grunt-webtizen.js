@@ -3,79 +3,41 @@ module.exports = function (grunt) {
   var command = "webtizen";
 
   /**
-   * grunt sdb:* task
-   * Wrappers for sdb commands for the whole development lifecycle,
-   * including pushing wgt files to a device and
-   * wrapping the wrt-installer and wrt-launcher commands;
-   * also makes it easy to set up remote debugging for an app.
+   * grunt webtizen:* task
+   * Wrappers for webtizen command.
    *
    * Caveats: it will probably fail miserably if you try to have
    * multiple Tizen devices attached at the same time.
    *
-   * DEPENDENCIES: grunt, lodash, xml2js, async
+   * DEPENDENCIES: grunt
    * (install with npm)
    *
-   * The actions available are:
+   * PROPERTIES:
+   * cwd: the directory in which to run the webtizen command
+   *      (it is important for some commands, eg signing)
+   * args: the arguments to the webtizen command
    *
-   *   push
-   *   install
-   *   uninstall
-   *   start (see launch())
-   *   stop (see launch())
-   *   debug (see launch())
-   *
-   * To be able to use these actions, you should first set up a
-   * push action to send the tizen-app.sh script to the device.
+   * To be able to use this task, you should first set up a
+   * task and target in your Gruntfile.js.
    * Configure in grunt.initConfig() like this (the example creates
    * a grunt sdb:prepare task which pushes the tizen-app.sh control
    * script to /opt/home/developer):
    *
-   *   sdb: {
-   *     prepare: {
-   *       action: 'push',
-   *       localFiles: './tools/grunt-tasks/tizen-app.sh',
-   *       remoteDestDir: '/opt/home/developer/',
-   *       chmod: '+x',
-   *       overwrite: true
+   *   webtizen: {
+   *     sign: {
+   *       cwd: 'build/wgt',
+   *       args: 'signing --nocheck -p '+process.env.TIZENSDKPROFILE
    *     },
    *     ...
    *   }
    *
+   * You have to then set the TIZENSDKPROFILE environment variable to
+   * point to where your profile is located.
+   *
    * Then call with grunt like this:
    *
-   *   grunt sdb:prepare
+   *   grunt webtizen:sign
    *
-   * Once the tizen-app.sh script is in place, you can configure the
-   * other tasks to make use of it, e.g.
-   *
-   * sdb: {
-   *   prepare: { ... see above ... },
-   *
-   *   pushwgt: {
-   *     action: 'push',
-   *     localFiles: {
-   *       pattern: 'build/*.wgt',
-   *       filter: 'latest'
-   *     },
-   *     remoteDestDir: '/opt/home/developer/'
-   *   },
-   *
-   *   install: {
-   *     action: 'install',
-   *     remoteFiles: {
-   *       pattern: '/opt/home/developer/*.wgt',
-   *       filter: 'latest'
-   *     },
-   *     remoteScript: '/opt/home/developer/tizen-app.sh'
-   *   }
-   * }
-   *
-   * See the documentation for push(), install(), uninstall()
-   * and launch() for the valid configuration options for each task.
-   *
-   * Note that the wrt-launcher commands use the <widget> element's
-   * id attribute to determine the ID of the app, by default derived from
-   * the config.xml file in the root of the project.
    */
   grunt.registerMultiTask('webtizen', 'use Tizen webtizen', function () {
     var commandline=[ command, this.data.args ].join(" ");
