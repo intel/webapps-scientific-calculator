@@ -139,7 +139,8 @@ module.exports = function (grunt) {
     webtizen: {
       sign: {
         cwd: "build/wgt",
-        args: "signing --nocheck -p " + process.env.TIZENSDKPROFILE
+        args: "signing --nocheck -p "
+         + (process.env.TIZENSDKPROFILE||"test:"+process.env.HOME+"/tizen-sdk/tools/ide/sample/profiles.xml")
       }
     },
 

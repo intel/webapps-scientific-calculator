@@ -72,13 +72,23 @@ There are a few options for running the application:
 # PACKAGING
 
 To sign the app, grunt needs to know the location of your Tizen SDK
-Profile xml file. Set this path in the TIZENSDKPROFILE environment
-variable, eg :
+Profile xml file. This is set to default to :
 
-  export TIZENSDKPROFILE=test:$HOME/tizen-sdk/tools/ide/sample/profiles.xml
+  test:$HOME/tizen-sdk/tools/ide/sample/profiles.xml
+
+which is the default location according to the Tizen CLI SDK instructions
+for generating the certificates.
+
+<https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.appprogramming%2Fhtml%2Fide_sdk_tools%2Fcommand_line_interface.htm>
+
+You can override this path using the TIZENSDKPROFILE environment
+variable. For example, if you moved the sdk from ~/tizen-sdk to
+~/apps/tizen-sdk :
+
+  export TIZENSDKPROFILE=test:$HOME/apps/tizen-sdk/tools/ide/sample/profiles.xml
 
 The application can be packaged into a wgt (zip) file using the grunt
-commands:
+command:
 
     grunt wgt
 
