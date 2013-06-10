@@ -328,7 +328,7 @@ module.exports = function (grunt) {
     var stopOnFailure = (config.stopOnFailure === true ? true : false);
 
     getMeta(configXml, function (err, meta) {
-      var id = meta.uri;
+      var id = meta.id;
 
       var cmd = sdbCmd + ' shell "' + remoteScript +
                 ' uninstall ' + id + '"';
@@ -446,7 +446,7 @@ module.exports = function (grunt) {
     var actionDone = (subcommand === 'stop' ? 'stopped' : 'launched');
 
     getMeta(configXml, function (err, meta) {
-      var id = meta.uri;
+      var id = meta.id;
 
       var cmd = sdbCmd + ' shell "' + remoteScript +
                 ' ' + subcommand + ' ' + id + '"';
