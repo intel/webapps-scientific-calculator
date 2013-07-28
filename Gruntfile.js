@@ -42,7 +42,7 @@ module.exports = function (grunt) {
     copy: {
       common: {
         files: [
-          { expand: true, cwd: '.', src: ['app/lib/appframework/jq.mobi.min.js'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/lib/appframework/appframework.min.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/q/q.min.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/peg-0.7.0.min/index.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/iscroll/dist/iscroll-min.js'], dest: 'build/' },
