@@ -9,7 +9,7 @@
   "dependencies": {
     "iscroll": "~5.0.0",
     "q": "~0.9.3",
-    "appframework": "01org/appframework#~2.0.0",
+    "intel-appframework": "*",
     "peg-0.7.0.min": "http://cloud.github.com/downloads/dmajda/pegjs/peg-0.7.0.min.js",
     "open-sans": "http://www.fontsquirrel.com/fonts/download/open-sans"
   }
