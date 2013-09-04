@@ -144,7 +144,7 @@ $(function() {
             Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
 
             // append main entry and the operator to current formula
-            $("#currentformula").append( Calculator.getMainEntry() + operator );
+            $("#currentformula").html( Calculator.getMainEntry() + operator );
             Calculator.setMainEntry("");
 
             //push the recent operator to currentFormulaStack
