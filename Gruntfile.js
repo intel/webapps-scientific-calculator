@@ -22,6 +22,7 @@ module.exports = function (grunt) {
           'build/app/js/license.js': ['app/js/license.js'],
           'build/app/js/help.js': ['app/js/help.js'],
           'build/app/js/localizer.js': ['app/js/localizer.js'],
+          'build/app/lib/q/q.js': ['app/lib/q/q.js'],
         }
       }
     },
@@ -43,7 +44,6 @@ module.exports = function (grunt) {
       common: {
         files: [
           { expand: true, cwd: '.', src: ['app/lib/intel-appframework/appframework.min.js'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/lib/q/q.min.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/peg-0.7.0.min/index.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/iscroll/dist/iscroll-min.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/pegjs/src/parser.pegjs'], dest: 'build/' },
