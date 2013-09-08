@@ -32,38 +32,6 @@ body {
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
     display: -webkit-box;
-/* 320 x 480 */
-    -webkit-transform: translate(-50%, -50%) scale(0.4444, 0.375);
-}
-
-/* 410 x 730 (for browser) */
-@media (min-height: 730px) and (min-width: 410px) {
-  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(0.57, 0.57);}
-}
-
-/* 480 x 800 */
-@media (min-height: 800px) and (min-width: 480px) {
-  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(0.6666, 0.625);}
-}
-
-/* 600 x 989 */
-@media (min-width: 600px) and (min-height: 989px) {
-  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(0.8333, 0.77266); }
-}
-
-/* 600 x 1024 */
-@media (min-height: 1024px) and (min-width: 600px) {
-  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(0.8333, 0.8);}
-}
-
-/* 720 x 1230 */
-@media (min-height: 1230px) and (min-width: 720px) {
-  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(1.0, 0.9609);}
-}
-
-/* 720 x 1280 */
-@media (min-height: 1280px) and (min-width: 720px) {
-  body { top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%) scale(1.0, 1.0);}
 }
 
 sup, sub {

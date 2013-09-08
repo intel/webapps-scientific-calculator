@@ -18,15 +18,6 @@
 }
 
 body {
-    position: absolute;
-    margin: 0px;
-    top: 0%;
-    left: 0%;
-}
-
-/* hack for landscape mode in simulator */
-@media (orientation: landscape) {
-  body {
     margin: 0px;
     overflow: visible;
     -webkit-user-select: none;
@@ -41,70 +32,6 @@ body {
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
     display: -webkit-box;
-  /* 320 x 480 */
-    -webkit-transform: translate(-50%, -50%) scale(0.375, 0.4444);
-  }
-}
-
-/* 730 x 410 */
-@media (orientation: landscape) and (min-height: 410px) and (min-width: 730px) {
-  body { -webkit-transform: translate(-50%, -50%) scale(0.57, 0.57);}
-}
-
-/* 800 x 480 */
-@media (orientation: landscape) and (min-height: 480px) and (min-width: 800px) {
-  body { -webkit-transform: translate(-50%, -50%) scale(0.625, 0.6666);}
-}
-
-/* 989 x 600 */
-@media (orientation: landscape) and (min-width: 600px) and (min-height: 989px) {
-  body { -webkit-transform: translate(-50%, -50%) scale(0.77266, 0.8333); }
-}
-
-/* 1024 x 600 */
-@media (orientation: landscape) and (min-height: 600px) and (min-width: 1024px) {
-  body { -webkit-transform: translate(-50%, -50%) scale(0.8, 0.8333);}
-}
-
-/* 1230 x 720 */
-@media (orientation: landscape) and (min-height: 720px) and (min-width: 1230px) {
-  body { -webkit-transform: translate(-50%, -50%) scale(0.9609, 1.0);}
-}
-
-/* 1280 x 720 */
-@media (orientation: landscape) and (min-height: 720px) and (min-width: 1280px) {
-  body { -webkit-transform: translate(-50%, -50%) scale(1.0, 1.0);}
-}
-
-
-/* hack for landscape mode in emulator */
-/* 320 x 480 */
-@media (orientation: portrait) {
-  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.4444, 0.375) translate(50%, -50%);}
-}
-/* 410 x 730 */
-@media (orientation: portrait) and (min-width: 410px) and (min-height: 730px) {
-  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.57, 0.57) translate(50%, -50%);}
-}
-/* 480 x 800 */
-@media (orientation: portrait) and (min-width: 480px) and (min-height: 800px) {
-  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.6666, 0.625) translate(50%, -50%);}
-}
-/* 989 x 600 */
-@media (orientation: portrait) and (min-width: 600px) and (min-height: 989px) {
-  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.77266, 0.8333) translate(50%, -50%); }
-}
-/* 600 x 1024 */
-@media (orientation: portrait) and (min-width: 600px) and (min-height: 1024px) {
-  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.8, 0.8333) translate(50%, -50%);}
-}
-/* 720 x 1230 */
-@media (orientation: portrait) and (min-width: 720px) and (min-height: 1230px) {
-  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(0.9609, 1.0) translate(50%, -50%);}
-}
-/* 720 x 1280 */
-@media (orientation: portrait) and (min-width: 720px) and (min-height: 1280px) {
-  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(1.0, 1.0) translate(50%, -50%);}
 }
 
 sup, sub {

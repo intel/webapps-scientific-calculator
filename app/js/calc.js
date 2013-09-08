@@ -24,14 +24,26 @@ $(function() {
          * changes the orientation css file based on the current window size
          */
         this.setOrientation = function() {
-           var lazy = $("#lazystylesheet");
+            var lazy = $("#lazystylesheet");
 
-           Calculator.cssAppendix = ((window.orientation == 90)||(window.orientation == -90))?".css":"_portrait.css";
+            Calculator.cssAppendix = ((window.orientation == 90)||(window.orientation == -90))?".css":"_portrait.css";
 
-           $("#stylesheet").attr("href","css/calc"+Calculator.cssAppendix);
-           if (lazy.length>0) {
-               lazy.attr("href","css/lazy"+Calculator.cssAppendix);
-           }
+            $("#stylesheet").attr("href","css/calc"+Calculator.cssAppendix);
+            if (lazy.length>0) {
+              lazy.attr("href","css/lazy"+Calculator.cssAppendix);
+            }
+
+            setTimeout(function() {
+                $("body").css("-webkit-transform",
+                    "translate(-50%, -50%)"+
+                    "scale("+
+                    document.documentElement.clientWidth/$("body").width()+
+                    ","+
+                    document.documentElement.clientHeight/$("body").height()+
+                    ")"
+                );
+            }, 0);
+
         };
 
         /**
@@ -802,9 +814,9 @@ $(function() {
     };
 
     $("button").prop("disabled",true);
-    Calculator.registerOrientationChange();
 
     window.addEventListener('pageshow', function () {
+        Calculator.registerOrientationChange();
         $("head").append("<link rel='stylesheet' id='lazystylesheet' type='text/css' href='css/lazy"+Calculator.cssAppendix+"'/>");
 
         $.get("lazy.html", function(result){
