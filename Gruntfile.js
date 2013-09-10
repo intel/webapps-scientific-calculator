@@ -61,14 +61,14 @@ module.exports = function (grunt) {
         files: [
           { expand: true, cwd: 'build/app/', src: ['**'], dest: 'build/wgt/' },
           { expand: true, cwd: '.', src: ['config.xml'], dest: 'build/wgt/' },
-          { expand: true, cwd: '.', src: ['scientific-calculator-icon_128.png'], dest: 'build/wgt/' }
+          { expand: true, cwd: '.', src: ['icon_128.png'], dest: 'build/wgt/' }
         ]
       },
       crx: {
         files: [
           { expand: true, cwd: 'build/app/', src: ['**'], dest: 'build/crx/' },
           { expand: true, cwd: '.', src: ['manifest.json'], dest: 'build/crx/' },
-          { expand: true, cwd: '.', src: ['scientific-calculator-icon*.png'], dest: 'build/crx/' }
+          { expand: true, cwd: '.', src: ['icon*.png'], dest: 'build/crx/' }
         ]
       },
       sdk: {
@@ -82,7 +82,7 @@ module.exports = function (grunt) {
           { expand: true, cwd: '.', src: ['app/js/license.js'], dest: 'build/sdk/js/' },
           { expand: true, cwd: '.', src: ['app/*.html'], dest: 'build/sdk/' },
           { expand: true, cwd: '.', src: ['config.xml'], dest: 'build/sdk/' },
-          { expand: true, cwd: '.', src: ['scientific-calculator-icon.png'], dest: 'build/sdk/' }
+          { expand: true, cwd: '.', src: ['icon.png'], dest: 'build/sdk/' }
         ]
       }
     },

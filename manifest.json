@@ -4,7 +4,7 @@
   "default_locale": "en_US",
   "description": "A scientific calculator",
   "icons": {
-    "128": "scientific-calculator-icon_128.png"
+    "128": "icon_128.png"
   },
   "app": {
     "launch": {
