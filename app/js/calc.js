@@ -14,37 +14,10 @@ $(function() {
 
     Calculator = new function() {
 
-
         this.localizer = null;
         this.parser = "";
         this.currentKey = "";
         this.cssAppendix = "_portrait.css";
-
-        /**
-         * changes the orientation css file based on the current window size
-         */
-        this.setOrientation = function() {
-            var lazy = $("#lazystylesheet");
-
-            Calculator.cssAppendix = ((window.orientation == 90)||(window.orientation == -90))?".css":"_portrait.css";
-
-            $("#stylesheet").attr("href","css/calc"+Calculator.cssAppendix);
-            if (lazy.length>0) {
-              lazy.attr("href","css/lazy"+Calculator.cssAppendix);
-            }
-
-            setTimeout(function() {
-                $("body").css("-webkit-transform",
-                    "translate(-50%, -50%)"+
-                    "scale("+
-                    document.documentElement.clientWidth/$("body").width()+
-                    ","+
-                    document.documentElement.clientHeight/$("body").height()+
-                    ")"
-                );
-            }, 0);
-
-        };
 
         /**
          * formula that has been computed already and its shown in the current formula area
@@ -777,14 +750,19 @@ $(function() {
 
         /**
          * register for the orientation event changes
+         * changing layout is handled by @media, but resize is done manually
          */
         this.registerOrientationChange = function(){
             //on page create
-            $(document).bind("pagecreate create", Calculator.setOrientation());
+            $(document).bind("pagecreate create", function() {
+              Calculator.maximiseBody();
+            });
 
             if("onorientationchange" in window)
             {
-                window.onorientationchange = Calculator.setOrientation;
+                window.onorientationchange = function() {
+                  Calculator.maximiseBody();
+                }
             }
             else
             {
@@ -797,7 +775,7 @@ $(function() {
                     {
                         window.orientation = 90;
                     }
-                    Calculator.setOrientation();
+                    Calculator.maximiseBody();
                 }
                 window.onresize();
             }
@@ -811,13 +789,32 @@ $(function() {
                 hScrollbar: true, vScrollbar: true,
                 hideScrollbar: true, checkDOMChanges: true});
         };
+
+        this.maximiseBody = function() {
+            var docWidth = document.documentElement.clientWidth;
+            var docHeight = document.documentElement.clientHeight;
+            var body = $("body");
+            var bodyWidth = body.width();
+            var bodyHeight = body.height();
+
+            body.css("-webkit-transform",
+                    "translate(-50%, -50%) "+
+                    "scale("+docWidth/bodyWidth+","+docHeight/bodyHeight+
+                    ")"
+                    );
+        };
     };
 
+    // grey-out all the buttons
     $("button").prop("disabled",true);
 
     window.addEventListener('pageshow', function () {
+        $("head").append(
+            "<link rel='stylesheet' media='all and (orientation:landscape' type='text/css' href='css/lazy.css'/>"+
+            "<link rel='stylesheet' media='all and (orientation:portrait' type='text/css' href='css/lazy_portrait.css'/>"
+            );
+
         Calculator.registerOrientationChange();
-        $("head").append("<link rel='stylesheet' id='lazystylesheet' type='text/css' href='css/lazy"+Calculator.cssAppendix+"'/>");
 
         $.get("lazy.html", function(result){
             // inject rest of js files
@@ -914,6 +911,7 @@ $(function() {
                 Calculator.populateHistoryPaneFromLocalStorage();
                 Calculator.registerInlineHandlers();
                 $("button").prop("disabled",false);
+                Calculator.maximiseBody();
             },function() {
                 console.error("something wrong with promises");
             });
