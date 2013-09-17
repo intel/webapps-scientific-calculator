@@ -32,7 +32,7 @@ body {
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
     display: -webkit-box;
-    -webkit-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%) scale(0,0);
 }
 
 sup, sub {
