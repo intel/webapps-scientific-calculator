@@ -791,17 +791,21 @@ $(function() {
         };
 
         this.maximiseBody = function() {
-            var docWidth = document.documentElement.clientWidth;
-            var docHeight = document.documentElement.clientHeight;
-            var body = $("body");
-            var bodyWidth = body.width();
-            var bodyHeight = body.height();
+            // add to event queue
+            setTimeout(function() {
+                // apply scaling transform
+                var docWidth = document.documentElement.clientWidth;
+                var docHeight = document.documentElement.clientHeight;
+                var body = $("body");
+                var bodyWidth = body.width();
+                var bodyHeight = body.height();
 
-            body.css("-webkit-transform",
-                    "translate(-50%, -50%) "+
-                    "scale("+docWidth/bodyWidth+","+docHeight/bodyHeight+
-                    ")"
-                    );
+                body.css("-webkit-transform",
+                        "translate(-50%, -50%) "+
+                        "scale("+docWidth/bodyWidth+","+docHeight/bodyHeight+
+                        ")"
+                        );
+            },0);
         };
     };
 
