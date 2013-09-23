@@ -13,7 +13,8 @@ grunt-cli do:
 
 You should then install the client-side dependencies into app/lib/:
 
-  ./bower.sh install
+    npm install -g bower
+    bower install
 
 Note that if you want to install the application to a Tizen device
 as a wgt file, you will also need to install the sdb tool first.
