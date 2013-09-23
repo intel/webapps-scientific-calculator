@@ -19,7 +19,7 @@
 
 body {
     margin: 0px;
-    overflow: visible;
+    overflow: hidden;
     -webkit-user-select: none;
     background-color: white;
     box-shadow: 5px 5px 20px black;
@@ -32,7 +32,8 @@ body {
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
     display: -webkit-box;
-    -webkit-transform: translate(-50%, -50%) scale(0,0);
+    -webkit-transform: translate(-50%, -50%);
+    -webkit-transition: -webkit-transform 1s;
 }
 
 sup, sub {
