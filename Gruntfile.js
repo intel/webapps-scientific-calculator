@@ -88,15 +88,12 @@ module.exports = function (grunt) {
       sdk: {
         files: [
           { expand: true, cwd: 'build/app/', src: ['**'], dest: 'build/sdk/' },
-          { expand: true, cwd: '.', src: ['app/css/calc*.css'], dest: 'build/sdk/css/' },
-          { expand: true, cwd: '.', src: ['app/css/lazy*.css'], dest: 'build/sdk/css/' },
-          { expand: true, cwd: '.', src: ['app/js/calc.js'], dest: 'build/sdk/js/' },
-          { expand: true, cwd: '.', src: ['app/js/lazy.js'], dest: 'build/sdk/js/' },
-          { expand: true, cwd: '.', src: ['app/js/help.js'], dest: 'build/sdk/js/' },
-          { expand: true, cwd: '.', src: ['app/js/license.js'], dest: 'build/sdk/js/' },
-          { expand: true, cwd: '.', src: ['app/*.html'], dest: 'build/sdk/' },
+          { expand: true, cwd: 'app/', src: ['js/**'], dest: 'build/sdk/' },
+          { expand: true, cwd: 'app/', src: ['css/**'], dest: 'build/sdk/' },
+          { expand: true, cwd: 'app/', src: ['*.html'], dest: 'build/sdk/' },
           { expand: true, cwd: 'data/', src: ['config.xml'], dest: 'build/sdk/' },
-          { expand: true, cwd: '.', src: ['icon*.png'], dest: 'build/sdk/' }
+          { expand: true, cwd: '.', src: ['icon*.png'], dest: 'build/sdk/' },
+          { expand: true, cwd: 'app/lib/', src: ['q/q.js'], dest: 'build/sdk/lib/'}
         ]
       }
     },
