@@ -102,3 +102,31 @@ CSS, and HTML) using:
 
 Note that in both cases, the files comprising the packages are
 first copied into the build/wgt and build/sdk directories respectively.
+
+# GUIDE FOR MS WINDOWS USERS AND TIZEN IDE
+
+Here are some steps to help people wishing to generate code for use in the Tizen IDE on Microsoft Windows.
+
+1. install git
+1. get admin shell
+1. click start
+1. in ‘search’ type ‘command’ - don’t hit return/enter
+1. ‘command prompt’ appears under ‘programs’ - right click on it and select ‘run as administrator’ - click ‘yes’ if it asks for confirmation
+1. install grunt - type ‘npm install -g grunt’
+1. install bower - type ‘npm install -g bower’
+1. close admin shell
+1. right click on desktop and select ‘git bash’
+1. change directory to where you want your projects to go (or don’t, if Desktop is ok)
+1. clone the repository, eg ‘git clone https://github.com/01org/webapps-annex.git’
+1. cd webapps-annex
+1. npm install
+1. bower install
+1. grunt sdk
+1. the project is now built in build/sdk and can be imported into the IDE
+1. launch Tizen IDE
+1. File->New->Tizen Web Project
+1. select all the files in the project and delete them
+1. File->Import…->General->File System Next
+1. “From directory” <- the build/sdk directory
+1. “Into folder” <- the project you created in the IDE
+1. Finish
