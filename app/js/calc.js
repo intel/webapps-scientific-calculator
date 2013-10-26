@@ -828,7 +828,7 @@ $(function() {
                 {
                     script: "lib/peg-0.7.0.min/index.js",
                     success: function(resolve) {
-                        $.get("js/peg-code.txt",function(data) {
+                        $.get("data/peg-code.txt",function(data) {
                             try {
                                 Calculator.parser = PEG.buildParser(data);
                                 resolve();

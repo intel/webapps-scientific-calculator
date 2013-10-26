@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://github.com/01org/webapps-scientific-calculator" version="<%= packageInfo.version %>" viewmodes="fullscreen">
+    <tizen:application id="UaW22rtxQw.calculator" package="UaW22rtxQw" required_version="2.1"/>
+    <content src="index.html"/>
+    <icon src="icon_128.png"/>
+    <name><%= packageInfo.name %></name>
+</widget>
