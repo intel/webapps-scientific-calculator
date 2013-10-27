@@ -7,6 +7,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-release');
   grunt.loadTasks('tools/grunt-tasks');
 
   grunt.initConfig({
@@ -14,6 +15,14 @@ module.exports = function (grunt) {
     chromeInfo: grunt.file.readJSON('data/chrome-crx/manifest.json'),
 
     clean: ['build'],
+
+    release: {
+      options: {
+        npm: false,
+        npmtag: false,
+        tagName: 'v<%= version %>'
+      }
+    },
 
     tizen_configuration: {
       // location on the device to install the tizen-app.sh script to
@@ -181,7 +190,7 @@ module.exports = function (grunt) {
         files: 'build/sdk/**',
         stripPrefix: 'build/sdk/',
         outDir: 'build',
-        suffix: '.wgt',
+        suffix: '.wgt'
       }
     },
 

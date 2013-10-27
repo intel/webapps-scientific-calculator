@@ -26,6 +26,7 @@
     "grunt-contrib-imagemin": "~0.1.3",
     "grunt-contrib-htmlmin": "~0.1.3",
     "connect": "~2.7.11",
-    "grunt-tizen": "~0.1.1"
+    "grunt-tizen": "~0.1.1",
+    "grunt-release": "~0.6.0"
   }
 }
