@@ -1,17 +1,22 @@
 {
-  "name": "<%= packageInfo.name %>",
-  "version": "<%= packageInfo.version %>",
-  "default_locale": "en_US",
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'none';",
+  "app": {
+    "launch": {
+      "container": "panel",
+	    "width":1024,
+	    "height":600,
+      "local_path": "index.html"
+    }
+  },
   "description": "<%= packageInfo.description %>",
   "icons": {
     "128": "icon_128.png"
   },
-  "app": {
-    "launch": {
-        "local_path": "index.html"
-    }
-  },
-  "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src 'self' 'unsafe-inline'"
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+BIaBW+xj11Ea9rwawrZ0+06jT68d2h2g5vEOS6AJJGf/N6DRplmlCozqmCkYzZLdS3Hiwaz3baMg0GCQpuG+Ylh4+vyL6Pk7GJTudG8hhkiulSvTCx3/19Kqd/VOHbMFsh8gCZAx28s3fH26USIMbwj6az0OwI30hXUgGun+fQIDAQAB",
+  "name": "<%= packageInfo.name %>",
+  "permissions": [  ],
+  "version": "<%= packageInfo.version %>",
+  "homepage_url" : "https://01.org/webapps/content/<%= packageInfo.name.toLowerCase() %>",
+  "update_url" : "https://01.org/webapps/content/<%= packageInfo.name.toLowerCase() %>/update.xml"
 }
-
