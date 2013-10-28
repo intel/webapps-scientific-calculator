@@ -1,6 +1,6 @@
 @font-face {
     font-family: OpenSans-Semibold;
-    src: url(../lib/open-sans/OpenSans-Semibold.ttf);
+    src: url(../lib/open-sans-semibold/index.woff);
 }
 
 .memorypane {
