@@ -12,7 +12,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     packageInfo: grunt.file.readJSON('package.json'),
-    chromeInfo: grunt.file.readJSON('data/chrome-crx/manifest.json'),
+    chromeInfo: grunt.file.readJSON('platforms/chrome-crx/manifest.json'),
 
     clean: ['build'],
 
@@ -61,8 +61,8 @@ module.exports = function (grunt) {
           { expand: true, cwd: '.', src: ['app/lib/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/audio/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/data/**'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/README.txt'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['LICENSE'], dest: 'build/app/' },
+          { expand: true, cwd: '.', src: ['app/README.txt'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/_locales/**'], dest: 'build/' }
         ]
       },
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
 
       wgt_config: {
         files: [
-          { expand: true, cwd: 'data/tizen-wgt/', src: ['config.xml'], dest: 'build/wgt/' }
+          { expand: true, cwd: 'platforms/tizen-wgt/', src: ['config.xml'], dest: 'build/wgt/' }
         ],
         options:
         {
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
       crx_manifest:
       {
         files: [
-          { expand: true, cwd: 'data/chrome-crx/', src: ['manifest.json'], dest: 'build/crx/' }
+          { expand: true, cwd: 'platforms/chrome-crx/', src: ['manifest.json'], dest: 'build/crx/' }
         ],
 
         options:
@@ -120,7 +120,7 @@ module.exports = function (grunt) {
       xpk_manifest:
       {
         files: [
-          { expand: true, cwd: 'data/tizen-xpk/', src: ['manifest.json'], dest: 'build/xpk/' }
+          { expand: true, cwd: 'platforms/tizen-xpk/', src: ['manifest.json'], dest: 'build/xpk/' }
         ],
 
         options:
@@ -139,7 +139,7 @@ module.exports = function (grunt) {
           { expand: true, cwd: 'app/', src: ['js/**'], dest: 'build/sdk/' },
           { expand: true, cwd: 'app/', src: ['css/**'], dest: 'build/sdk/' },
           { expand: true, cwd: 'app/', src: ['*.html'], dest: 'build/sdk/' },
-          { expand: true, cwd: 'data/tizen-wgt/', src: ['config.xml'], dest: 'build/sdk/' },
+          { expand: true, cwd: 'platforms/tizen-wgt/', src: ['config.xml'], dest: 'build/sdk/' },
           { expand: true, cwd: '.', src: ['icon*.png'], dest: 'build/sdk/' }
         ]
       }
@@ -148,7 +148,8 @@ module.exports = function (grunt) {
     htmlmin: {
       dist: {
         files: [
-          { expand: true, cwd: '.', src: ['app/*.html'], dest: 'build/' }
+          { expand: true, cwd: '.', src: ['app/*.html'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/html/*.html'], dest: 'build/' }
         ],
         options: {
           removeComments: true,
@@ -168,7 +169,8 @@ module.exports = function (grunt) {
           progressive: true
         },
         files: [
-          { expand: true, cwd: '.', src: ['app/images/**'], dest: 'build/' }
+          { expand: true, cwd: '.', src: ['app/images/**'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/css/images/**'], dest: 'build/' }
         ]
       }
     },
