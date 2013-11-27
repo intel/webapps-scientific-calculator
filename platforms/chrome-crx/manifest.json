@@ -17,6 +17,5 @@
   "name": "<%= packageInfo.name %>",
   "permissions": [  ],
   "version": "<%= packageInfo.version %>",
-  "homepage_url" : "https://01.org/webapps/content/<%= packageInfo.name.toLowerCase() %>",
-  "update_url" : "https://01.org/webapps/content/<%= packageInfo.name.toLowerCase() %>/update.xml"
+  "homepage_url" : "https://01.org/html5webapps/webapps/<%= packageInfo.name.toLowerCase() %>"
 }
