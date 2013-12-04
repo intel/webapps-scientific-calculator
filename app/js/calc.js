@@ -167,7 +167,7 @@ $(function() {
                 else if (mainEntry.indexOf(value) != -1) {
                     return;
                 }
-            } else if (value === "+/\u2212") {
+            } else if (value === "+/–") {
                 // "Plus/minus" sign.
 
                 if (mainEntry === "" || mainEntry === "0") {
