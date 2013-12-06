@@ -1,6 +1,6 @@
 {
   "name": "Calculator",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Calculator: a scientific calculator",
   "main": "app/calc.js",
   "scripts": {
