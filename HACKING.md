@@ -13,8 +13,8 @@ grunt-cli do:
 
 You should then install the client-side dependencies into app/lib/:
 
-    npm install -g bower
-    bower install
+  npm install -g bower
+  bower install
 
 Note that if you want to install the application to a Tizen device
 as a wgt file, you will also need to install the sdb tool first.
@@ -102,6 +102,27 @@ CSS, and HTML) using:
 
 Note that in both cases, the files comprising the packages are
 first copied into the build/wgt and build/sdk directories respectively.
+
+To create packages for Android use the 'apk' target:
+
+    grunt apk
+
+This will first build an 'xpk' target and then package two apks in
+build/ named AppName_{x86,arm}.apk.
+You can then install the appropriate one to your device as usual -
+for example, ```adb install -r build/AppName_x86.apk```.
+There are also targets to create packages just for a single architecture. They require the 'xpk' target to be build previously :
+
+    grunt xpk
+    grunt crosswalk:x86
+
+or :
+
+    grunt xpk
+    grunt crosswalk:arm
+
+Packaging for Android requires some set up - please see
+[crosswalk-apk-generator README.md](https://github.com/crosswalk-project/crosswalk-apk-generator/blob/master/README.md#pre-requisites).
 
 # GUIDE FOR MS WINDOWS USERS AND TIZEN IDE
 
