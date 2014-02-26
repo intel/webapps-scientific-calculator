@@ -29,7 +29,7 @@ module.exports = function (grunt) {
         // package for the app's generated Java files; this works best if
         // you have at least one period character between two character
         // strings, and no digits
-        pkg: 'org.org01.webapps.annex',
+        pkg: 'org.org01.webapps.<%= packageInfo.name.toLowerCase() %>',
 
         icon: 'icon_128.png',
 
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
         // package for the app's generated Java files; this works best if
         // you have at least one period character between two character
         // strings, and no digits
-        pkg: 'org.org01.webapps.annex',
+        pkg: 'org.org01.webapps.<%= packageInfo.name.toLowerCase() %>',
 
         icon: 'icon_128.png',
 
