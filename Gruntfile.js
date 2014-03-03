@@ -21,6 +21,8 @@ module.exports = function (grunt) {
 
         verbose: false,
 
+        version: '<%= packageInfo.version %>',
+
         // display name for the app on the device;
         // the sanitisedName used to construct the Locations object later
         // is derived from this
@@ -75,6 +77,8 @@ module.exports = function (grunt) {
         "outDir": 'build',
 
         verbose: false,
+
+        version: '<%= packageInfo.version %>',
 
         // display name for the app on the device;
         // the sanitisedName used to construct the Locations object later
