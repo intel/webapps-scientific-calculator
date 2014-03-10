@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-tizen');
+  grunt.loadNpmTasks('grunt-crosswalk');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -16,117 +17,37 @@ module.exports = function (grunt) {
 
     crosswalk: {
       arm: {
-        //"outDir": process.env.HOME+'/z/webapps/webapps-annex/build',
         "outDir": 'build',
-
         verbose: false,
-
         version: '<%= packageInfo.version %>',
-
-        // display name for the app on the device;
-        // the sanitisedName used to construct the Locations object later
-        // is derived from this
         name: '<%= packageInfo.name %>',
-
-        // package for the app's generated Java files; this works best if
-        // you have at least one period character between two character
-        // strings, and no digits
         pkg: 'org.org01.webapps.<%= packageInfo.name.toLowerCase() %>',
-
         icon: 'icon_128.png',
-
         fullscreen: true,
-
         remoteDebugging: true,
-
-        // path to the directory containing your HTML5 app;
-        // note that this must use the correct path separators for your
-        // platform: Windows uses '\\' while Linux uses '/'
         appRoot: 'build/xpk',
-
-        // relative path from appRoot of the entry HTML file for your app
         appLocalPath: 'index.html',
-
-        // embed crosswalk itself into the package
         //embedded: true,
-
-        // path to the root of your Android SDK installation;
-        // on Windows, use the path to the sdk directory inside
-        // the installation, e.g. 'c:\\android-sdk\\sdk'
-        // default: automatically obtain from the 'android' command's path
         //androidSDKDir: '/opt/android-sdk-linux/',
-
-        // path to the xwalk_app_template directory; you can either
-        // download and unpack this manually, or use the xwalk_android_dl
-        // script to do so (part of this project; see the README for details);
-        // note that path separators specific to your platform must be used
-        // eg: export XWALK_APP_TEMPLATE=$HOME/Downloads/crosswalk-3.32.53.4-x86
-        //xwalkAndroidDir: project/specific/folder
-
-        // architecture of embedded crosswalk
-        // default: it is obtained from the contents of
-        // xwalkAndroidDir/native_libs/ if there is only one arch in there,
-        // else it should be specified as either 'x86' or 'arm'
+        //xwalkAndroidDir: process.env.HOME+'/Downloads/crosswalk-3.32.53.4-arm'
         arch: 'arm',
-
-        // default: automatically obtains latest from androidSDKDir/build-tools
         //androidAPIVersion: "18.0.1"
       },
       x86: {
-        //"outDir": process.env.HOME+'/z/webapps/webapps-annex/build',
         "outDir": 'build',
-
         verbose: false,
-
         version: '<%= packageInfo.version %>',
-
-        // display name for the app on the device;
-        // the sanitisedName used to construct the Locations object later
-        // is derived from this
         name: '<%= packageInfo.name %>',
-
-        // package for the app's generated Java files; this works best if
-        // you have at least one period character between two character
-        // strings, and no digits
         pkg: 'org.org01.webapps.<%= packageInfo.name.toLowerCase() %>',
-
         icon: 'icon_128.png',
-
         fullscreen: true,
-
         remoteDebugging: true,
-
-        // path to the directory containing your HTML5 app;
-        // note that this must use the correct path separators for your
-        // platform: Windows uses '\\' while Linux uses '/'
         appRoot: 'build/xpk',
-
-        // relative path from appRoot of the entry HTML file for your app
         appLocalPath: 'index.html',
-
-        // embed crosswalk itself into the package
         //embedded: true,
-
-        // path to the root of your Android SDK installation;
-        // on Windows, use the path to the sdk directory inside
-        // the installation, e.g. 'c:\\android-sdk\\sdk'
-        // default: automatically obtain from the 'android' command's path
         //androidSDKDir: '/opt/android-sdk-linux/',
-
-        // path to the xwalk_app_template directory; you can either
-        // download and unpack this manually, or use the xwalk_android_dl
-        // script to do so (part of this project; see the README for details);
-        // note that path separators specific to your platform must be used
-        // eg: export XWALK_APP_TEMPLATE=$HOME/Downloads/crosswalk-3.32.53.4-x86
-        //xwalkAndroidDir: project/specific/folder
-
-        // architecture of embedded crosswalk
-        // default: it is obtained from the contents of
-        // xwalkAndroidDir/native_libs/ if there is only one arch in there,
-        // else it should be specified as either 'x86' or 'arm'
+        //xwalkAndroidDir: process.env.HOME+'/Downloads/crosswalk-3.32.53.4-x86'
         arch: 'x86',
-
-        // default: automatically obtains latest from androidSDKDir/build-tools
         //androidAPIVersion: "18.0.1"
       }
     },
