@@ -16,6 +16,23 @@ module.exports = function (grunt) {
     chromeInfo: grunt.file.readJSON('platforms/chrome-crx/manifest.json'),
 
     crosswalk: {
+      shared: {
+        "outDir": 'build',
+        verbose: false,
+        version: '<%= packageInfo.version %>',
+        name: '<%= packageInfo.name %>',
+        pkg: 'org.org01.webapps.<%= packageInfo.name.toLowerCase() %>',
+        icon: 'icon_128.png',
+        fullscreen: true,
+        remoteDebugging: true,
+        appRoot: 'build/xpk',
+        appLocalPath: 'index.html',
+        embedded: false
+        //androidSDKDir: '/opt/android-sdk-linux/',
+        //xwalkAndroidDir: process.env.HOME+'/Downloads/crosswalk-3.32.53.4-arm'
+        //arch: 'arm',
+        //androidAPIVersion: "18.0.1"
+      },
       arm: {
         "outDir": 'build',
         verbose: false,
