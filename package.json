@@ -1,5 +1,5 @@
 {
-  "name": "Calculator",
+  "name": "ScientificCalculator",
   "version": "0.0.6",
   "description": "Calculator: a scientific calculator",
   "main": "app/calc.js",
