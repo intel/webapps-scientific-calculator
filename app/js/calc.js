@@ -117,7 +117,7 @@ $(function() {
 
             var operator = $this.attr("data-operator");
 
-            if (operator===null) {
+            if (!operator) {
                 operator = $this.html();
             }
 
