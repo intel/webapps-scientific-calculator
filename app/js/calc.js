@@ -129,7 +129,6 @@ $(function() {
             Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
 
             // append main entry and the operator to current formula
-            $("#currentformula").html( Calculator.getMainEntry() + operator );
             $("#currentformula").html($("#currentformula").html() + Calculator.getMainEntry() + operator);
             Calculator.setMainEntry("");
 
