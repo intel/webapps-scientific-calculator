@@ -130,6 +130,7 @@ $(function() {
 
             // append main entry and the operator to current formula
             $("#currentformula").html( Calculator.getMainEntry() + operator );
+            $("#currentformula").html($("#currentformula").html() + Calculator.getMainEntry() + operator);
             Calculator.setMainEntry("");
 
             //push the recent operator to currentFormulaStack
