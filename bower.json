@@ -9,7 +9,7 @@
   "dependencies": {
     "iscroll": "~5.0.0",
     "q": "~0.9.3",
-    "intel-appframework": "*",
+    "jquery": "~2.1.1",
     "peg-0.7.0.min": "http://cloud.github.com/downloads/dmajda/pegjs/peg-0.7.0.min.js",
     "open-sans-semibold": "http://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff",
     "open-sans-light": "http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff",
