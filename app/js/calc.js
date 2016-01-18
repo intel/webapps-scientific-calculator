@@ -826,7 +826,7 @@ $(function() {
 
             var lazyScripts = [
                 {
-                    script: "lib/peg-0.7.0.min/index.js",
+                    script: "lib/pegjs/peg-0.9.0.min.js",
                     success: function(resolve) {
                         $.get("data/peg-code.txt",function(data) {
                             try {

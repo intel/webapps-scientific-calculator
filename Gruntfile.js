@@ -17,26 +17,15 @@ module.exports = function (grunt) {
 
     crosswalk: {
       options: {
-        outDir: 'build',
-        verbose: false,
+        verbose: true, // informative output, otherwise quiet
+        debug: false, // includes output of rm and cp commands (-v option)
         version: '<%= packageInfo.version %>',
         name: '<%= packageInfo.name %>',
         pkg: 'org.org01.webapps.<%= packageInfo.name.toLowerCase() %>',
         icon: 'icon_128.png',
-        fullscreen: true,
-        remoteDebugging: true,
-        appRoot: 'build/xpk',
-        appLocalPath: 'index.html',
+        appRoot: 'build/apk',
       },
-      shared: {
-        // no arch for shared
-      },
-      arm: {
-        arch: 'arm',
-      },
-      x86: {
-        arch: 'x86',
-      }
+      'default': {}
     },
 
     clean: ['build'],
@@ -156,6 +145,29 @@ module.exports = function (grunt) {
       {
         files: [
           { expand: true, cwd: 'platforms/tizen-xpk/', src: ['manifest.json'], dest: 'build/xpk/' }
+        ],
+
+        options:
+        {
+          processContent: function(content, srcpath)
+          {
+            return grunt.template.process(content);
+          }
+        }
+
+      },
+
+      apk: {
+        files: [
+          { expand: true, cwd: 'build/app/', src: ['**'], dest: 'build/apk/' },
+          { expand: true, cwd: '.', src: ['icon*.png'], dest: 'build/apk/' }
+        ]
+      },
+
+      apk_manifest:
+      {
+        files: [
+          { expand: true, cwd: 'platforms/android-apk/', src: ['manifest.json'], dest: 'build/apk/' }
         ],
 
         options:
@@ -322,6 +334,7 @@ module.exports = function (grunt) {
   ]);
   grunt.registerTask('wgt', ['dist', 'copy:wgt', 'copy:wgt_config', 'package:wgt']);
   grunt.registerTask('xpk', ['dist', 'copy:xpk', 'copy:xpk_manifest']);
+  grunt.registerTask('apk', ['dist', 'copy:apk', 'copy:apk_manifest']);
   grunt.registerTask('sdk', [
     'clean',
     'imagemin:dist',
@@ -363,9 +376,4 @@ module.exports = function (grunt) {
   grunt.registerTask('sdk-install', ['sdk', 'install']);
 
   grunt.registerTask('default', 'wgt');
-  grunt.registerTask('apk', [
-    'xpk',
-    'crosswalk:x86',
-    'crosswalk:arm'
-  ]);
 };

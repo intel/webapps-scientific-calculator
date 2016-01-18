@@ -1,0 +1,27 @@
+{
+  "name": "<%= packageInfo.name %>",
+  "short_name": "<%= packageInfo.name %>",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon_128.png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "icon_48.png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "icon_16.png",
+      "sizes": "16x16"
+    }
+  ],
+  "start_url": "index.html",
+  "xwalk_app_version": "<%= packageInfo.version %>",
+  "xwalk_package_id": "org.org01.webapps.<%= packageInfo.name.toLowerCase() %>",
+  "xwalk_target_platforms": [ "android" ],
+  "xwalk_android_animatable_view": false,
+  "xwalk_android_keep_screen_on": false,
+  "xwalk_windows_update_id": "39377815-5790-6419-4898-877555970102",
+  "xwalk_windows_vendor": "(Intel)"
+}

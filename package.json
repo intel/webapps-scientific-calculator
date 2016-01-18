@@ -20,7 +20,7 @@
     "grunt-contrib-copy": "~0.4.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-tizen": "~0.1.1",
-    "grunt-crosswalk": "~0.0.1",
+    "grunt-crosswalk": "*",
     "async": "~0.2.6",
     "node-native-zip": "~1.1.0",
     "lodash": "~1.1.1",
