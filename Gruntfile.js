@@ -8,6 +8,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-release');
   grunt.loadTasks('tools/grunt-tasks');
 
@@ -268,9 +269,14 @@ module.exports = function (grunt) {
       }
     },
 
-    simple_server: {
-      port: 30303,
-      dir: 'build/app/'
+    connect: {
+      server: {
+        options: {
+          protocol: 'https',
+          base: 'build/app/',
+          keepalive: true
+        }
+      }
     },
 
     tizen: {
@@ -370,7 +376,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('restart', ['tizen:stop', 'tizen:start']);
 
-  grunt.registerTask('server', ['dist', 'simple_server']);
+  grunt.registerTask('server', ['dist', 'connect']);
 
   grunt.registerTask('wgt-install', ['wgt', 'install']);
   grunt.registerTask('sdk-install', ['sdk', 'install']);
