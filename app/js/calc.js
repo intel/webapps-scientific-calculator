@@ -88,13 +88,13 @@ $(function() {
     this.handleClearOnNumberButtonClick = function() {
       if (Calculator.clearMainEntryOnNextNumberButton) {
         Calculator.setMainEntry('');
-        Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.len);
+        Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
       }
       if (Calculator.clearCurrentFormulaOnNextNumberButton) {
         Calculator.setCurrentFormula('');
         Calculator.currentFormulaStack.splice(
           0,
-          Calculator.currentFormulaStack.len
+          Calculator.currentFormulaStack.length
         );
       }
     };
@@ -102,11 +102,11 @@ $(function() {
     this.handleClearOnFunctionButtonClick = function() {
       if (Calculator.clearMainEntryOnNextFunctionButton) {
         Calculator.setMainEntry('');
-        Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.len);
+        Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
       }
       if (Calculator.clearCurrentFormulaOnNextFunctionButton) {
         Calculator.setCurrentFormula('');
-        Calculator.mainEntryStack.splice(0, Calculator.currentFormulaStack.len);
+        Calculator.mainEntryStack.splice(0, Calculator.currentFormulaStack.length);
       }
     };
 
@@ -127,6 +127,7 @@ $(function() {
       for (var i = 0; i < Calculator.mainEntryStack.length; i++) {
         Calculator.currentFormulaStack.push(Calculator.mainEntryStack[i]);
       }
+
       // clear mainEntryStack
       Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
 
