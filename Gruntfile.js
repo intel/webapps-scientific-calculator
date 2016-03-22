@@ -1,4 +1,6 @@
+
 module.exports = function (grunt) {
+  require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
 
   grunt.loadNpmTasks('grunt-tizen');
   grunt.loadNpmTasks('grunt-crosswalk');
@@ -39,6 +41,22 @@ module.exports = function (grunt) {
         tagName: 'v<%= version %>'
       }
     },
+
+	  babel: {
+		  options: {
+			  sourceMap: true,
+			  presets: ['babel-preset-es2015']
+		  },
+		  dist: {
+			  files: [{
+				  "expand": true,
+				  "cwd": ".",
+				  "src": ["app/js/*.js"],
+				  "dest": "build/",
+				  "ext": ".js"
+			  }]
+		  }
+	  },
 
     eslint: {
       /* see .eslintrc */

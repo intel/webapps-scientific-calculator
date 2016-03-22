@@ -7,7 +7,7 @@
  *
  */
 
-Localizer = function() {
+function Localizer() {
   /**
    * When adding new locale to the application, DO NOT to forget to add its english translation
    * to this array, as this array is being used to provide default translation text
