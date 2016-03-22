@@ -184,7 +184,7 @@ $(function() {
         if (mainEntry.charAt(0) === '-') {
           Calculator.appendToMainEntry(mainEntry.substring(1));
         } else {
-          Calculator.appendToMainEntry('-' + mainEntry);
+          Calculator.appendToMainEntry(`-${mainEntry}`);
         }
         value = '';
       }
@@ -328,19 +328,19 @@ $(function() {
     // Function for adding a result history entry.
     //
     this.formHistoryEntry = function(formula, entry) {
-      var historyEntry =
-        '<div class="thickdivisor"></div> ' +
-        '<div class="calculationpane"> ' +
-          '<div class="calculation"> ' +
-            '<div class="calculationtext">' + formula + '</div> ' +
-          '</div> ' +
-        '</div> ' +
-        '<div class="thindivisor"></div> ' +
-        '<div class="resultpane"> ' +
-          '<div class="result"> ' +
-            '<div class="resulttext">' + entry + '</div> ' +
-          '</div> ' +
-        '</div> ';
+      var historyEntry = `\
+<div class="thickdivisor"></div>\
+<div class="calculationpane">\
+  <div class="calculation">\
+    <div class="calculationtext">${formula}</div>\
+  </div>\
+</div>\
+<div class="thindivisor"></div>\
+<div class="resultpane">\
+  <div class="result">\
+    <div class="resulttext">${entry}</div>\
+  </div>\
+</div>`;
 
       return historyEntry;
     };
@@ -364,7 +364,7 @@ $(function() {
       };
 
       localStorage.setItem(
-        'history' + Calculator.nexthistoryindex,
+        `history${Calculator.nexthistoryindex}`,
         JSON.stringify(historyEntry)
       );
       Calculator.nexthistoryindex++;
@@ -384,14 +384,14 @@ $(function() {
         var historyEntries = '';
 
         var i = firsthistoryindex;
-        var historyitemstr = localStorage.getItem('history' + i);
+        var historyitemstr = localStorage.getItem(`history${i}`);
         while (historyitemstr !== null) {
           try {
             var historyitem = JSON.parse(historyitemstr);
 
             var oneWeek = 604800000; /* One week in milliseconds */
             if (time - historyitem.timestamp > oneWeek) {
-              localStorage.removeItem('history' + i);
+              localStorage.removeItem(`history${i}`);
               firsthistoryindex = i + 1;
             } else {
               historyEntries += Calculator.formHistoryEntry(
@@ -400,11 +400,11 @@ $(function() {
               );
             }
           } catch (err) {
-            localStorage.removeItem('history' + i);
+            localStorage.removeItem(`history${i}`);
           }
 
           i++;
-          historyitemstr = localStorage.getItem('history' + i);
+          historyitemstr = localStorage.getItem(`history${i}`);
         }
         Calculator.setCalculationHistoryEntries(historyEntries);
         localStorage.setItem('firsthistoryindex', firsthistoryindex);
@@ -492,10 +492,10 @@ $(function() {
 
         if (i <= 8) {
           // Empty memory entry found, store entry.
-          var mplusi = 'M' + i;
-          localStorage.setItem(mplusi, value + '##');
+          var mplusi = `M${i}`;
+          localStorage.setItem(mplusi, `${value}##`);
           Calculator.setMemoryEntry(mplusi, value, '');
-          $('#button' + mplusi).css('color', '#d9e2d0');
+          $(`#button${mplusi}`).css('color', '#d9e2d0');
         }
       }
     };
@@ -503,7 +503,7 @@ $(function() {
     this.getNextEmptyMemorySlot = function() {
       var i = 1;
       while (i <= 8) {
-        if (localStorage.getItem('M' + i) === null) {
+        if (localStorage.getItem(`M${i}`) === null) {
           break;
         }
 
@@ -513,13 +513,13 @@ $(function() {
     };
 
     this.setMemoryEntry = function(key, value, description) {
-      var buttonkey = '#button' + key;
-      var hashkey = '#' + key;
+      var buttonkey = `#button${key}`;
+      var hashkey = `#${key}`;
       $(buttonkey).children().eq(0).attr('src', 'images/ico_arrow_white.png');
-      $(buttonkey + 'edit').attr('class', 'buttonmemoryeditenabled');
-      $(buttonkey + 'close').attr('class', 'buttonmemorycloseenabled');
-      $(hashkey + 'text').html(value);
-      $(hashkey + 'description').text(description);
+      $(`${buttonkey}edit`).attr('class', 'buttonmemoryeditenabled');
+      $(`${buttonkey}close`).attr('class', 'buttonmemorycloseenabled');
+      $(`${hashkey}text`).html(value);
+      $(`${hashkey}description`).text(description);
       $(buttonkey).css('color', '#d9e2d0');
     };
 
@@ -530,13 +530,13 @@ $(function() {
         var memoryitem = memoryitemstr.split('##');
 
         Calculator.setMemoryEntry(key, memoryitem[0], description);
-        localStorage.setItem(key, memoryitem[0] + '##' + description);
+        localStorage.setItem(key, `${memoryitem[0]}##${description}`);
       }
     };
 
     this.onButtonMemoryEditClick = function(key) {
       if (
-        $('#button' + key + 'edit').attr('class') !==
+        $(`#button${key}edit`).attr('class') !==
         'buttonmemoryeditenabled'
       ) {
         return;
@@ -544,9 +544,9 @@ $(function() {
 
       Calculator.currentKey = key;
       $('#memorynoteeditor').show();
-      var hashkey = '#' + key;
-      var memoryitemstr = $(hashkey + 'text').text();
-      var description = $(hashkey + 'description').text();
+      var hashkey = `#${key}`;
+      var memoryitemstr = $(`${hashkey}text`).text();
+      var description = $(`${hashkey}description`).text();
       $('#mnebutton').text(key);
       $('#mnetext').text(memoryitemstr);
 
@@ -568,8 +568,8 @@ $(function() {
     };
 
     this.onMemoryDescriptionInputFocusOut = function(key) {
-      var keydescription = '#' + key;
-      var input = $(keydescription + 'input');
+      var keydescription = `#${key}`;
+      var input = $(`${keydescription}input`);
       var value = input.val();
       var description = $(keydescription);
 
@@ -582,7 +582,7 @@ $(function() {
     this.onButtonMemoryClick = function(key) {
       Calculator.handleClearOnNumberButtonClick();
 
-      var value = $('#' + key + 'text').text();
+      var value = $(`#${key}text`).text();
 
       if (value !== null) {
         Calculator.setMainEntry(value);
@@ -592,26 +592,26 @@ $(function() {
     };
 
     this.onButtonMemoryCloseClick = function(key) {
-      var hashkey = '#' + key;
-      var buttonkey = '#button' + key;
+      var hashkey = `#${key}`;
+      var buttonkey = `#button${key}`;
       $(buttonkey).children().eq(0).attr('src', 'images/ico_arrow_black.png');
-      $(buttonkey + 'edit').attr('class', 'buttonmemoryedit');
-      $(buttonkey + 'close').attr('class', 'buttonmemoryclose');
+      $(`${buttonkey}edit`).attr('class', 'buttonmemoryedit');
+      $(`${buttonkey}close`).attr('class', 'buttonmemoryclose');
       localStorage.removeItem(key);
-      $(hashkey + 'descriptioninput').val('');
-      $(hashkey + 'text').text('');
+      $(`${hashkey}descriptioninput`).val('');
+      $(`${hashkey}text`).text('');
       $(buttonkey).css('color', '#727272');
-      $(hashkey + 'description').text('');
+      $(`${hashkey}description`).text('');
     };
 
     this.populateMemoryPaneFromLocalStorage = function() {
       for (var i = 0; i < 9; i++) {
-        var memoryitemstr = localStorage.getItem('M' + i);
+        var memoryitemstr = localStorage.getItem(`M${i}`);
 
         if (!(memoryitemstr === null)) {
           var memoryitem = memoryitemstr.split('##');
 
-          Calculator.setMemoryEntry('M' + i, memoryitem[0], memoryitem[1]);
+          Calculator.setMemoryEntry(`M${i}`, memoryitem[0], memoryitem[1]);
         }
       }
     };
@@ -629,7 +629,7 @@ $(function() {
     this.clearAllMemorySlots = function() {
       $('#clearconfirmationdialog').css('visibility', 'hidden');
       for (var i = 1; i <= 8; i++) {
-        Calculator.onButtonMemoryCloseClick('M' + i);
+        Calculator.onButtonMemoryCloseClick(`M${i}`);
       }
       Calculator.setFreeMemorySlot();
     };
@@ -647,11 +647,12 @@ $(function() {
     // Function for initializing the UI buttons.
     //
     this.initButtons = function() {
-      $(
-        '.buttonblackshort,' +
-        '.buttonyellow,' +
-        '.buttonblack,' +
-        '.buttonblue'
+      $(`\
+.buttonblackshort,\
+.buttonyellow,\
+.buttonblack,\
+.buttonblue\
+`
       ).on('mousedown', Calculator.onFunctionButtonClick);
 
       $('.buttonwhite').on('mousedown', Calculator.onNumericalButtonClick);
@@ -685,19 +686,20 @@ $(function() {
       Calculator.buttonClickAudio.src = './audio/GeneralButtonPress_R2.ogg';
       Calculator.equalClickAudio = new Audio();
       Calculator.equalClickAudio.src = './audio/EqualitySign_R2.ogg';
-      $(
-        '#closehistorybutton,' +
-        '.historybutton,' +
-        '.buttonclose,' +
-        '.switchleftactive,' +
-        '.buttonpurple,' +
-        '.dialogAbuttonPurple,' +
-        '.dialogAbuttonBlack,' +
-        '.dialogBpurplebutton,' +
-        '.dialogBblackbutton,' +
-        '.buttonmemory,' +
-        '.buttonmemoryedit,' +
-        '.buttonmemoryclose'
+      $(`\
+#closehistorybutton,\
+.historybutton,\
+.buttonclose,\
+.switchleftactive,\
+.buttonpurple,\
+.dialogAbuttonPurple,\
+.dialogAbuttonBlack,\
+.dialogBpurplebutton,\
+.dialogBblackbutton,\
+.buttonmemory,\
+.buttonmemoryedit,\
+.buttonmemoryclose\
+`
       ).on('mousedown', function() {
         Calculator.buttonClickAudio.play();
       });
@@ -710,7 +712,7 @@ $(function() {
     this.closeHistory = function() {
       $('#LCD_Upper').hide();
       $('#licensebtnl').show();
-      $('#' + Calculator.currentPage).show();
+      $(`#${Calculator.currentPage}`).show();
       Calculator.historyScrollbar.refresh();
       return false;
     };
@@ -718,7 +720,7 @@ $(function() {
     this.setFreeMemorySlot = function() {
       var i = Calculator.getNextEmptyMemorySlot();
       if (i <= 8) {
-        $('#buttonmemorizetext').html('M' + i);
+        $('#buttonmemorizetext').html(`M${i}`);
       } else {
         $('#buttonmemorizetext').html('Mx');
       }
@@ -867,7 +869,7 @@ $(function() {
       $('#mnesave').click(function() {
         $('#memorynoteeditor').hide();
         var mnedescriptioninputval = $('#mnedescriptioninput').val();
-        $('#' + Calculator.currentKey + 'description')
+        $(`#${Calculator.currentKey}description`)
           .text(mnedescriptioninputval);
         Calculator.setMemoryDescription(
           Calculator.currentKey,
@@ -932,8 +934,8 @@ $(function() {
 
         body.css(
           '-webkit-transform',
-          'translate(-50%, -50%) ' +
-          'scale(' + docWidth / bodyWidth + ', ' + docHeight / bodyHeight + ')'
+          `translate(-50%, -50%) \
+           scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
         );
       }, 0);
     };
@@ -943,15 +945,16 @@ $(function() {
   $('button').prop('disabled', true);
 
   window.addEventListener('pageshow', function() {
-    $('head').append(
-      '<link ' +
-        'rel="stylesheet" ' +
-        'media="all and (orientation:landscape)" ' +
-        'href="css/lazy.css"/>' +
-      '<link ' +
-        'rel="stylesheet" ' +
-        'media="all and (orientation:portrait)" ' +
-        'href="css/lazy_portrait.css"/>'
+    $('head').append(`\
+<link\
+ rel="stylesheet"\
+ media="all and (orientation:landscape)"\
+ href="css/lazy.css"/>\
+<link\
+ rel="stylesheet"\
+ media="all and (orientation:portrait)"\
+ href="css/lazy_portrait.css"/>\
+`
     );
 
     Calculator.registerOrientationChange();

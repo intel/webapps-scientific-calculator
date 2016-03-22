@@ -14,11 +14,11 @@
  * @param {string} id The id of the license button.
  */
 function licenseInit(id) {
-  var lbtn = document.getElementById(id + 'btnl');
-  var qbtn = document.getElementById(id + 'btnq');
-  var lpage = document.getElementById(id + 'page');
-  var ltext = document.getElementById(id + 'text');
-  var lscroll = document.getElementById(id + 'scroll');
+  var lbtn = document.getElementById(`${id}btnl`);
+  var qbtn = document.getElementById(`${id}btnq`);
+  var lpage = document.getElementById(`${id}page`);
+  var ltext = document.getElementById(`${id}text`);
+  var lscroll = document.getElementById(`${id}scroll`);
   var timer;
 
   lbtn.onclick = function() {

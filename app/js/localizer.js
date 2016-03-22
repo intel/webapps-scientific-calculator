@@ -58,7 +58,7 @@ function Localizer() {
     };
     var ids = Object.keys(keys);
 
-    ids.forEach(id => $('#' + id).text(this.getTranslation(keys[id])));
+    ids.forEach(id => $(`#${id}`).text(this.getTranslation(keys[id])));
   };
 
   return this;
