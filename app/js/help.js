@@ -16,14 +16,14 @@
  */
 function helpInit(btnid, prefix) {
   var btn = document.getElementById(btnid);
-  var dialog = document.getElementById(prefix + "dialog");
-  var close = document.getElementById(prefix + "close");
+  var dialog = document.getElementById(prefix + 'dialog');
+  var close = document.getElementById(prefix + 'close');
 
   btn.addEventListener('click', function() {
-    dialog.className = "helpdialog shown";
+    dialog.className = 'helpdialog shown';
   });
 
   close.addEventListener('click', function() {
-    dialog.className = "helpdialog";
+    dialog.className = 'helpdialog';
   });
 }

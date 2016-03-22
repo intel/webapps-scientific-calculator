@@ -13,15 +13,15 @@ Localizer = function() {
    * to this array, as this array is being used to provide default translation text
    */
   var LOCALE = {
-    memoryClearallText: "Clear All",
-    memoryCloseText: "Close",
-    dialogHeadingText: "Clear All Memory slots",
-    dialogContentText: "All memory slots will be cleared.",
-    dialogOKButtonText: "OK",
-    dialogCancelButtonText: "Cancel",
-    mneSaveText: "Save",
-    mneCancelText: "Cancel",
-    malformedExpressionText: "Malformed Expression"
+    memoryClearallText: 'Clear All',
+    memoryCloseText: 'Close',
+    dialogHeadingText: 'Clear All Memory slots',
+    dialogContentText: 'All memory slots will be cleared.',
+    dialogOKButtonText: 'OK',
+    dialogCancelButtonText: 'Cancel',
+    mneSaveText: 'Save',
+    mneCancelText: 'Cancel',
+    malformedExpressionText: 'Malformed Expression'
   };
 
   /**
@@ -36,7 +36,7 @@ Localizer = function() {
    * returned from the array named LOCALE.
    */
   this.getTranslation = function(key) {
-    var text = "";
+    var text = '';
     if (window.chrome && window.chrome.i18n) {
       text = chrome.i18n.getMessage(key);
     } else {
@@ -47,18 +47,18 @@ Localizer = function() {
 
   this.localizeHtmlElements = function() {
     var keys = {
-      memoryclearall: "memoryClearallText",
-      memoryClose: "memoryCloseText",
-      dialogheading: "dialogHeadingText",
-      dialogcontenttext: "dialogContentText",
-      dialogokbutton: "dialogOKButtonText",
-      dialogcancelbutton: "dialogCancelButtonText",
-      mnesave: "mneSaveText",
-      mnecancel: "mneCancelText"
+      memoryclearall: 'memoryClearallText',
+      memoryClose: 'memoryCloseText',
+      dialogheading: 'dialogHeadingText',
+      dialogcontenttext: 'dialogContentText',
+      dialogokbutton: 'dialogOKButtonText',
+      dialogcancelbutton: 'dialogCancelButtonText',
+      mnesave: 'mneSaveText',
+      mnecancel: 'mneCancelText'
     };
     var ids = Object.keys(keys);
 
-    ids.forEach(id => $("#" + id).text(this.getTranslation(keys[id])));
+    ids.forEach(id => $('#' + id).text(this.getTranslation(keys[id])));
   };
 
   return this;

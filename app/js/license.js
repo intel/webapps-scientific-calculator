@@ -14,11 +14,11 @@
  * @param {string} id The id of the license button.
  */
 function licenseInit(id) {
-  var lbtn = document.getElementById(id + "btnl");
-  var qbtn = document.getElementById(id + "btnq");
-  var lpage = document.getElementById(id + "page");
-  var ltext = document.getElementById(id + "text");
-  var lscroll = document.getElementById(id + "scroll");
+  var lbtn = document.getElementById(id + 'btnl');
+  var qbtn = document.getElementById(id + 'btnq');
+  var lpage = document.getElementById(id + 'page');
+  var ltext = document.getElementById(id + 'text');
+  var lscroll = document.getElementById(id + 'scroll');
   var timer;
 
   lbtn.onclick = function() {
@@ -28,10 +28,10 @@ function licenseInit(id) {
     var delay = 1000;
 
     /* set the scroller to the top position */
-    lscroll.style.top = "0px";
+    lscroll.style.top = '0px';
 
     /* display the license page */
-    lpage.style.display = "block";
+    lpage.style.display = 'block';
 
     /* start the autoscroll interval */
     timer = setInterval(function() {
@@ -53,9 +53,9 @@ function licenseInit(id) {
       var newY =
         Math.abs(parseInt(lscroll.style.top, 10)) + ((dT / 40) * dY);
       if (newY > 0) {
-        lscroll.style.top = (-1 * newY) + "px";
+        lscroll.style.top = (-1 * newY) + 'px';
       } else {
-        lscroll.style.top = "0px";
+        lscroll.style.top = '0px';
       }
 
       /* if the lscroll has hit the limit, delay and swing */
@@ -71,7 +71,7 @@ function licenseInit(id) {
   };
 
   qbtn.onclick = function() {
-    lpage.style.display = "none";
+    lpage.style.display = 'none';
     clearInterval(timer);
   };
 }
