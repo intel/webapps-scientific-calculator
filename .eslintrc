@@ -1,0 +1,29 @@
+{
+  "extends": "google",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "globalReturn": false,
+    },
+    "sourceType": "script"
+  },
+  "globals": {
+    "chrome": true,
+    "Calculator": true,
+    "Q": true,
+    "Localizer": true,
+    "helpInit": true,
+    "licenseInit": true,
+    "PEG": true,
+    "IScroll": true,
+    "window": true,
+    "document": true,
+    "Audio": true,
+    "localStorage": true
+  },
+  "env": {
+    "node": false,
+    "browser": true,
+    "es6": true,
+    "jquery": true
+  }
+}

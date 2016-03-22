@@ -9,6 +9,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-release');
   grunt.loadTasks('tools/grunt-tasks');
 
@@ -37,6 +38,11 @@ module.exports = function (grunt) {
         npmtag: false,
         tagName: 'v<%= version %>'
       }
+    },
+
+    eslint: {
+      /* see .eslintrc */
+      target: ['app/js/*.js']
     },
 
     tizen_configuration: {
@@ -79,6 +85,29 @@ module.exports = function (grunt) {
           { expand: true, cwd: '.', src: ['LICENSE'], dest: 'build/app/' },
           { expand: true, cwd: '.', src: ['app/README.txt'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/_locales/**'], dest: 'build/' }
+        ]
+      },
+
+      image: {
+       files: [
+         { expand: true, cwd: '.', src: ['app/images/**'], dest: 'build/' },
+         { expand: true, cwd: '.', src: ['app/css/images/**'], dest: 'build/' }
+       ]
+      },
+      html: {
+        files: [
+          { expand: true, cwd: '.', src: ['app/*.html'], dest: 'build/' },
+          { expand: true, cwd: '.', src: ['app/html/*.html'], dest: 'build/' }
+        ],
+      },
+      css: {
+        files: [
+          { expand: true, cwd: '.', src: ['app/css/**'], dest: 'build/' }
+        ]
+      },
+      js: {
+        files: [
+          { expand: true, cwd: '.', src: ['app/js/**'], dest: 'build/' }
         ]
       },
 
@@ -329,6 +358,15 @@ module.exports = function (grunt) {
     'copy:common'
   ]);
 
+  grunt.registerTask('debug-dist', [
+    'clean',
+    'copy:image',
+    'copy:html',
+    'copy:css',
+    'copy:js',
+    'copy:common'
+  ]);
+
   grunt.registerTask('crx', ['dist', 'copy:crx', 'copy:crx_manifest']);
   grunt.registerTask('crx_unpacked', [
     'clean',
@@ -376,10 +414,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('restart', ['tizen:stop', 'tizen:start']);
 
-  grunt.registerTask('server', ['dist', 'connect']);
+  grunt.registerTask('pwa', ['dist']);
+
+  grunt.registerTask('server', ['pwa', 'connect']);
 
   grunt.registerTask('wgt-install', ['wgt', 'install']);
   grunt.registerTask('sdk-install', ['sdk', 'install']);
 
-  grunt.registerTask('default', 'wgt');
+  grunt.registerTask('default', 'pwa');
 };
