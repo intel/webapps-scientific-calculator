@@ -32,7 +32,7 @@ module.exports = function (grunt) {
       'default': {}
     },
 
-    clean: ['build'],
+    clean: ['babel/', 'build/'],
 
     release: {
       options: {
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
 				  "expand": true,
 				  "cwd": ".",
 				  "src": ["app/js/*.js"],
-				  "dest": "build/",
+				  "dest": "babel/",
 				  "ext": ".js"
 			  }]
 		  }
@@ -78,9 +78,12 @@ module.exports = function (grunt) {
 
     // minify JS
     uglify: {
+      options: {
+        sourceMap: true
+      },
       dist: {
         files: [
-          { expand: true, cwd: '.', src: 'app/js/**/*.js', dest: 'build/' }
+          { expand: true, cwd: 'babel', src: 'app/js/*.js', dest: 'build/' }
         ]
       }
     },
@@ -104,6 +107,12 @@ module.exports = function (grunt) {
           { expand: true, cwd: '.', src: ['app/README.txt'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/_locales/**'], dest: 'build/' }
         ]
+      },
+
+      babel_js: {
+        files: [
+          { expand: true, cwd: 'babel', src: ['app/js/*'], dest: 'build/' },
+        ],
       },
 
       image: {
@@ -320,7 +329,7 @@ module.exports = function (grunt) {
       server: {
         options: {
           protocol: 'https',
-          base: 'build/app/',
+          base: '.',
           keepalive: true
         }
       }
@@ -369,19 +378,21 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dist', [
     'clean',
-    'imagemin:dist',
+    'babel',
     'uglify:dist',
+    'imagemin:dist',
     'cssmin:dist',
     'htmlmin:dist',
     'copy:common'
   ]);
 
-  grunt.registerTask('debug-dist', [
+  grunt.registerTask('dist:debug', [
     'clean',
+    'babel',
+    'copy:babel_js',
     'copy:image',
     'copy:html',
     'copy:css',
-    'copy:js',
     'copy:common'
   ]);
 
