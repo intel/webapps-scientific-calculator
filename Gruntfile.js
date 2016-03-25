@@ -100,6 +100,7 @@ module.exports = function (grunt) {
     copy: {
       common: {
         files: [
+          { expand: true, cwd: '.', src: ['app/sw-import.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/audio/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/data/**'], dest: 'build/' },
@@ -328,8 +329,8 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          protocol: 'https',
-          base: '.',
+          protocol: 'http',
+          base: 'build/app/',
           keepalive: true
         }
       }

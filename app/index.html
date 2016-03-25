@@ -14,8 +14,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" media="all and (orientation:portrait)" href="css/calc_portrait.css">
         <link rel="stylesheet" media="all and (orientation:landscape)" href="css/calc.css">
+        <script src="lib/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <link rel="import" href="lib/platinum-sw/platinum-sw-register.html">
+        <link rel="import" href="lib/platinum-sw/platinum-sw-cache.html">
     </head>
     <body>
+        <platinum-sw-register auto-register>
+          <platinum-sw-cache></platinum-sw-cache>
+        </platinum-sw-register>
         <div id="background">
             <div id="calculationpane">
                 <div id="LCD_Upper">
