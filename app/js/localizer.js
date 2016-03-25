@@ -7,6 +7,12 @@
  *
  */
 
+/* exported Localizer */
+
+/**
+ * class to encapsulate methods to do with localisation.
+ * @return {object} instance of Localizer.
+ */
 function Localizer() {
   /**
    * When adding new locale to the application, DO NOT to forget to add its english translation
@@ -58,9 +64,14 @@ function Localizer() {
     };
     var ids = Object.keys(keys);
 
-    ids.forEach(id => $(`#${id}`).text(this.getTranslation(keys[id])));
+    ids.forEach(
+      id => {
+        document.querySelector(`#${id}`).textContent =
+          this.getTranslation(keys[id]);
+      }
+    );
   };
 
   return this;
-};
+}
 

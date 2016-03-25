@@ -9,7 +9,7 @@
 
 var Calculator = {};
 
-$(function() {
+(function() {
   'use strict';
 
   Calculator = new function() {
@@ -47,40 +47,87 @@ $(function() {
      * number of decimal digits to be preserved on trigonometric calculations
      */
     this.trigPrecision = 10000000000;
+
     //
     // Functions
     //
 
+    var _setClass = function(selectorOrElement, classToSet) {
+      let elements = [];
+      if (typeof selectorOrElement === 'string') {
+        elements = document.querySelectorAll(selectorOrElement);
+      } else {
+        elements.push(selectorOrElement);
+      }
+
+      for (let i = 0; i < elements.length; i++) {
+        let element = elements[i];
+
+        element.className = '';
+        element.classList.add(classToSet);
+      }
+    };
+
+    var _setStyle = function(selector, property, value) {
+      let elements = document.querySelectorAll(selector);
+
+      for (let i = 0; i < elements.length; i++) {
+        let element = elements[i];
+
+        element.style[property] = value;
+      }
+    };
+
     // Functions for transitioning between states.
     //
     this.transitionToDegrees = function() {
-      $('#degradswitch').attr('class', 'switchleftactive');
-      $('#buttondeg').attr('class', 'buttontogglebackgroundB');
-      $('#buttonrad').attr('class', 'buttontogglebackgroundA');
+      let classes = {
+        '#degradswitch': 'switchleftactive',
+        '#buttondeg': 'buttontogglebackgroundB',
+        '#buttonrad': 'buttontogglebackgroundA'
+      };
+
+      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+
       Calculator.angleDivisor = 180 / Math.PI;
     };
 
     this.transitionToRadians = function() {
-      $('#degradswitch').attr('class', 'switchrightactive');
-      $('#buttondeg').attr('class', 'buttontogglebackgroundA');
-      $('#buttonrad').attr('class', 'buttontogglebackgroundB');
+      let classes = {
+        '#degradswitch': 'switchrightactive',
+        '#buttondeg': 'buttontogglebackgroundA',
+        '#buttonrad': 'buttontogglebackgroundB'
+      };
+
+      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+
       Calculator.angleDivisor = 1;
     };
 
     this.transitionToTrigonometricFunctions = function() {
-      $('#traghypswitch').attr('class', 'switchleftactive');
-      $('#buttontrig').attr('class', 'buttontogglebackgroundB');
-      $('#buttonhyp').attr('class', 'buttontogglebackgroundA');
-      $('#trigonometric').css('display', 'inherit');
-      $('#hyperbolic').css('display', 'none');
+      let classes = {
+        '#traghypswitch': 'switchleftactive',
+        '#buttontrig': 'buttontogglebackgroundB',
+        '#buttonhyp': 'buttontogglebackgroundA'
+      };
+
+      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+
+      _setStyle('#trigonometric', 'display', 'inherit');
+      _setStyle('#hyperbolic', 'display', 'none');
     };
 
     this.transitionToHyperbolicFunctions = function() {
-      $('#traghypswitch').attr('class', 'switchrightactive');
-      $('#buttontrig').attr('class', 'buttontogglebackgroundA');
-      $('#buttonhyp').attr('class', 'buttontogglebackgroundB');
-      $('#trigonometric').css('display', 'none');
-      $('#hyperbolic').css('display', 'inherit');
+      let classes = {
+        '#traghypswitch': 'switchrightactive',
+        '#buttontrig': 'buttontogglebackgroundA',
+        '#buttonhyp': 'buttontogglebackgroundB'
+      };
+
+      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+
+      _setStyle('#trigonometric', 'display', 'none');
+      _setStyle('#hyperbolic', 'display', 'inherit');
     };
 
     // Helper function for clearing main entry and current formula as needed.
@@ -90,6 +137,7 @@ $(function() {
         Calculator.setMainEntry('');
         Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
       }
+
       if (Calculator.clearCurrentFormulaOnNextNumberButton) {
         Calculator.setCurrentFormula('');
         Calculator.currentFormulaStack.splice(
@@ -104,27 +152,30 @@ $(function() {
         Calculator.setMainEntry('');
         Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
       }
+
       if (Calculator.clearCurrentFormulaOnNextFunctionButton) {
         Calculator.setCurrentFormula('');
-        Calculator.mainEntryStack.splice(0, Calculator.currentFormulaStack.length);
+        Calculator.mainEntryStack.splice(
+          0,
+          Calculator.currentFormulaStack.length
+        );
       }
     };
 
     // Functions for handling button presses.
     //
     this.onFunctionButtonClick = function() {
-      var $this = $(this);
       Calculator.buttonClickAudio.play();
       Calculator.handleClearOnFunctionButtonClick();
 
-      var operator = $this.attr('data-operator');
+      let operator = this.getAttribute('data-operator');
 
       if (!operator) {
-        operator = $this.html();
+        operator = this.innerHTML;
       }
 
       // move mainEntryStack content to currentFormulaStack
-      for (var i = 0; i < Calculator.mainEntryStack.length; i++) {
+      for (let i = 0; i < Calculator.mainEntryStack.length; i++) {
         Calculator.currentFormulaStack.push(Calculator.mainEntryStack[i]);
       }
 
@@ -132,11 +183,10 @@ $(function() {
       Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
 
       // append main entry and the operator to current formula
-      $('#currentformula').html(
-        $('#currentformula').html() +
+      document.querySelector('#currentformula').innerHTML =
+        document.querySelector('#currentformula').innerHTML +
         Calculator.getMainEntry() +
-        operator
-      );
+        operator;
       Calculator.setMainEntry('');
 
       // push the recent operator to currentFormulaStack
@@ -151,8 +201,8 @@ $(function() {
       Calculator.buttonClickAudio.play();
       Calculator.handleClearOnNumberButtonClick();
 
-      var value = $(this).html();
-      var mainEntry = Calculator.getMainEntry();
+      let value = this.innerHTML;
+      let mainEntry = Calculator.getMainEntry();
 
       if (mainEntry.length >= 22) {
         return;
@@ -200,7 +250,7 @@ $(function() {
 
     this.onClearButtonClick = function() {
       Calculator.buttonClickAudio.play();
-      var clearButtonText = $('#buttonclear').html();
+      let clearButtonText = document.querySelector('#buttonclear').innerHTML;
 
       if (clearButtonText === 'C') {
         Calculator.setMainEntry('');
@@ -209,18 +259,19 @@ $(function() {
         Calculator.currentFormula = '';
       }
       // clear stacks
-      var len = Calculator.mainEntryStack.length;
+      let len = Calculator.mainEntryStack.length;
       Calculator.mainEntryStack.splice(0, len);
       len = Calculator.currentFormulaStack.length;
       Calculator.currentFormulaStack.splice(0, len);
 
       // update the currentformula area
-      $('#currentformula').html(Calculator.currentFormula);
+      document.querySelector('#currentformula').innerHTML =
+        Calculator.currentFormula;
     };
 
     this.onDeleteButtonClick = function() {
       Calculator.buttonClickAudio.play();
-      var mainEntry = Calculator.getMainEntry();
+      let mainEntry = Calculator.getMainEntry();
 
       if (
         Calculator.currentFormulaStack.length <= 0 &&
@@ -228,14 +279,14 @@ $(function() {
         return;
       }
 
-      var malformedExpressionText =
+      let malformedExpressionText =
         Calculator.localizer.getTranslation('malformedExpressionText');
       if (malformedExpressionText === mainEntry) {
         Calculator.setMainEntry('');
         return;
       }
 
-      var len = 0;
+      let len = 0;
       // first delete mainEntry then currentFormula
       if (Calculator.mainEntryStack.length > 0) {
         // splice one element
@@ -244,7 +295,7 @@ $(function() {
 
         // update the remaining elements
         mainEntry = '';
-        for (var i = 0; i < Calculator.mainEntryStack.length; i++) {
+        for (let i = 0; i < Calculator.mainEntryStack.length; i++) {
           mainEntry += Calculator.mainEntryStack[i];
         }
         Calculator.setMainEntry(mainEntry);
@@ -254,11 +305,12 @@ $(function() {
         Calculator.currentFormulaStack.splice(len - 1, 1);
 
         // update the remaining elements
-        var text = '';
-        for (var j = 0; j < Calculator.currentFormulaStack.length; j++) {
+        let text = '';
+        for (let j = 0; j < Calculator.currentFormulaStack.length; j++) {
           text += Calculator.currentFormulaStack[j];
         }
-        $('#currentformula').html(Calculator.currentFormula + text);
+        document.querySelector('#currentformula').innerHTML =
+          Calculator.currentFormula + text;
       }
     };
 
@@ -266,17 +318,17 @@ $(function() {
       Calculator.equalClickAudio.play();
       Calculator.handleClearOnFunctionButtonClick();
 
-      var mainEntry = Calculator.getMainEntry();
-      var prevFormula = Calculator.currentFormula;
+      let mainEntry = Calculator.getMainEntry();
+      let prevFormula = Calculator.currentFormula;
       Calculator.currentFormulaStack.push(mainEntry);
       Calculator.appendToCurrentFormula(mainEntry);
 
-      var formula = Calculator.getCurrentFormula();
+      let formula = Calculator.getCurrentFormula();
 
       // replace ^ with x for unambiguous parsing.
       formula = formula.replace('e<sup>^</sup>', 'e<sup>x</sup>');
 
-      var entry = '';
+      let entry = '';
       if (formula !== '') {
         try {
           entry = Calculator.parser.parse(formula);
@@ -301,9 +353,9 @@ $(function() {
       Calculator.clearMainEntryOnNextFunctionButton = true;
       Calculator.clearCurrentFormulaOnNextNumberButton = true;
 
-      var len = 0;
+      let len = 0;
       // clear undo stacks
-      var malformedExpressionText =
+      let malformedExpressionText =
         Calculator.localizer.getTranslation('malformedExpressionText');
       if (entry === malformedExpressionText) {
         // restore previous formula on error cases
@@ -322,13 +374,13 @@ $(function() {
     };
 
     this.setClearButtonMode = function(mode) {
-      $('#buttonclear').html(mode);
+      document.querySelector('#buttonclear').innerHTML = mode;
     };
 
     // Function for adding a result history entry.
     //
     this.formHistoryEntry = function(formula, entry) {
-      var historyEntry = `\
+      let historyEntry = `\
 <div class="thickdivisor"></div>\
 <div class="calculationpane">\
   <div class="calculation">\
@@ -346,18 +398,20 @@ $(function() {
     };
 
     this.setCalculationHistoryEntries = function(historyEntries) {
-      $('#calculationhistory').html(historyEntries);
+      document.querySelector('#calculationhistory').innerHTML = historyEntries;
     };
 
     this.appendEntryToCalculationHistory = function(historyEntry) {
-      var calculationHistory = $('#calculationhistory');
-      calculationHistory.html(calculationHistory.html() + historyEntry);
+      let calculationHistory = document.querySelector('#calculationhistory');
+      calculationHistory.innerHTML =
+        calculationHistory.innerHtml +
+        historyEntry;
     };
 
     // Functions for manipulating history persistent storage data.
     //
     this.createHistoryEntryInLocalStorage = function(formula, result) {
-      var historyEntry = {
+      let historyEntry = {
         formula: formula,
         result: result,
         timestamp: new Date().getTime()
@@ -371,7 +425,7 @@ $(function() {
     };
 
     this.populateHistoryPaneFromLocalStorage = function() {
-      var firsthistoryindex = localStorage.getItem('firsthistoryindex');
+      let firsthistoryindex = localStorage.getItem('firsthistoryindex');
 
       if (firsthistoryindex === null) {
         // Initialize history local storage if not used yet.
@@ -380,16 +434,16 @@ $(function() {
       } else {
         // If history local storage is used, then populate the history
         // list with stored items that are less than a week old.
-        var time = new Date().getTime();
-        var historyEntries = '';
+        let time = new Date().getTime();
+        let historyEntries = '';
 
-        var i = firsthistoryindex;
-        var historyitemstr = localStorage.getItem(`history${i}`);
+        let i = firsthistoryindex;
+        let historyitemstr = localStorage.getItem(`history${i}`);
         while (historyitemstr !== null) {
           try {
-            var historyitem = JSON.parse(historyitemstr);
+            let historyitem = JSON.parse(historyitemstr);
 
-            var oneWeek = 604800000; /* One week in milliseconds */
+            let oneWeek = 604800000; /* One week in milliseconds */
             if (time - historyitem.timestamp > oneWeek) {
               localStorage.removeItem(`history${i}`);
               firsthistoryindex = i + 1;
@@ -414,50 +468,55 @@ $(function() {
     // Functions for manipulating entries.
     //
     this.getMainEntry = function() {
-      return $('#mainentry').html();
+      return document.querySelector('#mainentry').innerHTML;
     };
 
     this.setMainEntry = function(string) {
-      var mainentryelement = $('#mainentry');
+      let mainentryelement = document.querySelector('#mainentry');
 
-      mainentryelement.html(string);
-      $('#mpmainentry').html(string);
+      mainentryelement.innerHTML = string;
+      document.querySelector('#mpmainentry').innerHTML = string;
 
       if (string === '') {
-        $('#buttonclear').html('AC');
+        document.querySelector('#buttonclear').innerHTML = 'AC';
       } else {
-        $('#buttonclear').html('C');
+        document.querySelector('#buttonclear').innerHTML = 'C';
       }
 
-      mainentryelement.attr('class', 'mainentryshort');
-      if (mainentryelement[0].offsetWidth < mainentryelement[0].scrollWidth) {
-        mainentryelement.attr('class', 'mainentrylong');
+      _setClass(mainentryelement, 'mainentryshort');
+      if (mainentryelement.offsetWidth < mainentryelement.scrollWidth) {
+        _setClass(mainentryelement, 'mainentrylong');
       }
     };
 
     this.appendToMainEntry = function(string) {
-      Calculator.setMainEntry($('#mainentry').html() + string);
+      Calculator.setMainEntry(
+        document.querySelector('#mainentry').innerHTML +
+        string
+      );
     };
 
     this.getCurrentFormula = function() {
-      return $('#currentformula').html();
+      return document.querySelector('#currentformula').innerHTML;
     };
 
     this.setCurrentFormula = function(string) {
-      var currentformulaelement = $('#currentformula');
+      let currentformulaelement = document.querySelector('#currentformula');
 
-      currentformulaelement.html(string);
-      currentformulaelement.attr('class', 'currentformulashort');
-      var thisOffsetWidth = currentformulaelement[0].offsetWidth;
-      var thisScrollWidth = currentformulaelement[0].scrollWidth;
+      currentformulaelement.innerHTML = string;
+      _setClass(currentformulaelement, 'currentformulashort');
+      let thisOffsetWidth = currentformulaelement.offsetWidth;
+      let thisScrollWidth = currentformulaelement.scrollWidth;
       if (thisOffsetWidth < thisScrollWidth) {
-        currentformulaelement.attr('class', 'currentformulalong');
+        _setClass(currentformulaelement, 'currentformulalong');
       }
       Calculator.currentFormula = string;
     };
 
     this.appendToCurrentFormula = function(string) {
-      var newstring = $('#currentformula').html() + string;
+      let newstring =
+        document.querySelector('#currentformula').innerHTML +
+        string;
       Calculator.currentFormula = newstring;
       Calculator.setCurrentFormula(newstring);
     };
@@ -465,7 +524,7 @@ $(function() {
     // Functions for handling arrow button click events.
     //
     this.onButtonMainEntryToMemoryClick = function() {
-      var value = Calculator.getMainEntry();
+      let value = Calculator.getMainEntry();
 
       Calculator.addValueToEmptyMemoryEntry(value);
       Calculator.setFreeMemorySlot();
@@ -488,20 +547,20 @@ $(function() {
     this.addValueToEmptyMemoryEntry = function(value) {
       if (value !== '') {
         // Try to find an empty memory entry.
-        var i = Calculator.getNextEmptyMemorySlot();
+        let i = Calculator.getNextEmptyMemorySlot();
 
         if (i <= 8) {
           // Empty memory entry found, store entry.
-          var mplusi = `M${i}`;
+          let mplusi = `M${i}`;
           localStorage.setItem(mplusi, `${value}##`);
           Calculator.setMemoryEntry(mplusi, value, '');
-          $(`#button${mplusi}`).css('color', '#d9e2d0');
+          document.querySelector(`#button${mplusi}`).style.color = '#d9e2d0';
         }
       }
     };
 
     this.getNextEmptyMemorySlot = function() {
-      var i = 1;
+      let i = 1;
       while (i <= 8) {
         if (localStorage.getItem(`M${i}`) === null) {
           break;
@@ -513,21 +572,23 @@ $(function() {
     };
 
     this.setMemoryEntry = function(key, value, description) {
-      var buttonkey = `#button${key}`;
-      var hashkey = `#${key}`;
-      $(buttonkey).children().eq(0).attr('src', 'images/ico_arrow_white.png');
-      $(`${buttonkey}edit`).attr('class', 'buttonmemoryeditenabled');
-      $(`${buttonkey}close`).attr('class', 'buttonmemorycloseenabled');
-      $(`${hashkey}text`).html(value);
-      $(`${hashkey}description`).text(description);
-      $(buttonkey).css('color', '#d9e2d0');
+      let buttonkey = `#button${key}`;
+      let hashkey = `#${key}`;
+      let children = document.querySelector(buttonkey).children;
+      children[0].setAttribute('src', 'images/ico_arrow_white.png');
+      _setClass(`${buttonkey}edit`, 'buttonmemoryeditenabled');
+      _setClass(`${buttonkey}close`, 'buttonmemorycloseenabled');
+      document.querySelector(`${hashkey}text`).innerHTML = value;
+      document.querySelector(`${hashkey}description`).textContent =
+        description;
+      document.querySelector(buttonkey).style.color = '#d9e2d0';
     };
 
     this.setMemoryDescription = function(key, description) {
-      var memoryitemstr = localStorage.getItem(key);
+      let memoryitemstr = localStorage.getItem(key);
 
       if (!(memoryitemstr === null)) {
-        var memoryitem = memoryitemstr.split('##');
+        let memoryitem = memoryitemstr.split('##');
 
         Calculator.setMemoryEntry(key, memoryitem[0], description);
         localStorage.setItem(key, `${memoryitem[0]}##${description}`);
@@ -535,54 +596,55 @@ $(function() {
     };
 
     this.onButtonMemoryEditClick = function(key) {
-      if (
-        $(`#button${key}edit`).attr('class') !==
-        'buttonmemoryeditenabled'
-      ) {
+      let keyElement = document.querySelector(`#button${key}edit`);
+      if (!keyElement.classList.contains('buttonmemoryeditenabled')) {
         return;
       }
 
       Calculator.currentKey = key;
-      $('#memorynoteeditor').show();
-      var hashkey = `#${key}`;
-      var memoryitemstr = $(`${hashkey}text`).text();
-      var description = $(`${hashkey}description`).text();
-      $('#mnebutton').text(key);
-      $('#mnetext').text(memoryitemstr);
+      document.querySelector('#memorynoteeditor').style.display = 'block';
+      let hashkey = `#${key}`;
+      let memoryitemstr = document.querySelector(`${hashkey}text`).textContent;
+      let description =
+        document.querySelector(`${hashkey}description`).textContent;
+      document.querySelector('#mnebutton').textContent = key;
+      document.querySelector('#mnetext').textContent = memoryitemstr;
 
-      var input = $('#mnedescriptioninput');
-      var text = $('#mnedescription');
+      let input = document.querySelector('#mnedescriptioninput');
+      let text = document.querySelector('#mnedescription');
 
       if (
-        input.css('display') === 'none' ||
-        input.css('visibility') === 'visible'
+        input.style.display === '' ||
+        input.style.display === 'none' ||
+        input.style.visibility !== 'visible'
       ) {
-        input.css('display', 'inline');
-        text.css('display', 'none');
-        input.trigger('focus');
+        input.style.display = 'inline';
+        text.style.display = '';
+        document.querySelector('#mnedescriptioninput').focus();
       } else {
-        input.css('display', 'none');
-        text.css('display', 'inline');
+        input.style.display = '';
+        text.style.display = 'inline';
       }
-      input.val(description);
+
+      input.value = description;
     };
 
     this.onMemoryDescriptionInputFocusOut = function(key) {
-      var keydescription = `#${key}`;
-      var input = $(`${keydescription}input`);
-      var value = input.val();
-      var description = $(keydescription);
+      let keydescription = `#${key}`;
+      let input = document.querySelector(`${keydescription}input`);
+      let value = input.value;
+      let description = document.querySelector(keydescription);
 
-      description.text(value);
+      description.textContent = value;
       Calculator.setMemoryDescription(key, value);
-      input.css('display', 'none');
-      description.css('display', 'inline');
+      input.style.display = '';
+      description.style.display = 'inline';
     };
 
     this.onButtonMemoryClick = function(key) {
       Calculator.handleClearOnNumberButtonClick();
 
-      var value = $(`#${key}text`).text();
+      let value = document.querySelector(`#${key}text`).textContent;
 
       if (value !== null) {
         Calculator.setMainEntry(value);
@@ -592,24 +654,26 @@ $(function() {
     };
 
     this.onButtonMemoryCloseClick = function(key) {
-      var hashkey = `#${key}`;
-      var buttonkey = `#button${key}`;
-      $(buttonkey).children().eq(0).attr('src', 'images/ico_arrow_black.png');
-      $(`${buttonkey}edit`).attr('class', 'buttonmemoryedit');
-      $(`${buttonkey}close`).attr('class', 'buttonmemoryclose');
+      let hashkey = `#${key}`;
+      let buttonkey = `#button${key}`;
+      let children = document.querySelector(buttonkey).children;
+      children[0].setAttribute('src', 'images/ico_arrow_black.png');
+      _setClass(`${buttonkey}edit`, 'buttonmemoryedit');
+      _setClass(`${buttonkey}close`, 'buttonmemoryclose');
+      _setClass(`${buttonkey}close`, 'buttonmemoryclose');
       localStorage.removeItem(key);
-      $(`${hashkey}descriptioninput`).val('');
-      $(`${hashkey}text`).text('');
-      $(buttonkey).css('color', '#727272');
-      $(`${hashkey}description`).text('');
+      document.querySelector(`${hashkey}descriptioninput`).value = '';
+      document.querySelector(`${hashkey}text`).textContent = '';
+      _setStyle(buttonkey, 'color', '#727272');
+      document.querySelector(`${hashkey}description`).textContent = '';
     };
 
     this.populateMemoryPaneFromLocalStorage = function() {
-      for (var i = 0; i < 9; i++) {
-        var memoryitemstr = localStorage.getItem(`M${i}`);
+      for (let i = 0; i < 9; i++) {
+        let memoryitemstr = localStorage.getItem(`M${i}`);
 
         if (!(memoryitemstr === null)) {
-          var memoryitem = memoryitemstr.split('##');
+          let memoryitem = memoryitemstr.split('##');
 
           Calculator.setMemoryEntry(`M${i}`, memoryitem[0], memoryitem[1]);
         }
@@ -617,62 +681,82 @@ $(function() {
     };
 
     this.onButtonMemoryListClick = function() {
-      $('#memorypage').show();
+      _setStyle('#memorypage', 'display', 'block');
       Calculator.currentPage = 'memorypage';
-      $('#mpmainentry').html(Calculator.getMainEntry());
+      document.querySelector('#mpmainentry').innerHTML =
+        Calculator.getMainEntry();
     };
 
     this.onButtonMemoryClearAll = function() {
-      $('#clearconfirmationdialog').css('visibility', 'visible');
+      _setStyle('#clearconfirmationdialog', 'visibility', 'visible');
     };
 
     this.clearAllMemorySlots = function() {
-      $('#clearconfirmationdialog').css('visibility', 'hidden');
-      for (var i = 1; i <= 8; i++) {
+      _setStyle('#clearconfirmationdialog', 'visibility', 'hidden');
+      for (let i = 1; i <= 8; i++) {
         Calculator.onButtonMemoryCloseClick(`M${i}`);
       }
       Calculator.setFreeMemorySlot();
     };
 
     this.cancelClearAllDialog = function() {
-      $('#clearconfirmationdialog').css('visibility', 'hidden');
+      _setStyle('#clearconfirmationdialog', 'visibility', 'hidden');
     };
 
     this.onButtonMemoryClose = function() {
       Calculator.setFreeMemorySlot();
-      $('#memorypage').hide();
+      _setStyle('#memorypage', 'display', '');
       Calculator.currentPage = 'calculationpane';
     };
 
     // Function for initializing the UI buttons.
     //
     this.initButtons = function() {
-      $(`\
+      let buttons = document.querySelectorAll(`\
 .buttonblackshort,\
 .buttonyellow,\
 .buttonblack,\
 .buttonblue\
 `
-      ).on('mousedown', Calculator.onFunctionButtonClick);
+      );
+      for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i];
+        button.addEventListener(
+          'mousedown',
+          Calculator.onFunctionButtonClick
+        );
+      }
 
-      $('.buttonwhite').on('mousedown', Calculator.onNumericalButtonClick);
+      buttons = document.querySelectorAll('.buttonwhite');
+      for (let i = 0; i < buttons.length; i++) {
+        let thisButton = buttons[i];
+
+        thisButton.addEventListener(
+          'mousedown',
+          Calculator.onNumericalButtonClick
+        );
+      }
 
       // Initialize memorize button
       Calculator.setFreeMemorySlot();
 
       // Initialize button special cases.
-      var handlerMap = {
+      let handlerMap = {
         '#buttonclear': Calculator.onClearButtonClick,
         '#buttondelete': Calculator.onDeleteButtonClick,
         '#buttondot': Calculator.onNumericalButtonClick,
         '#buttonplusminus': Calculator.onNumericalButtonClick,
         '#buttonequal': Calculator.onEqualButtonClick
       };
-      var keys = Object.keys(handlerMap);
+      let keys = Object.keys(handlerMap);
 
-      for (var i = 0; i < keys.length; i++) {
-        var thisKey = keys[i];
-        $(thisKey).off('mousedown').on('mousedown', handlerMap[thisKey]);
+      for (let i = 0; i < keys.length; i++) {
+        let thisKey = keys[i];
+        let thisElement = document.querySelector(thisKey);
+        thisElement.addEventListener(
+          'mousedown',
+          handlerMap[thisKey]
+        );
       }
 
       Calculator.initAudio();
@@ -686,7 +770,8 @@ $(function() {
       Calculator.buttonClickAudio.src = './audio/GeneralButtonPress_R2.ogg';
       Calculator.equalClickAudio = new Audio();
       Calculator.equalClickAudio.src = './audio/EqualitySign_R2.ogg';
-      $(`\
+
+      let buttons = document.querySelectorAll(`\
 #closehistorybutton,\
 .historybutton,\
 .buttonclose,\
@@ -700,34 +785,46 @@ $(function() {
 .buttonmemoryedit,\
 .buttonmemoryclose\
 `
-      ).on('mousedown', function() {
-        Calculator.buttonClickAudio.play();
-      });
+      );
+
+      var _addListener = function(button) {
+        button.addEventListener(
+          'mousedown',
+          () => Calculator.buttonClickAudio.play()
+        );
+      };
+
+      for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i];
+
+        _addListener(button);
+      }
     };
 
     this.openHistory = function() {
-      $('#LCD_Upper').show();
-      $('#licensebtnl').hide();
+      _setStyle('#LCD_Upper', 'display', 'block');
+      _setStyle('#licensebtnl', 'display', '');
     };
+
     this.closeHistory = function() {
-      $('#LCD_Upper').hide();
-      $('#licensebtnl').show();
-      $(`#${Calculator.currentPage}`).show();
+      _setStyle('#LCD_Upper', 'display', '');
+      _setStyle('#licensebtnl', 'display', 'block');
+      _setStyle(`#${Calculator.currentPage}`, 'display', 'block');
       Calculator.historyScrollbar.refresh();
       return false;
     };
 
     this.setFreeMemorySlot = function() {
-      var i = Calculator.getNextEmptyMemorySlot();
+      let i = Calculator.getNextEmptyMemorySlot();
       if (i <= 8) {
-        $('#buttonmemorizetext').html(`M${i}`);
+        document.querySelector('#buttonmemorizetext').innerHTML = `M${i}`;
       } else {
-        $('#buttonmemorizetext').html('Mx');
+        document.querySelector('#buttonmemorizetext').innerHTML = 'Mx';
       }
     };
 
     this.registerInlineHandlers = function() {
-      var handlers = {
+      let handlers = {
         click: {
           '#closehistorybutton': Calculator.closeHistory,
           '#openhistorybutton': Calculator.openHistory,
@@ -850,36 +947,54 @@ $(function() {
         }
       };
 
-      var events = Object.keys(handlers);
+      let events = Object.keys(handlers);
       events.forEach(function(event) {
-        var selectors = Object.keys(handlers[event]);
+        let selectors = Object.keys(handlers[event]);
 
         selectors.forEach(function(selector) {
-          var handler = handlers[event][selector];
-          $(selector).on(event, handler);
+          let handler = handlers[event][selector];
+          let elements = document.querySelectorAll(selector);
+
+          for (let i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            element.addEventListener(event, handler);
+          }
         });
       });
     };
 
     this.registerMneClickHandlers = function() {
-      $('#mnecancel').click(function() {
-        $('#memorynoteeditor').hide();
-      });
+      document.querySelector('#mnecancel').addEventListener(
+        'click',
+        function() {
+          document.querySelector('#memorynoteeditor').style.display = 'none';
+        }
+      );
 
-      $('#mnesave').click(function() {
-        $('#memorynoteeditor').hide();
-        var mnedescriptioninputval = $('#mnedescriptioninput').val();
-        $(`#${Calculator.currentKey}description`)
-          .text(mnedescriptioninputval);
-        Calculator.setMemoryDescription(
-          Calculator.currentKey,
-          mnedescriptioninputval
-        );
-      });
+      document.querySelector('#mnesave').addEventListener(
+        'click',
+        function() {
+          _setStyle('#memorynoteeditor', 'display', '');
+          let mnedescriptioninputval =
+            document.querySelector('#mnedescriptioninput').value = '';
+          document.querySelector(
+            `#${Calculator.currentKey}description`
+          ).textContent = mnedescriptioninputval;
+          Calculator.setMemoryDescription(
+            Calculator.currentKey,
+            mnedescriptioninputval
+          );
+        }
+      );
 
-      $('#mnedescriptiondelete').click(function() {
-        $('#mnedescriptioninput').val('');
-      });
+      document.querySelector(
+        '#mnedescriptiondelete'
+      ).addEventListener(
+        'click',
+        function() {
+          document.querySelector('#mnedescriptioninput').value = '';
+        }
+      );
     };
 
     /**
@@ -888,7 +1003,7 @@ $(function() {
      */
     this.registerOrientationChange = function() {
       // on page create
-      $(document).bind('pagecreate create', function() {
+      document.addEventListener('pagecreate', function() {
         Calculator.maximiseBody();
       });
 
@@ -898,7 +1013,7 @@ $(function() {
         };
       } else {
         window.onresize = function() {
-          if ($(window).height() > $(window).width()) {
+          if (window.innerHeight > window.innerWidth) {
             window.orientation = 0;
           } else {
             window.orientation = 90;
@@ -926,14 +1041,13 @@ $(function() {
       // add to event queue
       setTimeout(function() {
         // apply scaling transform
-        var docWidth = document.documentElement.clientWidth;
-        var docHeight = document.documentElement.clientHeight;
-        var body = $('body');
-        var bodyWidth = body.width();
-        var bodyHeight = body.height();
+        let docWidth = document.documentElement.clientWidth;
+        let docHeight = document.documentElement.clientHeight;
+        let body = document.querySelector('body');
+        let bodyWidth = body.clientWidth;
+        let bodyHeight = body.clientHeight;
 
-        body.css(
-          '-webkit-transform',
+        _setStyle('body', '-webkit-transform',
           `translate(-50%, -50%) \
            scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
         );
@@ -942,32 +1056,41 @@ $(function() {
   };
 
   // grey-out all the buttons
-  $('button').prop('disabled', true);
+  let buttons = document.querySelectorAll('button');
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].disabled = true;
+  }
 
   window.addEventListener('pageshow', function() {
-    $('head').append(`\
-<link\
- rel="stylesheet"\
- media="all and (orientation:landscape)"\
- href="css/lazy.css"/>\
-<link\
- rel="stylesheet"\
- media="all and (orientation:portrait)"\
- href="css/lazy_portrait.css"/>\
-`
-    );
+    let link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('media', 'all and (orientation:landscape)');
+    link.setAttribute('href', 'css/lazy.css');
+
+    document.querySelector('head').appendChild(link);
+
+    link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('media', 'all and (orientation:portrait)');
+    link.setAttribute('href', 'css/lazy_portrait.css');
+
+    document.querySelector('head').appendChild(link);
 
     Calculator.registerOrientationChange();
 
-    $.get('lazy.html', function(result) {
+    fetch('lazy.html').then(function(response) {
+      return response.text();
+    }).then(function(body) {
       // inject rest of js files
       // and run Calculator init code that depends on them
 
-      var lazyScripts = [
+      let lazyScripts = [
         {
           script: 'lib/pegjs/peg-0.9.0.min.js',
           success: function(resolve) {
-            $.get('data/peg-code.txt', function(data) {
+            fetch('data/peg-code.txt').then(function(response) {
+              return response.text();
+            }).then(function(data) {
               try {
                 Calculator.parser = PEG.buildParser(data);
                 resolve();
@@ -981,10 +1104,14 @@ $(function() {
           script: 'js/license.js',
           success: function(resolve) {
             licenseInit('license', 'background');
-            $('#licensebtnl').on('mousedown', function() {
+            document.querySelector(
+              '#licensebtnl'
+            ).addEventListener('mousedown', function() {
               Calculator.buttonClickAudio.play();
             });
-            $('#licensebtnq').on('mousedown', function() {
+            document.querySelector(
+              '#licensebtnq'
+            ).addEventListener('mousedown', function() {
               Calculator.buttonClickAudio.play();
             });
             resolve();
@@ -994,10 +1121,14 @@ $(function() {
           script: 'js/help.js',
           success: function(resolve) {
             helpInit('home_help', 'help_');
-            $('#home_help').on('mousedown', function() {
+            document.querySelector(
+              '#home_help'
+            ).addEventListener('mousedown', function() {
               Calculator.buttonClickAudio.play();
             });
-            $('#help_close').on('mousedown', function() {
+            document.querySelector(
+              '#help_close'
+            ).addEventListener('mousedown', function() {
               Calculator.buttonClickAudio.play();
             });
             resolve();
@@ -1019,34 +1150,34 @@ $(function() {
           }
         }
       ];
-      var promises = [];
+      let promises = [];
 
       // complete body
-      $('body').append(result);
+      document.querySelector('body').innerHTML += body;
 
       Calculator.registerMneClickHandlers();
 
-      var makeSuccessScript = function(success, resolve) {
+      let makeSuccessScript = function(success, resolve) {
         return function() {
           success(resolve);
         };
       };
 
       // inject js files
-      for (var index = 0; index < lazyScripts.length; index++) {
-        var jqTag = document.createElement('script');
-        var dfd = Q.defer();
-        promises.push(dfd.promise);
-        jqTag.onload = makeSuccessScript(
-          lazyScripts[index].success,
-          dfd.resolve
-        );
-        jqTag.setAttribute('src', lazyScripts[index].script);
-        document.body.appendChild(jqTag);
+      for (let index = 0; index < lazyScripts.length; index++) {
+        promises.push(new Promise(function(resolve) {
+          let jqTag = document.createElement('script');
+          jqTag.onload = makeSuccessScript(
+            lazyScripts[index].success,
+            resolve
+          );
+          jqTag.setAttribute('src', lazyScripts[index].script);
+          document.body.appendChild(jqTag);
+        }));
       }
 
       // once all js files have been loaded and initialised/etc, do the rest
-      Q.all(promises).then(function() {
+      Promise.all(promises).then(function() {
         Calculator.initButtons();
         Calculator.setMainEntry('');
         Calculator.setCurrentFormula('');
@@ -1056,11 +1187,14 @@ $(function() {
         Calculator.populateMemoryPaneFromLocalStorage();
         Calculator.populateHistoryPaneFromLocalStorage();
         Calculator.registerInlineHandlers();
-        $('button').prop('disabled', false);
+        let buttons = document.querySelectorAll('button');
+        for (let i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = false;
+        }
         Calculator.maximiseBody();
       }, function() {
         console.error('something wrong with promises');
       });
     });
   }, false);
-});
+})();
