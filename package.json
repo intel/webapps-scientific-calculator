@@ -26,7 +26,7 @@
     "grunt-contrib-copy": "*",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-htmlmin": "*",
-    "grunt-contrib-imagemin": "*",
+    "grunt-contrib-imagemin": "~0.1.4",
     "grunt-contrib-uglify": "*",
     "grunt-crosswalk": "*",
     "grunt-eslint": "*",

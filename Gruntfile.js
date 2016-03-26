@@ -378,23 +378,23 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('dist', [
-    'clean',
-    'babel',
-    'uglify:dist',
-    'imagemin:dist',
-    'cssmin:dist',
-    'htmlmin:dist',
-    'copy:common'
+    'clean', // clean babel/ and build/
+    'babel', // babelify app/js -> babel/app/js
+    'uglify:dist', // uglify babel/app/js -> build/app/js
+    'imagemin:dist', // minify app/images -> build/app/images
+    'cssmin:dist', // minify app/css -> build/app/css
+    'htmlmin:dist', // minify app/html -> build/app/html
+    'copy:common' // copy other stuff
   ]);
 
   grunt.registerTask('dist:debug', [
-    'clean',
-    'babel',
-    'copy:babel_js',
-    'copy:image',
-    'copy:html',
-    'copy:css',
-    'copy:common'
+    'clean', // clean babel/ and build/
+    'babel', // babelify app/js -> babel/app/js
+    'copy:babel_js', // copy babel/app/js -> build/app/js
+    'copy:image', // copy app/images -> build/app/images
+    'copy:css', // copy app/css -> build/app/css
+    'copy:html', // copy app/html -> build/app/html
+    'copy:common' // copy other stuff
   ]);
 
   grunt.registerTask('crx', ['dist', 'copy:crx', 'copy:crx_manifest']);

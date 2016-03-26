@@ -9,7 +9,6 @@
   "globals": {
     "chrome": true,
     "Calculator": true,
-    "Q": true,
     "Localizer": true,
     "helpInit": true,
     "licenseInit": true,
@@ -23,7 +22,6 @@
   "env": {
     "node": false,
     "browser": true,
-    "es6": true,
-    "jquery": true
+    "es6": true
   }
 }
