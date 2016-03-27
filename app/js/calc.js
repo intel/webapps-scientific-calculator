@@ -51,8 +51,54 @@ var Calculator = {};
     //
     // Functions
     //
+    var _classChanges = [];
+    var _styleChanges = [];
 
     var _setClass = function(selectorOrElement, classToSet) {
+      var newChange = {
+        selectorOrElement: selectorOrElement,
+        classToSet: classToSet
+      };
+
+      _classChanges.push(newChange);
+    };
+
+    var _setStyle = function(selector, property, value) {
+      var newChange = {
+        selector: selector,
+        property: property,
+        value: value
+      };
+
+      _styleChanges.push(newChange);
+    };
+
+    var _setClassesAndStyles = function() {
+      let numClassChanges = _classChanges.length;
+      for (let i = 0; i < numClassChanges; i++ ) {
+        let classChange = _classChanges.pop();
+        _reallySetClass(
+          classChange.selectorOrElement,
+          classChange.classToSet
+        );
+      }
+
+      let numStyleChanges = _styleChanges.length;
+      for (let i = 0; i < numStyleChanges; i++ ) {
+        let styleChange = _styleChanges.pop();
+        _reallySetStyle(
+          styleChange.selector,
+          styleChange.property,
+          styleChange.value
+        );
+      }
+
+      window.requestAnimationFrame(_setClassesAndStyles);
+    };
+
+    window.requestAnimationFrame(_setClassesAndStyles);
+
+    var _reallySetClass = function(selectorOrElement, classToSet) {
       let elements = [];
       if (typeof selectorOrElement === 'string') {
         elements = document.querySelectorAll(selectorOrElement);
@@ -68,7 +114,7 @@ var Calculator = {};
       }
     };
 
-    var _setStyle = function(selector, property, value) {
+    var _reallySetStyle = function(selector, property, value) {
       let elements = document.querySelectorAll(selector);
 
       for (let i = 0; i < elements.length; i++) {
@@ -554,7 +600,7 @@ var Calculator = {};
           let mplusi = `M${i}`;
           localStorage.setItem(mplusi, `${value}##`);
           Calculator.setMemoryEntry(mplusi, value, '');
-          document.querySelector(`#button${mplusi}`).style.color = '#d9e2d0';
+          _setStyle(document.querySelector(`#button${mplusi}`), 'color', '#d9e2d0');
         }
       }
     };
@@ -581,7 +627,7 @@ var Calculator = {};
       document.querySelector(`${hashkey}text`).innerHTML = value;
       document.querySelector(`${hashkey}description`).textContent =
         description;
-      document.querySelector(buttonkey).style.color = '#d9e2d0';
+      _setStyle(document.querySelector(buttonkey), 'color', '#d9e2d0');
     };
 
     this.setMemoryDescription = function(key, description) {
@@ -602,7 +648,7 @@ var Calculator = {};
       }
 
       Calculator.currentKey = key;
-      document.querySelector('#memorynoteeditor').style.display = 'block';
+      _setStyle(document.querySelector('#memorynoteeditor'), 'display', 'block');
       let hashkey = `#${key}`;
       let memoryitemstr = document.querySelector(`${hashkey}text`).textContent;
       let description =
@@ -638,7 +684,7 @@ var Calculator = {};
       description.textContent = value;
       Calculator.setMemoryDescription(key, value);
       input.style.display = '';
-      description.style.display = 'inline';
+      _setStyle(description, 'display', 'inline');
     };
 
     this.onButtonMemoryClick = function(key) {
@@ -967,7 +1013,7 @@ var Calculator = {};
       document.querySelector('#mnecancel').addEventListener(
         'click',
         function() {
-          document.querySelector('#memorynoteeditor').style.display = 'none';
+          _setStyle(document.querySelector('#memorynoteeditor'), 'display', 'none');
         }
       );
 

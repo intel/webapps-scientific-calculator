@@ -14,9 +14,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="stylesheet" media="all and (orientation:portrait)" href="css/calc_portrait.css">
         <link rel="stylesheet" media="all and (orientation:landscape)" href="css/calc.css">
-        <script src="lib/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import" href="lib/platinum-sw/platinum-sw-register.html">
-        <link rel="import" href="lib/platinum-sw/platinum-sw-cache.html">
     </head>
     <body>
         <platinum-sw-register auto-register>
@@ -148,6 +145,9 @@
         <!-- external library js files -->
         <script src="lib/es6-promise/es6-promise.min.js"></script>
         <script src="lib/fetch/fetch.js"></script>
+        <script src="lib/webcomponentsjs/webcomponents-lite.min.js" async></script>
+        <link rel="import" href="lib/platinum-sw/platinum-sw-register.html" async>
+        <link rel="import" href="lib/platinum-sw/platinum-sw-cache.html" async>
 
         <!-- internal js file -->
         <script src="js/calc.js"></script>
