@@ -330,6 +330,8 @@ module.exports = function (grunt) {
       server: {
         options: {
           protocol: 'http',
+          //protocol: 'https',
+          //hostname: 'maxw-xps-8300.isw.intel.com',
           base: 'build/app/',
           keepalive: true
         }
