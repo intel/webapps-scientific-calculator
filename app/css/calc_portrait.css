@@ -20,7 +20,7 @@
 body {
     margin: 0px;
     overflow: visible;
-    -webkit-user-select: none;
+    user-select: none;
     background-color: white;
     box-shadow: 5px 5px 20px black;
     top: 50%;
@@ -28,11 +28,11 @@ body {
     position: absolute;
     width: 720px;
     height: 1280px;
-    -webkit-box-align: center;
-    -webkit-box-pack: center;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-transform: translate(-50%, -50%) scale(0,0);
+    box-align: center;
+    box-pack: center;
+    box-orient: vertical;
+    display: flex;
+    transform: translate(-50%, -50%) scale(0,0);
 }
 
 sup, sub {
@@ -970,7 +970,7 @@ sub {
     text-align: center;
     line-height: 40px;
     cursor: pointer;
-    -webkit-border-radius: 40px;
+    border-radius: 40px;
     border: solid 3px #dddddd;
     opacity: 0.3;
     color: #dddddd;
@@ -988,7 +988,7 @@ sub {
     text-align: center;
     line-height: 40px;
     cursor: pointer;
-    -webkit-border-radius: 40px;
+    border-radius: 40px;
     border: solid 3px #dddddd;
     color: #dddddd;
     opacity: 0.3;

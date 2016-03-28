@@ -441,7 +441,7 @@
     display: none;
 }
 
-@-webkit-keyframes historyAnimationOpen {
+@keyframes historyAnimationOpen {
 0% {
     height: 0px;
     }
@@ -450,7 +450,7 @@
     }
 }
 
-@-webkit-keyframes historyAnimationClose {
+@keyframes historyAnimationClose {
     0% {
         height: 390px;
     }
@@ -697,15 +697,15 @@
     left: 0px;
     width: 720px;
     height: 1280px;
-    background: -webkit-gradient(linear, left top, right top, from(#3f4140), to(#1d2021));
+    background: gradient(linear, left top, right top, from(#3f4140), to(#1d2021));
     z-index: 99;
 }
 
 #licensetext {
     width: 98.5%;
     height: 88%;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #c4ccbc));
-    -webkit-border-radius: 12px;
+    background-image: gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #c4ccbc));
+    border-radius: 12px;
     border-radius: 12px;
     box-shadow: inset 1px 1px 2px 1px black;
     margin-bottom: 2px;
@@ -729,9 +729,9 @@
     text-decoration: none;
     font: 60px/100% Arial, Helvetica, sans-serif;
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
-    -webkit-border-radius: 12px;
     border-radius: 12px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
+    border-radius: 12px;
+    background: gradient(linear, left top, left bottom, from(#666), to(#000));
     height: 114px;
     width: 114px;
     line-height: 110px;
@@ -740,12 +740,12 @@
 }
 
 .licensebtn:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#000));
+    background: gradient(linear, left top, left bottom, from(#444), to(#000));
 }
 
 .licensebtn:active {
     color: #666;
-    background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#444));
+    background: gradient(linear, left top, left bottom, from(#000), to(#444));
 }
 
 #licensebtnq {
@@ -769,7 +769,7 @@
 
 .helpdialog.shown {
     visibility: visible;
-    -webkit-transition: background-color 0.5s;
+    transition: background-color 0.5s;
     background-color: rgba(0,0,0,.33);
     z-index: 99;
 }
@@ -787,7 +787,7 @@
 }
 
 .helpdialog.shown .inner {
-    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
     opacity: 1;
 }
 
@@ -849,7 +849,7 @@
     text-align: center;
     border: solid 10px #131516;
     background-color: #131516;
-    -webkit-border-radius: 60px;
+    border-radius: 60px;
     line-height: 45px;
     cursor: pointer;
     color: #dddddd;

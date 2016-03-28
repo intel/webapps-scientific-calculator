@@ -7,7 +7,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -58,6 +58,33 @@ module.exports = function (grunt) {
 		  }
 	  },
 
+    postcss: {
+      dist: {
+        options: {
+          map: true, // inline sourcemaps
+          processors: [
+            require('postcss-cssnext')({warnForDuplicates: false}), // cssnano also includes autoprefixer
+            require('cssnano')() // minify the result
+          ]
+        },
+        files: [
+          { expand: true, cwd: '.', src: 'app/css/*.css', dest: 'build/' }
+        ]
+      },
+      debug: {
+        options: {
+          map: true, // inline sourcemaps
+          processors: [
+            require('postcss-cssnext')()
+          ]
+        },
+        files: [
+          { expand: true, cwd: '.', src: 'app/css/*.css', dest: 'build/' }
+        ]
+      }
+    },
+
+
     eslint: {
       /* see .eslintrc */
       target: ['app/js/*.js']
@@ -84,15 +111,6 @@ module.exports = function (grunt) {
       dist: {
         files: [
           { expand: true, cwd: 'babel', src: 'app/js/*.js', dest: 'build/' }
-        ]
-      }
-    },
-
-    // minify CSS
-    cssmin: {
-      dist: {
-        files: [
-          { expand: true, cwd: '.', src: ['app/css/**/*.css'], dest: 'build/' }
         ]
       }
     },
@@ -384,7 +402,7 @@ module.exports = function (grunt) {
     'babel', // babelify app/js -> babel/app/js
     'uglify:dist', // uglify babel/app/js -> build/app/js
     'imagemin:dist', // minify app/images -> build/app/images
-    'cssmin:dist', // minify app/css -> build/app/css
+    'postcss:dist', // preprocess css build/app/css -> build/app/css
     'htmlmin:dist', // minify app/html -> build/app/html
     'copy:common' // copy other stuff
   ]);
@@ -394,7 +412,7 @@ module.exports = function (grunt) {
     'babel', // babelify app/js -> babel/app/js
     'copy:babel_js', // copy babel/app/js -> build/app/js
     'copy:image', // copy app/images -> build/app/images
-    'copy:css', // copy app/css -> build/app/css
+    'postcss:debug', // preprocess css build/app/css -> build/app/css
     'copy:html', // copy app/html -> build/app/html
     'copy:common' // copy other stuff
   ]);
