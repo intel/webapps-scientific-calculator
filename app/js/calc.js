@@ -1126,7 +1126,29 @@ var Calculator = {};
 
       let lazyScripts = [
         {
-          script: 'lib/pegjs/peg-0.9.0.min.js',
+          type: 'script',
+          file: 'lib/webcomponentsjs/webcomponents-lite.min.js',
+          success: function(resolve) {
+            resolve();
+          }
+        },
+        {
+          type: 'import',
+          file: 'lib/platinum-sw/platinum-sw-cache.html',
+          success: function(resolve) {
+            resolve();
+          }
+        },
+        {
+          type: 'import',
+          file: 'lib/platinum-sw/platinum-sw-register.html',
+          success: function(resolve) {
+            resolve();
+          }
+        },
+        {
+          type: 'script',
+          file: 'lib/pegjs/peg-0.9.0.min.js',
           success: function(resolve) {
             fetch('data/peg-code.txt').then(function(response) {
               return response.text();
@@ -1141,7 +1163,8 @@ var Calculator = {};
           }
         },
         {
-          script: 'js/license.js',
+          type: 'script',
+          file: 'js/license.js',
           success: function(resolve) {
             licenseInit('license', 'background');
             document.querySelector(
@@ -1158,7 +1181,8 @@ var Calculator = {};
           }
         },
         {
-          script: 'js/help.js',
+          type: 'script',
+          file: 'js/help.js',
           success: function(resolve) {
             helpInit('home_help', 'help_');
             document.querySelector(
@@ -1175,7 +1199,8 @@ var Calculator = {};
           }
         },
         {
-          script: 'js/localizer.js',
+          type: 'script',
+          file: 'js/localizer.js',
           success: function(resolve) {
             Calculator.localizer = new Localizer();
             Calculator.localizer.localizeHtmlElements();
@@ -1183,7 +1208,8 @@ var Calculator = {};
           }
         },
         {
-          script: 'lib/iscroll/dist/iscroll-min.js',
+          type: 'script',
+          file: 'lib/iscroll/dist/iscroll-min.js',
           success: function(resolve) {
             Calculator.createScrollbars();
             resolve();
@@ -1203,17 +1229,34 @@ var Calculator = {};
         };
       };
 
-      // inject js files
-      for (let index = 0; index < lazyScripts.length; index++) {
-        promises.push(new Promise(function(resolve) {
-          let jqTag = document.createElement('script');
-          jqTag.onload = makeSuccessScript(
-            lazyScripts[index].success,
+      let makePromise = function(i) {
+        return new Promise(function(resolve) {
+          let element;
+          if (lazyScripts[i].type === 'script') {
+            element = document.createElement('script');
+            element.onload = makeSuccessScript(
+              lazyScripts[i].success,
+              resolve
+            );
+            element.setAttribute('src', lazyScripts[i].file);
+          } else
+          if (lazyScripts[i].type === 'import') {
+            element = document.createElement('link');
+            element.setAttribute('rel', 'import');
+            element.setAttribute('href', lazyScripts[i].file);
+            element.onload = makeSuccessScript(
+              lazyScripts[i].success,
             resolve
           );
-          jqTag.setAttribute('src', lazyScripts[index].script);
-          document.body.appendChild(jqTag);
-        }));
+          }
+
+          document.head.appendChild(element);
+        });
+      };
+
+      // inject js and html import elements
+      for (let i = 0; i < lazyScripts.length; i++) {
+        promises.push(makePromise(i));
       }
 
       // once all js files have been loaded and initialised/etc, do the rest
