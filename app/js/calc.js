@@ -1141,20 +1141,24 @@ var Calculator = {};
           type: 'script',
           file: 'lib/webcomponentsjs/webcomponents-lite.min.js',
           success: function(resolve) {
-            resolve();
-          }
-        },
-        {
-          type: 'import',
-          file: 'lib/platinum-sw/platinum-sw-cache.html',
-          success: function(resolve) {
-            resolve();
-          }
-        },
-        {
-          type: 'import',
-          file: 'lib/platinum-sw/platinum-sw-register.html',
-          success: function(resolve) {
+            // once webcomponents is loaded, load the polymer elements
+            let files = [
+              'lib/platinum-sw/platinum-sw-register.html',
+              'lib/platinum-sw/platinum-sw-cache.html',
+            ];
+            let elements = [];
+
+            files.forEach(function(file) {
+              let element = document.createElement('link');
+              element.setAttribute('rel', 'import');
+              element.setAttribute('href', file);
+              elements.push(element);
+            });
+
+            elements.forEach(function(element) {
+              document.head.appendChild(element);
+            });
+
             resolve();
           }
         },
@@ -1251,15 +1255,7 @@ var Calculator = {};
               resolve
             );
             element.setAttribute('src', lazyScripts[i].file);
-          } else
-          if (lazyScripts[i].type === 'import') {
-            element = document.createElement('link');
-            element.setAttribute('rel', 'import');
-            element.setAttribute('href', lazyScripts[i].file);
-            element.onload = makeSuccessScript(
-              lazyScripts[i].success,
-              resolve
-            );
+
           }
 
           document.head.appendChild(element);
