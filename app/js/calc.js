@@ -54,7 +54,7 @@ var Calculator = {};
     var _classChanges = [];
     var _styleChanges = [];
 
-    var _setClass = function(selectorOrElement, classToSet) {
+    var _queueClassChange = function(selectorOrElement, classToSet) {
       var newChange = {
         selectorOrElement: selectorOrElement,
         classToSet: classToSet
@@ -63,7 +63,7 @@ var Calculator = {};
       _classChanges.push(newChange);
     };
 
-    var _setStyle = function(selector, property, value) {
+    var _queueStyleChange = function(selector, property, value) {
       var newChange = {
         selector: selector,
         property: property,
@@ -73,32 +73,7 @@ var Calculator = {};
       _styleChanges.push(newChange);
     };
 
-    var _setClassesAndStyles = function() {
-      let numClassChanges = _classChanges.length;
-      for (let i = 0; i < numClassChanges; i++ ) {
-        let classChange = _classChanges.pop();
-        _reallySetClass(
-          classChange.selectorOrElement,
-          classChange.classToSet
-        );
-      }
-
-      let numStyleChanges = _styleChanges.length;
-      for (let i = 0; i < numStyleChanges; i++ ) {
-        let styleChange = _styleChanges.pop();
-        _reallySetStyle(
-          styleChange.selector,
-          styleChange.property,
-          styleChange.value
-        );
-      }
-
-      window.requestAnimationFrame(_setClassesAndStyles);
-    };
-
-    window.requestAnimationFrame(_setClassesAndStyles);
-
-    var _reallySetClass = function(selectorOrElement, classToSet) {
+    var _setClass = function(selectorOrElement, classToSet) {
       let elements = [];
       if (typeof selectorOrElement === 'string') {
         elements = document.querySelectorAll(selectorOrElement);
@@ -114,7 +89,7 @@ var Calculator = {};
       }
     };
 
-    var _reallySetStyle = function(selector, property, value) {
+    var _setStyle = function(selector, property, value) {
       let elements = document.querySelectorAll(selector);
 
       for (let i = 0; i < elements.length; i++) {
@@ -123,6 +98,31 @@ var Calculator = {};
         element.style[property] = value;
       }
     };
+
+    var _queueClassChangeesAndStyles = function() {
+      let numClassChanges = _classChanges.length;
+      for (let i = 0; i < numClassChanges; i++) {
+        let classChange = _classChanges.pop();
+        _setClass(
+          classChange.selectorOrElement,
+          classChange.classToSet
+        );
+      }
+
+      let numStyleChanges = _styleChanges.length;
+      for (let i = 0; i < numStyleChanges; i++) {
+        let styleChange = _styleChanges.pop();
+        _setStyle(
+          styleChange.selector,
+          styleChange.property,
+          styleChange.value
+        );
+      }
+
+      window.requestAnimationFrame(_queueClassChangeesAndStyles);
+    };
+
+    window.requestAnimationFrame(_queueClassChangeesAndStyles);
 
     // Functions for transitioning between states.
     //
@@ -133,7 +133,7 @@ var Calculator = {};
         '#buttonrad': 'buttontogglebackgroundA'
       };
 
-      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
 
       Calculator.angleDivisor = 180 / Math.PI;
     };
@@ -145,7 +145,7 @@ var Calculator = {};
         '#buttonrad': 'buttontogglebackgroundB'
       };
 
-      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
 
       Calculator.angleDivisor = 1;
     };
@@ -157,10 +157,10 @@ var Calculator = {};
         '#buttonhyp': 'buttontogglebackgroundA'
       };
 
-      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
 
-      _setStyle('#trigonometric', 'display', 'inherit');
-      _setStyle('#hyperbolic', 'display', 'none');
+      _queueStyleChange('#trigonometric', 'display', 'inherit');
+      _queueStyleChange('#hyperbolic', 'display', 'none');
     };
 
     this.transitionToHyperbolicFunctions = function() {
@@ -170,10 +170,10 @@ var Calculator = {};
         '#buttonhyp': 'buttontogglebackgroundB'
       };
 
-      Object.keys(classes).forEach(id => _setClass(id, classes[id]));
+      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
 
-      _setStyle('#trigonometric', 'display', 'none');
-      _setStyle('#hyperbolic', 'display', 'inherit');
+      _queueStyleChange('#trigonometric', 'display', 'none');
+      _queueStyleChange('#hyperbolic', 'display', 'inherit');
     };
 
     // Helper function for clearing main entry and current formula as needed.
@@ -529,9 +529,9 @@ var Calculator = {};
         document.querySelector('#buttonclear').innerHTML = 'C';
       }
 
-      _setClass(mainentryelement, 'mainentryshort');
+      _queueClassChange(mainentryelement, 'mainentryshort');
       if (mainentryelement.offsetWidth < mainentryelement.scrollWidth) {
-        _setClass(mainentryelement, 'mainentrylong');
+        _queueClassChange(mainentryelement, 'mainentrylong');
       }
     };
 
@@ -550,11 +550,11 @@ var Calculator = {};
       let currentformulaelement = document.querySelector('#currentformula');
 
       currentformulaelement.innerHTML = string;
-      _setClass(currentformulaelement, 'currentformulashort');
+      _queueClassChange(currentformulaelement, 'currentformulashort');
       let thisOffsetWidth = currentformulaelement.offsetWidth;
       let thisScrollWidth = currentformulaelement.scrollWidth;
       if (thisOffsetWidth < thisScrollWidth) {
-        _setClass(currentformulaelement, 'currentformulalong');
+        _queueClassChange(currentformulaelement, 'currentformulalong');
       }
       Calculator.currentFormula = string;
     };
@@ -600,7 +600,11 @@ var Calculator = {};
           let mplusi = `M${i}`;
           localStorage.setItem(mplusi, `${value}##`);
           Calculator.setMemoryEntry(mplusi, value, '');
-          _setStyle(document.querySelector(`#button${mplusi}`), 'color', '#d9e2d0');
+          _queueStyleChange(
+            document.querySelector(`#button${mplusi}`),
+            'color',
+            '#d9e2d0'
+          );
         }
       }
     };
@@ -622,12 +626,12 @@ var Calculator = {};
       let hashkey = `#${key}`;
       let children = document.querySelector(buttonkey).children;
       children[0].setAttribute('src', 'images/ico_arrow_white.png');
-      _setClass(`${buttonkey}edit`, 'buttonmemoryeditenabled');
-      _setClass(`${buttonkey}close`, 'buttonmemorycloseenabled');
+      _queueClassChange(`${buttonkey}edit`, 'buttonmemoryeditenabled');
+      _queueClassChange(`${buttonkey}close`, 'buttonmemorycloseenabled');
       document.querySelector(`${hashkey}text`).innerHTML = value;
       document.querySelector(`${hashkey}description`).textContent =
         description;
-      _setStyle(document.querySelector(buttonkey), 'color', '#d9e2d0');
+      _queueStyleChange(document.querySelector(buttonkey), 'color', '#d9e2d0');
     };
 
     this.setMemoryDescription = function(key, description) {
@@ -648,7 +652,11 @@ var Calculator = {};
       }
 
       Calculator.currentKey = key;
-      _setStyle(document.querySelector('#memorynoteeditor'), 'display', 'block');
+      _queueStyleChange(
+        document.querySelector('#memorynoteeditor'),
+        'display',
+        'block'
+      );
       let hashkey = `#${key}`;
       let memoryitemstr = document.querySelector(`${hashkey}text`).textContent;
       let description =
@@ -684,7 +692,7 @@ var Calculator = {};
       description.textContent = value;
       Calculator.setMemoryDescription(key, value);
       input.style.display = '';
-      _setStyle(description, 'display', 'inline');
+      _queueStyleChange(description, 'display', 'inline');
     };
 
     this.onButtonMemoryClick = function(key) {
@@ -704,13 +712,13 @@ var Calculator = {};
       let buttonkey = `#button${key}`;
       let children = document.querySelector(buttonkey).children;
       children[0].setAttribute('src', 'images/ico_arrow_black.png');
-      _setClass(`${buttonkey}edit`, 'buttonmemoryedit');
-      _setClass(`${buttonkey}close`, 'buttonmemoryclose');
-      _setClass(`${buttonkey}close`, 'buttonmemoryclose');
+      _queueClassChange(`${buttonkey}edit`, 'buttonmemoryedit');
+      _queueClassChange(`${buttonkey}close`, 'buttonmemoryclose');
+      _queueClassChange(`${buttonkey}close`, 'buttonmemoryclose');
       localStorage.removeItem(key);
       document.querySelector(`${hashkey}descriptioninput`).value = '';
       document.querySelector(`${hashkey}text`).textContent = '';
-      _setStyle(buttonkey, 'color', '#727272');
+      _queueStyleChange(buttonkey, 'color', '#727272');
       document.querySelector(`${hashkey}description`).textContent = '';
     };
 
@@ -727,18 +735,18 @@ var Calculator = {};
     };
 
     this.onButtonMemoryListClick = function() {
-      _setStyle('#memorypage', 'display', 'block');
+      _queueStyleChange('#memorypage', 'display', 'block');
       Calculator.currentPage = 'memorypage';
       document.querySelector('#mpmainentry').innerHTML =
         Calculator.getMainEntry();
     };
 
     this.onButtonMemoryClearAll = function() {
-      _setStyle('#clearconfirmationdialog', 'visibility', 'visible');
+      _queueStyleChange('#clearconfirmationdialog', 'visibility', 'visible');
     };
 
     this.clearAllMemorySlots = function() {
-      _setStyle('#clearconfirmationdialog', 'visibility', 'hidden');
+      _queueStyleChange('#clearconfirmationdialog', 'visibility', 'hidden');
       for (let i = 1; i <= 8; i++) {
         Calculator.onButtonMemoryCloseClick(`M${i}`);
       }
@@ -746,12 +754,12 @@ var Calculator = {};
     };
 
     this.cancelClearAllDialog = function() {
-      _setStyle('#clearconfirmationdialog', 'visibility', 'hidden');
+      _queueStyleChange('#clearconfirmationdialog', 'visibility', 'hidden');
     };
 
     this.onButtonMemoryClose = function() {
       Calculator.setFreeMemorySlot();
-      _setStyle('#memorypage', 'display', '');
+      _queueStyleChange('#memorypage', 'display', '');
       Calculator.currentPage = 'calculationpane';
     };
 
@@ -848,14 +856,14 @@ var Calculator = {};
     };
 
     this.openHistory = function() {
-      _setStyle('#LCD_Upper', 'display', 'block');
-      _setStyle('#licensebtnl', 'display', '');
+      _queueStyleChange('#LCD_Upper', 'display', 'block');
+      _queueStyleChange('#licensebtnl', 'display', '');
     };
 
     this.closeHistory = function() {
-      _setStyle('#LCD_Upper', 'display', '');
-      _setStyle('#licensebtnl', 'display', 'block');
-      _setStyle(`#${Calculator.currentPage}`, 'display', 'block');
+      _queueStyleChange('#LCD_Upper', 'display', '');
+      _queueStyleChange('#licensebtnl', 'display', 'block');
+      _queueStyleChange(`#${Calculator.currentPage}`, 'display', 'block');
       Calculator.historyScrollbar.refresh();
       return false;
     };
@@ -1013,14 +1021,18 @@ var Calculator = {};
       document.querySelector('#mnecancel').addEventListener(
         'click',
         function() {
-          _setStyle(document.querySelector('#memorynoteeditor'), 'display', 'none');
+          _queueStyleChange(
+            document.querySelector('#memorynoteeditor'),
+            'display',
+            'none'
+          );
         }
       );
 
       document.querySelector('#mnesave').addEventListener(
         'click',
         function() {
-          _setStyle('#memorynoteeditor', 'display', '');
+          _queueStyleChange('#memorynoteeditor', 'display', '');
           let mnedescriptioninputval =
             document.querySelector('#mnedescriptioninput').value = '';
           document.querySelector(
@@ -1093,7 +1105,7 @@ var Calculator = {};
         let bodyWidth = body.clientWidth;
         let bodyHeight = body.clientHeight;
 
-        _setStyle('body', '-webkit-transform',
+        _queueStyleChange('body', '-webkit-transform',
           `translate(-50%, -50%) \
            scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
         );
@@ -1246,8 +1258,8 @@ var Calculator = {};
             element.setAttribute('href', lazyScripts[i].file);
             element.onload = makeSuccessScript(
               lazyScripts[i].success,
-            resolve
-          );
+              resolve
+            );
           }
 
           document.head.appendChild(element);
