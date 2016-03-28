@@ -1101,12 +1101,6 @@ var Calculator = {};
     };
   };
 
-  // grey-out all the buttons
-  let buttons = document.querySelectorAll('button');
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].disabled = true;
-  }
-
   window.addEventListener('pageshow', function() {
     let link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
