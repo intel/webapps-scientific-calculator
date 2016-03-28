@@ -1119,14 +1119,14 @@ var Calculator = {};
     link.setAttribute('media', 'all and (orientation:landscape)');
     link.setAttribute('href', 'css/lazy.css');
 
-    document.querySelector('head').appendChild(link);
+    document.head.appendChild(link);
 
     link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('media', 'all and (orientation:portrait)');
     link.setAttribute('href', 'css/lazy_portrait.css');
 
-    document.querySelector('head').appendChild(link);
+    document.head.appendChild(link);
 
     Calculator.registerOrientationChange();
 
@@ -1235,7 +1235,7 @@ var Calculator = {};
       let promises = [];
 
       // complete body
-      document.querySelector('body').innerHTML += body;
+      document.body.innerHTML += body;
 
       Calculator.registerMneClickHandlers();
 
