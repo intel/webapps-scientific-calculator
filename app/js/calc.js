@@ -229,8 +229,7 @@ var Calculator = {};
       Calculator.mainEntryStack.splice(0, Calculator.mainEntryStack.length);
 
       // append main entry and the operator to current formula
-      document.querySelector('#currentformula').innerHTML =
-        document.querySelector('#currentformula').innerHTML +
+      document.getElementById('currentformula').innerHTML +=
         Calculator.getMainEntry() +
         operator;
       Calculator.setMainEntry('');
@@ -296,7 +295,7 @@ var Calculator = {};
 
     this.onClearButtonClick = function() {
       Calculator.buttonClickAudio.play();
-      let clearButtonText = document.querySelector('#buttonclear').innerHTML;
+      let clearButtonText = document.getElementById('buttonclear').innerHTML;
 
       if (clearButtonText === 'C') {
         Calculator.setMainEntry('');
@@ -311,7 +310,7 @@ var Calculator = {};
       Calculator.currentFormulaStack.splice(0, len);
 
       // update the currentformula area
-      document.querySelector('#currentformula').innerHTML =
+      document.getElementById('currentformula').innerHTML =
         Calculator.currentFormula;
     };
 
@@ -355,7 +354,7 @@ var Calculator = {};
         for (let j = 0; j < Calculator.currentFormulaStack.length; j++) {
           text += Calculator.currentFormulaStack[j];
         }
-        document.querySelector('#currentformula').innerHTML =
+        document.getElementById('currentformula').innerHTML =
           Calculator.currentFormula + text;
       }
     };
@@ -420,7 +419,7 @@ var Calculator = {};
     };
 
     this.setClearButtonMode = function(mode) {
-      document.querySelector('#buttonclear').innerHTML = mode;
+      document.getElementById('buttonclear').innerHTML = mode;
     };
 
     // Function for adding a result history entry.
@@ -444,11 +443,11 @@ var Calculator = {};
     };
 
     this.setCalculationHistoryEntries = function(historyEntries) {
-      document.querySelector('#calculationhistory').innerHTML = historyEntries;
+      document.getElementById('calculationhistory').innerHTML = historyEntries;
     };
 
     this.appendEntryToCalculationHistory = function(historyEntry) {
-      let calculationHistory = document.querySelector('#calculationhistory');
+      let calculationHistory = document.getElementById('calculationhistory');
       calculationHistory.innerHTML =
         calculationHistory.innerHtml +
         historyEntry;
@@ -514,19 +513,19 @@ var Calculator = {};
     // Functions for manipulating entries.
     //
     this.getMainEntry = function() {
-      return document.querySelector('#mainentry').innerHTML;
+      return document.getElementById('mainentry').innerHTML;
     };
 
     this.setMainEntry = function(string) {
-      let mainentryelement = document.querySelector('#mainentry');
+      let mainentryelement = document.getElementById('mainentry');
 
       mainentryelement.innerHTML = string;
-      document.querySelector('#mpmainentry').innerHTML = string;
+      document.getElementById('mpmainentry').innerHTML = string;
 
       if (string === '') {
-        document.querySelector('#buttonclear').innerHTML = 'AC';
+        document.getElementById('buttonclear').innerHTML = 'AC';
       } else {
-        document.querySelector('#buttonclear').innerHTML = 'C';
+        document.getElementById('buttonclear').innerHTML = 'C';
       }
 
       _queueClassChange(mainentryelement, 'mainentryshort');
@@ -537,17 +536,17 @@ var Calculator = {};
 
     this.appendToMainEntry = function(string) {
       Calculator.setMainEntry(
-        document.querySelector('#mainentry').innerHTML +
+        document.getElementById('mainentry').innerHTML +
         string
       );
     };
 
     this.getCurrentFormula = function() {
-      return document.querySelector('#currentformula').innerHTML;
+      return document.getElementById('currentformula').innerHTML;
     };
 
     this.setCurrentFormula = function(string) {
-      let currentformulaelement = document.querySelector('#currentformula');
+      let currentformulaelement = document.getElementById('currentformula');
 
       currentformulaelement.innerHTML = string;
       _queueClassChange(currentformulaelement, 'currentformulashort');
@@ -561,7 +560,7 @@ var Calculator = {};
 
     this.appendToCurrentFormula = function(string) {
       let newstring =
-        document.querySelector('#currentformula').innerHTML +
+        document.getElementById('currentformula').innerHTML +
         string;
       Calculator.currentFormula = newstring;
       Calculator.setCurrentFormula(newstring);
@@ -600,11 +599,7 @@ var Calculator = {};
           let mplusi = `M${i}`;
           localStorage.setItem(mplusi, `${value}##`);
           Calculator.setMemoryEntry(mplusi, value, '');
-          _queueStyleChange(
-            document.querySelector(`#button${mplusi}`),
-            'color',
-            '#d9e2d0'
-          );
+          _queueStyleChange(`#button${mplusi}`, 'color', '#d9e2d0');
         }
       }
     };
@@ -631,7 +626,7 @@ var Calculator = {};
       document.querySelector(`${hashkey}text`).innerHTML = value;
       document.querySelector(`${hashkey}description`).textContent =
         description;
-      _queueStyleChange(document.querySelector(buttonkey), 'color', '#d9e2d0');
+      _queueStyleChange(buttonkey, 'color', '#d9e2d0');
     };
 
     this.setMemoryDescription = function(key, description) {
@@ -652,20 +647,16 @@ var Calculator = {};
       }
 
       Calculator.currentKey = key;
-      _queueStyleChange(
-        document.querySelector('#memorynoteeditor'),
-        'display',
-        'block'
-      );
+      _queueStyleChange('#memorynoteeditor', 'display', 'block');
       let hashkey = `#${key}`;
       let memoryitemstr = document.querySelector(`${hashkey}text`).textContent;
       let description =
         document.querySelector(`${hashkey}description`).textContent;
-      document.querySelector('#mnebutton').textContent = key;
-      document.querySelector('#mnetext').textContent = memoryitemstr;
+      document.getElementById('mnebutton').textContent = key;
+      document.getElementById('mnetext').textContent = memoryitemstr;
 
-      let input = document.querySelector('#mnedescriptioninput');
-      let text = document.querySelector('#mnedescription');
+      let input = document.getElementById('mnedescriptioninput');
+      let text = document.getElementById('mnedescription');
 
       if (
         input.style.display === '' ||
@@ -674,7 +665,7 @@ var Calculator = {};
       ) {
         input.style.display = 'inline';
         text.style.display = '';
-        document.querySelector('#mnedescriptioninput').focus();
+        document.getElementById('mnedescriptioninput').focus();
       } else {
         input.style.display = '';
         text.style.display = 'inline';
@@ -737,7 +728,7 @@ var Calculator = {};
     this.onButtonMemoryListClick = function() {
       _queueStyleChange('#memorypage', 'display', 'block');
       Calculator.currentPage = 'memorypage';
-      document.querySelector('#mpmainentry').innerHTML =
+      document.getElementById('mpmainentry').innerHTML =
         Calculator.getMainEntry();
     };
 
@@ -871,9 +862,9 @@ var Calculator = {};
     this.setFreeMemorySlot = function() {
       let i = Calculator.getNextEmptyMemorySlot();
       if (i <= 8) {
-        document.querySelector('#buttonmemorizetext').innerHTML = `M${i}`;
+        document.getElementById('buttonmemorizetext').innerHTML = `M${i}`;
       } else {
-        document.querySelector('#buttonmemorizetext').innerHTML = 'Mx';
+        document.getElementById('buttonmemorizetext').innerHTML = 'Mx';
       }
     };
 
@@ -1018,25 +1009,21 @@ var Calculator = {};
     };
 
     this.registerMneClickHandlers = function() {
-      document.querySelector('#mnecancel').addEventListener(
+      document.getElementById('mnecancel').addEventListener(
         'click',
         function() {
-          _queueStyleChange(
-            document.querySelector('#memorynoteeditor'),
-            'display',
-            'none'
-          );
+          _queueStyleChange('#memorynoteeditor', 'display', 'none');
         }
       );
 
-      document.querySelector('#mnesave').addEventListener(
+      document.getElementById('mnesave').addEventListener(
         'click',
         function() {
           _queueStyleChange('#memorynoteeditor', 'display', '');
           let mnedescriptioninputval =
-            document.querySelector('#mnedescriptioninput').value = '';
-          document.querySelector(
-            `#${Calculator.currentKey}description`
+            document.getElementById('mnedescriptioninput').value = '';
+          document.getElementById(
+            `${Calculator.currentKey}description`
           ).textContent = mnedescriptioninputval;
           Calculator.setMemoryDescription(
             Calculator.currentKey,
@@ -1045,14 +1032,10 @@ var Calculator = {};
         }
       );
 
-      document.querySelector(
-        '#mnedescriptiondelete'
-      ).addEventListener(
-        'click',
-        function() {
-          document.querySelector('#mnedescriptioninput').value = '';
-        }
-      );
+      document.getElementById('mnedescriptiondelete')
+        .addEventListener('click', function() {
+          document.getElementById('mnedescriptioninput').value = '';
+        });
     };
 
     /**
@@ -1144,7 +1127,7 @@ var Calculator = {};
             // once webcomponents is loaded, load the polymer elements
             let files = [
               'lib/platinum-sw/platinum-sw-register.html',
-              'lib/platinum-sw/platinum-sw-cache.html',
+              'lib/platinum-sw/platinum-sw-cache.html'
             ];
             let elements = [];
 
@@ -1183,16 +1166,14 @@ var Calculator = {};
           file: 'js/license.js',
           success: function(resolve) {
             licenseInit('license', 'background');
-            document.querySelector(
-              '#licensebtnl'
-            ).addEventListener('mousedown', function() {
-              Calculator.buttonClickAudio.play();
-            });
-            document.querySelector(
-              '#licensebtnq'
-            ).addEventListener('mousedown', function() {
-              Calculator.buttonClickAudio.play();
-            });
+            document.getElementById('licensebtnl')
+              .addEventListener('mousedown', function() {
+                Calculator.buttonClickAudio.play();
+              });
+            document.getElementById('licensebtnq')
+              .addEventListener('mousedown', function() {
+                Calculator.buttonClickAudio.play();
+              });
             resolve();
           }
         },
@@ -1201,16 +1182,14 @@ var Calculator = {};
           file: 'js/help.js',
           success: function(resolve) {
             helpInit('home_help', 'help_');
-            document.querySelector(
-              '#home_help'
-            ).addEventListener('mousedown', function() {
-              Calculator.buttonClickAudio.play();
-            });
-            document.querySelector(
-              '#help_close'
-            ).addEventListener('mousedown', function() {
-              Calculator.buttonClickAudio.play();
-            });
+            document.getElementById('home_help')
+              .addEventListener('mousedown', function() {
+                Calculator.buttonClickAudio.play();
+              });
+            document.getElementById('help_close')
+              .addEventListener('mousedown', function() {
+                Calculator.buttonClickAudio.play();
+              });
             resolve();
           }
         },
@@ -1255,7 +1234,6 @@ var Calculator = {};
               resolve
             );
             element.setAttribute('src', lazyScripts[i].file);
-
           }
 
           document.head.appendChild(element);
