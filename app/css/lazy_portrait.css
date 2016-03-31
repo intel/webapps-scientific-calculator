@@ -697,14 +697,14 @@
     left: 0px;
     width: 720px;
     height: 1280px;
-    background: gradient(linear, left top, right top, from(#3f4140), to(#1d2021));
+    background: linear-gradient(to right top, #3f4140, #1d2021);
     z-index: 99;
 }
 
 #licensetext {
     width: 98.5%;
     height: 88%;
-    background-image: gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #c4ccbc));
+    background-image: linear-gradient(to left top, #FFFFFF, #c4ccbc);
     border-radius: 12px;
     border-radius: 12px;
     box-shadow: inset 1px 1px 2px 1px black;
@@ -731,7 +731,7 @@
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
     border-radius: 12px;
     border-radius: 12px;
-    background: gradient(linear, left top, left bottom, from(#666), to(#000));
+    background: linear-gradient(to left bottom, #666, #000);
     height: 114px;
     width: 114px;
     line-height: 110px;
@@ -740,12 +740,12 @@
 }
 
 .licensebtn:hover {
-    background: gradient(linear, left top, left bottom, from(#444), to(#000));
+    background: linear-gradient(to left bottom, #444, #000);
 }
 
 .licensebtn:active {
     color: #666;
-    background: gradient(linear, left top, left bottom, from(#000), to(#444));
+    background: linear-gradient(to left bottom, #000, #444);
 }
 
 #licensebtnq {
