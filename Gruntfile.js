@@ -347,10 +347,12 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          protocol: 'http',
-          //protocol: 'https',
-          //hostname: 'maxw-xps-8300.isw.intel.com',
+          protocol: 'http2',
+          // you will need to change these to your own settings
+          hostname: 'maxw-xps-8300.isw.intel.com',
           base: 'build/app/',
+          key: grunt.file.read('/home/maxw/.intel-certs/maxw-xps-8300.isw.intel.com.key').toString(),
+          cert: grunt.file.read('/home/maxw/.intel-certs/Intel_SSL_Internal_Certificate_for_maxw-xps-8300_isw_intel_com.cer').toString(),
           keepalive: true
         }
       }
