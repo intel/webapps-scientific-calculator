@@ -39,6 +39,7 @@
     "node-native-zip": "*",
     "pixrem": "^3.0.0",
     "postcss-cssnext": "^2.5.1",
+    "stylelint": "^5.2.1",
     "xml2js": "*"
   }
 }

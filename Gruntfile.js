@@ -63,6 +63,7 @@ module.exports = function (grunt) {
         options: {
           map: true, // inline sourcemaps
           processors: [
+            require('stylelint')(),
             require('postcss-cssnext')({warnForDuplicates: false}), // cssnano also includes autoprefixer
             require('cssnano')() // minify the result
           ]
