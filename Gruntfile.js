@@ -63,9 +63,10 @@ module.exports = function (grunt) {
         options: {
           map: true, // inline sourcemaps
           processors: [
-            require('stylelint')(),
+            //require('stylelint')({"extends": "stylelint-config-standard"}),
             require('postcss-cssnext')({warnForDuplicates: false}), // cssnano also includes autoprefixer
-            require('cssnano')() // minify the result
+            require('cssnano')(), // minify the result
+            require('postcss-reporter')({clearMessages: true})
           ]
         },
         files: [
@@ -76,7 +77,9 @@ module.exports = function (grunt) {
         options: {
           map: true, // inline sourcemaps
           processors: [
-            require('postcss-cssnext')()
+            //require('stylelint')({"extends": "stylelint-config-standard"}),
+            require('postcss-cssnext')(),
+            require('postcss-reporter')({clearMessages: true})
           ]
         },
         files: [
@@ -350,10 +353,10 @@ module.exports = function (grunt) {
         options: {
           protocol: 'http2',
           // you will need to change these to your own settings
-          hostname: 'maxw-xps-8300.isw.intel.com',
+          //hostname: 'maxw-xps-8300.isw.intel.com',
           base: 'build/app/',
-          key: grunt.file.read('/home/maxw/.intel-certs/maxw-xps-8300.isw.intel.com.key').toString(),
-          cert: grunt.file.read('/home/maxw/.intel-certs/Intel_SSL_Internal_Certificate_for_maxw-xps-8300_isw_intel_com.cer').toString(),
+          //key: grunt.file.read('/home/maxw/.intel-certs/maxw-xps-8300.isw.intel.com.key').toString(),
+          //cert: grunt.file.read('/home/maxw/.intel-certs/Intel_SSL_Internal_Certificate_for_maxw-xps-8300_isw_intel_com.cer').toString(),
           keepalive: true
         }
       }
