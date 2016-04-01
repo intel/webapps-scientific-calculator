@@ -351,7 +351,7 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          protocol: 'http2',
+          protocol: 'http',
           // you will need to change these to your own settings
           //hostname: 'maxw-xps-8300.isw.intel.com',
           base: 'build/app/',
