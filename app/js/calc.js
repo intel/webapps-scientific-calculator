@@ -761,14 +761,15 @@ var Calculator = {};
 .buttonblackshort,\
 .buttonyellow,\
 .buttonblack,\
-.buttonblue\
+.buttonblue:not(#buttondot)\
 `
       );
       for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i];
         button.addEventListener(
           'mousedown',
-          Calculator.onFunctionButtonClick
+          Calculator.onFunctionButtonClick,
+          false
         );
       }
 
@@ -778,7 +779,8 @@ var Calculator = {};
 
         thisButton.addEventListener(
           'mousedown',
-          Calculator.onNumericalButtonClick
+          Calculator.onNumericalButtonClick,
+          false
         );
       }
 
@@ -800,7 +802,8 @@ var Calculator = {};
         let thisElement = document.querySelector(thisKey);
         thisElement.addEventListener(
           'mousedown',
-          handlerMap[thisKey]
+          handlerMap[thisKey],
+          false
         );
       }
 
