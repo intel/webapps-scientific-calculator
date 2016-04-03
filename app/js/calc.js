@@ -51,27 +51,7 @@ var Calculator = {};
     //
     // Functions
     //
-    var _classChanges = [];
-    var _styleChanges = [];
-
-    var _queueClassChange = function(selectorOrElement, classToSet) {
-      var newChange = {
-        selectorOrElement: selectorOrElement,
-        classToSet: classToSet
-      };
-
-      _classChanges.push(newChange);
-    };
-
-    var _queueStyleChange = function(selector, property, value) {
-      var newChange = {
-        selector: selector,
-        property: property,
-        value: value
-      };
-
-      _styleChanges.push(newChange);
-    };
+    var _domChanges = [];
 
     var _setClass = function(selectorOrElement, classToSet) {
       let elements = [];
@@ -99,30 +79,60 @@ var Calculator = {};
       }
     };
 
-    var _queueClassChangeesAndStyles = function() {
-      let numClassChanges = _classChanges.length;
-      for (let i = 0; i < numClassChanges; i++) {
-        let classChange = _classChanges.pop();
-        _setClass(
-          classChange.selectorOrElement,
-          classChange.classToSet
-        );
-      }
+    var _doDomChanges = function() {
+      let numDomChanges = _domChanges.length;
+      for (let i = 0; i < numDomChanges; i++) {
+        let thisChange = _domChanges.pop();
 
-      let numStyleChanges = _styleChanges.length;
-      for (let i = 0; i < numStyleChanges; i++) {
-        let styleChange = _styleChanges.pop();
-        _setStyle(
-          styleChange.selector,
-          styleChange.property,
-          styleChange.value
-        );
+        switch (thisChange.type) {
+          case 'class':
+            _setClass(
+              thisChange.selectorOrElement,
+              thisChange.classToSet
+            );
+            break;
+          case 'style':
+            _setStyle(
+              thisChange.selector,
+              thisChange.property,
+              thisChange.value
+            );
+            break;
+          default:
+            console.error('Unknown dom change type');
+            break;
+        }
       }
-
-      window.requestAnimationFrame(_queueClassChangeesAndStyles);
     };
 
-    window.requestAnimationFrame(_queueClassChangeesAndStyles);
+    var _queueClassChange = function(selectorOrElement, classToSet) {
+      var newChange = {
+        type: 'class',
+        selectorOrElement: selectorOrElement,
+        classToSet: classToSet
+      };
+
+      _domChanges.push(newChange);
+
+      if (_domChanges.length === 1) {
+        window.requestAnimationFrame(_doDomChanges);
+      }
+    };
+
+    var _queueStyleChange = function(selector, property, value) {
+      var newChange = {
+        type: 'style',
+        selector: selector,
+        property: property,
+        value: value
+      };
+
+      _domChanges.push(newChange);
+
+      if (_domChanges.length === 1) {
+        window.requestAnimationFrame(_doDomChanges);
+      }
+    };
 
     // Functions for transitioning between states.
     //
