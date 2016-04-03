@@ -50,13 +50,17 @@
                     <div id="keyboardleft">
                         <div id="leftmostpane">
                             <div id="statetransition">
-                                <div id="degradswitch" class="switchleftactive">
-                                     <div class="buttontogglebackgroundB" id="buttondeg">DEG</div>
-                                     <div class="buttontogglebackgroundA" id="buttonrad">RAD</div>
+                                <div class="statetransitionswitch">
+                                    <div id="degradswitch" class="switchleftactive">
+                                        <div class="buttontogglebackgroundB" id="buttondeg">DEG</div>
+                                        <div class="buttontogglebackgroundA" id="buttonrad">RAD</div>
+                                    </div>
                                 </div>
-                                 <div id="traghypswitch" class="switchleftactive">
-                                     <div class="buttontogglebackgroundB" id="buttontrig">TRIG</div>
-                                     <div class="buttontogglebackgroundA" id="buttonhyp">HYP</div>
+                                <div class="statetransitionswitch">
+                                    <div id="traghypswitch" class="switchleftactive">
+                                        <div class="buttontogglebackgroundB" id="buttontrig">TRIG</div>
+                                        <div class="buttontogglebackgroundA" id="buttonhyp">HYP</div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="trigonometric">
@@ -93,60 +97,74 @@
                                 <button disabled class="buttonyellow" id="buttonnthpower" data-operator="<sup>^</sup>">y<sup>x</sup></button>
                                 <button disabled class="buttonyellow" id="buttonnthroot" data-operator="<sup>n</sup>&#8730;"><sup>x</sup>&#8730;y</button>
                             </div>
+                            <div id="centerleftpanespacer">
+                                <button disabled class="buttonblue"></button>
+                            </div>
                         </div>
                     </div>
                     <div id="keyboardsplitter"></div>
                     <div id="keyboardright">
-                        <div id="centerrightpane">
-                            <button disabled class="buttonpurple" id="buttonmemorylist">
-                                <span class="buttonlefttext">M</span>
-                                <img class="buttonrighticon" src="images/ico_mem_list.png"/>
-                            </button>
-                            <button disabled class="buttonpurple" id="buttonmemorize">
-                                <img class="buttonlefticon" src="images/ico_arrow_black.png"/>
-                                <span class="buttonrighttext" id="buttonmemorizetext"></span>
-                            </button>
-                            <button disabled class="buttonblack" id="buttonleftparenthesis">(</button>
-                            <button disabled class="buttonblack" id="buttonrightparenthesis">)</button>
-                            <button disabled class="buttonblack" id="buttonfactorial" data-operator="!">x!</button>
-                            <button disabled class="buttonblack" id="buttoninverse" data-operator="<sup>-1</sup>">x<sup>-1</sup></button>
-                            <button disabled class="buttonblack" id="buttonpi">&pi;</button>
-                            <button disabled class="buttonblack" id="buttonpercentage">%</button>
-                        </div>
-                        <div id="rightpane">
-                            <button disabled class="buttonred" id="buttonclear">C</button>
-                            <button disabled class="buttonblue" id="buttondivide">&#247;</button>
-                            <button disabled class="buttonblue" id="buttonmultiply">&#215;</button>
-                            <button disabled class="buttonwhite" id="button7">7</button>
-                            <button disabled class="buttonwhite" id="button8">8</button>
-                            <button disabled class="buttonwhite" id="button9">9</button>
-                            <button disabled class="buttonwhite" id="button4">4</button>
-                            <button disabled class="buttonwhite" id="button5">5</button>
-                            <button disabled class="buttonwhite" id="button6">6</button>
-                            <button disabled class="buttonwhite" id="button1">1</button>
-                            <button disabled class="buttonwhite" id="button2">2</button>
-                            <button disabled class="buttonwhite" id="button3">3</button>
-                            <button disabled class="buttonwhite" id="button0">0</button>
-                            <button disabled class="buttonblue" id="buttondot">.</button>
-                            <button disabled class="buttonblue" id="buttonplusminus">+/&ndash;</button>
-                        </div>
-                        <div id="rightmostpane">
-                            <button disabled class="buttonred" id="buttondelete"><img class="buttondeleteicon" src="images/ico_back.png" alt="backspace" height="26" width="40"/></button>
-                            <button disabled class="buttonblue" id="buttonsubtract" data-operator="-">&ndash;</button>
-                            <button disabled class="buttonblue" id="buttonadd">+</button>
-                            <button disabled class="buttonblueequal" id="buttonequal">=</button>
-                        </div>
+                        <button disabled class="buttonpurple" id="buttonmemorylist">
+                            <span class="buttonlefttext">M</span>
+                            <img class="buttonrighticon" src="images/ico_mem_list.png"/>
+                        </button>
+                        <button disabled class="buttonpurple" id="buttonmemorize">
+                            <img class="buttonlefticon" src="images/ico_arrow_black.png"/>
+                            <span class="buttonrighttext" id="buttonmemorizetext">M1</span>
+                        </button>
+                        <button disabled class="buttonred" id="buttonclear">C</button>
+                        <button disabled class="buttonblue" id="buttondivide">&#247;</button>
+                        <button disabled class="buttonblue" id="buttonmultiply">&#215;</button>
+                        <button disabled class="buttonred" id="buttondelete"><img class="buttondeleteicon" src="images/ico_back.png" alt="backspace" height="26" width="40"/></button>
+                        <button disabled class="buttonblack" id="buttonleftparenthesis">(</button>
+                        <button disabled class="buttonblack" id="buttonrightparenthesis">)</button>
+                        <button disabled class="buttonwhite" id="button7">7</button>
+                        <button disabled class="buttonwhite" id="button8">8</button>
+                        <button disabled class="buttonwhite" id="button9">9</button>
+                        <button disabled class="buttonblue" id="buttonsubtract" data-operator="-">&ndash;</button>
+                        <button disabled class="buttonblack" id="buttonfactorial" data-operator="!">x!</button>
+                        <button disabled class="buttonblack" id="buttoninverse" data-operator="<sup>-1</sup>">x<sup>-1</sup></button>
+                        <button disabled class="buttonwhite" id="button4">4</button>
+                        <button disabled class="buttonwhite" id="button5">5</button>
+                        <button disabled class="buttonwhite" id="button6">6</button>
+                        <button disabled class="buttonblue" id="buttonadd">+</button>
+                        <button disabled class="buttonblack" id="buttonpi">&pi;</button>
+                        <button disabled class="buttonblack" id="buttonpercentage">%</button>
+                        <button disabled class="buttonwhite" id="button1">1</button>
+                        <button disabled class="buttonwhite" id="button2">2</button>
+                        <button disabled class="buttonwhite" id="button3">3</button>
+                        <button disabled class="buttonblue" style="visibility: hidden"></button>
+                        <button disabled class="buttonblueequal" id="buttonequal">=</button>
+                        <div id="licensebtnl"> i </div>
+                        <div id="home_help" class="helplaunch"> ? </div>
+                        <button disabled class="buttonwhite" id="button0">0</button>
+                        <button disabled class="buttonblue" id="buttondot">.</button>
+                        <button disabled class="buttonblue" id="buttonplusminus">+/&ndash;</button>
+                        <button disabled class="buttonblue" style="visibility: hidden"></button>
                     </div>
                 </div>
-                <div id="licensebtnl"> i </div>
-                <div id="home_help" class="helplaunch"> ? </div>
             </div>
         </div>
     </body>
 
-    <script src="lib/es6-promise/es6-promise.min.js"></script>
-    <script src="lib/fetch/fetch.js"></script>
-    <script src="js/calc.js"></script>
+    <script>
+      window.addEventListener('load', function() {
+        window.requestAnimationFrame(function() {
+          let scripts = [
+            'lib/es6-promise/es6-promise.min.js',
+            'lib/fetch/fetch.js',
+            'js/calc.js'
+          ];
+
+          scripts.forEach(function(script) {
+            let scriptElement = document.createElement('script');
+            scriptElement.setAttribute('src',script);
+
+            document.head.appendChild(scriptElement);
+          });
+        });
+      }, false);
+    </script>
 
 </html>
 

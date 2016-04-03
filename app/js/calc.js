@@ -12,6 +12,118 @@ var Calculator = {};
 (function() {
   'use strict';
 
+  var Raf = new function() {
+    //
+    // Functions
+    //
+    var _domChanges = [];
+
+    var _setClass = function(selectorOrElement, classToSet) {
+      let elements = [];
+      if (typeof selectorOrElement === 'string') {
+        elements = document.querySelectorAll(selectorOrElement);
+      } else {
+        elements.push(selectorOrElement);
+      }
+
+      for (let i = 0; i < elements.length; i++) {
+        let element = elements[i];
+
+        element.className = '';
+        element.classList.add(classToSet);
+      }
+    };
+
+    var _setStyle = function(selector, property, value) {
+      let elements = document.querySelectorAll(selector);
+
+      for (let i = 0; i < elements.length; i++) {
+        let element = elements[i];
+
+        element.style[property] = value;
+      }
+    };
+
+    var _appendChild = function(parentElement, child) {
+      parentElement.appendChild(child);
+    };
+
+    var _doDomChanges = function() {
+      let numDomChanges = _domChanges.length;
+      for (let i = 0; i < numDomChanges; i++) {
+        let thisChange = _domChanges.pop();
+
+        switch (thisChange.type) {
+          case 'class':
+            _setClass(
+              thisChange.selectorOrElement,
+              thisChange.classToSet
+            );
+            break;
+          case 'style':
+            _setStyle(
+              thisChange.selector,
+              thisChange.property,
+              thisChange.value
+            );
+            break;
+          case 'child':
+            _appendChild(
+              thisChange.parentElement,
+              thisChange.child
+            );
+            break;
+          default:
+            console.error('Unknown dom change type');
+            break;
+        }
+      }
+    };
+
+    this.queueClassChange = function(selectorOrElement, classToSet) {
+      var newChange = {
+        type: 'class',
+        selectorOrElement: selectorOrElement,
+        classToSet: classToSet
+      };
+
+      _domChanges.push(newChange);
+
+      if (_domChanges.length === 1) {
+        window.requestAnimationFrame(_doDomChanges);
+      }
+    };
+
+    this.queueStyleChange = function(selector, property, value) {
+      var newChange = {
+        type: 'style',
+        selector: selector,
+        property: property,
+        value: value
+      };
+
+      _domChanges.push(newChange);
+
+      if (_domChanges.length === 1) {
+        window.requestAnimationFrame(_doDomChanges);
+      }
+    };
+
+    this.queueAppendChild = function(parentElement, child) {
+      var newChange = {
+        type: 'child',
+        parentElement: parentElement,
+        child: child
+      };
+
+      _domChanges.push(newChange);
+
+      if (_domChanges.length === 1) {
+        window.requestAnimationFrame(_doDomChanges);
+      }
+    };
+  };
+
   Calculator = new function() {
     this.localizer = null;
     this.parser = '';
@@ -48,92 +160,6 @@ var Calculator = {};
      */
     this.trigPrecision = 10000000000;
 
-    //
-    // Functions
-    //
-    var _domChanges = [];
-
-    var _setClass = function(selectorOrElement, classToSet) {
-      let elements = [];
-      if (typeof selectorOrElement === 'string') {
-        elements = document.querySelectorAll(selectorOrElement);
-      } else {
-        elements.push(selectorOrElement);
-      }
-
-      for (let i = 0; i < elements.length; i++) {
-        let element = elements[i];
-
-        element.className = '';
-        element.classList.add(classToSet);
-      }
-    };
-
-    var _setStyle = function(selector, property, value) {
-      let elements = document.querySelectorAll(selector);
-
-      for (let i = 0; i < elements.length; i++) {
-        let element = elements[i];
-
-        element.style[property] = value;
-      }
-    };
-
-    var _doDomChanges = function() {
-      let numDomChanges = _domChanges.length;
-      for (let i = 0; i < numDomChanges; i++) {
-        let thisChange = _domChanges.pop();
-
-        switch (thisChange.type) {
-          case 'class':
-            _setClass(
-              thisChange.selectorOrElement,
-              thisChange.classToSet
-            );
-            break;
-          case 'style':
-            _setStyle(
-              thisChange.selector,
-              thisChange.property,
-              thisChange.value
-            );
-            break;
-          default:
-            console.error('Unknown dom change type');
-            break;
-        }
-      }
-    };
-
-    var _queueClassChange = function(selectorOrElement, classToSet) {
-      var newChange = {
-        type: 'class',
-        selectorOrElement: selectorOrElement,
-        classToSet: classToSet
-      };
-
-      _domChanges.push(newChange);
-
-      if (_domChanges.length === 1) {
-        window.requestAnimationFrame(_doDomChanges);
-      }
-    };
-
-    var _queueStyleChange = function(selector, property, value) {
-      var newChange = {
-        type: 'style',
-        selector: selector,
-        property: property,
-        value: value
-      };
-
-      _domChanges.push(newChange);
-
-      if (_domChanges.length === 1) {
-        window.requestAnimationFrame(_doDomChanges);
-      }
-    };
-
     // Functions for transitioning between states.
     //
     this.transitionToDegrees = function() {
@@ -143,7 +169,7 @@ var Calculator = {};
         '#buttonrad': 'buttontogglebackgroundA'
       };
 
-      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
+      Object.keys(classes).forEach(id => Raf.queueClassChange(id, classes[id]));
 
       Calculator.angleDivisor = 180 / Math.PI;
     };
@@ -155,7 +181,7 @@ var Calculator = {};
         '#buttonrad': 'buttontogglebackgroundB'
       };
 
-      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
+      Object.keys(classes).forEach(id => Raf.queueClassChange(id, classes[id]));
 
       Calculator.angleDivisor = 1;
     };
@@ -167,10 +193,10 @@ var Calculator = {};
         '#buttonhyp': 'buttontogglebackgroundA'
       };
 
-      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
+      Object.keys(classes).forEach(id => Raf.queueClassChange(id, classes[id]));
 
-      _queueStyleChange('#trigonometric', 'display', 'inherit');
-      _queueStyleChange('#hyperbolic', 'display', 'none');
+      Raf.queueStyleChange('#trigonometric', 'display', 'inherit');
+      Raf.queueStyleChange('#hyperbolic', 'display', 'none');
     };
 
     this.transitionToHyperbolicFunctions = function() {
@@ -180,10 +206,10 @@ var Calculator = {};
         '#buttonhyp': 'buttontogglebackgroundB'
       };
 
-      Object.keys(classes).forEach(id => _queueClassChange(id, classes[id]));
+      Object.keys(classes).forEach(id => Raf.queueClassChange(id, classes[id]));
 
-      _queueStyleChange('#trigonometric', 'display', 'none');
-      _queueStyleChange('#hyperbolic', 'display', 'inherit');
+      Raf.queueStyleChange('#trigonometric', 'display', 'none');
+      Raf.queueStyleChange('#hyperbolic', 'display', 'inherit');
     };
 
     // Helper function for clearing main entry and current formula as needed.
@@ -538,9 +564,9 @@ var Calculator = {};
         document.getElementById('buttonclear').innerHTML = 'C';
       }
 
-      _queueClassChange(mainentryelement, 'mainentryshort');
+      Raf.queueClassChange(mainentryelement, 'mainentryshort');
       if (mainentryelement.offsetWidth < mainentryelement.scrollWidth) {
-        _queueClassChange(mainentryelement, 'mainentrylong');
+        Raf.queueClassChange(mainentryelement, 'mainentrylong');
       }
     };
 
@@ -559,11 +585,11 @@ var Calculator = {};
       let currentformulaelement = document.getElementById('currentformula');
 
       currentformulaelement.innerHTML = string;
-      _queueClassChange(currentformulaelement, 'currentformulashort');
+      Raf.queueClassChange(currentformulaelement, 'currentformulashort');
       let thisOffsetWidth = currentformulaelement.offsetWidth;
       let thisScrollWidth = currentformulaelement.scrollWidth;
       if (thisOffsetWidth < thisScrollWidth) {
-        _queueClassChange(currentformulaelement, 'currentformulalong');
+        Raf.queueClassChange(currentformulaelement, 'currentformulalong');
       }
       Calculator.currentFormula = string;
     };
@@ -609,7 +635,7 @@ var Calculator = {};
           let mplusi = `M${i}`;
           localStorage.setItem(mplusi, `${value}##`);
           Calculator.setMemoryEntry(mplusi, value, '');
-          _queueStyleChange(`#button${mplusi}`, 'color', '#d9e2d0');
+          Raf.queueStyleChange(`#button${mplusi}`, 'color', '#d9e2d0');
         }
       }
     };
@@ -631,12 +657,12 @@ var Calculator = {};
       let hashkey = `#${key}`;
       let children = document.querySelector(buttonkey).children;
       children[0].setAttribute('src', 'images/ico_arrow_white.png');
-      _queueClassChange(`${buttonkey}edit`, 'buttonmemoryeditenabled');
-      _queueClassChange(`${buttonkey}close`, 'buttonmemorycloseenabled');
+      Raf.queueClassChange(`${buttonkey}edit`, 'buttonmemoryeditenabled');
+      Raf.queueClassChange(`${buttonkey}close`, 'buttonmemorycloseenabled');
       document.querySelector(`${hashkey}text`).innerHTML = value;
       document.querySelector(`${hashkey}description`).textContent =
         description;
-      _queueStyleChange(buttonkey, 'color', '#d9e2d0');
+      Raf.queueStyleChange(buttonkey, 'color', '#d9e2d0');
     };
 
     this.setMemoryDescription = function(key, description) {
@@ -657,7 +683,7 @@ var Calculator = {};
       }
 
       Calculator.currentKey = key;
-      _queueStyleChange('#memorynoteeditor', 'display', 'block');
+      Raf.queueStyleChange('#memorynoteeditor', 'display', 'block');
       let hashkey = `#${key}`;
       let memoryitemstr = document.querySelector(`${hashkey}text`).textContent;
       let description =
@@ -693,7 +719,7 @@ var Calculator = {};
       description.textContent = value;
       Calculator.setMemoryDescription(key, value);
       input.style.display = '';
-      _queueStyleChange(description, 'display', 'inline');
+      Raf.queueStyleChange(description, 'display', 'inline');
     };
 
     this.onButtonMemoryClick = function(key) {
@@ -713,13 +739,13 @@ var Calculator = {};
       let buttonkey = `#button${key}`;
       let children = document.querySelector(buttonkey).children;
       children[0].setAttribute('src', 'images/ico_arrow_black.png');
-      _queueClassChange(`${buttonkey}edit`, 'buttonmemoryedit');
-      _queueClassChange(`${buttonkey}close`, 'buttonmemoryclose');
-      _queueClassChange(`${buttonkey}close`, 'buttonmemoryclose');
+      Raf.queueClassChange(`${buttonkey}edit`, 'buttonmemoryedit');
+      Raf.queueClassChange(`${buttonkey}close`, 'buttonmemoryclose');
+      Raf.queueClassChange(`${buttonkey}close`, 'buttonmemoryclose');
       localStorage.removeItem(key);
       document.querySelector(`${hashkey}descriptioninput`).value = '';
       document.querySelector(`${hashkey}text`).textContent = '';
-      _queueStyleChange(buttonkey, 'color', '#727272');
+      Raf.queueStyleChange(buttonkey, 'color', '#727272');
       document.querySelector(`${hashkey}description`).textContent = '';
     };
 
@@ -736,18 +762,18 @@ var Calculator = {};
     };
 
     this.onButtonMemoryListClick = function() {
-      _queueStyleChange('#memorypage', 'display', 'block');
+      Raf.queueStyleChange('#memorypage', 'display', 'block');
       Calculator.currentPage = 'memorypage';
       document.getElementById('mpmainentry').innerHTML =
         Calculator.getMainEntry();
     };
 
     this.onButtonMemoryClearAll = function() {
-      _queueStyleChange('#clearconfirmationdialog', 'visibility', 'visible');
+      Raf.queueStyleChange('#clearconfirmationdialog', 'visibility', 'visible');
     };
 
     this.clearAllMemorySlots = function() {
-      _queueStyleChange('#clearconfirmationdialog', 'visibility', 'hidden');
+      Raf.queueStyleChange('#clearconfirmationdialog', 'visibility', 'hidden');
       for (let i = 1; i <= 8; i++) {
         Calculator.onButtonMemoryCloseClick(`M${i}`);
       }
@@ -755,12 +781,12 @@ var Calculator = {};
     };
 
     this.cancelClearAllDialog = function() {
-      _queueStyleChange('#clearconfirmationdialog', 'visibility', 'hidden');
+      Raf.queueStyleChange('#clearconfirmationdialog', 'visibility', 'hidden');
     };
 
     this.onButtonMemoryClose = function() {
       Calculator.setFreeMemorySlot();
-      _queueStyleChange('#memorypage', 'display', '');
+      Raf.queueStyleChange('#memorypage', 'display', '');
       Calculator.currentPage = 'calculationpane';
     };
 
@@ -860,14 +886,14 @@ var Calculator = {};
     };
 
     this.openHistory = function() {
-      _queueStyleChange('#LCD_Upper', 'display', 'block');
-      _queueStyleChange('#licensebtnl', 'display', '');
+      Raf.queueStyleChange('#LCD_Upper', 'display', 'block');
+      Raf.queueStyleChange('#licensebtnl', 'display', '');
     };
 
     this.closeHistory = function() {
-      _queueStyleChange('#LCD_Upper', 'display', '');
-      _queueStyleChange('#licensebtnl', 'display', 'block');
-      _queueStyleChange(`#${Calculator.currentPage}`, 'display', 'block');
+      Raf.queueStyleChange('#LCD_Upper', 'display', '');
+      Raf.queueStyleChange('#licensebtnl', 'display', 'block');
+      Raf.queueStyleChange(`#${Calculator.currentPage}`, 'display', 'block');
       Calculator.historyScrollbar.refresh();
       return false;
     };
@@ -1025,14 +1051,14 @@ var Calculator = {};
       document.getElementById('mnecancel').addEventListener(
         'click',
         function() {
-          _queueStyleChange('#memorynoteeditor', 'display', 'none');
+          Raf.queueStyleChange('#memorynoteeditor', 'display', 'none');
         }
       );
 
       document.getElementById('mnesave').addEventListener(
         'click',
         function() {
-          _queueStyleChange('#memorynoteeditor', 'display', '');
+          Raf.queueStyleChange('#memorynoteeditor', 'display', '');
           let mnedescriptioninputval =
             document.getElementById('mnedescriptioninput').value = '';
           document.getElementById(
@@ -1058,12 +1084,10 @@ var Calculator = {};
     this.registerOrientationChange = function() {
       // on page create
       document.addEventListener('pagecreate', function() {
-        Calculator.maximiseBody();
       });
 
       if ('onorientationchange' in window) {
         window.onorientationchange = function() {
-          Calculator.maximiseBody();
         };
       } else {
         window.onresize = function() {
@@ -1072,7 +1096,6 @@ var Calculator = {};
           } else {
             window.orientation = 90;
           }
-          Calculator.maximiseBody();
         };
         window.onresize();
       }
@@ -1092,37 +1115,24 @@ var Calculator = {};
     };
 
     this.maximiseBody = function() {
-      // add to event queue
-      setTimeout(function() {
-        // apply scaling transform
-        let docWidth = document.documentElement.clientWidth;
-        let docHeight = document.documentElement.clientHeight;
-        let body = document.querySelector('body');
-        let bodyWidth = body.clientWidth;
-        let bodyHeight = body.clientHeight;
-
-        _queueStyleChange('body', '-webkit-transform',
-          `translate(-50%, -50%) \
-           scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
-        );
-      }, 0);
     };
   };
 
-  window.addEventListener('pageshow', function() {
+  //window.addEventListener('pageshow', function() {
+  (function() {
     let link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('media', 'all and (orientation:landscape)');
     link.setAttribute('href', 'css/lazy.css');
 
-    document.head.appendChild(link);
+    Raf.queueAppendChild(document.head, link);
 
     link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('media', 'all and (orientation:portrait)');
     link.setAttribute('href', 'css/lazy_portrait.css');
 
-    document.head.appendChild(link);
+    Raf.queueAppendChild(document.head, link);
 
     Calculator.registerOrientationChange();
 
@@ -1152,7 +1162,7 @@ var Calculator = {};
             });
 
             elements.forEach(function(element) {
-              document.head.appendChild(element);
+              Raf.queueAppendChild(document.head, element);
             });
 
             resolve();
@@ -1249,7 +1259,7 @@ var Calculator = {};
             element.setAttribute('src', lazyScripts[i].file);
           }
 
-          document.head.appendChild(element);
+          Raf.queueAppendChild(document.head, element);
         });
       };
 
@@ -1273,10 +1283,12 @@ var Calculator = {};
         for (let i = 0; i < buttons.length; i++) {
           buttons[i].disabled = false;
         }
-        Calculator.maximiseBody();
+
+        console.timeStamp('MAXMAXMAX:Buttons Enabled');
       }, function() {
         console.error('something wrong with promises');
       });
     });
-  }, false);
+  })();
+  //}, false);
 })();
