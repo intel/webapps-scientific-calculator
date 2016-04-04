@@ -1060,7 +1060,7 @@ var Calculator = {};
         function() {
           Raf.queueStyleChange('#memorynoteeditor', 'display', '');
           let mnedescriptioninputval =
-            document.getElementById('mnedescriptioninput').value = '';
+            document.getElementById('mnedescriptioninput').value;
           document.getElementById(
             `${Calculator.currentKey}description`
           ).textContent = mnedescriptioninputval;

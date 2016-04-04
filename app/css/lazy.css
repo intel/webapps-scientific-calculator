@@ -40,6 +40,7 @@
   color: #d9e2d0;
   font-family: OpenSans-Regular;
   font-size: 36px;
+  line-height: 36px;
   left: 8px;
   top: 6px;
   overflow: hidden;
@@ -113,6 +114,7 @@
   float: left; 
   width: 265px;
   height: 40px;
+  line-height: 40px;
   color: #d9e2d0;
   font-family: OpenSans-Light;
   font-size: 24px;
@@ -546,8 +548,8 @@
   height: 720px;
   left: 0px;
   top: 0px;
-  background: var(--backgroundFill);
   background-image: url(../images/bg_land.png);
+  background-repeat: no-repeat;
 }
 
 #mnememorypane {

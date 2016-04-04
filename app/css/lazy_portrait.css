@@ -113,6 +113,7 @@
   float: left; 
   width: 320px;
   height: 45px;
+  line-height: 45px;
   color: #d9e2d0;
   font-family: OpenSans-Light;
   font-size: 24px;
