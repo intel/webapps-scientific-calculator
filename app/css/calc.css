@@ -91,7 +91,7 @@ sub {
     background-image: url(../images/switch_land_left_act.png);
 }
 
-.switchleftactive:active, .switchrightactive:active{
+.switchleftactive:active, .switchrightactive:active {
     background-image: url(../images/switch_land_press.png);
 }
 
@@ -240,7 +240,7 @@ sub {
     top: 0px;
 }
 
-#calculationpane #LCD_Upper {
+#LCD_Upper {
     position: absolute;
     float: left; 
     width: 1248px;
@@ -251,9 +251,9 @@ sub {
     background-repeat:no-repeat;
     z-index: 2;
     overflow: hidden;
-    }
+}
 
-#calculationpane #LCD_Lower {
+#LCD_Lower {
     position: relative;
     float: left; 
     width: 1248px;
@@ -264,7 +264,7 @@ sub {
     background-repeat: no-repeat;
 }
 
-#calculationpane #keyboard {
+#keyboard {
     position: relative;
     float: left;
     width: 1248px;
@@ -275,7 +275,7 @@ sub {
     background-image: url(../images/bg_keyboard_land.png);
 }
 
-#calculationpane #keyboard #keyboardleft{
+#keyboardleft {
     position: relative;
     float: left;
     width: 512px;
@@ -284,7 +284,7 @@ sub {
     top: 0px;
 }
 
-#calculationpane #keyboard #keyboardsplitter{
+#keyboardsplitter {
     position:relative;
     width: 4px;
     float: left;
@@ -295,7 +295,7 @@ sub {
     background-image: url(../images/line_keyboard_land.png);
 }
 
-#calculationpane #keyboard #keyboardright{
+#keyboardright {
     position: relative;
     float: right;
     width: 732px;
@@ -304,7 +304,7 @@ sub {
     left:0px;
 }
 
-#calculationpane #keyboard #keyboardleft #leftmostpane {
+#leftmostpane {
     position: relative;
     float: left; 
     width: 360px;
@@ -313,7 +313,7 @@ sub {
     top: 36px;
 }
 
-#calculationpane #keyboard #keyboardleft #centerleftpane {
+#centerleftpane {
     position: relative;
     float: left; 
     width: 104px;
@@ -322,7 +322,7 @@ sub {
     top: 10px;
 }
 
-#calculationpane #keyboard #keyboardright #centerrightpane {
+#centerrightpane {
     position: relative;
     float: left; 
     width: 225px;
@@ -331,7 +331,7 @@ sub {
     left: 16px;
 }
 
-#calculationpane #keyboard #keyboardright #rightpane {
+#rightpane {
     position: relative;
     float: left;
     width: 335px;
@@ -340,7 +340,7 @@ sub {
     top: 20px;
 }
 
-#calculationpane #keyboard #keyboardright #rightmostpane {
+#rightmostpane {
     position: relative;
     float: right;
     width: 104px;
@@ -349,7 +349,7 @@ sub {
     right:16px;
 }
 
-#calculationpane #keyboard #keyboardleft #leftmostpane #statetransition {
+#statetransition {
     position: relative;
     width: 360px;
     height: 36px;
@@ -357,14 +357,14 @@ sub {
     left:0px;
 }
 
-#calculationpane #keyboard #keyboardleft #leftmostpane #statetransition #degradswitch{
+#degradswitch {
     position: relative;
     float: left;
     width: 160px;
     height: 36px;
 }
 
-#calculationpane #keyboard #keyboardleft #leftmostpane #statetransition #traghypswitch{
+#traghypswitch {
     position: relative;
     float: right;
     width: 160px;
@@ -374,14 +374,14 @@ sub {
 
 /* Upper LCD display */
 
-#LCD_Upper #calculationhistory {
+#calculationhistory {
     float: left;
     left: 3px;
     top: 8px;
     overflow: visible;
 }
 
-#LCD_Upper #historyverticalline  {
+#historyverticalline  {
     position: relative;
     float: right;
     width: 2px;
@@ -394,14 +394,14 @@ sub {
 
 /* Lower LCD display */
 
-#LCD_Lower #upperpane {
+#upperpane {
     position: relative;
     float: left; 
     width: 1248px;
     height: 72px;
 }
 
-#LCD_Lower #upperpane #upperclosebutton {
+#upperclosebutton {
     position: relative;
     float: left; 
     width: 112px;
@@ -409,13 +409,13 @@ sub {
     left: 0px;
 }
 
-#LCD_Lower #upperpane #upperclosebutton #buttonclosecurrentformula {
+#buttonclosecurrentformula {
     position: relative;
     float: left; 
     left: 28px;
 }
 
-#LCD_Lower #upperpane #verticaldivider {
+#verticaldivider {
     position: relative;
     float: left; 
     width: 1px;
@@ -424,7 +424,7 @@ sub {
     background-repeat: no-repeat;
 }
 
-#LCD_Lower #horizontaldivider {
+#horizontaldivider {
     position: relative;
     float: left; 
     width: 1240px;
@@ -434,27 +434,27 @@ sub {
     background-repeat: no-repeat;
 }
 
-#LCD_Lower #lowerpane {
+#lowerpane {
     position: relative;
     float: left; 
     width: 1248px;
     height: 138px;
 }
 
-#LCD_Lower #lowerpane #lowerclosebutton {
+#lowerclosebutton {
     position: relative;
     float: left; 
     width: 112px;
     height: 76px;
 }
 
-#LCD_Lower #lowerpane #lowerclosebutton #buttonclosemainentry {
+#buttonclosemainentry {
     position: relative;
     float: left;
     left: 28px;
 }
 
-#LCD_Lower #lowerpane #verticaldivider {
+#verticaldivider {
     position: relative;
     float: left; 
     width: 1px;
@@ -463,7 +463,7 @@ sub {
     background-repeat: no-repeat;
 }
 
-#LCD_Lower #lowerpane #buttonmainentrymemoryadd {
+#buttonmainentrymemoryadd {
     position: relative;
     left: 6px;
     top: 20px;
@@ -616,14 +616,6 @@ sub {
 
 /* State transition toggle buttons */
 
-#statetransition {
-    position: relative;
-    width: 370px;
-    height: 210px;
-    left: 10px;
-    top: 10px;
-}
-
 #buttondeg {
     position: relative;
     width:80px;
@@ -645,7 +637,7 @@ sub {
     width:80px;
     height:36px;
     text-align: center;
-    }
+}
 
 #buttonhyp {
     position: absolute;
@@ -890,7 +882,7 @@ sub {
     background-repeat: no-repeat;
 }
 
-.historybutton:active{
+.historybutton:active {
     background-image: url(../images/bt_history_exp_land_press.png);
 }
 
@@ -904,11 +896,11 @@ sub {
     background-repeat: no-repeat;
 }
 
-.historybuttonclose:active{
+.historybuttonclose:active {
     background-image: url(../images/bt_history_contr_land_press.png);
 }
 
-#LCD_Upper #closehistorybutton{
+#closehistorybutton {
     position: absolute;
     float: left;
     width: 130px;
@@ -918,7 +910,7 @@ sub {
     z-index: 3;
 }
 
-#LCD_Lower #lowerpane #openhistorybutton{
+#openhistorybutton {
     position: absolute;
     float: left;
     width: 130px;
@@ -927,7 +919,7 @@ sub {
     top: 76px;
 }
 
-.buttonlefticon{
+.buttonlefticon {
     position: relative;
     height: 26px;
     width: 26px;
@@ -936,7 +928,7 @@ sub {
     top:10px;
 }
 
-.buttonrighticon{
+.buttonrighticon {
     position: relative;
     height: 26px;
     width: 26px;
@@ -946,13 +938,13 @@ sub {
     top: 10px;
 }
 
-.buttonrighttext{
+.buttonrighttext {
     position:relative;
     float:right;
     right:5px;
 }
 
-.buttonlefttext{
+.buttonlefttext {
     position:relative;
     width: 50px;
     float:left;
