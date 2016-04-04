@@ -144,9 +144,24 @@
         </div>
     </body>
 
-    <script src="lib/es6-promise/es6-promise.min.js"></script>
-    <script src="lib/fetch/fetch.js"></script>
-    <script src="js/calc.js"></script>
+    <script>
+      window.addEventListener('pageshow', function() {
+        window.requestAnimationFrame(function() {
+          let scripts = [
+            'lib/es6-promise/es6-promise.min.js',
+            'lib/fetch/fetch.js',
+            'js/calc.js'
+          ];
+
+          scripts.forEach(function(script) {
+            let scriptElement = document.createElement('script');
+            scriptElement.setAttribute('src',script);
+
+            document.head.appendChild(scriptElement);
+          });
+        });
+      }, false);
+    </script>
 
 </html>
 
