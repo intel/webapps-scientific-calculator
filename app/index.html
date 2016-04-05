@@ -145,17 +145,19 @@
   </body>
 
   <script>
+    'use strict';
+
     window.addEventListener('pageshow', function() {
       console.timeStamp('MAXMAXMAX:pageshow');
       window.requestAnimationFrame(function() {
-        let scripts = [
+        var scripts = [
           'lib/es6-promise/es6-promise.min.js',
           'lib/fetch/fetch.js',
           'js/calc.js'
         ];
 
         scripts.forEach(function(script) {
-          let scriptElement = document.createElement('script');
+          var scriptElement = document.createElement('script');
           scriptElement.setAttribute('src',script);
 
           document.head.appendChild(scriptElement);
