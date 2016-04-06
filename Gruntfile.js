@@ -81,6 +81,7 @@ module.exports = function (grunt) {
     copy: {
       common: {
         files: [
+          { expand: true, cwd: '.', src: ['app/manifest.json'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/sw-import.js'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/lib/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['app/audio/**'], dest: 'build/' },

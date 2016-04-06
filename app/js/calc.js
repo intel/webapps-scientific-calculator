@@ -7,18 +7,18 @@
  *
  */
 
-var Calculator = {};
+let Calculator = {};
 
 (function() {
   'use strict';
 
-  var Raf = new function() {
+  let Raf = new function() {
     //
     // Functions
     //
-    var _domChanges = [];
+    let _domChanges = [];
 
-    var _setClass = function(selectorOrElement, classToSet) {
+    let _setClass = function(selectorOrElement, classToSet) {
       let elements = [];
       if (typeof selectorOrElement === 'string') {
         elements = document.querySelectorAll(selectorOrElement);
@@ -34,7 +34,7 @@ var Calculator = {};
       }
     };
 
-    var _setStyle = function(selector, property, value) {
+    let _setStyle = function(selector, property, value) {
       let elements = document.querySelectorAll(selector);
 
       for (let i = 0; i < elements.length; i++) {
@@ -44,11 +44,11 @@ var Calculator = {};
       }
     };
 
-    var _appendChild = function(parentElement, child) {
+    let _appendChild = function(parentElement, child) {
       parentElement.appendChild(child);
     };
 
-    var _doDomChanges = function() {
+    let _doDomChanges = function() {
       let numDomChanges = _domChanges.length;
       for (let i = 0; i < numDomChanges; i++) {
         let thisChange = _domChanges.pop();
@@ -81,7 +81,7 @@ var Calculator = {};
     };
 
     this.queueClassChange = function(selectorOrElement, classToSet) {
-      var newChange = {
+      let newChange = {
         type: 'class',
         selectorOrElement: selectorOrElement,
         classToSet: classToSet
@@ -95,7 +95,7 @@ var Calculator = {};
     };
 
     this.queueStyleChange = function(selector, property, value) {
-      var newChange = {
+      let newChange = {
         type: 'style',
         selector: selector,
         property: property,
@@ -110,7 +110,7 @@ var Calculator = {};
     };
 
     this.queueAppendChild = function(parentElement, child) {
-      var newChange = {
+      let newChange = {
         type: 'child',
         parentElement: parentElement,
         child: child
@@ -871,7 +871,7 @@ var Calculator = {};
 `
       );
 
-      var _addListener = function(button) {
+      let _addListener = function(button) {
         button.addEventListener(
           'mousedown',
           () => Calculator.buttonClickAudio.play()
@@ -1040,7 +1040,7 @@ var Calculator = {};
           let elements = document.querySelectorAll(selector);
 
           for (let i = 0; i < elements.length; i++) {
-            var element = elements[i];
+            let element = elements[i];
             element.addEventListener(event, handler);
           }
         });
@@ -1312,5 +1312,4 @@ var Calculator = {};
       });
     });
   })();
-  //}, false);
 })();
