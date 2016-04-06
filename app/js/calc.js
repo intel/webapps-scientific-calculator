@@ -1087,6 +1087,10 @@ var Calculator = {};
         Calculator.maximiseBody();
       });
 
+      document.addEventListener('create', function() {
+        Calculator.maximiseBody();
+      });
+
       if ('onorientationchange' in window) {
         window.onorientationchange = function() {
           Calculator.maximiseBody();
@@ -1118,20 +1122,21 @@ var Calculator = {};
     };
 
     this.maximiseBody = function() {
-      // add to event queue
-      setTimeout(function() {
-        // apply scaling transform
-        let docWidth = document.documentElement.clientWidth;
-        let docHeight = document.documentElement.clientHeight;
-        let body = document.querySelector('body');
-        let bodyWidth = body.clientWidth;
-        let bodyHeight = body.clientHeight;
+      // apply scaling transform
+      let docWidth = document.documentElement.clientWidth;
+      let docHeight = document.documentElement.clientHeight;
+      let body = document.querySelector('body');
+      let bodyWidth = body.clientWidth;
+      let bodyHeight = body.clientHeight;
 
-        Raf.queueStyleChange('body', '-webkit-transform',
-          `translate(-50%, -50%) \
-           scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
-        );
-      }, 0);
+      Raf.queueStyleChange('body', '-webkit-transform',
+        `translate(-50%, -50%) \
+         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
+      );
+      Raf.queueStyleChange('body', 'transform',
+        `translate(-50%, -50%) \
+         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
+      );
     };
   };
 
@@ -1299,6 +1304,7 @@ var Calculator = {};
         for (let i = 0; i < buttons.length; i++) {
           buttons[i].disabled = false;
         }
+        Calculator.maximiseBody();
 
         console.timeStamp('MAXMAXMAX:Buttons Enabled');
       }, function() {
