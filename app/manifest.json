@@ -3,8 +3,8 @@
   "short_name": "Sci Calc",
   "icons": [
     {
-      "src": "images/icon_128.png",
-      "sizes": "128x128",
+      "src": "images/icon_300.png",
+      "sizes": "300x300",
       "type": "image/png"
     }
   ],

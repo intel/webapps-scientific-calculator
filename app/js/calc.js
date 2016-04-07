@@ -1219,7 +1219,7 @@ let Calculator = {};
         "/images/scrollbar_bottom.png",
         "/images/line_history_hor2px_land.png",
         "/images/switch_single_land.png",
-        "/images/icon_128.png",
+        "/images/icon_300.png",
         "/images/bt_blue_land_press.png",
         "/images/bt_equals_port_press.png",
         "/images/bt_dialogB_purple.png",
