@@ -122,6 +122,26 @@ let Calculator = {};
         window.requestAnimationFrame(_doDomChanges);
       }
     };
+
+    let _doMaximiseBody = function() {
+      // apply scaling transform
+      let docWidth = document.documentElement.clientWidth;
+      let docHeight = document.documentElement.clientHeight;
+      let body = document.querySelector('body');
+      let bodyWidth = body.clientWidth;
+      let bodyHeight = body.clientHeight;
+
+      document.body.style['-webkit-transform'] =
+        `translate(-50%, -50%) \
+         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`;
+      document.body.style.transform =
+        `translate(-50%, -50%) \
+         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`;
+    };
+
+    this.maximiseBody = function() {
+      window.requestAnimationFrame(_doMaximiseBody);
+    };
   };
 
   Calculator = new function() {
@@ -1082,16 +1102,20 @@ let Calculator = {};
     this.registerOrientationChange = function() {
       // on page create
       document.addEventListener('pagecreate', function() {
-        Calculator.maximiseBody();
+        Raf.maximiseBody();
       });
 
       document.addEventListener('create', function() {
-        Calculator.maximiseBody();
+        Raf.maximiseBody();
       });
 
       if ('onorientationchange' in window) {
         window.onorientationchange = function() {
-          Calculator.maximiseBody();
+          Raf.maximiseBody();
+        };
+
+        window.onresize = function() {
+          Raf.maximiseBody();
         };
       } else {
         window.onresize = function() {
@@ -1100,9 +1124,9 @@ let Calculator = {};
           } else {
             window.orientation = 90;
           }
-          Calculator.maximiseBody();
+
+          Raf.maximiseBody();
         };
-        window.onresize();
       }
     };
 
@@ -1117,24 +1141,6 @@ let Calculator = {};
           hideScrollbar: true,
           checkDOMChanges: true
         });
-    };
-
-    this.maximiseBody = function() {
-      // apply scaling transform
-      let docWidth = document.documentElement.clientWidth;
-      let docHeight = document.documentElement.clientHeight;
-      let body = document.querySelector('body');
-      let bodyWidth = body.clientWidth;
-      let bodyHeight = body.clientHeight;
-
-      Raf.queueStyleChange('body', '-webkit-transform',
-        `translate(-50%, -50%) \
-         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
-      );
-      Raf.queueStyleChange('body', 'transform',
-        `translate(-50%, -50%) \
-         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`
-      );
     };
 
     this.fillServiceWorkerCache = function() {
@@ -1508,7 +1514,8 @@ let Calculator = {};
         for (let i = 0; i < buttons.length; i++) {
           buttons[i].disabled = false;
         }
-        Calculator.maximiseBody();
+
+        Raf.maximiseBody();
 
         console.timeStamp('MAXMAXMAX:Buttons Enabled');
       }, function() {
