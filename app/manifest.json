@@ -1,5 +1,6 @@
 {
   "name": "Scientific Calculator",
+  "short_name": "Sci Calc",
   "icons": [
     {
       "src": "images/icon_128.png",
