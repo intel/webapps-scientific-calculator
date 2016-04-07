@@ -1333,18 +1333,11 @@ let Calculator = {};
         "/images/pencil.png",
         "/images/bt_white_land.png",
         "/images/bt_history_contr_land_press.png",
-        "/lazy.html",
+        "/lazy.html"
       ];
 
-      allFiles.forEach(function(file) {
-        console.log('MAXMAXMAX:fetching:', file);
-        fetch(file).then(function(response) {
-          if (response.status !== 200) {
-            console.log('MAXMAXMAX:bad for:', url);
-          }
-        }).catch(function() {
-          console.log('Error fetching file:', file);
-        });
+      document.addEventListener('WebComponentsReady', function() {
+        document.querySelector('platinum-sw-cache').precache = allFiles;
       });
     };
   };
@@ -1394,6 +1387,8 @@ let Calculator = {};
             elements.forEach(function(element) {
               Raf.queueAppendChild(document.head, element);
             });
+
+            Calculator.fillServiceWorkerCache();
 
             resolve();
           }
@@ -1514,8 +1509,6 @@ let Calculator = {};
           buttons[i].disabled = false;
         }
         Calculator.maximiseBody();
-
-        Calculator.fillServiceWorkerCache();
 
         console.timeStamp('MAXMAXMAX:Buttons Enabled');
       }, function() {
