@@ -88,7 +88,7 @@ module.exports = function (grunt) {
           { expand: true, cwd: '.', src: ['app/data/**'], dest: 'build/' },
           { expand: true, cwd: '.', src: ['LICENSE'], dest: 'build/app/' },
           { expand: true, cwd: '.', src: ['app/README.txt'], dest: 'build/' },
-          { expand: true, cwd: '.', src: ['app/_locales/**'], dest: 'build/' }
+          { expand: true, cwd: '.', src: ['app/locales/**'], dest: 'build/' }
         ]
       },
 
