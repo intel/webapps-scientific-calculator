@@ -14,8 +14,35 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="icon" type="image/png" href="images/icon_300.png">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" media="all and (orientation:portrait)" href="css/calc_portrait.css">
-    <link rel="stylesheet" media="all and (orientation:landscape)" href="css/calc.css">
+    <style>
+      body {
+        position: absolute;
+
+        margin: 0px;
+        top: 50%;
+        left: 50%;
+
+        background-color: #222526;
+      }
+
+      @media (orientation: landscape) {
+        body {
+          width: 1280px;
+          height: 720px;
+        }
+      }
+
+      @media (orientation: portrait) {
+        body {
+          width: 720px;
+          height: 1280px;
+        }
+      }
+
+      #background {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <platinum-sw-register auto-register clients-claim skip-waiting>
@@ -148,6 +175,48 @@
 
   <script>
     'use strict';
+
+    (function() {
+      var stylesheets = [
+        {
+          media: 'all and (orientation:portrait)',
+          href: 'css/calc_portrait.css'
+        },
+        {
+          media: 'all and (orientation:landscape)',
+          href: 'css/calc.css'
+        },
+      ];
+
+      stylesheets.forEach(function(stylesheet) {
+        var linkElement = document.createElement('link');
+        linkElement.setAttribute('rel', 'stylesheet');
+        linkElement.setAttribute('media', stylesheet.media);
+        linkElement.setAttribute('href', stylesheet.href);
+
+        document.head.appendChild(linkElement);
+      });
+    })();
+
+    var doMaximiseBody = function() {
+      // apply scaling transform
+      var docWidth = document.documentElement.clientWidth;
+      var docHeight = document.documentElement.clientHeight;
+      var body = document.body;
+      var bodyWidth = body.clientWidth;
+      var bodyHeight = body.clientHeight;
+
+      var transform =
+        "translate(-50%, -50%) scale(" +
+            docWidth / bodyWidth +
+            ", " +
+            docHeight / bodyHeight +
+          ")";
+      body.style['-webkit-transform'] = transform;
+      body.style.transform = transform;
+    };
+
+    doMaximiseBody();
 
     window.addEventListener('pageshow', function() {
       console.timeStamp('MAXMAXMAX:pageshow');

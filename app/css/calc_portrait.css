@@ -11,6 +11,10 @@
   --backgroundFill: no-repeat 100% 100% transparent;
 }
 
+#background {
+  display: block;
+}
+
 @font-face {
   font-family: OpenSans-Light;
   src: url(../lib/open-sans-light/index.woff);
@@ -25,7 +29,7 @@ body {
   margin: 0px;
   overflow: visible;
   user-select: none;
-  background-color: white;
+  background-color: #222526;
   box-shadow: 5px 5px 20px black;
   top: 50%;
   left: 50%;

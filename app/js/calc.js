@@ -123,24 +123,9 @@ let Calculator = {};
       }
     };
 
-    let _doMaximiseBody = function() {
-      // apply scaling transform
-      let docWidth = document.documentElement.clientWidth;
-      let docHeight = document.documentElement.clientHeight;
-      let body = document.querySelector('body');
-      let bodyWidth = body.clientWidth;
-      let bodyHeight = body.clientHeight;
-
-      document.body.style['-webkit-transform'] =
-        `translate(-50%, -50%) \
-         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`;
-      document.body.style.transform =
-        `translate(-50%, -50%) \
-         scale(${docWidth / bodyWidth}, ${docHeight / bodyHeight})`;
-    };
-
     this.maximiseBody = function() {
-      window.requestAnimationFrame(_doMaximiseBody);
+      // doMaximiseBody is defined in index.html
+      window.requestAnimationFrame(doMaximiseBody);
     };
   };
 
