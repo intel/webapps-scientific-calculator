@@ -179,19 +179,24 @@
     (function() {
       var stylesheets = [
         {
+          href: 'css/calc_common.css'
+        },
+        {
           media: 'all and (orientation:portrait)',
           href: 'css/calc_portrait.css'
         },
         {
           media: 'all and (orientation:landscape)',
-          href: 'css/calc.css'
+          href: 'css/calc_landscape.css'
         },
       ];
 
       stylesheets.forEach(function(stylesheet) {
         var linkElement = document.createElement('link');
         linkElement.setAttribute('rel', 'stylesheet');
-        linkElement.setAttribute('media', stylesheet.media);
+        if (stylesheet.media) {
+          linkElement.setAttribute('media', stylesheet.media);
+        }
         linkElement.setAttribute('href', stylesheet.href);
 
         document.head.appendChild(linkElement);

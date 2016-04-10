@@ -7,67 +7,15 @@
  *
  */
 
-:root {
-  --backgroundFill: no-repeat 100% 100% transparent;
-}
-
-#background {
-  display: block;
-}
-
-@font-face {
-  font-family: OpenSans-Light;
-  src: url(../lib/open-sans-light/index.woff);
-}
-
-@font-face {
-  font-family: OpenSans-Regular;
-  src: url(../lib/open-sans/index.woff);
-}
-
 body {
-  margin: 0px;
-  overflow: visible;
-  user-select: none;
-  background-color: #222526;
-  box-shadow: 5px 5px 20px black;
-  top: 50%;
-  left: 50%;
-  position: absolute;
   width: 720px;
   height: 1280px;
-  box-align: center;
-  box-pack: center;
-  box-orient: vertical;
-  display: flex;
-}
-
-sup,
-sub {
-  position: relative;
-  vertical-align: baseline;
-}
-
-sup {
-  font-size: 50%;
-  bottom: 2ex;
-}
-
-sub {
-  font-size: 50%;
-  top: 0.8ex;
 }
 
 /* Button classes */
 
 .buttonblackshort {
   width: 98px;
-  height: 64px;
-  color: #EBEBE9;
-  font-family: OpenSans-Light;
-  font-size: 33px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_blackSmall_port.png);
 }
 
@@ -78,25 +26,10 @@ sub {
 .buttontogglebackgroundA,
 .buttontogglebackgroundB {
   width: 75px;
-  height: 36px;
-  font-family: OpenSans-Light;
-  font-size: 24px;
-  line-height: 36px;
-  background: var(--backgroundFill);
-}
-
-.buttontogglebackgroundA {
-  color: #727272;
-}
-
-.buttontogglebackgroundB {
-  color: #d9e2d0;
 }
 
 .switchleftactive {
   width: 152px;
-  height: 36px;
-  background: var(--backgroundFill);
   background-image: url(../images/switch_port_left_act.png);
 }
 
@@ -107,12 +40,6 @@ sub {
 
 .buttonyellow {
   width: 98px;
-  height: 64px;
-  color: #ebebe9;
-  font-family: OpenSans-Light;
-  font-size: 36px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_yellow_port.png);
 }
 
@@ -123,11 +50,6 @@ sub {
 .buttonred {
   width: 98px;
   height: 98px;
-  color: #ebebe9;
-  font-family: OpenSans-Light;
-  font-size: 46px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_red_port.png);
 }
 
@@ -138,11 +60,6 @@ sub {
 .buttonblack {
   width: 98px;
   height: 98px;
-  color: #ebebe9;
-  font-family: OpenSans-Light;
-  font-size: 36px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_black_port.png);
 }
 
@@ -153,11 +70,6 @@ sub {
 .buttonwhite {
   width: 98px;
   height: 98px;
-  color: #000000;
-  font-family: OpenSans-Regular;
-  font-size: 46px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_white_port.png);
 }
 
@@ -168,11 +80,6 @@ sub {
 .buttonblue {
   width: 98px;
   height: 98px;
-  color: #ebebe9;
-  font-family: OpenSans-Light;
-  font-size: 56px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_blue_port.png);
 }
 
@@ -183,8 +90,6 @@ sub {
 .buttonpurple {
   width: 98px;
   height: 98px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_purple_port.png);
 }
 
@@ -195,11 +100,6 @@ sub {
 .buttonblueequal {
   width: 98px;
   height: 208px;
-  color: #ebebe9;
-  font-family: OpenSans-Light;
-  font-size: 56px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_equals_port.png);
 }
 
@@ -207,92 +107,48 @@ sub {
   background-image: url(../images/bt_equals_port_press.png);
 }
 
-.buttonclose {
-  width: 64px;
-  height: 64px;
-  border-style: none;
-  background: var(--backgroundFill);
-  background-image: url(../images/bt_bin.png);
-}
-
-.buttonclose:active {
-  background-image: url(../images/bt_bin_press.png);
-}
-
 /* Backgrounds */
 
 #background {
-  position: relative;
-  float: left; 
   width: 720px;
   height: 1280px;
-  left: 0px;
-  top: 0px;
-  background: var(--backgroundFill);
   background-image: url(../images/bg_port.png);
 }
 
 #calculationpane {
-  position: relative;
-  float: left; 
   width: 720px;
   height: 1280px;
-  left: 0px;
-  top: 0px;
 }
 
 #LCD_Upper {
-  position: absolute;
-  display: none; /* not shown at startup */
-  float: left; 
   width: 688px;
   height: 1250px;
-  left: 16px;
-  top: 16px;
-  background: var(--backgroundFill);
   background-image: url(../images/bg_history_port.png);
-  z-index: 2;
-  overflow: hidden;
 }
 
 #LCD_Lower {
-  position: relative;
-  float: left; 
   width: 688px;
   height: 282px;
-  left: 16px;
   top: 20px;
-  background: var(--backgroundFill);
   background-image: url(../images/bg_display_port.png);
 }
 
 #keyboard {
-  position: relative;
-  float: left;
   width: 688px;
   height: 940px;
-  left: 16px;
   top: 43px;
-  background: var(--backgroundFill);
   background-image: url(../images/bg_keyboard_port.png);
 }
 
 #keyboardleft {
-  position: relative;
-  float: left;
   width: 688px;
   height: 382px;
-  left: 0px;
-  top: 0px;
 }
 
 #keyboardsplitter {
-  position: relative;
-  float: left;
   width: 680px;
   height: 6px;
   left: 4px;
-  background: var(--backgroundFill);
   background-image: url(../images/line_keyboard_port.png);
 }
 
@@ -304,8 +160,6 @@ sub {
 }
 
 #leftmostpane {
-  position: relative;
-  float: left;
   width: 688px;
   height: 382px;
   left: 0px;
@@ -321,8 +175,6 @@ sub {
 }
 
 #centerrightpane {
-  position: relative;
-  float: left; 
   width: 208px;
   height: 428px;
   left: 20px;
@@ -330,8 +182,6 @@ sub {
 }
 
 #rightpane {
-  position: relative;
-  float: left; 
   width: 320px;
   height: 538px;
   left: 32px;
@@ -339,7 +189,6 @@ sub {
 }
 
 #rightmostpane {
-  position: relative;
   float: left;
   width: 98px;
   height: 538px;
@@ -356,75 +205,44 @@ sub {
 }
 
 #degradswitch {
-  position: relative;
-  float: left;
   width: 152px;
-  height: 36px;
   left: 0px;
 }
 
 #traghypswitch {
-  position: relative;
-  float: right;
   width: 152px;
-  height: 36px;
   right: 0px;
 }
 
 /* Upper LCD display */
 
-#calculationhistory {
-  float: left; 
-  left: 3px;
-  top: 8px;
-}
-
 #historyverticalline {
-  position: relative;
-  float: right;
-  width: 2px;
   height: 1240px;
-  right: 37px;
-  top: 4px;
-  background: var(--backgroundFill);
   background-image: url(../images/line_history_vert_port.png);
 }
 
 /* Lower LCD display */
 
 #upperpane {
-  position: relative;
-  float: left; 
   width: 688px;
   height: 108px;
 }
 
 #buttonclosecurrentformula {
-  position: relative;
-  float: left; 
   left: 20px;
 }
 
 #horizontaldivider {
-  position: relative;
-  float: left; 
   width: 680px;
-  height: 2px;
-  left: 4px;
-  background: var(--backgroundFill);
   background-image: url(../images/line_display_port.png);
 }
 
 #lowerpane {
-  position: relative;
-  float: left; 
   width: 688px;
   height: 172px;
 }
 
 #buttonclosemainentry {
-  position: relative;
-  float: left;
   left: 20px;
 }
 
@@ -432,15 +250,6 @@ sub {
   position: absolute;
   left: 120px;
   width: 548px;
-}
-
-#buttonmainentrymemoryadd {
-  position: relative;
-  left: 6px;
-  top: 20px;
-  border-style: none;
-  background: var(--backgroundFill);
-  background-image: url(../images/Button_Arrow_Black.png);
 }
 
 /* Buttons and their backgrounds */
@@ -455,40 +264,20 @@ sub {
   top: 24px;
 }
 
-#buttonlog {
-  position: relative;
-  left: 0px;
-  top: 0px;
-}
-
 #buttonlog2 {
-  position: relative;
   left: 12px;
-  top: 0px;
 }
 
 #buttonln {
-  position: relative;
   left: 24px;
-  top: 0px;
-}
-
-#button10x {
-  position: relative;
-  left: 0px;
-  top: 20px;
 }
 
 #button2x {
-  position: relative;
   left: 12px;
-  top: 20px;
 }
 
 #buttonex {
-  position: relative;
   left: 24px;
-  top: 20px;
 }
 
 /* Trigonometric function buttons */
@@ -501,40 +290,20 @@ sub {
   top: 108px;
 }
 
-#buttonsin {
-  position: relative;
-  left: 0px;
-  top: 0px;
-}
-
 #buttoncos {
-  position: relative;
   left: 8px;
-  top: 0px;
 }
 
 #buttontan {
-  position: relative;
   left: 16px;
-  top: 0px;
-}
-
-#buttonarcsin {
-  position: relative;
-  left: 0px;
-  top: 20px;
 }
 
 #buttonarccos {
-  position: relative;
   left: 8px;
-  top: 20px;
 }
 
 #buttonarctan {
-  position: relative;
   left: 16px;
-  top: 20px;
 }
 
 /* Hyperbolic function buttons */
@@ -545,97 +314,53 @@ sub {
   height: 148px;
   left: 20px;
   top: 108px;
-  display: none;
-}
-
-#buttonsinh {
-  position: relative;
-  left: 0px;
-  top: 0px;
 }
 
 #buttoncosh {
-  position: relative;
   left: 8px;
-  top: 0px;
 }
 
 #buttontanh {
-  position: relative;
   left: 16px;
-  top: 0px;
-}
-
-#buttonasinh {
-  position: relative;
-  left: 0px;
-  top: 20px;
 }
 
 #buttonacosh {
-  position: relative;
   left: 8px;
-  top: 20px;
 }
 
 #buttonatanh {
-  position: relative;
   left: 16px;
-  top: 20px;
 }
 
 /* State transition toggle buttons */
 
 #buttondeg {
-  position: relative;
   width: 76px;
-  height: 36px;
-  text-align: center;
 }
 
 #buttonrad {
-  position: absolute;
   left: 76px;
   width: 76px;
-  height: 36px;
-  top: 0px;
-  text-align: center;
 }
 
 #buttontrig {
-  position: relative;
   width: 76px;
-  height: 36px;
-  text-align: center;
 }
 
 #buttonhyp {
-  position: absolute;
   left: 76px;
   width: 76px;
-  height: 36px;
-  top: 0px;
-  text-align: center;
 }
 
 /* Power and root function buttons */
 
 #powerandroot {
-  position: relative;
   width: 212px;
   height: 64px;
-  left: 0px;
-  top: 0px;
-}
-
-#buttonsquare {
-  position: relative;
-  left: 0px;
   top: 0px;
 }
 
 #buttonsquareroot {
-  position: relative;
   left: 12px;
   top: 0px;
 }
@@ -651,80 +376,45 @@ sub {
 }
 
 #buttonnthpower {
-  position: relative;
-  left: 0px;
   top: 0px;
 }
 
 #buttonnthroot {
-  position: relative;
-  left: 0px;
   top: 20px;
 }
 
 /* Center right pane buttons */
 #buttonclear {
-  position: relative;
-  left: 0px;
   top: -4px;
 }
 
-#buttonmemorylist {
-  position: relative;
-  left: 0px;
-  top: 0px;
-  color: #ebebe9;
-  font-family: OpenSans-Light;
-  font-size: 36px;
-}
-
-#buttondelete {
-  position: relative;
-  left: 0px;
-  top: 0px;
-}
-
 #buttonmemorize {
-  position: relative;
   left: 8px;
-  top: 0px;
-  color: #000000;
-  font-family: OpenSans-Light;
-  font-size: 36px;
 }
 
 #buttonleftparenthesis {
-  position: relative;
-  left: 0px;
   top: 8px;
 }
 
 #buttonrightparenthesis {
-  position: relative;
   left: 8px;
   top: 8px;
 }
 
 #buttonfactorial {
-  position: relative;
-  left: 0px;
   top: 16px;
 }
 
 #buttoninverse {
-  position: relative;
   left: 8px;
   top: 16px;
 }
 
 #buttonpi {
-  position: relative;
-  left: 0px;
   top: 24px;
 }
 
 #buttonpercentage {
-  position: relative;
   left: 8px;
   top: 24px;
 }
@@ -732,122 +422,75 @@ sub {
 /* Right pane buttons */
 
 #button7 {
-  position: relative;
-  left: 0px;
   top: 8px;
 }
 
 #button8 {
-  position: relative;
-  left: 8px;
   top: 8px;
 }
 
 #button9 {
-  position: relative;
-  left: 16px;
   top: 8px;
 }
 
-#buttondivide {
-  position: relative;
-  left: 8px;
-  top: 0px;
-}
-
 #button4 {
-  position: relative;
-  left: 0px;
   top: 16px;
 }
 
 #button5 {
-  position: relative;
-  left: 8px;
   top: 16px;
 }
 
 #button6 {
-  position: relative;
-  left: 16px;
   top: 16px;
 }
 
-#buttonmultiply {
-  position: relative;
-  left: 16px;
-  top: 0px;
-}
-
 #button1 {
-  position: relative;
-  left: 0px;
   top: 24px;
 }
 
 #button2 {
-  position: relative;
-  left: 8px;
   top: 24px;
 }
 
 #button3 {
-  position: relative;
-  left: 16px;
   top: 24px;
 }
 
 #buttonsubtract {
-  position: relative;
-  left: 0px;
   top: 8px;
 }
 
 #button0 {
-  position: relative;
-  left: 0px;
   top: 28px;
 }
 
 #button00 {
-  position: relative;
   left: 18px;
   top: 32px;
 }
 
 #buttondot {
-  position: relative;
-  left: 8px;
   top: 32px;
 }
 
 #buttonadd {
-  position: relative;
-  left: 0px;
   top: 16px;
 }
 
 /* Rightmost pane buttons */
 
 #buttonplusminus {
-  position: relative;
-  left: 16px;
   top: 32px;
 }
 
 #buttonequal {
-  position: relative;
-  left: 0px;
   top: 24px;
 }
 
 /* open/close history button */
 .historybutton {
-  position: absolute;
   width: 120px;
-  height: 56px;
-  border-style: none;
-  background: var(--backgroundFill);
   background-image: url(../images/bt_history_exp_port.png);
 }
 
@@ -855,132 +498,39 @@ sub {
   background-image: url(../images/bt_history_exp_port_press.png);
 }
 
-.historybuttonclose {
-  position: absolute;
-  width: 130px;
-  height: 56px;
-  border-style: none;
-  background: var(--backgroundFill);
-  background-image: url(../images/bt_history_contr_land.png);
-}
-
-.historybuttonclose:active {
-  background-image: url(../images/bt_history_contr_land_press.png);
-}
-
 #closehistorybutton {
-  position: absolute;
-  float: left;
-  width: 130px;
-  height: 56px;
-  left: 4px;
   top: 1188px;
-  z-index: 3;
 }
 
 #openhistorybutton {
-  position: absolute;
-  float: left;
-  width: 130px;
-  height: 56px;
-  left: 4px;
   top: 110px;
 }
 
 .buttonlefticon {
-  position: relative;
-  height: 26px;
-  width: 26px;
-  float: left;
   left: 8px;
   top: 6px;
 }
 
 .buttonrighticon {
-  position: relative;
-  height: 26px;
-  width: 26px;
   right: 16px;
-  float: right;
   top: 7px;
 }
 
 .buttonrighttext {
-  position: relative;
-  float: right;
   right: 3px;
   top: -4px;
 }
 
 .buttonlefttext {
-  position: relative;
-  width: 50px;
-  float: left;
   top: -5px;
 }
 
-#wrapper {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-#scroller {
-  position: absolute;
-  width: 100%;
-  padding: 0;
-}
-
 #licensebtnl {
-  position: absolute;
   top: 1190px;
   left: 60px;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  cursor: pointer;
-  border-radius: 40px;
-  border: solid 3px #dddddd;
-  opacity: 0.3;
-  color: #dddddd;
-  font: 35px Arial, Helvetica, sans-serif;
-}
-
-#licensebtnl:active {
-  opacity: 1.0;
-}
-
-.helplaunch {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  cursor: pointer;
-  border-radius: 40px;
-  border: solid 3px #dddddd;
-  color: #dddddd;
-  opacity: 0.3;
-  font: 35px Arial, Helvetica, sans-serif;
 }
 
 #home_help {
   top: 630px;
   left: 60px;
-}
-
-#home_help:active {
-  opacity: 1;
-}
-
-button {
-  outline: 0;
-}
-
-button[disabled] {
-  opacity: 0.5;
 }
