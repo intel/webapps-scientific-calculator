@@ -1,0 +1,13 @@
+{
+  "name": "Scientific Calculator",
+  "short_name": "Sci Calc",
+  "icons": [
+    {
+      "src": "images/icon_300.png",
+      "sizes": "300x300",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone"
+}

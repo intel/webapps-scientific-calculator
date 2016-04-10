@@ -1,0 +1,552 @@
+/*
+ * Copyright (c) 2012, Intel Corporation.
+ *
+ * This program is licensed under the terms and conditions of the  
+ * Apache License, version 2.0.  The full text of the Apache License is at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+
+body {
+  width: 1280px;
+  height: 720px;
+}
+
+/* Button classes */
+
+.buttonblackshort {
+  width: 104px;
+  background-image: url(../images/bt_blackSmall_land.png);
+}
+
+.buttonblackshort:active {
+  background-image: url(../images/bt_blackSmall_land_press.png);
+}
+
+.buttontogglebackgroundA,
+.buttontogglebackgroundB {
+  width: 80px;
+}
+
+.switchleftactive {
+  width: 160px;
+  background-image: url(../images/switch_land_left_act.png);
+}
+
+.switchleftactive:active,
+.switchrightactive:active {
+  background-image: url(../images/switch_land_press.png);
+}
+
+.buttonyellow {
+  width: 104px;
+  background-image: url(../images/bt_yellow_land.png);
+}
+
+.buttonyellow:active {
+  background-image: url(../images/bt_yellow_land_press.png);
+}
+
+.buttonred {
+  width: 104px;
+  height: 72px;
+  background-image: url(../images/bt_red_land.png);
+}
+
+.buttonred:active {
+  background-image: url(../images/bt_red_land_press.png);
+}
+
+.buttonblack {
+  width: 104px;
+  height: 72px;
+  background-image: url(../images/bt_black_land.png);
+}
+
+.buttonblack:active {
+  background-image: url(../images/bt_black_land_press.png);
+}
+
+.buttonwhite {
+  width: 104px;
+  height: 72px;
+  background-image: url(../images/bt_white_land.png);
+}
+
+.buttonwhite:active {
+  background-image: url(../images/bt_white_land_press.png);
+}
+
+.buttonblue {
+  width: 104px;
+  height: 72px;
+  background-image: url(../images/bt_blue_land.png);
+}
+
+.buttonblue:active {
+  background-image: url(../images/bt_blue_land_press.png);
+}
+
+.buttonpurple {
+  width: 104px;
+  height: 72px;
+  background-image: url(../images/bt_purple_land.png);
+}
+
+.buttonpurple:active {
+  background-image: url(../images/bt_purple_land_press.png);
+}
+
+.buttonblueequal {
+  width: 104px;
+  height: 156px;
+  background-image: url(../images/bt_equals_land.png);
+}
+
+.buttonblueequal:active {
+  background-image: url(../images/bt_equals_land_press.png);
+}
+
+/* Backgrounds */
+
+#background {
+  width: 1280px;
+  height: 720px;
+  background-image: url(../images/bg_land.png);
+}
+
+#calculationpane {
+  width: 1280px;
+  height: 720px;
+}
+
+#LCD_Upper {
+  width: 1248px;
+  height: 690px;
+  background-image: url(../images/bg_history_land.png);
+}
+
+#LCD_Lower {
+  width: 1248px;
+  height: 212px;
+  top: 16px;
+  background-image: url(../images/bg_display_land.png);
+}
+
+#keyboard {
+  width: 1248px;
+  height: 450px;
+  top: 44px;
+  background-image: url(../images/bg_keyboard_land.png);
+}
+
+#keyboardleft {
+  width: 512px;
+  height: 450px;
+}
+
+#keyboardsplitter {
+  width: 4px;
+  height: 440px;
+  left: 0px;
+  top: 4px;
+  background-image: url(../images/line_keyboard_land.png);
+}
+
+#keyboardright {
+  float: right;
+  width: 732px;
+  height: 450px;
+  top: 0px;
+  left: 0px;
+}
+
+#leftmostpane {
+  width: 360px;
+  height: 400px;
+  left: 20px;
+  top: 36px;
+}
+
+#centerleftpane {
+  position: relative;
+  width: 104px;
+  height: 430px;
+  left: 40px;
+  top: 10px;
+  float: left; 
+}
+
+#centerrightpane {
+  width: 225px;
+  height: 330px;
+  left: 16px;
+  top: 20px;
+}
+
+#rightpane {
+  width: 335px;
+  height: 420px;
+  left: 40px;
+  top: 20px;
+}
+
+#rightmostpane {
+  float: right;
+  width: 104px;
+  height: 420px;
+  top: 20px;
+  right: 16px;
+}
+
+#statetransition {
+  position: relative;
+  width: 360px;
+  height: 36px;
+  top: 0px;
+  left: 0px;
+}
+
+#degradswitch {
+  width: 160px;
+}
+
+#traghypswitch {
+  width: 160px;
+  left: 6px;
+}
+
+/* Upper LCD display */
+
+#calculationhistory {
+  overflow: visible;
+}
+
+#historyverticalline {
+  height: 680px;
+  background-image: url(../images/line_history_vert_land.png);
+}
+
+/* Lower LCD display */
+
+#upperpane {
+  width: 1248px;
+  height: 72px;
+}
+
+#upperclosebutton {
+  position: relative;
+  float: left; 
+  width: 112px;
+  height: 72px;
+  left: 0px;
+}
+
+#buttonclosecurrentformula {
+  left: 28px;
+}
+
+#horizontaldivider {
+  width: 1240px;
+  background-image: url(../images/line_display_land.png);
+}
+
+#lowerclosebutton {
+  position: relative;
+  float: left; 
+  width: 112px;
+  height: 76px;
+}
+
+#lowerpane {
+  width: 1248px;
+  height: 138px;
+}
+
+#buttonclosemainentry {
+  left: 28px;
+}
+
+/* Buttons and their backgrounds */
+
+/* Exponential and logarithmic function buttons */
+
+#expandlog {
+  position: relative;
+  width: 360px;
+  height: 150px;
+  left: 0px;
+  top: 52px;
+}
+
+#buttonlog2 {
+  left: 20px;
+}
+
+#buttonln {
+  left: 40px;
+}
+
+#button2x {
+  left: 20px;
+}
+
+#buttonex {
+  left: 40px;
+}
+
+/* Trigonometric function buttons */
+
+#trigonometric {
+  position: relative;
+  width: 360px;
+  height: 150px;
+  left: 0px;
+  top: 32px;
+}
+
+#buttoncos {
+  left: 20px;
+}
+
+#buttontan {
+  left: 40px;
+}
+
+#buttonarccos {
+  left: 20px;
+}
+
+#buttonarctan {
+  left: 40px;
+}
+
+/* Hyperbolic function buttons */
+
+#hyperbolic {
+  position: relative;
+  width: 360px;
+  height: 150px;
+  left: 0px;
+  top: 32px;
+}
+
+#buttoncosh {
+  left: 20px;
+}
+
+#buttontanh {
+  left: 40px;
+}
+
+#buttonacosh {
+  left: 20px;
+}
+
+#buttonatanh {
+  left: 40px;
+}
+
+/* State transition toggle buttons */
+
+#buttondeg {
+  width: 80px;
+}
+
+#buttonrad {
+  left: 80px;
+  width: 80px;
+}
+
+#buttontrig {
+  width: 80px;
+}
+
+#buttonhyp {
+  left: 80px;
+  width: 80px;
+}
+
+/* Power and root function buttons */
+
+#powerandroot {
+  width: 104px;
+  height: 148px;
+  top: 10px;
+}
+
+#buttonsquareroot {
+  left: 0px;
+  top: 20px;
+}
+
+/* Nth power and nth root function buttons */
+
+#nthpowerandnthroot {
+  position: relative;
+  width: 104px;
+  height: 168px;;
+  left: 0px;
+  top: 10px;
+}
+
+#buttonnthpower {
+  top: 20px;
+}
+
+#buttonnthroot {
+  top: 40px;
+}
+
+/* Center right pane buttons */
+#buttonclear {
+  top: -6px;
+}
+
+#buttonmemorize {
+  left: 14px;
+}
+
+#buttonleftparenthesis {
+  top: 12px;
+}
+
+#buttonrightparenthesis {
+  left: 14px;
+  top: 12px;
+}
+
+#buttonfactorial {
+  top: 24px;
+}
+
+#buttoninverse {
+  left: 14px;
+  top: 24px;
+}
+
+#buttonpi {
+  top: 36px;
+}
+
+#buttonpercentage {
+  left: 14px;
+  top: 36px;
+}
+
+/* Right pane buttons */
+
+#button7 {
+  top: 12px;
+}
+
+#button8 {
+  top: 12px;
+}
+
+#button9 {
+  top: 12px;
+}
+
+#button4 {
+  top: 24px;
+}
+
+#button5 {
+  top: 24px;
+}
+
+#button6 {
+  top: 24px;
+}
+
+#button1 {
+  top: 36px;
+}
+
+#button2 {
+  top: 36px;
+}
+
+#button3 {
+  top: 36px;
+}
+
+#buttonsubtract {
+  top: 20px;
+}
+
+#button0 {
+  top: 40px;
+}
+
+#button00 {
+  left: 12px;
+  top: 34px;
+}
+
+#buttondot {
+  top: 48px;
+}
+
+#buttonadd {
+  top: 32px;
+}
+
+/* Rightmost pane buttons */
+
+#buttonplusminus {
+  top: 48px;
+}
+
+#buttonequal {
+  top: 44px;
+}
+
+/* open/close history button */
+.historybutton {
+  width: 130px;
+  background-image: url(../images/bt_history_exp_land.png);
+}
+
+.historybutton:active {
+  background-image: url(../images/bt_history_exp_land_press.png);
+}
+
+#closehistorybutton {
+  top: 629px;
+}
+
+#openhistorybutton {
+  left: 4px;
+  top: 76px;
+}
+
+.buttonlefticon {
+  left: 10px;
+  top: 10px;
+}
+
+.buttonrighticon {
+  right: 20px;
+  top: 10px;
+}
+
+.buttonrighttext {
+  right: 5px;
+}
+
+.buttonlefttext {
+  left: 5px;
+  top: -2px;
+}
+
+#licensebtnl {
+  top: 640px;
+  left: 580px;
+}
+
+#home_help {
+  top: 640px;
+  left: 700px;
+}

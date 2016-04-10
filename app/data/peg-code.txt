@@ -198,19 +198,19 @@ trigonometric
 sin
   = "sin" operand:signedexpression
     {
-        res = Math.sin(operand / Calculator.angleDivisor);
+        var res = Math.sin(operand / Calculator.angleDivisor);
         return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
     }
 cos
   = "cos" operand:signedexpression
     {
-        res = Math.cos(operand / Calculator.angleDivisor);
+        var res = Math.cos(operand / Calculator.angleDivisor);
         return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
     }
 tan
   = "tan" operand:signedexpression
     {
-        res = Math.tan(operand / Calculator.angleDivisor);
+        var res = Math.tan(operand / Calculator.angleDivisor);
         return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
     }
 arcsin

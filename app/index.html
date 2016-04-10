@@ -8,144 +8,243 @@
  *
 -->
 <html>
-    <head>
-        <title>Scientific Calculator</title>
-        <meta name="viewport" content="width=device-width target-densitydpi=device-dpi initial-scale=1 maximum-scale=1 user-scalable=0"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" media="all and (orientation:portrait)" href="css/calc_portrait.css">
-        <link rel="stylesheet" media="all and (orientation:landscape)" href="css/calc.css">
-    </head>
-    <body>
-        <div id="background">
-            <div id="calculationpane">
-                <div id="LCD_Upper">
-                    <div id="wrapper">
-                        <div id="scroller">
-                            <div class="scroll-pane" id="calculationhistory"></div>
-                        </div>
-                    </div>
-                    <div id="historyverticalline"></div>
-                    <button class="historybuttonclose" id="closehistorybutton"></button>
-                </div>
-                <div id="LCD_Lower">
-                    <div id="upperpane">
-                        <div id="upperclosebutton">
-                            <button class="buttonclose" id="buttonclosecurrentformula"></button>
-                        </div>
-                        <div id="currentformula"></div>
-                    </div>
-                    <div id="horizontaldivider"></div>
-                    <div id="lowerpane">
-                        <div id="lowerclosebutton">
-                            <button class="buttonclose" id="buttonclosemainentry"></button>
-                        </div>
-                        <div id="mainentry"></div>
-                        <button class="historybutton" id="openhistorybutton"></button>
-                    </div>
-                </div>
-                <div id="keyboard">
-                    <div id="keyboardleft">
-                        <div id="leftmostpane">
-                            <div id="statetransition">
-                                <div id="degradswitch" class="switchleftactive">
-                                     <div class="buttontogglebackgroundB" id="buttondeg">DEG</div>
-                                     <div class="buttontogglebackgroundA" id="buttonrad">RAD</div>
-                                </div>
-                                 <div id="traghypswitch" class="switchleftactive">
-                                     <div class="buttontogglebackgroundB" id="buttontrig">TRIG</div>
-                                     <div class="buttontogglebackgroundA" id="buttonhyp">HYP</div>
-                                </div>
-                            </div>
-                            <div id="trigonometric">
-                                <button class="buttonblackshort" id="buttonsin">sin</button>
-                                <button class="buttonblackshort" id="buttoncos">cos</button>
-                                <button class="buttonblackshort" id="buttontan">tan</button>
-                                <button class="buttonblackshort" id="buttonarcsin">sin<sup>-1</sup></button>
-                                <button class="buttonblackshort" id="buttonarccos">cos<sup>-1</sup></button>
-                                <button class="buttonblackshort" id="buttonarctan">tan<sup>-1</sup></button>
-                            </div>
-                            <div id="hyperbolic">
-                                <button class="buttonblackshort" id="buttonsinh">sinh</button>
-                                <button class="buttonblackshort" id="buttoncosh">cosh</button>
-                                <button class="buttonblackshort" id="buttontanh">tanh</button>
-                                <button class="buttonblackshort" id="buttonasinh">sinh<sup>-1</sup></button>
-                                <button class="buttonblackshort" id="buttonacosh">cosh<sup>-1</sup></button>
-                                <button class="buttonblackshort" id="buttonatanh">tanh<sup>-1</sup></button>
-                            </div>
-                            <div id="expandlog">
-                                <button class="buttonblackshort" id="buttonlog">log</button>
-                                <button class="buttonblackshort" id="buttonlog2">log<sub>2</sub></button>
-                                <button class="buttonblackshort" id="buttonln">ln</button>
-                                <button class="buttonblackshort" id="button10x" data-operator="10<sup>^</sup>">10<sup>x</sup></button>
-                                <button class="buttonblackshort" id="button2x" data-operator="2<sup>^</sup>">2<sup>x</sup></button>
-                                <button class="buttonblackshort" id="buttonex" data-operator="e<sup>^</sup>">e<sup>x</sup></button>
-                            </div>
-                        </div>
-                        <div id="centerleftpane">
-                            <div id="powerandroot">
-                                <button class="buttonyellow" id="buttonsquare" data-operator="<sup>2</sup>">x<sup>2</sup></button>
-                                <button class="buttonyellow" id="buttonsquareroot">&#8730;</button>
-                            </div>
-                            <div id="nthpowerandnthroot">
-                                <button class="buttonyellow" id="buttonnthpower" data-operator="<sup>^</sup>">y<sup>x</sup></button>
-                                <button class="buttonyellow" id="buttonnthroot" data-operator="<sup>n</sup>&#8730;"><sup>x</sup>&#8730;y</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="keyboardsplitter"></div>
-                    <div id="keyboardright">
-                        <div id="centerrightpane">
-                            <button class="buttonpurple" id="buttonmemorylist">
-                                <span class="buttonlefttext">M</span>
-                                <img class="buttonrighticon" src="images/ico_mem_list.png"/>
-                            </button>
-                            <button class="buttonpurple" id="buttonmemorize">
-                                <img class="buttonlefticon" src="images/ico_arrow_black.png"/>
-                                <span class="buttonrighttext" id="buttonmemorizetext"></span>
-                            </button>
-                            <button class="buttonblack" id="buttonleftparenthesis">(</button>
-                            <button class="buttonblack" id="buttonrightparenthesis">)</button>
-                            <button class="buttonblack" id="buttonfactorial" data-operator="!">x!</button>
-                            <button class="buttonblack" id="buttoninverse" data-operator="<sup>-1</sup>">x<sup>-1</sup></button>
-                            <button class="buttonblack" id="buttonpi">&pi;</button>
-                            <button class="buttonblack" id="buttonpercentage">%</button>
-                        </div>
-                        <div id="rightpane">
-                            <button class="buttonred" id="buttonclear">C</button>
-                            <button class="buttonblue" id="buttondivide">&#247;</button>
-                            <button class="buttonblue" id="buttonmultiply">&#215;</button>
-                            <button class="buttonwhite" id="button7">7</button>
-                            <button class="buttonwhite" id="button8">8</button>
-                            <button class="buttonwhite" id="button9">9</button>
-                            <button class="buttonwhite" id="button4">4</button>
-                            <button class="buttonwhite" id="button5">5</button>
-                            <button class="buttonwhite" id="button6">6</button>
-                            <button class="buttonwhite" id="button1">1</button>
-                            <button class="buttonwhite" id="button2">2</button>
-                            <button class="buttonwhite" id="button3">3</button>
-                            <button class="buttonwhite" id="button0">0</button>
-                            <button class="buttonblue" id="buttondot">.</button>
-                            <button class="buttonblue" id="buttonplusminus">+/&ndash;</button>
-                        </div>
-                        <div id="rightmostpane">
-                            <button class="buttonred" id="buttondelete"><img class="buttondeleteicon" src="images/ico_back.png" alt="backspace" height="26" width="40"/></button>
-                            <button class="buttonblue" id="buttonsubtract" data-operator="-">&ndash;</button>
-                            <button class="buttonblue" id="buttonadd">+</button>
-                            <button class="buttonblueequal" id="buttonequal">=</button>
-                        </div>
-                    </div>
-                </div>
-                <div id="licensebtnl"> i </div>
-                <div id="home_help" class="helplaunch"> ? </div>
-            </div>
-        </div>
-        <!-- external library js files -->
-        <script src="lib/intel-appframework/build/appframework.min.js"></script>
-        <script src="lib/q/q.js"></script>
+  <head>
+    <title>Scientific Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" type="image/png" href="images/icon_300.png">
+    <link rel="manifest" href="manifest.json">
+    <style>
+      body {
+        position: absolute;
 
-        <!-- internal js file -->
-        <script src="js/calc.js"></script>
-    </body>
+        margin: 0px;
+        top: 50%;
+        left: 50%;
+
+        background-color: #222526;
+      }
+
+      @media (orientation: landscape) {
+        body {
+          width: 1280px;
+          height: 720px;
+        }
+      }
+
+      @media (orientation: portrait) {
+        body {
+          width: 720px;
+          height: 1280px;
+        }
+      }
+
+      #background {
+        display: none;
+      }
+    </style>
+  </head>
+  <body style="overflow: hidden;">
+    <platinum-sw-register auto-register clients-claim skip-waiting>
+      <platinum-sw-cache default-cache-strategy="fastest"></platinum-sw-cache>
+    </platinum-sw-register>
+    <div id="background">
+      <div id="calculationpane">
+        <div id="LCD_Upper">
+          <div id="wrapper">
+            <div id="scroller">
+              <div class="scroll-pane" id="calculationhistory"></div>
+            </div>
+          </div>
+          <div id="historyverticalline"></div>
+          <button disabled class="historybuttonclose" id="closehistorybutton"></button>
+        </div>
+        <div id="LCD_Lower">
+          <div id="upperpane">
+            <div id="upperclosebutton">
+              <button disabled class="buttonclose" id="buttonclosecurrentformula"></button>
+            </div>
+            <div id="currentformula"></div>
+          </div>
+          <div id="horizontaldivider"></div>
+          <div id="lowerpane">
+            <div id="lowerclosebutton">
+              <button disabled class="buttonclose" id="buttonclosemainentry"></button>
+            </div>
+            <div id="mainentry"></div>
+            <button disabled class="historybutton" id="openhistorybutton"></button>
+          </div>
+        </div>
+        <div id="keyboard">
+          <div id="keyboardleft">
+            <div id="leftmostpane">
+              <div id="statetransition">
+                <div id="degradswitch" class="switchleftactive">
+                   <div class="buttontogglebackgroundB" id="buttondeg">DEG</div>
+                   <div class="buttontogglebackgroundA" id="buttonrad">RAD</div>
+                </div>
+                 <div id="traghypswitch" class="switchleftactive">
+                   <div class="buttontogglebackgroundB" id="buttontrig">TRIG</div>
+                   <div class="buttontogglebackgroundA" id="buttonhyp">HYP</div>
+                </div>
+              </div>
+              <div id="trigonometric">
+                <button disabled class="buttonblackshort" id="buttonsin">sin</button>
+                <button disabled class="buttonblackshort" id="buttoncos">cos</button>
+                <button disabled class="buttonblackshort" id="buttontan">tan</button>
+                <button disabled class="buttonblackshort" id="buttonarcsin">sin<sup>-1</sup></button>
+                <button disabled class="buttonblackshort" id="buttonarccos">cos<sup>-1</sup></button>
+                <button disabled class="buttonblackshort" id="buttonarctan">tan<sup>-1</sup></button>
+              </div>
+              <div id="hyperbolic">
+                <button disabled class="buttonblackshort" id="buttonsinh">sinh</button>
+                <button disabled class="buttonblackshort" id="buttoncosh">cosh</button>
+                <button disabled class="buttonblackshort" id="buttontanh">tanh</button>
+                <button disabled class="buttonblackshort" id="buttonasinh">sinh<sup>-1</sup></button>
+                <button disabled class="buttonblackshort" id="buttonacosh">cosh<sup>-1</sup></button>
+                <button disabled class="buttonblackshort" id="buttonatanh">tanh<sup>-1</sup></button>
+              </div>
+              <div id="expandlog">
+                <button disabled class="buttonblackshort" id="buttonlog">log</button>
+                <button disabled class="buttonblackshort" id="buttonlog2">log<sub>2</sub></button>
+                <button disabled class="buttonblackshort" id="buttonln">ln</button>
+                <button disabled class="buttonblackshort" id="button10x" data-operator="10<sup>^</sup>">10<sup>x</sup></button>
+                <button disabled class="buttonblackshort" id="button2x" data-operator="2<sup>^</sup>">2<sup>x</sup></button>
+                <button disabled class="buttonblackshort" id="buttonex" data-operator="e<sup>^</sup>">e<sup>x</sup></button>
+              </div>
+            </div>
+            <div id="centerleftpane">
+              <div id="powerandroot">
+                <button disabled class="buttonyellow" id="buttonsquare" data-operator="<sup>2</sup>">x<sup>2</sup></button>
+                <button disabled class="buttonyellow" id="buttonsquareroot">&#8730;</button>
+              </div>
+              <div id="nthpowerandnthroot">
+                <button disabled class="buttonyellow" id="buttonnthpower" data-operator="<sup>^</sup>">y<sup>x</sup></button>
+                <button disabled class="buttonyellow" id="buttonnthroot" data-operator="<sup>n</sup>&#8730;"><sup>x</sup>&#8730;y</button>
+              </div>
+            </div>
+          </div>
+          <div id="keyboardsplitter"></div>
+          <div id="keyboardright">
+            <div id="centerrightpane">
+              <button disabled class="buttonpurple" id="buttonmemorylist">
+                <span class="buttonlefttext">M</span>
+                <img class="buttonrighticon" src="images/ico_mem_list.png"/>
+              </button>
+              <button disabled class="buttonpurple" id="buttonmemorize">
+                <img class="buttonlefticon" src="images/ico_arrow_black.png"/>
+                <span class="buttonrighttext" id="buttonmemorizetext"></span>
+              </button>
+              <button disabled class="buttonblack" id="buttonleftparenthesis">(</button>
+              <button disabled class="buttonblack" id="buttonrightparenthesis">)</button>
+              <button disabled class="buttonblack" id="buttonfactorial" data-operator="!">x!</button>
+              <button disabled class="buttonblack" id="buttoninverse" data-operator="<sup>-1</sup>">x<sup>-1</sup></button>
+              <button disabled class="buttonblack" id="buttonpi">&pi;</button>
+              <button disabled class="buttonblack" id="buttonpercentage">%</button>
+            </div>
+            <div id="rightpane">
+              <button disabled class="buttonred" id="buttonclear">C</button>
+              <button disabled class="buttonblue" id="buttondivide">&#247;</button>
+              <button disabled class="buttonblue" id="buttonmultiply">&#215;</button>
+              <button disabled class="buttonwhite" id="button7">7</button>
+              <button disabled class="buttonwhite" id="button8">8</button>
+              <button disabled class="buttonwhite" id="button9">9</button>
+              <button disabled class="buttonwhite" id="button4">4</button>
+              <button disabled class="buttonwhite" id="button5">5</button>
+              <button disabled class="buttonwhite" id="button6">6</button>
+              <button disabled class="buttonwhite" id="button1">1</button>
+              <button disabled class="buttonwhite" id="button2">2</button>
+              <button disabled class="buttonwhite" id="button3">3</button>
+              <button disabled class="buttonwhite" id="button0">0</button>
+              <button disabled class="buttonblue" id="buttondot">.</button>
+              <button disabled class="buttonblue" id="buttonplusminus">+/&ndash;</button>
+            </div>
+            <div id="rightmostpane">
+              <button disabled class="buttonred" id="buttondelete"><img class="buttondeleteicon" src="images/ico_back.png" alt="backspace" height="26" width="40"/></button>
+              <button disabled class="buttonblue" id="buttonsubtract" data-operator="-">&ndash;</button>
+              <button disabled class="buttonblue" id="buttonadd">+</button>
+              <button disabled class="buttonblueequal" id="buttonequal">=</button>
+            </div>
+          </div>
+        </div>
+        <div id="licensebtnl"> i </div>
+        <div id="home_help" class="helplaunch"> ? </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    'use strict';
+
+    var startingOrientation =
+      (window.innerWidth > window.innerHeight) ? 'landscape' : 'portrait';
+
+    var loadOrientationSpecificStylesheet = function(orientation) {
+      var linkElement = document.createElement('link');
+
+      linkElement = document.createElement('link');
+      linkElement.setAttribute('rel', 'stylesheet');
+
+      linkElement.setAttribute('media', 'all and (orientation:' + orientation + ')');
+      linkElement.setAttribute('href', 'css/calc_' + orientation + '.css');
+
+      document.head.appendChild(linkElement);
+    };
+
+    // load stylesheets immediately
+    (function() {
+      var linkElement = document.createElement('link');
+      linkElement.setAttribute('rel', 'stylesheet');
+      linkElement.setAttribute('href', 'css/calc_common.css');
+      document.head.appendChild(linkElement);
+
+      loadOrientationSpecificStylesheet(startingOrientation);
+    })();
+
+    var doMaximiseBody = function() {
+      // apply scaling transform
+      var docWidth = document.documentElement.clientWidth;
+      var docHeight = document.documentElement.clientHeight;
+      var body = document.body;
+      var bodyWidth = body.clientWidth;
+      var bodyHeight = body.clientHeight;
+
+      var transform =
+        "translate(-50%, -50%) scale(" +
+            docWidth / bodyWidth +
+            ", " +
+            docHeight / bodyHeight +
+          ")";
+      body.style['-webkit-transform'] = transform;
+      body.style.transform = transform;
+    };
+
+    doMaximiseBody();
+
+    window.addEventListener('pageshow', function() {
+      console.timeStamp('MAXMAXMAX:pageshow');
+      window.requestAnimationFrame(function() {
+        var scripts = [
+          'lib/es6-promise/es6-promise.min.js',
+          'lib/fetch/fetch.js',
+          'js/calc.js'
+        ];
+
+        scripts.forEach(function(script) {
+          var scriptElement = document.createElement('script');
+          scriptElement.setAttribute('src',script);
+
+          document.head.appendChild(scriptElement);
+        });
+
+        // load stylesheet for other orientation
+        var otherOrientation = (startingOrientation === 'landscape') ? 'portrait' : 'landscape';
+        loadOrientationSpecificStylesheet(otherOrientation);
+
+        document.head.appendChild(linkElement);
+      });
+    }, false);
+  </script>
 
 </html>
 

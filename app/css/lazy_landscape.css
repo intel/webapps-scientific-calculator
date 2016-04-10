@@ -10,36 +10,37 @@
 .memorypane {
   position: absolute;
   background: var(--backgroundFill);
-  background-image: url(../images/bg_memory_slot_port.png);
-  width: 534px;
-  height: 98px;
-  left: 114px;
+  background-image: url(../images/bg_memory_slot_land.png);
+  width: 476px;
+  height: 92px;
+  left: 124px;
 }
 
 .memoryentrypane {
   position: relative;
   float: left; 
-  width: 658px;
-  height: 116px;
-  top: 18px;
-  left: 20px;
+  width: 610px;
+  height: 104px;
+  top: 12px;
+  left: 10px;
 }
 
 .memory {
   position: relative;
   float: left; 
-  width: 330px;
+  width: 276px;
   height: 45px;
 }
 
 .memorytext {
   position: relative;
   float: left; 
-  width: 322px;
+  width: 268px;
   height: 45px;
   color: #d9e2d0;
   font-family: OpenSans-Regular;
   font-size: 36px;
+  line-height: 36px;
   left: 8px;
   top: 6px;
   overflow: hidden;
@@ -47,21 +48,21 @@
 }
 
 .buttonmemory {
-  position: relative;
+  position: absolute;
   float: left; 
-  left: 0px;
-  width: 98px;
-  height: 98px;
+  left: 10px;
+  width: 104px;
+  height: 93px;
   color: #727272;
   font-family: OpenSans-Light;
   font-size: 36px;
   border-style: none;
   background: var(--backgroundFill);
-  background-image: url(../images/bt_purple_port.png);
+  background-image: url(../images/bt_mem_list_land.png);
 }
 
 .buttonmemory:active {
-  background-image: url(../images/bt_purple_port_press.png);
+  background-image: url(../images/bt_mem_list_land_press.png);
 }
 
 .buttonmemoryclose {
@@ -69,7 +70,7 @@
   float: right;
   width: 64px;
   height: 64px;
-  left: 350px;
+  left: 294px;
   top: 14px;
   border-style: none;
   background: var(--backgroundFill);
@@ -81,7 +82,7 @@
   float: right;
   width: 64px;
   height: 64px;
-  left: 350px;
+  left: 294px;
   top: 14px;
   border-style: none;
   background: var(--backgroundFill);
@@ -111,9 +112,9 @@
 .memorydescriptiontext {
   position: relative;
   float: left; 
-  width: 320px;
-  height: 45px;
-  line-height: 45px;
+  width: 265px;
+  height: 40px;
+  line-height: 40px;
   color: #d9e2d0;
   font-family: OpenSans-Light;
   font-size: 24px;
@@ -130,7 +131,7 @@
   color: #d9e2d0;
   font-family: OpenSans-Light;
   font-size: 24px;
-  background-color: transparent;
+  background: var(--backgroundFill);
   display: none;
 }
 
@@ -138,7 +139,7 @@
   position: absolute;
   width: 64px;
   height: 64px;
-  left: 450px;
+  left: 394px;
   top: 14px;
   border-style: none;
   background: var(--backgroundFill);
@@ -149,7 +150,7 @@
   position: absolute;
   width: 64px;
   height: 64px;
-  left: 450px;
+  left: 394px;
   top: 14px;
   border-style: none;
   background: var(--backgroundFill);
@@ -163,23 +164,23 @@
 #memorypage {
   position: absolute;
   float: left;
-  width: 720px;
-  height: 1280px;
+  width: 1280px;
+  height: 720px;
   left: 0px;
   top: 0px;
   background: var(--backgroundFill);
-  background-image: url(../images/bg_port.png);
+  background-image: url(../images/bg_land.png);
 }
 
 #memorypane {
   position: relative;
   float: left;
-  left: 16px;
-  top: 44px;
-  width: 688px;
-  height: 1044px;
+  left: 20px;
+  top: 28px;
+  width: 1248px;
+  height: 518px;
   background: var(--backgroundFill);
-  background-image: url(../images/bg_memory_list_port.png);
+  background-image: url(../images/bg_memory_list_land.png);
 }
 
 #logo {
@@ -211,7 +212,7 @@
   position: relative;
   float: left;
   left: 20px;
-  top: 24px;
+  top: 14px;
   width: 201px;
   height: 64px;
 }
@@ -235,8 +236,8 @@
 #memoryClose {
   position: relative;
   float: right;
-  right: 20px;
-  top: 24px;
+  right: 24px;
+  top: 14px;
   width: 201px;
   height: 64px;
 }
@@ -244,12 +245,12 @@
 #memorypagelcd {
   position: relative;
   float: left;
-  width: 688px;
-  height: 178px;
-  left: 16px;
+  width: 1248px;
+  height: 144px;
+  left: 20px;
   top: 16px;
   background: var(--backgroundFill);
-  background-image: url(../images/bg_display_memory_port.png);
+  background-image: url(../images/bg_display_memory_land.png);
 }
 
 #mplcdbuttonclose {
@@ -259,9 +260,9 @@
 
 #mpmainentry {
   position: absolute;
-  left: 130px;
   right: 16px;
-  top: 20px;
+  left: 150px;
+  top: 10px;
   font-family: OpenSans-Semibold;
   font-size: 84px;
   text-align: right;
@@ -270,22 +271,21 @@
 #mpopenhistorybutton {
   position: absolute;
   float: left;
-  width: 120px;
+  width: 130px;
   height: 56px;
   left: 4px;
-  top: 116px;
+  top: 82px;
 }
 
 .switchrightactive {
-  width: 152px;
+  width: 160px;
   height: 36px;
-  background: var(--backgroundFill);
-  background-image: url(../images/switch_port_right_act.png);
+  background-image: url(../images/switch_land_right_act.png);
 }
 
 .jspTrack {
   background: #c4ccbc;
-  height: 1208px;
+  height: 670px;
 }
 
 .jspDrag {
@@ -300,16 +300,17 @@
 .thickdivisor {
   position: relative;
   float: left; 
-  width: 646px;
+  width: 1206px;
   height: 4px;
+  left: 1px;
   background: var(--backgroundFill);
-  background-image: url(../images/line_history_hor4px_port.png);
+  background-image: url(../images/line_history_hor4px_land.png);
 }
 
 .calculationpane {
   position: relative;
   float: left; 
-  width: 646px;
+  width: 1210px;
   max-height: 108px;
   min-height: 68px;
   overflow: hidden;
@@ -318,7 +319,7 @@
 .calculation {
   position: relative;
   float: left; 
-  width: 646px;
+  width: 1210px;
 }
 
 .calculationtext {
@@ -338,31 +339,33 @@
   width: 2px;
   height: 72px;
   top: -72px;
+  left: -1px;
   background: var(--backgroundFill);
-  background-image: url(../images/line_history_vert_port.png);
+  background-image: url(../images/line_history_vert_land.png);
 }
 
 .thindivisor {
   position: relative;
   float: left; 
-  width: 646px;
+  width: 1206px;
   height: 2px;
+  left: 1px;
   background: var(--backgroundFill);
-  background-image: url(../images/line_history_hor2px_port.png);
+  background-image: url(../images/line_history_hor2px_land.png);
 }
 
 .resultpane {
   position: relative;
   float: left; 
-  width: 646px;
-  height: 112px;
+  width: 1210px;
+  height: 82px;
 }
 
 .result {
   position: relative;
   float: left; 
-  width: 646px;
-  height: 112px;
+  width: 1210px;
+  height: 82px;
 }
 
 .resulttext {
@@ -372,16 +375,15 @@
   font-family: OpenSans-Semibold;
   font-size: 56px;
   right: 16px;
-  top: 10px;
 }
 
 .currentformulashort {
-  position: absolute;
-  width: 592px;
+  position: relative;
+  float: right;
+  width: 1134px;
   height: 62px;
   right: 16px;
-  left: 80px;
-  top: 46px;
+  top: 7px;
   font-family: OpenSans-Regular;
   font-size: 44px;
   text-align: right;
@@ -391,44 +393,28 @@
 
 .currentformulalong {
   position: relative;
-  float: right;
-  width: 548px;
-  height: 98px;
+  float: left;
+  width: 1134px;
+  height: 72px;
   right: 16px;
   top: 7px;
   font-family: OpenSans-Regular;
   font-size: 44px;
   text-align: right;
-  word-wrap: break-word;
-  line-height: 110%;
   color: #000000;
   overflow: hidden;
 }
 
 .mainentryshort {
-  position: absolute;
+  position: relative;
+  float: right;
+  width: 1098px;
   height: 114px;
   right: 16px;
-  top: 10px;
+  top: 9px;
   font-family: OpenSans-Semibold;
   font-size: 84px;
   text-align: right;
-  color: #000000;
-  overflow: hidden;
-}
-
-.mainentrylong {
-  position: relative;
-  float: right;
-  width: 548px;
-  height: 165px;
-  right: 16px;
-  top: 10px;
-  font-family: OpenSans-Semibold;
-  font-size: 64px;
-  text-align: right;
-  word-wrap: break-word;
-  line-height: 110%;
   color: #000000;
   overflow: hidden;
 }
@@ -443,6 +429,7 @@
   0% {
     height: 0px;
   }
+
   100% {
     height: 390px;
   }
@@ -463,17 +450,17 @@
   position: absolute;
   width: 688px;
   height: 362px;
-  left: 24px;
-  top: 440px;
+  left: 296px;
+  top: 179px;
   background: var(--backgroundFill);
   background-image: url(../images/bg_dialog.png);
 }
 
 #dialogheading {
   position: relative;
-  width: 650px;
+  width: 660px;
   height: 56px;
-  left: 10px;
+  left: 16px;
   top: 20px;
   color: #EBEBE9;
   font-family: OpenSans-Semibold;
@@ -485,16 +472,17 @@
   float: left;
   width: 680px;
   height: 270px;
+  left: 5px;
   top: 30px;
-  background-repeat: no-repeat;
+  background: var(--backgroundFill);
   font-family: OpenSans-Light;
-  font-size: 20px;
-  color: #FFFFFF;
+  font-size: 36px;
+  color: #EBEBE9;
 }
 
 #dialogcontenttext {
   position: relative;
-  width: 680px;
+  width: 660px;
   height: 150px;
   left: 16px;
   top: 50px;
@@ -540,7 +528,7 @@
   float: left;
   width: 264px;
   height: 64px;
-  left: 16px;
+  left: 20px;
 }
 
 #dialogcancelbutton {
@@ -548,7 +536,7 @@
   float: right;
   width: 264px;
   height: 64px;
-  right: 16px;
+  right: 20px;
 }
 
 /* memory note editor page */
@@ -556,18 +544,18 @@
 #memorynoteeditor {
   position: absolute;
   float: left;
-  width: 720px;
-  height: 1280px;
+  width: 1280px;
+  height: 720px;
   left: 0px;
   top: 0px;
-  background: var(--backgroundFill);
-  background-image: url(../images/bg_port.png);
+  background-image: url(../images/bg_land.png);
+  background-repeat: no-repeat;
 }
 
 #mnememorypane {
   position: relative;
-  top: 200px;
-  left: 36px;
+  top: 20px;
+  left: 316px;
   height: 94px;
   width: 648px;
   background: var(--backgroundFill);
@@ -585,21 +573,19 @@
 
 #mnetext {
   position: absolute;
-  color: #D9E2D0;
-  font-family: OpenSans-Light;
-  font-size: 36px;
-  left: 124px;
+  color: #ffffff;
+  left: 122px;
   width: 533px;
   height: 45px;
-  top: 0px;
+  top: 8px;
 }
 
 #mnedescription {
   position: absolute;
   color: #000000;
-  left: 114px;
+  left: 122px;
   top: 45px;
-  width: 480px;
+  width: 533px;
   height: 45px;
 }
 
@@ -610,7 +596,7 @@
   top: 49px;
   width: 480px;
   height: 36px;
-  background-color: transparent;
+  background: var(--backgroundFill);
   font-size: 20px;
   border: hidden;
 }
@@ -631,22 +617,26 @@
 
 #mnesave {
   position: absolute;
-  left: 30px;
-  top: 330px;
+  left: 316px;
+  top: 144px;
   width: 201px;
   height: 64px;
 }
 
 #mnecancel {
-  position: absolute;
-  left: 477px;
-  top: 330px;
+  position: relative;
+  float: right;
+  right: 316px;
+  top: 144px;
   width: 201px;
   height: 64px;
 }
 
 #mnebuttondownarrow {
   position: relative;
+  height: 26px;
+  width: 26px;
+  float: left;
   top: 30px;
   left: 10px;
 }
@@ -654,12 +644,12 @@
 .dialogbackground {
   position: absolute;
   float: left;
-  width: 720px;
-  height: 1280px;
+  width: 1280px;
+  height: 720px;
   left: 0px;
   top: 0px;
   background: var(--backgroundFill);
-  background-image: url(../images/bg_port.png);
+  background-image: url(../images/bg_land.png);
   opacity: 0.5;
 }
 
@@ -679,6 +669,7 @@
 
 .customScrollbarV > div {
   position: absolute;
+  z-index: 100;
   width: 100%;
   background: black;
   box-sizing: border-box;
@@ -691,8 +682,8 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 720px;
-  height: 1280px;
+  width: 1280px;
+  height: 720px;
   background: linear-gradient(to right top, #3f4140, #1d2021);
   z-index: 99;
 }
@@ -713,7 +704,7 @@
 
 #licensescroll {
   position: relative;
-  font: 18px/100% Arial, Helvetica, sans-serif;
+  font: 25px/100% Arial, Helvetica, sans-serif;
   text-align: center;
 }
 
@@ -723,14 +714,14 @@
   border: solid 1px #333;
   text-align: center;
   text-decoration: none;
-  font: 60px/100% Arial, Helvetica, sans-serif;
+  font: 50px/100% Arial, Helvetica, sans-serif;
   text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
   border-radius: 12px;
   border-radius: 12px;
   background: linear-gradient(to left bottom, #666, #000);
-  height: 114px;
-  width: 114px;
-  line-height: 110px;
+  height: 64px;
+  width: 100px;
+  line-height: 60px;
   cursor: pointer;
   box-shadow: 2px 2px 14px #000;
 }
@@ -745,7 +736,7 @@
 }
 
 #licensebtnq {
-  left: 160px;
+  left: 440px;
   width: 400px;
 }
 
@@ -763,6 +754,18 @@
   visibility: hidden;
 }
 
+.helpdialog .column1 {
+  position: relative;
+  float: left;
+  width: 50%;
+}
+
+.helpdialog .column2 {
+  position: relative;
+  float: right;
+  width: 50%;
+}
+
 .helpdialog.shown {
   visibility: visible;
   transition: background-color 0.5s;
@@ -773,8 +776,8 @@
 .helpdialog .inner {
   position: absolute;
   top: 10%;
-  left : 5.9%;
-  height: 70%;
+  left : 8%;
+  height: 65%;
   width: 80%;
   border: 20px solid #131516;
   background-color: #2a2b2a;
@@ -797,15 +800,15 @@
 .helpdialog .inner .contents .black {
   color: #000000;
   font-family: OpenSans-Light;
-  font-size: 36px;
-  line-height: 98px;
+  font-size: 26px;
+  line-height: 72px;
 }
 
 .helpdialog .inner .contents .white {
   color: #ebebe9;
   font-family: OpenSans-Light;
   font-size: 36px;
-  line-height: 98px;
+  line-height: 72px;
 }
 
 .helpdialog .inner .contents .white2 {
@@ -835,8 +838,8 @@
   position: absolute;
   width: 60px;
   height: 60px;
-  top: -5%;
-  left: 93%;
+  top: -7%;
+  left: 96%;
   font-family: Sans;
   font-weight: 900;
   font-size: 90px;

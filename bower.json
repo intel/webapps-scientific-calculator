@@ -8,11 +8,13 @@
   ],
   "dependencies": {
     "iscroll": "~5.0.0",
-    "q": "~0.9.3",
     "pegjs": "~0.9.0",
     "open-sans-semibold": "http://themes.googleusercontent.com/static/fonts/opensans/v6/MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff",
     "open-sans-light": "http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff",
     "open-sans": "http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff",
-    "intel-appframework": "~2.1.1"
+    "fetch": "^0.11.0",
+    "es6-promise": "^3.2.1",
+    "polymer": "Polymer/polymer#^1.4.0",
+    "platinum-sw": "PolymerElements/platinum-sw#^1.3.0"
   }
 }
