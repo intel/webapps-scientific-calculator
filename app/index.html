@@ -176,31 +176,29 @@
   <script>
     'use strict';
 
+    var startingOrientation =
+      (window.innerWidth > window.innerHeight) ? 'landscape' : 'portrait';
+
+    var loadOrientationSpecificStylesheet = function(orientation) {
+      var linkElement = document.createElement('link');
+
+      linkElement = document.createElement('link');
+      linkElement.setAttribute('rel', 'stylesheet');
+
+      linkElement.setAttribute('media', 'all and (orientation:' + orientation + ')');
+      linkElement.setAttribute('href', 'css/calc_' + orientation + '.css');
+
+      document.head.appendChild(linkElement);
+    };
+
+    // load stylesheets immediately
     (function() {
-      var stylesheets = [
-        {
-          href: 'css/calc_common.css'
-        },
-        {
-          media: 'all and (orientation:portrait)',
-          href: 'css/calc_portrait.css'
-        },
-        {
-          media: 'all and (orientation:landscape)',
-          href: 'css/calc_landscape.css'
-        },
-      ];
+      var linkElement = document.createElement('link');
+      linkElement.setAttribute('rel', 'stylesheet');
+      linkElement.setAttribute('href', 'css/calc_common.css');
+      document.head.appendChild(linkElement);
 
-      stylesheets.forEach(function(stylesheet) {
-        var linkElement = document.createElement('link');
-        linkElement.setAttribute('rel', 'stylesheet');
-        if (stylesheet.media) {
-          linkElement.setAttribute('media', stylesheet.media);
-        }
-        linkElement.setAttribute('href', stylesheet.href);
-
-        document.head.appendChild(linkElement);
-      });
+      loadOrientationSpecificStylesheet(startingOrientation);
     })();
 
     var doMaximiseBody = function() {
@@ -238,6 +236,12 @@
 
           document.head.appendChild(scriptElement);
         });
+
+        // load stylesheet for other orientation
+        var otherOrientation = (startingOrientation === 'landscape') ? 'portrait' : 'landscape';
+        loadOrientationSpecificStylesheet(otherOrientation);
+
+        document.head.appendChild(linkElement);
       });
     }, false);
   </script>

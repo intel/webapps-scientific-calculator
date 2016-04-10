@@ -1130,9 +1130,10 @@ let Calculator = {};
 
     this.fillServiceWorkerCache = function() {
       let allFiles = [
-        "/css/calc.css",
-        "/css/lazy.css",
+        "/css/calc_common.css",
+        "/css/calc_landscape.css",
         "/css/calc_portrait.css",
+        "/css/lazy.css",
         "/css/lazy_portrait.css",
         "/css/jquery.jscrollpane.css",
         "/sw-import.js",
