@@ -822,7 +822,6 @@
   width: 64px;
   height: 64px;
   border: 2px solid white;
-  background: var(--backgroundFill);
   background-image: url(../images/clear_memory_disable.png);
   background-color: black;
 }
@@ -831,7 +830,6 @@
   width: 64px;
   height: 64px;
   border: 2px solid white;
-  background: var(--backgroundFill);
   background-image: url(../images/pencil_disable.png);
   background-color: black;
 }

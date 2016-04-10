@@ -503,6 +503,7 @@ body {
 }
 
 #openhistorybutton {
+  left: -6px;
   top: 110px;
 }
 
