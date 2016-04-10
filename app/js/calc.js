@@ -1133,7 +1133,7 @@ let Calculator = {};
         "/css/calc_common.css",
         "/css/calc_landscape.css",
         "/css/calc_portrait.css",
-        "/css/lazy.css",
+        "/css/lazy_landscape.css",
         "/css/lazy_portrait.css",
         "/css/jquery.jscrollpane.css",
         "/sw-import.js",
