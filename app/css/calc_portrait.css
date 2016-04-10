@@ -40,7 +40,6 @@ body {
   box-pack: center;
   box-orient: vertical;
   display: flex;
-  transform: translate(-50%, -50%) scale(0, 0);
 }
 
 sup,

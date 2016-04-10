@@ -22,8 +22,6 @@
         top: 50%;
         left: 50%;
 
-        overflow: hidden;
-
         background-color: #222526;
       }
 
@@ -46,7 +44,7 @@
       }
     </style>
   </head>
-  <body>
+  <body style="overflow: hidden;">
     <platinum-sw-register auto-register clients-claim skip-waiting>
       <platinum-sw-cache default-cache-strategy="fastest"></platinum-sw-cache>
     </platinum-sw-register>
