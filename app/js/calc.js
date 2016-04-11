@@ -1338,7 +1338,7 @@ let Calculator = {};
     let link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('media', 'all and (orientation:landscape)');
-    link.setAttribute('href', 'css/lazy.css');
+    link.setAttribute('href', 'css/lazy_landscape.css');
 
     Raf.queueAppendChild(document.head, link);
 
