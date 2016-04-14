@@ -1363,6 +1363,7 @@ let Calculator = {};
         {
           type: 'script',
           file: 'lib/webcomponentsjs/webcomponents-lite.min.js',
+          condition: 'serviceWorker' in navigator,
           success: function(resolve) {
             // once webcomponents is loaded, load the polymer elements
             let files = [
@@ -1470,17 +1471,23 @@ let Calculator = {};
 
       let makePromise = function(i) {
         return new Promise(function(resolve) {
-          let element;
-          if (lazyScripts[i].type === 'script') {
-            element = document.createElement('script');
-            element.onload = makeSuccessScript(
-              lazyScripts[i].success,
-              resolve
-            );
-            element.setAttribute('src', lazyScripts[i].file);
-          }
+          // if condition is not specified then load script
+          // if condition is specified, then if it is true, then load script
+          if ((lazyScripts[i].condition === undefined ) || lazyScripts[i].condition) {
+            let element = null;
+            if (lazyScripts[i].type === 'script') {
+              element = document.createElement('script');
+              element.onload = makeSuccessScript(
+                lazyScripts[i].success,
+                resolve
+              );
+              element.setAttribute('src', lazyScripts[i].file);
+            }
 
-          Raf.queueAppendChild(document.head, element);
+            if (element !== null) {
+              Raf.queueAppendChild(document.head, element);
+            }
+          }
         });
       };
 
