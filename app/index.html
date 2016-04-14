@@ -177,6 +177,18 @@
   <script>
     'use strict';
 
+    // requestAnim shim layer by Paul Irish
+    window.requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       || 
+              window.webkitRequestAnimationFrame || 
+              window.mozRequestAnimationFrame    || 
+              window.oRequestAnimationFrame      || 
+              window.msRequestAnimationFrame     || 
+              function(/* function */ callback, /* DOMElement */ element){
+                  window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+
     var startingOrientation =
       (window.innerWidth > window.innerHeight) ? 'landscape' : 'portrait';
 
@@ -223,7 +235,7 @@
     doMaximiseBody();
 
     window.addEventListener('pageshow', function() {
-      window.requestAnimationFrame(function() {
+      window.requestAnimFrame(function() {
         var scripts = [
           'lib/es6-promise/es6-promise.min.js',
           'lib/fetch/fetch.js',
