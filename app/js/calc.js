@@ -74,7 +74,9 @@ let Calculator = {};
             );
             break;
           default:
-            console.error('Unknown dom change type');
+            if (console && console.error) {
+              console.error('Unknown dom change type');
+            }
             break;
         }
       }
@@ -1396,7 +1398,9 @@ let Calculator = {};
                 Calculator.parser = PEG.buildParser(data);
                 resolve();
               } catch (err) {
-                console.log(err.message);
+                if (console && console.log) {
+                  console.log(err.message);
+                }
               }
             });
           }
@@ -1502,10 +1506,10 @@ let Calculator = {};
         }
 
         Raf.maximiseBody();
-
-        console.timeStamp('MAXMAXMAX:Buttons Enabled');
       }, function() {
-        console.error('something wrong with promises');
+        if (console && console.error) {
+          console.error('something wrong with promises');
+        }
       });
     });
   })();
