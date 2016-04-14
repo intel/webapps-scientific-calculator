@@ -9,6 +9,18 @@
 
 let Calculator = {};
 
+// requestAnim shim layer by Paul Irish
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       || 
+          window.webkitRequestAnimationFrame || 
+          window.mozRequestAnimationFrame    || 
+          window.oRequestAnimationFrame      || 
+          window.msRequestAnimationFrame     || 
+          function(/* function */ callback, /* DOMElement */ element){
+              window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
 (function() {
   'use strict';
 
@@ -92,7 +104,7 @@ let Calculator = {};
       _domChanges.push(newChange);
 
       if (_domChanges.length === 1) {
-        window.requestAnimationFrame(_doDomChanges);
+        window.requestAnimFrame(_doDomChanges);
       }
     };
 
@@ -107,7 +119,7 @@ let Calculator = {};
       _domChanges.push(newChange);
 
       if (_domChanges.length === 1) {
-        window.requestAnimationFrame(_doDomChanges);
+        window.requestAnimFrame(_doDomChanges);
       }
     };
 
@@ -121,13 +133,13 @@ let Calculator = {};
       _domChanges.push(newChange);
 
       if (_domChanges.length === 1) {
-        window.requestAnimationFrame(_doDomChanges);
+        window.requestAnimFrame(_doDomChanges);
       }
     };
 
     this.maximiseBody = function() {
       // doMaximiseBody is defined in index.html
-      window.requestAnimationFrame(doMaximiseBody);
+      window.requestAnimFrame(doMaximiseBody);
     };
   };
 
