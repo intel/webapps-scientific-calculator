@@ -17,12 +17,12 @@
 
 @font-face {
   font-family: OpenSans-Light;
-  src: url(../lib/open-sans-light/index.woff);
+  src: url(../bower_components/open-sans-light/index.woff);
 }
 
 @font-face {
   font-family: OpenSans-Regular;
-  src: url(../lib/open-sans/index.woff);
+  src: url(../bower_components/open-sans/index.woff);
 }
 
 body {
