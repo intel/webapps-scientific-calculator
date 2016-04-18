@@ -1,0 +1,877 @@
+:root {
+  --backgroundFill: no-repeat 100% 100% transparent;
+}
+
+@font-face {
+  font-family: OpenSans-Semibold;
+  src: url(../lib/open-sans-semibold/index.woff);
+}
+
+.memorypane {
+  position: absolute;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_memory_slot_port.png);
+  width: 534px;
+  height: 98px;
+  left: 114px;
+}
+
+.memoryentrypane {
+  position: relative;
+  float: left; 
+  width: 658px;
+  height: 116px;
+  top: 18px;
+  left: 20px;
+}
+
+.memory {
+  position: relative;
+  float: left; 
+  width: 330px;
+  height: 45px;
+}
+
+.memorytext {
+  position: relative;
+  float: left; 
+  width: 322px;
+  height: 45px;
+  color: #d9e2d0;
+  font-family: OpenSans-Regular;
+  font-size: 36px;
+  left: 8px;
+  top: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buttonmemory {
+  position: relative;
+  float: left; 
+  left: 0px;
+  width: 98px;
+  height: 98px;
+  color: #727272;
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/bt_purple_port.png);
+}
+
+.buttonmemory:active {
+  background-image: url(../images/bt_purple_port_press.png);
+}
+
+.buttonmemoryclose {
+  position: absolute;
+  float: right;
+  width: 64px;
+  height: 64px;
+  left: 350px;
+  top: 14px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/clear_memory_disable.png);
+}
+
+.buttonmemorycloseenabled {
+  position: absolute;
+  float: right;
+  width: 64px;
+  height: 64px;
+  left: 350px;
+  top: 14px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/clear_memory.png);
+}
+
+.buttonmemorycloseenabled:active {
+  background-image: url(../images/clear_memory_press.png);
+}
+
+.memorydivisor {
+  position: relative;
+  float: left; 
+  width: 160px;
+  height: 2px;
+  background: var(--backgroundFill);
+  background-image: url(../images/LineVertical184Green.png);
+}
+
+.memorydescription {
+  position: relative;
+  float: left; 
+  width: 276px;
+  height: 45px;
+}
+
+.memorydescriptiontext {
+  position: relative;
+  float: left; 
+  width: 320px;
+  height: 45px;
+  line-height: 45px;
+  color: #d9e2d0;
+  font-family: OpenSans-Light;
+  font-size: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  left: 8px;
+  top: 2px;
+}
+
+.memorydescriptioninput {
+  position: relative;
+  float: left; 
+  border: none;
+  color: #d9e2d0;
+  font-family: OpenSans-Light;
+  font-size: 24px;
+  background-color: transparent;
+  display: none;
+}
+
+.buttonmemoryedit {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  left: 450px;
+  top: 14px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/pencil_disable.png);
+}
+
+.buttonmemoryeditenabled {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  left: 450px;
+  top: 14px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/pencil.png);
+}
+
+.buttonmemoryeditenabled:active {
+  background-image: url(../images/pencil_press.png);
+}
+
+#memorypage {
+  position: absolute;
+  float: left;
+  width: 720px;
+  height: 1280px;
+  left: 0px;
+  top: 0px;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_port.png);
+}
+
+#memorypane {
+  position: relative;
+  float: left;
+  left: 16px;
+  top: 44px;
+  width: 688px;
+  height: 1044px;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_memory_list_port.png);
+}
+
+#logo {
+  position: relative;
+  float: left;
+  width: 244px;
+  height: 33px;
+  background: var(--backgroundFill);
+  background-image: url(../images/Logo.png);
+}
+
+.dialogAbuttonPurple {
+  position: absolute;
+  width: 201px;
+  height: 64px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/bt_dialogA_purple.png);
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  color: #EBEBE9;
+}
+
+.dialogAbuttonPurple:active {
+  background-image: url(../images/bt_dialogA_purple_press.png);
+}
+
+#memoryclearall {
+  position: relative;
+  float: left;
+  left: 20px;
+  top: 24px;
+  width: 201px;
+  height: 64px;
+}
+
+.dialogAbuttonBlack {
+  position: absolute;
+  width: 201px;
+  height: 64px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/bt_dialogA_black.png);
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  color: #EBEBE9;
+}
+
+.dialogAbuttonBlack:active {
+  background-image: url(../images/bt_dialogA_black_press.png);
+}
+
+#memoryClose {
+  position: relative;
+  float: right;
+  right: 20px;
+  top: 24px;
+  width: 201px;
+  height: 64px;
+}
+
+#memorypagelcd {
+  position: relative;
+  float: left;
+  width: 688px;
+  height: 178px;
+  left: 16px;
+  top: 16px;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_display_memory_port.png);
+}
+
+#mplcdbuttonclose {
+  position: relative;
+  left: 28px;
+}
+
+#mpmainentry {
+  position: absolute;
+  left: 130px;
+  right: 16px;
+  top: 20px;
+  font-family: OpenSans-Semibold;
+  font-size: 84px;
+  text-align: right;
+}
+
+#mpopenhistorybutton {
+  position: absolute;
+  float: left;
+  width: 120px;
+  height: 56px;
+  left: 4px;
+  top: 116px;
+}
+
+.switchrightactive {
+  width: 152px;
+  height: 36px;
+  background: var(--backgroundFill);
+  background-image: url(../images/switch_port_right_act.png);
+}
+
+.jspTrack {
+  background: #c4ccbc;
+  height: 1208px;
+}
+
+.jspDrag {
+  background: #000000;
+  border-radius: 10px;
+}
+
+.jspVerticalBar {
+  width: 10px;
+}
+
+.thickdivisor {
+  position: relative;
+  float: left; 
+  width: 646px;
+  height: 4px;
+  background: var(--backgroundFill);
+  background-image: url(../images/line_history_hor4px_port.png);
+}
+
+.calculationpane {
+  position: relative;
+  float: left; 
+  width: 646px;
+  max-height: 108px;
+  min-height: 68px;
+  overflow: hidden;
+}
+
+.calculation {
+  position: relative;
+  float: left; 
+  width: 646px;
+}
+
+.calculationtext {
+  position: relative;
+  float: right;
+  color: #000000;
+  font-family: OpenSans-Regular;
+  font-size: 36px;
+  right: 16px;
+  top: 5px;
+  text-align: right;
+}
+
+.shortverticaldivisor {
+  position: relative;
+  float: right;
+  width: 2px;
+  height: 72px;
+  top: -72px;
+  background: var(--backgroundFill);
+  background-image: url(../images/line_history_vert_port.png);
+}
+
+.thindivisor {
+  position: relative;
+  float: left; 
+  width: 646px;
+  height: 2px;
+  background: var(--backgroundFill);
+  background-image: url(../images/line_history_hor2px_port.png);
+}
+
+.resultpane {
+  position: relative;
+  float: left; 
+  width: 646px;
+  height: 112px;
+}
+
+.result {
+  position: relative;
+  float: left; 
+  width: 646px;
+  height: 112px;
+}
+
+.resulttext {
+  position: relative;
+  float: right;
+  color: #000000;
+  font-family: OpenSans-Semibold;
+  font-size: 56px;
+  right: 16px;
+  top: 10px;
+}
+
+.currentformulashort {
+  position: absolute;
+  width: 592px;
+  height: 62px;
+  right: 16px;
+  left: 80px;
+  top: 46px;
+  font-family: OpenSans-Regular;
+  font-size: 44px;
+  text-align: right;
+  color: #000000;
+  overflow: hidden;
+}
+
+.currentformulalong {
+  position: relative;
+  float: right;
+  width: 548px;
+  height: 98px;
+  right: 16px;
+  top: 7px;
+  font-family: OpenSans-Regular;
+  font-size: 44px;
+  text-align: right;
+  word-wrap: break-word;
+  line-height: 110%;
+  color: #000000;
+  overflow: hidden;
+}
+
+.mainentryshort {
+  position: absolute;
+  height: 114px;
+  right: 16px;
+  top: 10px;
+  font-family: OpenSans-Semibold;
+  font-size: 84px;
+  text-align: right;
+  color: #000000;
+  overflow: hidden;
+}
+
+.mainentrylong {
+  position: relative;
+  float: right;
+  width: 548px;
+  height: 165px;
+  right: 16px;
+  top: 10px;
+  font-family: OpenSans-Semibold;
+  font-size: 64px;
+  text-align: right;
+  word-wrap: break-word;
+  line-height: 110%;
+  color: #000000;
+  overflow: hidden;
+}
+
+/* Hide the grammar div. */
+
+#grammar {
+  display: none;
+}
+
+@keyframes historyAnimationOpen {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 390px;
+  }
+}
+
+@keyframes historyAnimationClose {
+  0% {
+    height: 390px;
+  }
+
+  100% {
+    height: 0px;
+  }
+}
+
+/* clear all memory slots confirmation dialog */
+#clearconfirmationdialogbg {
+  position: absolute;
+  width: 688px;
+  height: 362px;
+  left: 24px;
+  top: 440px;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_dialog.png);
+}
+
+#dialogheading {
+  position: relative;
+  width: 650px;
+  height: 56px;
+  left: 10px;
+  top: 20px;
+  color: #EBEBE9;
+  font-family: OpenSans-Semibold;
+  font-size: 36px;
+}
+
+#dialogcontent {
+  position: relative;
+  float: left;
+  width: 680px;
+  height: 270px;
+  top: 30px;
+  background-repeat: no-repeat;
+  font-family: OpenSans-Light;
+  font-size: 20px;
+  color: #FFFFFF;
+}
+
+#dialogcontenttext {
+  position: relative;
+  width: 680px;
+  height: 150px;
+  left: 16px;
+  top: 50px;
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  color: #EBEBE9;
+}
+
+.dialogBpurplebutton {
+  position: absolute;
+  width: 264px;
+  height: 64px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/bt_dialogB_purple.png);
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  color: #EBEBE9;
+}
+
+.dialogBblackbutton {
+  position: absolute;
+  width: 264px;
+  height: 64px;
+  border-style: none;
+  background: var(--backgroundFill);
+  background-image: url(../images/bt_dialogB_blacks.png);
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  color: #EBEBE9;
+}
+
+.dialogBpurplebutton:active {
+  background-image: url(../images/bt_dialogB_purple_press.png);
+}
+
+.dialogBblackbutton:active {
+  background-image: url(../images/bt_dialogB_black_press.png);
+}
+
+#dialogokbutton {
+  position: relative;
+  float: left;
+  width: 264px;
+  height: 64px;
+  left: 16px;
+}
+
+#dialogcancelbutton {
+  position: relative;
+  float: right;
+  width: 264px;
+  height: 64px;
+  right: 16px;
+}
+
+/* memory note editor page */
+
+#memorynoteeditor {
+  position: absolute;
+  float: left;
+  width: 720px;
+  height: 1280px;
+  left: 0px;
+  top: 0px;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_port.png);
+}
+
+#mnememorypane {
+  position: relative;
+  top: 200px;
+  left: 36px;
+  height: 94px;
+  width: 648px;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_memory_note.png);
+}
+
+#mnebutton {
+  position: relative;
+  top: 18px;
+  left: 12px;
+  color: #EBEBE9;
+  font-family: OpenSans-Light;
+  font-size: 36px;
+}
+
+#mnetext {
+  position: absolute;
+  color: #D9E2D0;
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  left: 124px;
+  width: 533px;
+  height: 45px;
+  top: 0px;
+}
+
+#mnedescription {
+  position: absolute;
+  color: #000000;
+  left: 114px;
+  top: 45px;
+  width: 480px;
+  height: 45px;
+}
+
+#mnedescriptioninput {
+  position: absolute;
+  color: #000000;
+  left: 118px;
+  top: 49px;
+  width: 480px;
+  height: 36px;
+  background-color: transparent;
+  font-size: 20px;
+  border: hidden;
+}
+
+#mnedescriptiondelete {
+  position: absolute;
+  left: 603px;
+  top: 48px;
+  width: 40px;
+  height: 40px;
+  background: var(--backgroundFill);
+  background-image: url(../images/clear_text.png);
+}
+
+#mnedescriptiondelete:active {
+  background-image: url(../images/clear_text_press.png);
+}
+
+#mnesave {
+  position: absolute;
+  left: 30px;
+  top: 330px;
+  width: 201px;
+  height: 64px;
+}
+
+#mnecancel {
+  position: absolute;
+  left: 477px;
+  top: 330px;
+  width: 201px;
+  height: 64px;
+}
+
+#mnebuttondownarrow {
+  position: relative;
+  top: 30px;
+  left: 10px;
+}
+
+.dialogbackground {
+  position: absolute;
+  float: left;
+  width: 720px;
+  height: 1280px;
+  left: 0px;
+  top: 0px;
+  background: var(--backgroundFill);
+  background-image: url(../images/bg_port.png);
+  opacity: 0.5;
+}
+
+/**
+ *
+ * Vertical Scrollbar
+ *
+ */
+.customScrollbarV {
+  position: absolute;
+  z-index: 110;
+  width: 8px;
+  bottom: 7px;
+  top: 2px;
+  right: 1px;
+}
+
+.customScrollbarV > div {
+  position: absolute;
+  width: 100%;
+  background: black;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+/* license page */
+
+#licensepage {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 720px;
+  height: 1280px;
+  background: linear-gradient(to right top, #3f4140, #1d2021);
+  z-index: 99;
+}
+
+#licensetext {
+  width: 98.5%;
+  height: 88%;
+  background-image: linear-gradient(to left top, #FFFFFF, #c4ccbc);
+  border-radius: 12px;
+  border-radius: 12px;
+  box-shadow: inset 1px 1px 2px 1px black;
+  margin-bottom: 2px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+  cursor: move;
+}
+
+#licensescroll {
+  position: relative;
+  font: 18px/100% Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.licensebtn {
+  position: absolute;
+  color: #d7d7d7;
+  border: solid 1px #333;
+  text-align: center;
+  text-decoration: none;
+  font: 60px/100% Arial, Helvetica, sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+  border-radius: 12px;
+  border-radius: 12px;
+  background: linear-gradient(to left bottom, #666, #000);
+  height: 114px;
+  width: 114px;
+  line-height: 110px;
+  cursor: pointer;
+  box-shadow: 2px 2px 14px #000;
+}
+
+.licensebtn:hover {
+  background: linear-gradient(to left bottom, #444, #000);
+}
+
+.licensebtn:active {
+  color: #666;
+  background: linear-gradient(to left bottom, #000, #444);
+}
+
+#licensebtnq {
+  left: 160px;
+  width: 400px;
+}
+
+/* help dialog */
+
+.helpdialog {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  font-family: Sans;
+  visibility: hidden;
+}
+
+.helpdialog.shown {
+  visibility: visible;
+  transition: background-color 0.5s;
+  background-color: rgba(0, 0, 0, .33);
+  z-index: 99;
+}
+
+.helpdialog .inner {
+  position: absolute;
+  top: 10%;
+  left : 5.9%;
+  height: 70%;
+  width: 80%;
+  border: 20px solid #131516;
+  background-color: #2a2b2a;
+  padding: 10px;
+  opacity: 0;
+}
+
+.helpdialog.shown .inner {
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+
+.helpdialog .inner .contents {
+  font-family: Arial;
+  font-size: 20px;
+  color: #ffffff;
+  cursor: default;
+}
+
+.helpdialog .inner .contents .black {
+  color: #000000;
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  line-height: 98px;
+}
+
+.helpdialog .inner .contents .white {
+  color: #ebebe9;
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  line-height: 98px;
+}
+
+.helpdialog .inner .contents .white2 {
+  color: #ebebe9;
+  font-family: OpenSans-Light;
+  font-size: 36px;
+  line-height: 64px;
+}
+
+.helpdialog .inner .contents .exampleclose {
+  width: 64px;
+  height: 64px;
+  border: 2px solid white;
+  background-image: url(../images/clear_memory_disable.png);
+  background-color: black;
+}
+
+.helpdialog .inner .contents .exampleedit {
+  width: 64px;
+  height: 64px;
+  border: 2px solid white;
+  background-image: url(../images/pencil_disable.png);
+  background-color: black;
+}
+
+.helpdialog .inner .close {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: -5%;
+  left: 93%;
+  font-family: Sans;
+  font-weight: 900;
+  font-size: 90px;
+  text-align: center;
+  border: solid 10px #131516;
+  background-color: #131516;
+  border-radius: 60px;
+  line-height: 45px;
+  cursor: pointer;
+  color: #dddddd;
+  z-index: 1; /* pull up above the columns */
+}
+
+.helpdialog .inner .close:active {
+  color: #ffffff;
+}
+
+#memorypage,
+#memorynoteeditor,
+#licensepage {
+  display: none;
+}
+
+#clearconfirmationdialog {
+  visibility: hidden;
+}
+
+div.dialogAbuttonPurple,
+div.dialogAbuttonBlack {
+  position: relative;
+  float: left;
+}
+
+div.buttonpurple,
+div.exampleclose,
+div.exampleedit {
+  float: left;
+}

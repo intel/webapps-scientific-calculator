@@ -7,6 +7,7 @@
     "sourceType": "script"
   },
   "globals": {
+    "doMaximiseBody": true,
     "chrome": true,
     "Calculator": true,
     "Localizer": true,

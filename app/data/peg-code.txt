@@ -1,0 +1,336 @@
+start
+  = additive
+
+additive
+  = left:(multiplicative [%]?) right:( [+-] multiplicative [%]?)*
+    {
+        var ret = (left[1] == "%") ? left[0] / 100 : left[0];
+        var i;
+        var prec = 0;
+
+        if(isNaN(ret) || !isFinite(ret) )
+            return ret
+
+        var tmp = ret;
+        while (tmp % 1 != 0){
+                tmp = tmp * 10;
+                prec++;
+            }
+        for (i = 0; i < right.length; ++i) {
+            var num = (right[i][2] == "%") ? ret * right[i][1] / 100 : right[i][1];
+
+            tmp = num;
+            var prec1 = 0;
+
+            while (tmp % 1 != 0){
+                tmp = tmp * 10;
+                prec1++;
+            }
+            prec = prec > prec1 ? prec: prec1;
+
+            if (right[i][0] == "+") {
+                ret = ret + num;
+            } else if (right[i][0] == "-") {
+                ret = ret - num;
+            }
+
+        }
+        return (prec > 0 && right.length > 0) ? parseFloat(ret.toFixed(prec)) : ret;
+    }
+
+multiplicative
+  = left:signedexpression right:( [×÷] signedexpression [%]? / trigonometric [%]? / hyperbolic [%]? / numberlog [%]? / squareroot [%]?)*
+    {
+        var ret = left;
+        var i;
+        var prec = 0;
+
+	         if(isNaN(ret) || !isFinite(ret))
+	            return ret
+
+        var tmp = ret;
+        while (tmp % 1 != 0){
+                tmp = tmp * 10;
+                prec++;
+            }
+
+        for (i = 0; i < right.length; ++i) {
+            var num = (right[i][2] == "%") ? right[i][1] / 100 : right[i][1];
+
+            tmp = num;
+            var prec1 = 0;
+            while (tmp % 1 != 0){
+                tmp = tmp * 10;
+                prec1++;
+            }
+
+            if (right[i][0] == "×") {
+                ret = ret * num;
+                prec += prec1;
+            } else if (right[i][0] == "÷") {
+                ret = ret / num;
+                prec -= prec1;
+            }else{
+                ret = ret * right[i][0];
+            }
+        }
+        return (prec > 0 && right.length > 0) ? parseFloat(ret.toFixed(prec)) : ret;
+    }
+signedexpression
+  = sign:[-]? expression:expression
+    {
+        var ret = expression;
+
+        if (sign) {
+            ret = -ret;
+        }
+
+        return ret;
+    }
+
+expression
+  = expandlog
+  / powerandroot
+  / trigonometric
+  / hyperbolic
+  / factorial
+  / numberpi
+  / inverse
+  / primary
+
+expandlog
+  = log10
+  / log2
+  / ln
+  / tentox
+  / twotox
+  / etox
+
+numberlog
+  = log10
+  / log2
+  / ln
+
+log10
+  = "log" operand:signedexpression
+    {
+        return Math.log(operand) / Math.LN10;
+    }
+
+log2
+  = "log<sub>2</sub>" operand:signedexpression
+    {
+        return Math.log(operand) / Math.LN2;
+    }
+
+ln
+  = "ln" operand:signedexpression
+    {
+        return Math.log(operand);
+    }
+
+tentox
+  = "10<sup>x</sup>" operand:signedexpression
+    {
+        return Math.pow(10, operand);
+    }
+
+twotox
+  = "2<sup>x</sup>" operand:signedexpression
+    {
+        return Math.pow(2, operand);
+    }
+
+etox
+  = "e<sup>x</sup>" operand:signedexpression
+    {
+        return Math.pow(Math.E, operand);
+    }
+
+powerandroot
+  = squareroot
+  / nthroot
+  / square
+  / nthpower
+
+squareroot
+  = "√" radicand:signedexpression
+    {
+        return Math.sqrt(radicand);
+    }
+
+nthroot
+  = index:primary "<sup>n</sup>√" radicand:signedexpression
+    {
+        var ret = Number.NaN;
+
+        if (parseInt(index) === index && index > 0) { /* The nth root is only defined for positive integer indices. */
+            if (index % 2 && radicand < 0) { /* For odd indices, consider the sign of the radicand. */
+                ret = -Math.pow(-radicand, 1 / index);
+            } else {
+                ret = Math.pow(radicand, 1 / index);
+            }
+        }
+
+        return ret;
+    }
+
+square
+  = operand:primary "<sup>2</sup>"
+    {
+        return Math.pow(operand, 2);
+    }
+
+nthpower
+  = operand:primary "<sup>^</sup>" exponent:signedexpression
+    {
+        return Math.pow(operand, exponent);
+    }
+
+trigonometric
+  = sin
+  / cos
+  / tan
+  / arcsin
+  / arccos
+  / arctan
+
+sin
+  = "sin" operand:signedexpression
+    {
+        var res = Math.sin(operand / Calculator.angleDivisor);
+        return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
+    }
+cos
+  = "cos" operand:signedexpression
+    {
+        var res = Math.cos(operand / Calculator.angleDivisor);
+        return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
+    }
+tan
+  = "tan" operand:signedexpression
+    {
+        var res = Math.tan(operand / Calculator.angleDivisor);
+        return Math.round(res * Calculator.trigPrecision) / Calculator.trigPrecision;
+    }
+arcsin
+  = "sin<sup>-1</sup>" operand:signedexpression
+    {
+        return Math.asin(operand) * Calculator.angleDivisor;
+    }
+arccos
+  = "cos<sup>-1</sup>" operand:signedexpression
+    {
+        return Math.acos(operand) * Calculator.angleDivisor;
+    }
+arctan
+  = "tan<sup>-1</sup>" operand:signedexpression
+    {
+        return Math.atan(operand) * Calculator.angleDivisor;
+    }
+
+hyperbolic
+  = sinh
+  / cosh
+  / tanh
+  / asinh
+  / acosh
+  / atanh
+
+sinh
+  = "sinh" operand:signedexpression
+    {
+        var e = Math.E;
+
+        return (Math.pow(e, operand) - Math.pow(e, -operand)) / 2;
+    }
+
+cosh
+  = "cosh" operand:signedexpression
+    {
+        var e = Math.E;
+
+        return (Math.pow(e, operand) + Math.pow(e, -operand)) / 2;
+    }
+
+tanh
+  = "tanh" operand:signedexpression
+    {
+        var e = Math.E;
+
+        return (Math.pow(e, operand) - Math.pow(e, -operand)) / (Math.pow(e, operand) + Math.pow(e, -operand));
+    }
+
+asinh
+  = "sinh<sup>-1</sup>" operand:signedexpression
+    {
+        return Math.log(operand + Math.sqrt(1 + Math.pow(operand, 2)));
+    }
+
+acosh
+  = "cosh<sup>-1</sup>" operand:signedexpression
+    {
+        return 2 * Math.log(Math.sqrt((operand + 1) / 2) + Math.sqrt((operand - 1) /2 ));
+    }
+
+atanh
+  = "tanh<sup>-1</sup>" operand:signedexpression
+    {
+        return (Math.log(1 + operand) - Math.log(1 - operand)) / 2;
+    }
+
+factorial
+  = operand:primary "!"
+    {
+        var ret = Number.NaN;
+
+        if (parseInt(operand) === operand && operand >= 0) { /* Factorial is only defined for positive integers and zero. */
+            ret = 1;
+
+            for (var i = 2; i <= operand; i++) {
+                ret *= i
+            }
+        }
+
+        return ret;
+    }
+inverse
+  = operand:primary "<sup>-1</sup>"
+    {
+        return 1 / operand;
+    }
+
+primary
+  = pi
+  / number
+  / "(" additive:additive ")"
+    {
+        return additive;
+    }
+
+numberpi
+  = operand:primary "π"
+  {
+    return operand*Math.PI;
+  }
+
+pi
+  = "π"
+    {
+        return Math.PI;
+    }
+
+number
+  = wholepart:[0-9]+fractionalpart:([.][0-9]+)?
+    {
+        var ret;
+
+        if (fractionalpart) {
+            ret = parseFloat(wholepart.join("") + "." + fractionalpart[1].join(""));
+        } else {
+            ret = parseInt(wholepart.join(""));
+        }
+
+        return ret;
+    }
+
