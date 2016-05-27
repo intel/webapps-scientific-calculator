@@ -11,7 +11,7 @@
     "url": "https://github.com/01org/webapps-scientific-calculator"
   },
   "author": "Todd Brandt <todd.e.brandt@intel.com>",
-  "license": "APL 2.0",
+  "license": "Apache-2.0",
   "readmeFilename": "README.md",
   "devDependencies": {
     "async": "*",
